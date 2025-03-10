@@ -1,0 +1,25 @@
+# Node.js dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Build files
+dist/
+frontend/dist/
+backend/dist/
+
+# Environment variables
+.env
+frontend/.env
+backend/.env
+
+# Logs
+*.log
+
+# Cache
+frontend/.parcel-cache/data.mdb
+frontend/.parcel-cache/data.mdb
+frontend/.parcek-cache
+frontend/.parcel-cache/3a48495d1029e46d
+frontend/.parcel-cache/lock.mdb
+frontend/.parcel-cache/
