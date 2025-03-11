@@ -37,7 +37,7 @@ const Login = () => {
           sx={{
             height: "95vh",
             overflow: "hidden",
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
             backdropFilter: "blur(8px)",
             borderTopRightRadius: { xs: "0%", md: "0.5rem" },
             borderBottomLeftRadius: { xs: "0.5rem", md: "0%" },

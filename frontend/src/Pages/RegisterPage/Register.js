@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack, Container, colors } from "@mui/material";
+import { Box, Stack, Container, colors, Typography } from "@mui/material";
 import Img from "../../../assets/welcome.jpg";
 import LoginInput from "../../components/LoginInputBox/LoginInput";
 
@@ -37,16 +37,18 @@ const Login = () => {
           sx={{
             height: "95vh",
             overflow: "hidden",
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
             backdropFilter: "blur(8px)",
             borderTopRightRadius: { xs: "0%", md: "0.5rem" },
             borderBottomLeftRadius: { xs: "0.5rem", md: "0%" },
             borderBottomRightRadius: "0.5rem",
             padding: "2%",
+            
           }}
+          
           flex={1}
         >
-          <LoginInput isRegister/>
+          <LoginInput isRegister />
         </Box>
       </Stack>
     </Box>
