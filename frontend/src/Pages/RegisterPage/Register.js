@@ -3,7 +3,6 @@ import { Box, Stack, Container, colors, Typography } from "@mui/material";
 import Img from "../../../assets/welcome.jpg";
 import LoginInput from "../../components/LoginInputBox/LoginInput";
 
-
 const Login = () => {
   return (
     <Box
@@ -29,9 +28,7 @@ const Login = () => {
           alt="login-page"
           src={Img}
           flex={2}
-        >
-         
-        </Box>
+        ></Box>
 
         <Box
           sx={{
@@ -43,9 +40,7 @@ const Login = () => {
             borderBottomLeftRadius: { xs: "0.5rem", md: "0%" },
             borderBottomRightRadius: "0.5rem",
             padding: "2%",
-            
           }}
-          
           flex={1}
         >
           <LoginInput isRegister />
