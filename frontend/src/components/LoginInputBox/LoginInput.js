@@ -22,8 +22,8 @@ const LoginInput = ({ isRegister = false }) => {
   const {enqueueSnackbar} = useSnackbar();
 
   const handleChange = (e) =>{
-    const field = e.target.id;
-    setFormData((prev)=>({...prev,[field] : e.target.value}) )
+    const {name,value} = e.target;
+    setFormData((prev)=>({...prev, [name] : value }) )
   }
 
   const registerValidateInput = (formData) => {
@@ -46,7 +46,7 @@ const LoginInput = ({ isRegister = false }) => {
         variant: "warning",
       });
       return false;
-    } else if (formData.password !== formData.confirmPassword) {
+    } else if (formData.password !== formData.confirmpassword) {
       enqueueSnackbar("Passwords do not match", { variant: "warning" });
       return false;
     } else {
@@ -55,35 +55,32 @@ const LoginInput = ({ isRegister = false }) => {
   };
   const handleRegister = async (formData) => {
     if (!registerValidateInput(formData)) return;
-    const URL = `${config.endpoint}/auth/register`;
+    //const URL = `${config.endpoint}/auth/register`;
     const body = {
       username: formData.username,
       password: formData.password,
+      confirm : formData.confirmpassword,
+      department : formData.department
     };
-    const headers = {
-      headers: {
-        Authorization: config.authorization,
-      },
-    };
-    console.log(body);
-
-    // try {
-    //   setLoading(true);
-    //   const res = await axios.post(URL, body, headers);
-    //   setFormData({
-    //     username: "",
-    //     password: "",
-    //     confirmPassword: "",
-    //   });
-    //   console.log(res);
-    //   enqueueSnackbar("Registered successfully", { variant: "success" });
-    //   navigate("/");
-    // } catch (err) {
-    //   console.log(err);
-    // } finally {
-    //   setLoading(false);
-    // }
+   
+    try {
+      setLoading(true);
+      const res = await axios.post(URL, body, headers);
+      setFormData({
+        username: "",
+        password: "",
+        confirmPassword: "",
+      });
+      console.log(res);
+      enqueueSnackbar("Registered successfully", { variant: "success" });
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <Box
@@ -94,7 +91,7 @@ const LoginInput = ({ isRegister = false }) => {
       pt={{ xs: "10%", md: "40%" }}
     >
       {isRegister ? (
-        <Stack direction="column">
+        <Stack direction="column" gap={2}>
           <Typography color="white" variant="h2">
             Register
           </Typography>
@@ -104,11 +101,11 @@ const LoginInput = ({ isRegister = false }) => {
               Login
             </Link>
           </Typography>
+          <Stack direction="column" >
           <Stack direction="row" gap={1}>
             <TextField
               sx={{
-                marginBottom: "15px",
-                width: "100%",
+               width: "100%",
                 color: "white",
                 "& .MuiInputLabel-root": { color: "lightgray" },
                 "& label.Mui-focused": { color: "white" },
@@ -123,14 +120,16 @@ const LoginInput = ({ isRegister = false }) => {
                 },
               }}
               id="username"
+              name="username"
               label="User Name"
               variant="outlined"
-              onChange={(e)=>{handleChange}}
+              onChange={(e)=>{handleChange(e)}}
             />
             <Dropdown
+              id = "department"
               name="department"
               value={formData.department}
-              handleChange={(e) => {handleChange}}
+              handleChange={(e) => handleChange(e)}
               placeholder="Department"
               items={["Developer", "Admin", "Management"]}
             />
@@ -138,6 +137,7 @@ const LoginInput = ({ isRegister = false }) => {
 
           <TextField
             id="password"
+            name="password"
             label="Password"
             type="password"
             variant="outlined"
@@ -156,21 +156,20 @@ const LoginInput = ({ isRegister = false }) => {
                 color: "white",
               },
             }}
-            onChange={(e)=>{handleChange}}
+            onChange={(e)=>handleChange(e)}
           />
-          <Typography mt={1} color="lightgray" variant="subtitle2">
+          <Typography mt={1} mb={1} color="lightgray" variant="subtitle2">
             Password must be atleast 5 characters long
           </Typography>
           <TextField
             id="confirmpassword"
+            name="confirmpassword"
             label="Confirm Password"
             type="password"
             variant="outlined"
-            onChange={(e)=>{handleChange}}
+            onChange={(e)=>handleChange(e)}
             sx={{
-              marginTop: "15px",
-              marginBottom: "15px",
-              width: "100%",
+             width: "100%",
               color: "white",
               "& .MuiInputLabel-root": { color: "lightgray" },
               "& label.Mui-focused": { color: "white" },
@@ -185,6 +184,7 @@ const LoginInput = ({ isRegister = false }) => {
               },
             }}
           />
+        </Stack>
           <Button
             sx={{
               marginTop: "25px",
@@ -236,7 +236,7 @@ const LoginInput = ({ isRegister = false }) => {
             variant="outlined"
           />
           <TextField
-            mt
+           
             id="password"
             label="Password"
             type="password"
@@ -248,9 +248,9 @@ const LoginInput = ({ isRegister = false }) => {
               "& label.Mui-focused": { color: "white" },
               "& .MuiOutlinedInput-root": {
                 backgroundColor: "rgb(80, 79, 78)",
-                "& fieldset": { borderColor: "lightgray" }, // Default border color
-                "&:hover fieldset": { borderColor: "white" }, // Hover border color
-                "&.Mui-focused fieldset": { borderColor: "white" }, // Focus border color
+                "& fieldset": { borderColor: "lightgray" }, 
+                "&:hover fieldset": { borderColor: "white" }, 
+                "&.Mui-focused fieldset": { borderColor: "white" }, 
               },
               "& .MuiInputBase-input": {
                 color: "white",

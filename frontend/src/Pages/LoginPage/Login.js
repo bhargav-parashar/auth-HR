@@ -8,13 +8,13 @@ const Login = () => {
   return (
     <Box
       py={3}
-      px={3}
+      px={{sm:3, lg:20}}
       sx={{
         background:
           "linear-gradient(0deg, rgba(246,228,204,1) 0%, rgba(108,140,181,1) 100%)",
       }}
     >
-      <Stack direction={{ xs: "column", md: "row" }} sx={{ width: "100%" }}>
+      <Stack direction={{ xs: "column", md: "row" }} sx={{ width: "100%"}} >
         <Box
           sx={{
             maxWidth: { xs: "100vw", md: "65vw" },

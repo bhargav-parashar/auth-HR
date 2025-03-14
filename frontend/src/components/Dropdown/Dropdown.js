@@ -27,15 +27,11 @@ export default function SelectSmall({placeholder,items,name,value,handleChange,d
     }}>
       {
       <Select
+        
         name={name}
         value={value}
         displayEmpty
         onChange={handleChange}
-        // startAdornment={
-        //   <InputAdornment position="start">
-        //     <PlaceOutlinedIcon />
-        //   </InputAdornment>
-        // }
         disabled={disabled}
       >
         <MenuItem disabled value="">
