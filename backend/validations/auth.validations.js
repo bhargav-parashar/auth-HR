@@ -1,9 +1,15 @@
 const Joi = require("joi");
 
-const authValidationSchema = Joi.object().keys({
+const registerValidationSchema = Joi.object().keys({
     username: Joi.string().default("").max(50),
-    password: Joi.string().required()   
+    password: Joi.string().required(),
+    department: Joi.string().required()   
+});
+
+const loginValidationSchema = Joi.object().keys({
+    username: Joi.string().default("").max(50),
+    password: Joi.string().required()  
 });
 
 
-module.exports = {authValidationSchema};
+module.exports = {registerValidationSchema,loginValidationSchema};

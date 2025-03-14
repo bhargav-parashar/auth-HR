@@ -15,6 +15,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
+    "axios": "^1.8.3",
     "notistack": "^3.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -23,6 +24,7 @@
     "swiper": "^11.2.5"
   },
   "devDependencies": {
+    "buffer": "^6.0.3",
     "parcel": "^2.13.3",
     "process": "^0.11.10"
   }

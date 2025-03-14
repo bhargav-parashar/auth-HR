@@ -13,7 +13,7 @@ const PORT = process.env.PORT;
 connectDB();
 
 const corsOptions = {
-    origin: ["https://swift-exit-frontend.vercel.app","http://localhost:1234"], //["http://localhost:8081","http://localhost:3000"]
+    origin: ["http://localhost:1234"], //["http://localhost:8081","http://localhost:3000"]
     optionsSuccessStatus : 200,
     credentials: true //Access-Control-Allow-Credentials : true 
 };
