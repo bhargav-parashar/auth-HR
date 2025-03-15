@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RegisterPage from "../src/Pages/RegisterPage/Register";
-import Login from "../src/Pages/LoginPage/Login";
+import RegisterPage from "./pages/RegisterPage/Register";
+import Login from "./pages/LoginPage/Login";
 import { SnackbarProvider,closeSnackbar } from "notistack";
 
 const router = createBrowserRouter([
@@ -42,7 +42,8 @@ root.render(
       border:"none",
       fontSize:'15px',
       fontWeight:'bold',
-      color:'white'
+      color:'white',
+      cursor:'pointer'
     }}
     >
       X

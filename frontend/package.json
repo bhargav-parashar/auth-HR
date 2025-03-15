@@ -23,6 +23,9 @@
     "react-router-dom": "^6.22.0",
     "swiper": "^11.2.5"
   },
+  "@parcel/resolver-default": {
+      "packageExports": true
+  },
   "devDependencies": {
     "buffer": "^6.0.3",
     "parcel": "^2.13.3",
