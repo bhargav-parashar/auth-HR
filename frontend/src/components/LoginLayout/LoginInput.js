@@ -123,7 +123,7 @@ const LoginInput = ({ isRegister = false }) => {
       enqueueSnackbar(`Logged In as ${formData.username}`, {
         variant: "success",
       });
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       console.log(err);
       enqueueSnackbar(err.response.data.message, { variant: "warning" });

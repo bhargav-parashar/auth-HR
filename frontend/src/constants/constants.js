@@ -17,4 +17,23 @@ const carouselSlides = [
   },
 ];
 
-export { carouselSlides };
+const sidebarOptions = [
+  {
+    id: 1,
+    option: "Dashboard",
+    icon: "HomeOutlinedIcon"
+  },
+
+  {
+    id: 2,
+    option: "Analytics",
+    icon: "DataUsageIcon"
+  },
+  {
+    id: 3,
+    option: "Employees",
+    icon: "GroupsIcon"
+  }
+]
+
+export { carouselSlides, sidebarOptions };

@@ -5,6 +5,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage/Register";
 import Login from "./pages/LoginPage/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import { SnackbarProvider,closeSnackbar } from "notistack";
 
 const router = createBrowserRouter([
@@ -16,7 +17,10 @@ const router = createBrowserRouter([
         path: "/register",
         element: <RegisterPage />,
       },
-
+      {
+        path: "/dashboard",
+        element: <Dashboard/>
+      },
       {
         path: "/",
         element: <Login />,
