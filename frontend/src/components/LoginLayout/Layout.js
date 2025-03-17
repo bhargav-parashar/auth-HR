@@ -7,8 +7,8 @@ import { carouselSlides } from "../../constants/constants";
 const Login = ({ children }) => {
   return (
     <Box
-      py={{ xs: 0,  xl: 5 }}
-      px={{ xs: 0,  xl: 10 }}
+      py={{ xs: 0, xl: 5 }}
+      px={{ xs: 0, xl: 10 }}
       sx={{
         height: "100vh",
         background:
@@ -28,7 +28,7 @@ const Login = ({ children }) => {
           sx={{
             background: "#090909",
             objectFit: "cover",
-            borderTopLeftRadius: {xs:'0rem', xl:"0.5rem"}  ,
+            borderTopLeftRadius: { xs: "0rem", xl: "0.5rem" },
             borderTopRightRadius: { xs: "0rem", xl: "0.5rem" },
             borderBottomLeftRadius: { xs: "0rem", xl: "0.5rem" },
             overflow: "hidden",
@@ -40,7 +40,7 @@ const Login = ({ children }) => {
               maxWidth: "100%",
               background: "#090909",
               objectFit: "contain",
-              borderTopLeftRadius:{xs:'0rem', xl:"0.5rem"}  ,
+              borderTopLeftRadius: { xs: "0rem", xl: "0.5rem" },
               borderTopRightRadius: { xs: "0rem", xl: "0.rem" },
               borderBottomLeftRadius: { xs: "0%", xl: "0.5rem" },
             }}
@@ -106,12 +106,28 @@ const Login = ({ children }) => {
             backdropFilter: "blur(8px)",
             borderTopRightRadius: { xs: "0rem", xl: "0.5rem" },
             borderBottomLeftRadius: { xs: "0rem", xl: "0rem" },
-            borderBottomRightRadius:  {xs:'0rem', xl:"0.5rem"} ,
+            borderBottomRightRadius: { xs: "0rem", xl: "0.5rem" },
             padding: { xs: "5%", md: "2%" },
           }}
           flex={{ xs: 3, md: 1 }}
         >
           {children}
+          <Box
+            direction="row"
+            justifyContent="center"
+            sx={{
+              position: "absolute",
+              bottom: "3%",
+              left: "1%",
+              right: "1%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Typography variant="caption" color="lightgray">
+              Made with ❤️ and countless console.log()s.
+            </Typography>
+          </Box>
         </Box>
       </Stack>
     </Box>
