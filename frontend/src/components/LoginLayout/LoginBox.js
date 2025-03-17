@@ -110,7 +110,7 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
             fontSize: "11px"
           }}
           variant="outlined"
-          onClick={() => {}}
+          onClick={ () => handleLogin(true, false) }
         >
           Guest HR
         </Button>
@@ -128,7 +128,7 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
             fontSize: "11px"
           }}
           variant="outlined"
-          onClick={() => {}}
+          onClick={ () => handleLogin(false, true) }
         >
           Guest Employee
         </Button>

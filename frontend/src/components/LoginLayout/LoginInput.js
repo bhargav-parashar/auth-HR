@@ -8,6 +8,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import RegisterBox from "./RegisterBox";
 import LoginBox from "./LoginBox";
+import {guestAdmin, guestEmployee} from "../../constants/constants";
 
 const LoginInput = ({ isRegister = false }) => {
   const [formData, setFormData] = useState({
@@ -103,24 +104,24 @@ const LoginInput = ({ isRegister = false }) => {
     }
   };
 
-  const handleLogin = async () => {
-    if (!loginValidateInput(formData)) return;
+  const handleLogin = async ( isGuestAdmin = false, isGuestEmp = false ) => {
+    if ( !isGuestAdmin && !isGuestEmp && !loginValidateInput(formData) ) return;
     const URL = `${config.endpoint}/auth/login`;
 
     const body = {
-      username: formData.username,
-      password: formData.password,
+      username: isGuestAdmin? guestAdmin.username : isGuestEmp ? guestEmployee.username : formData.username,
+      password: isGuestAdmin? guestAdmin.password : isGuestEmp ? guestEmployee.password : formData.password
     };
 
     try {
       setIsLoading(true);
       const res = await axios.post(URL, body);
       setFormData({
-        username: "",
+        username: "", 
         password: "",
       });
       console.log(res);
-      enqueueSnackbar(`Logged In as ${formData.username}`, {
+      enqueueSnackbar(`Logged In as ${isGuestAdmin? guestAdmin.username : isGuestEmp ? guestEmployee.username : formData.username}`, {
         variant: "success",
       });
       navigate("/dashboard");

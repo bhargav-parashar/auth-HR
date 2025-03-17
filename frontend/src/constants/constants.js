@@ -34,6 +34,16 @@ const sidebarOptions = [
     option: "Employees",
     icon: "GroupsIcon"
   }
-]
+];
 
-export { carouselSlides, sidebarOptions };
+const guestAdmin = {
+  username: "admin",
+  password: "admin"
+};
+
+const guestEmployee = {
+  username : "John Wick",
+  password : "password"
+};
+
+export { carouselSlides, sidebarOptions, guestAdmin, guestEmployee };
