@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import {
-  Box
-} from "@mui/material";
+import { Box } from "@mui/material";
 import { useSnackbar } from "notistack";
 import config from "../../config/config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import RegisterBox from "./RegisterBox";
 import LoginBox from "./LoginBox";
-import {guestAdmin, guestEmployee} from "../../constants/constants";
+import { guestAdmin, guestEmployee } from "../../constants/constants";
 
 const LoginInput = ({ isRegister = false }) => {
   const [formData, setFormData] = useState({
@@ -104,27 +102,43 @@ const LoginInput = ({ isRegister = false }) => {
     }
   };
 
-  const handleLogin = async ( isGuestAdmin = false, isGuestEmp = false ) => {
-    if ( !isGuestAdmin && !isGuestEmp && !loginValidateInput(formData) ) return;
+  const handleLogin = async (isGuestAdmin = false, isGuestEmp = false, isManualLogin=true ) => {
+    if (isManualLogin && !loginValidateInput(formData)) return;
     const URL = `${config.endpoint}/auth/login`;
 
     const body = {
-      username: isGuestAdmin? guestAdmin.username : isGuestEmp ? guestEmployee.username : formData.username,
-      password: isGuestAdmin? guestAdmin.password : isGuestEmp ? guestEmployee.password : formData.password
+      username: isGuestAdmin
+        ? guestAdmin.username
+        : isGuestEmp
+        ? guestEmployee.username
+        : formData.username,
+      password: isGuestAdmin
+        ? guestAdmin.password
+        : isGuestEmp
+        ? guestEmployee.password
+        : formData.password,
     };
 
     try {
       setIsLoading(true);
       const res = await axios.post(URL, body, { withCredentials: true });
       setFormData({
-        username: "", 
+        username: "",
         password: "",
       });
       localStorage.setItem("loggedInUser", JSON.stringify(body.username));
-      console.log(res);
-      enqueueSnackbar(`Logged In as ${isGuestAdmin? guestAdmin.username : isGuestEmp ? guestEmployee.username : formData.username}`, {
-        variant: "success",
-      });
+      enqueueSnackbar(
+        `Logged In as ${
+          isGuestAdmin
+            ? guestAdmin.username
+            : isGuestEmp
+            ? guestEmployee.username
+            : formData.username
+        }`,
+        {
+          variant: "success",
+        }
+      );
       navigate("/dashboard");
     } catch (err) {
       console.log(err);
@@ -139,7 +153,7 @@ const LoginInput = ({ isRegister = false }) => {
       sx={{
         height: "100%",
       }}
-      pt={{xs:4, sm:10}}
+      pt={{ xs: 4, sm: 10 }}
     >
       {isRegister ? (
         <RegisterBox

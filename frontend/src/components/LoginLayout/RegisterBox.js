@@ -10,6 +10,8 @@ import {
 import Dropdown from "../Dropdown/Dropdown";
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
+import LoginCarousel from "../Carousel/LoginCarousel";
+import { loadingCarousel } from "../../constants/constants";
 
 const CustomTextBox = styled(TextField)(() => ({
   width: "100%",
@@ -83,8 +85,18 @@ const RegisterBox = ({ formData, handleChange, handleRegister, isLoading }) => {
       </Stack>
       {isLoading ? (
         <Box mt={5}>
-          <Loader />
-        </Box>
+        <Stack direction='row' >
+        <Loader  />
+        <LoginCarousel
+            slidesPerView={1}
+            delay={3000}
+            data={loadingCarousel.map((slide) => (
+              <Typography key={slide.id} sx={{ color: "white" }}>{slide.txt}</Typography>
+            ))}
+          />
+          
+        </Stack>
+      </Box>
       ) : (
         <Button
           sx={{

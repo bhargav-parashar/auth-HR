@@ -8,6 +8,8 @@ export default function Carousel({
   data,
   slidesPerView = 1,
   spaceBetween = 30,
+  speed = 1100,
+  delay = 3000
 }) {
   return (
     <>
@@ -23,10 +25,10 @@ export default function Carousel({
           el: ".swiper-pagination",
         }}
         autoplay={{
-          delay: 3000,
+          delay: delay,
           pauseOnMouseEnter: true,
         }}
-        speed={1100}
+        speed= {speed}
         style={{
           width: "90%",
           paddingBottom: "10px", 

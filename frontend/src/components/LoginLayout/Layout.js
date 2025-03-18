@@ -29,7 +29,7 @@ const Login = ({ children }) => {
             background: "#090909",
             objectFit: "cover",
             borderTopLeftRadius: { xs: "0rem", xl: "0.5rem" },
-            borderTopRightRadius: { xs: "0rem", xl: "0.5rem" },
+            borderTopRightRadius: "0rem",
             borderBottomLeftRadius: { xs: "0rem", xl: "0.5rem" },
             overflow: "hidden",
             position: "relative",

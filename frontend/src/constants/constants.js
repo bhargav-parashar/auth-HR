@@ -17,6 +17,33 @@ const carouselSlides = [
   },
 ];
 
+const loadingCarousel = [
+  {
+    id:1,
+    txt:"Connecting to server..."
+  },
+  {
+    id:2,
+    txt:"Loading Data..."
+  },
+  {
+    id:3,
+    txt:"Almost there..."
+  },
+  {
+    id:4,
+    txt:"Setting things up..."
+  },
+  {
+    id:5,
+    txt:"Just a few more seconds..."
+  },
+  {
+    id:6,
+    txt:"Magic is happening..."
+  }
+]
+
 const sidebarOptions = [
   {
     id: 1,
@@ -46,4 +73,4 @@ const guestEmployee = {
   password : "password"
 };
 
-export { carouselSlides, sidebarOptions, guestAdmin, guestEmployee };
+export { carouselSlides, sidebarOptions, guestAdmin, guestEmployee, loadingCarousel };

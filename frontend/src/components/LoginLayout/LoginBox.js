@@ -6,26 +6,28 @@ import {
   TextField,
   Button,
   Divider,
-  styled
+  styled,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
+import LoginCarousel from "../Carousel/LoginCarousel";
+import { loadingCarousel } from "../../constants/constants";
 
 const CustomTextBox = styled(TextField)(() => ({
-    width: "100%",
+  width: "100%",
+  color: "white",
+  "& .MuiInputLabel-root": { color: "lightgray" },
+  "& label.Mui-focused": { color: "white" },
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "rgb(80, 79, 78)",
+    "& fieldset": { borderColor: "lightgray" },
+    "&:hover fieldset": { borderColor: "white" },
+    "&.Mui-focused fieldset": { borderColor: "white" },
+  },
+  "& .MuiInputBase-input": {
     color: "white",
-    "& .MuiInputLabel-root": { color: "lightgray" },
-    "& label.Mui-focused": { color: "white" },
-    "& .MuiOutlinedInput-root": {
-      backgroundColor: "rgb(80, 79, 78)",
-      "& fieldset": { borderColor: "lightgray" },
-      "&:hover fieldset": { borderColor: "white" },
-      "&.Mui-focused fieldset": { borderColor: "white" },
-    },
-    "& .MuiInputBase-input": {
-      color: "white",
-    },
-  }));
+  },
+}));
 
 const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
   return (
@@ -61,7 +63,17 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
       />
       {isLoading ? (
         <Box mt={5}>
-          <Loader />
+          <Stack direction='row' >
+          <Loader  />
+          <LoginCarousel
+              slidesPerView={1}
+              delay={3000}
+              data={loadingCarousel.map((slide) => (
+                <Typography key={slide.id} sx={{ color: "white" }}>{slide.txt}</Typography>
+              ))}
+            />
+            
+          </Stack>
         </Box>
       ) : (
         <Button
@@ -77,7 +89,7 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
             },
           }}
           variant="contained"
-          onClick={handleLogin}
+          onClick={() => handleLogin(false, false, true)}
         >
           Login
         </Button>
@@ -107,10 +119,10 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
               background: " rgba(246,228,204,1)",
               color: "black",
             },
-            fontSize: "11px"
+            fontSize: "11px",
           }}
           variant="outlined"
-          onClick={ () => handleLogin(true, false) }
+          onClick={() => handleLogin(true, false, false)}
         >
           Guest HR
         </Button>
@@ -125,10 +137,10 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
               background: " rgba(246,228,204,1)",
               color: "black",
             },
-            fontSize: "11px"
+            fontSize: "11px",
           }}
           variant="outlined"
-          onClick={ () => handleLogin(false, true) }
+          onClick={() => handleLogin(false, true, false)}
         >
           Guest Employee
         </Button>
