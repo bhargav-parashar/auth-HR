@@ -58,10 +58,10 @@ const login = async (req, res) => {
           .cookie("remember-token", jwtToken, {
             maxAge: 30 * 60 * 1000,
             httpOnly: true,
-            secure: true,
-            sameSite: "None",
+            // secure: true,
+            // sameSite: "None",
           })
-          .json({ 
+          .send({ 
                   token: jwtToken, 
                   role: role 
           });
@@ -76,7 +76,27 @@ const login = async (req, res) => {
   }
 };
 
+const logout = (req,res)=>{
+  try{
+      res.status(200)
+      .clearCookie(
+          "remember-token",
+           {
+              httpOnly: true,
+              // secure:true,
+              // sameSite:'None'
+           }
+      )
+      .json({message:"Logged Out"})
+  }catch(err){
+      res.status(500).send({ message: "Something went wrong", err });
+  }
+ 
+  
+};
+
 module.exports = {
   register,
   login,
+  logout
 };

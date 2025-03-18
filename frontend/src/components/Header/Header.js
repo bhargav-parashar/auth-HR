@@ -7,65 +7,19 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-
 import { useSnackbar } from "notistack";
-//import IsLoggedInContext from "../Context/IsLoggedInContext.js";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import config from "../../config/config";
 
 const Header = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-  // const { isLoggedIn, setIsLoggedIn, setIsLogoutClicked  } = useContext(IsLoggedInContext);
-
-  //   useEffect(()=>{
-  //     //make a request to server, with credentials. If token is verified, navigate to employee page
-  //     //if token is not verified,do nothing
-  //      console.log('Header effect Rendered', new Date());
-  //       const checkStatus = async () =>{
-  //       const URL = `${config.endpoint}/auth/loginstatus`;
-
-  //       try{
-
-  //         const res = await axios.post(URL, {}, {withCredentials : true} );
-  //         if(res.status === 200){
-  //           localStorage.setItem("userName",JSON.stringify(res.data.userName) );
-
-  //           if(res.data.role === 'admin'){
-  //             navigate("/hr-home-page")
-  //           }else{
-  //           navigate("/employee-home-page")
-  //           }
-  //         }else{
-  //           localStorage.setItem("isLoggedIn", JSON.stringify(false));
-  //           setIsLoggedIn(false);
-  //           localStorage.removeItem("userName");
-  //         }
-
-  //       }catch(err){
-  //         if(err.status === 403){
-  //           localStorage.setItem("isLoggedIn", JSON.stringify(false));
-  //           setIsLoggedIn(false);
-  //           localStorage.removeItem("userName");
-  //           navigate("/");
-  //           enqueueSnackbar("Previous session timed out", { variant: "warning" });
-  //         }
-
-  //         console.log(err);
-  //       }
-
-  //     };
-  //     checkStatus()
-  // },[]);
-
   const handleLogout = async () => {
     try {
-      setIsLogoutClicked(true);
       const URL = `${config.endpoint}/auth/logout`;
       const res = await axios.post(URL, {}, { withCredentials: true });
-      localStorage.setItem("isLoggedIn", JSON.stringify(false));
-      setIsLoggedIn(false);
-      localStorage.removeItem("userName");
+      localStorage.removeItem("loggedInUser");
       enqueueSnackbar("Logged out successfully", { variant: "success" });
       navigate("/");
     } catch (err) {

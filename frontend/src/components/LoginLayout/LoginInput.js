@@ -115,11 +115,12 @@ const LoginInput = ({ isRegister = false }) => {
 
     try {
       setIsLoading(true);
-      const res = await axios.post(URL, body);
+      const res = await axios.post(URL, body, { withCredentials: true });
       setFormData({
         username: "", 
         password: "",
       });
+      localStorage.setItem("loggedInUser", JSON.stringify(body.username));
       console.log(res);
       enqueueSnackbar(`Logged In as ${isGuestAdmin? guestAdmin.username : isGuestEmp ? guestEmployee.username : formData.username}`, {
         variant: "success",
