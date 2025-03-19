@@ -24,7 +24,7 @@ const Dashboard = () => {
           height: "100%",
         }}
       >
-        <Box flex={1} sx={{ border: "2px solid black" }}>
+        <Box flex={1} sx={{ border: "2px solid black", display:{xs:'none', md:'block'} }}>
           <Sidebar />
         </Box>
         <Box flex={5} sx={{ border: "2px solid black" }}>

@@ -7,7 +7,7 @@ import { sidebarOptions } from "../../constants/constants";
 
 const Sidebar = () => {
   return (
-    <Stack direction="column">
+    <Stack direction="column" >
       <Stack
         mb={9}
         p={2}
