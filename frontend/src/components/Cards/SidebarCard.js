@@ -5,12 +5,13 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LogoutIcon from '@mui/icons-material/Logout';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import Icon from "../Sidebar/Icon";
 
-const SidebarCard = ({ menuItem, menuIcon }) => {
+const SidebarCard = ({ menuItem, menuIcon, selectedTab, setSelectedTab }) => {
   let icon = <HomeOutlinedIcon />;
   switch (menuIcon) {
     case "HomeOutlinedIcon":
-      icon = <HomeOutlinedIcon />;
+      icon = <HomeOutlinedIcon sx={{cursor:"pointer"}} onClick={() => alert("Hola")} />;
       break;
     case "DataUsageIcon":
       icon = <DataUsageIcon />;
@@ -28,6 +29,10 @@ const SidebarCard = ({ menuItem, menuIcon }) => {
       icon = <HomeOutlinedIcon />;
   }
 
+  const handleClick = (val) =>{
+    alert(val)
+  };
+
   return (
     <Stack
       p={2}
@@ -44,8 +49,8 @@ const SidebarCard = ({ menuItem, menuIcon }) => {
         sx={{ border: "2px solid red" }}
         gap={1}
       >
-        {icon}
-        <Typography>{menuItem}</Typography>
+        <Icon menuIcon={menuIcon} menuItem={menuItem} selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+        <Typography sx={{cursor:"pointer"}} onClick={() => handleClick(menuItem)} >{menuItem}</Typography>
       </Stack>
     </Stack>
   );

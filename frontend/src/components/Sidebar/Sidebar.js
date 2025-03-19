@@ -2,10 +2,14 @@ import React from "react";
 import { Box, Stack, Typography, Divider } from "@mui/material";
 import SidebarCard from "../../components/Cards/SidebarCard";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import { sidebarOptions } from "../../constants/constants";
+import { adminSidebarOptions, empSidebarOptions } from "../../constants/constants";
+import UserContext from "../../context/UserContext";
+import { useContext } from "react";
 
 
 const Sidebar = () => {
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+
   return (
     <Stack direction="column" >
       <Stack
@@ -27,13 +31,26 @@ const Sidebar = () => {
           <Typography variant="h4">AuthHR</Typography>
         </Stack>
       </Stack>
-      {sidebarOptions.map((item) => (
-        <SidebarCard
-          key={item.id}
-          menuItem={item.option}
-          menuIcon={item.icon}
-        />
-      ))}
+      {
+        loggedInUser.role === "admin" ?  (
+          adminSidebarOptions.map((item) => (
+            <SidebarCard
+              key={item.id}
+              menuItem={item.option}
+              menuIcon={item.icon}
+            />
+          ))
+        ) :(
+          empSidebarOptions.map((item) => (
+            <SidebarCard
+              key={item.id}
+              menuItem={item.option}
+              menuIcon={item.icon}
+            />
+          ))
+        )
+      }
+
       <Divider
         variant="middle"
         sx={{

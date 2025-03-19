@@ -34,9 +34,9 @@ export default function Carousel({
           paddingBottom: "10px", 
         }}
       >
-        {data.map((slide) => (
+        {data.map((slide,idx) => (
           <SwiperSlide
-            key={slide.id}
+            key={idx}
             style={{
               width: "fit-content",
               display: "flex",

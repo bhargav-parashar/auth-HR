@@ -42,9 +42,9 @@ const loadingCarousel = [
     id:6,
     txt:"Magic is happening..."
   }
-]
+];
 
-const sidebarOptions = [
+const adminSidebarOptions = [
   {
     id: 1,
     option: "Dashboard",
@@ -63,6 +63,30 @@ const sidebarOptions = [
   }
 ];
 
+const empSidebarOptions = [
+  {
+    id: 1,
+    option: "Dashboard",
+    icon: "HomeOutlinedIcon"
+  },
+
+  {
+    id: 2,
+    option: "Apply Leave",
+    icon: "DataUsageIcon"
+  },
+  {
+    id: 3,
+    option: "Request Relocation",
+    icon: "GroupsIcon"
+  },
+  {
+    id: 4,
+    option: "Submit Resignation",
+    icon: "GroupsIcon"
+  }
+];
+
 const guestAdmin = {
   username: "admin",
   password: "admin"
@@ -73,4 +97,4 @@ const guestEmployee = {
   password : "password"
 };
 
-export { carouselSlides, sidebarOptions, guestAdmin, guestEmployee, loadingCarousel };
+export { carouselSlides, adminSidebarOptions,empSidebarOptions, guestAdmin, guestEmployee, loadingCarousel };

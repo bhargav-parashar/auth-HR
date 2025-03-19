@@ -62,7 +62,6 @@ const login = async (req, res) => {
             // sameSite: "None",
           })
           .send({ 
-                  token: jwtToken, 
                   role: role 
           });
       } else {

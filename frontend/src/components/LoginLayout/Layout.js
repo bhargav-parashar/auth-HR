@@ -94,7 +94,7 @@ const Login = ({ children }) => {
             <LoginCarousel
               slidesPerView={1}
               data={carouselSlides.map((slide) => (
-                <Typography sx={{ color: "white" }}>{slide.txt}</Typography>
+                <Typography key={slide.id} sx={{ color: "white" }}>{slide.txt}</Typography>
               ))}
             />
           </Box>

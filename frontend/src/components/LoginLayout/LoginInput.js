@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import RegisterBox from "./RegisterBox";
 import LoginBox from "./LoginBox";
 import { guestAdmin, guestEmployee } from "../../constants/constants";
+import { useContext } from "react";
+import UserContext from "../../context/UserContext";
 
 const LoginInput = ({ isRegister = false }) => {
   const [formData, setFormData] = useState({
@@ -18,6 +20,7 @@ const LoginInput = ({ isRegister = false }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const { loggedInUser, setLoggedInUser} = useContext(UserContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -127,6 +130,8 @@ const LoginInput = ({ isRegister = false }) => {
         password: "",
       });
       localStorage.setItem("loggedInUser", JSON.stringify(body.username));
+      setLoggedInUser({username:body.username, role : res.data.role});
+      
       enqueueSnackbar(
         `Logged In as ${
           isGuestAdmin
@@ -139,7 +144,7 @@ const LoginInput = ({ isRegister = false }) => {
           variant: "success",
         }
       );
-      navigate("/dashboard");
+       navigate("/dashboard");
     } catch (err) {
       console.log(err);
       enqueueSnackbar(err.response.data.message, { variant: "warning" });
