@@ -5,11 +5,11 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import LogoutIcon from "@mui/icons-material/Logout";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 
-const Icon = ({ menuIcon, menuItem }) => {
+const Icon = ({ menuIcon, menuItem, selectedTab, handleClick }) => {
   let currIcon = (
     <HomeOutlinedIcon
       sx={{ cursor: "pointer" }}
-      onClick={() => alert(menuItem)}
+      onClick={()=>handleClick(menuItem)}
     />
   );
   switch (menuIcon) {
@@ -17,7 +17,7 @@ const Icon = ({ menuIcon, menuItem }) => {
       currIcon = (
         <HomeOutlinedIcon
           sx={{ cursor: "pointer" }}
-          onClick={() => alert(menuItem)}
+          onClick={()=>handleClick(menuItem)}
         />
       );
       break;
@@ -25,7 +25,7 @@ const Icon = ({ menuIcon, menuItem }) => {
       currIcon = (
         <DataUsageIcon
           sx={{ cursor: "pointer" }}
-          onClick={() => alert(menuItem)}
+          onClick={()=>handleClick(menuItem)}
         />
       );
       break;
@@ -33,7 +33,7 @@ const Icon = ({ menuIcon, menuItem }) => {
       currIcon = (
         <GroupsIcon
           sx={{ cursor: "pointer" }}
-          onClick={() => alert(menuItem)}
+          onClick={()=>handleClick(menuItem)}
         />
       );
       break;
@@ -41,7 +41,7 @@ const Icon = ({ menuIcon, menuItem }) => {
       currIcon = (
         <LogoutIcon
           sx={{ cursor: "pointer" }}
-          onClick={() => alert(menuItem)}
+          onClick={()=>handleClick(menuItem)}
         />
       );
       break;
@@ -49,7 +49,7 @@ const Icon = ({ menuIcon, menuItem }) => {
       currIcon = (
         <DarkModeOutlinedIcon
           sx={{ cursor: "pointer" }}
-          onClick={() => alert(menuItem)}
+          onClick={()=>handleClick(menuItem)}
         />
       );
       break;
@@ -57,7 +57,7 @@ const Icon = ({ menuIcon, menuItem }) => {
       currIcon = (
         <HomeOutlinedIcon
           sx={{ cursor: "pointer" }}
-          onClick={() => alert(menuItem)}
+          onClick={()=>handleClick(menuItem)}
         />
       );
   }

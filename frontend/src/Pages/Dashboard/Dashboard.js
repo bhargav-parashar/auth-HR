@@ -1,20 +1,24 @@
 import React from "react";
-import { Box, Stack, Container, colors, Typography } from "@mui/material";
+import { Box, Stack} from "@mui/material";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import AdminHome from "./AdminHome";
 import EmployeeHome from "./EmployeeHome";
+import ApplyLeave from "./ApplyLeave";
+import Relocation from "./Relocation";
+import Resignation from "./Resignation";
+import Analytics from "./Analytics";
+import Employees from "./Employees";
 import { useState } from "react";
 import TabContext from "../../context/tabContext";
 import UserContext from "../../context/UserContext";
 import { useContext } from "react";
 
 const Dashboard = () => {
-  const [selectedTab, setSelectedTab] = useState(1);
-  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const [selectedTab, setSelectedTab] = useState("Dashboard");
+  const { loggedInUser } = useContext(UserContext);
 
   const handleTabChange = (tab) => {
-    alert(tab);
     setSelectedTab(tab);
   };
 
@@ -44,11 +48,38 @@ const Dashboard = () => {
               display: { xs: "none", md: "block" },
             }}
           >
-            <Sidebar />
+            <Sidebar
+              selectedTab={selectedTab}
+              setSelectedTab={handleTabChange}
+            />
           </Box>
           <Box flex={5} sx={{ border: "2px solid black" }}>
             <Header />
-            {loggedInUser.role == "admin" ? <AdminHome /> : <EmployeeHome />}
+            {loggedInUser.role === "admin" && selectedTab === "Dashboard" && (
+              <AdminHome />
+            )}
+            {loggedInUser.role === "admin" && selectedTab === "Analytics" && (
+              <Analytics />
+            )}
+            {loggedInUser.role === "admin" && selectedTab === "Employees" && (
+              <Employees />
+            )}
+            {loggedInUser.role === "employee" &&
+              selectedTab === "Dashboard" && (
+              <EmployeeHome />
+            )}
+            {loggedInUser.role === "employee" &&
+              selectedTab === "Apply Leave" && (
+              <ApplyLeave />
+            )}
+            {loggedInUser.role === "employee" &&
+              selectedTab === "Request Relocation" && (
+              <Relocation />
+            )}
+            {loggedInUser.role === "employee" &&
+              selectedTab === "Submit Resignation" && (
+              <Resignation />
+            )}
           </Box>
         </Stack>
       </Box>

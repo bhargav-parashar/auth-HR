@@ -11,7 +11,7 @@ const SidebarCard = ({ menuItem, menuIcon, selectedTab, setSelectedTab }) => {
   let icon = <HomeOutlinedIcon />;
   switch (menuIcon) {
     case "HomeOutlinedIcon":
-      icon = <HomeOutlinedIcon sx={{cursor:"pointer"}} onClick={() => alert("Hola")} />;
+      icon = <HomeOutlinedIcon sx={{cursor:"pointer"}}  />;
       break;
     case "DataUsageIcon":
       icon = <DataUsageIcon />;
@@ -30,7 +30,7 @@ const SidebarCard = ({ menuItem, menuIcon, selectedTab, setSelectedTab }) => {
   }
 
   const handleClick = (val) =>{
-    alert(val)
+    setSelectedTab(val);
   };
 
   return (
@@ -49,7 +49,7 @@ const SidebarCard = ({ menuItem, menuIcon, selectedTab, setSelectedTab }) => {
         sx={{ border: "2px solid red" }}
         gap={1}
       >
-        <Icon menuIcon={menuIcon} menuItem={menuItem} selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+        <Icon menuIcon={menuIcon} menuItem={menuItem} selectedTab={selectedTab} handleClick={handleClick} />
         <Typography sx={{cursor:"pointer"}} onClick={() => handleClick(menuItem)} >{menuItem}</Typography>
       </Stack>
     </Stack>
