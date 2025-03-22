@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack } from "@mui/material";
+import { Box, Paper, Stack } from "@mui/material";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import AdminHome from "./AdminHome";
@@ -33,19 +33,16 @@ const Dashboard = () => {
             "linear-gradient(0deg, rgba(246,228,204,1) 0%, rgba(108,140,181,1) 100%)",
         }}
       >
-        <Box sx={{ height: "100%", border: "2px solid green", position:'relative' }}>
-        <Header />
+        <Stack direction="column" gap={0} sx={{ height: "100%" }}>
           <Stack
             direction={{ xs: "column", md: "row" }}
             sx={{
-              height: "93%",
-              border:'2px solid purple'
+              height: "100%",
             }}
           >
             <Box
               flex={1}
               sx={{
-                 border: "2px solid blue",
                 display: { xs: "none", md: "block" },
                 height: "100%",
               }}
@@ -55,27 +52,27 @@ const Dashboard = () => {
                 setSelectedTab={handleTabChange}
               />
             </Box>
-            <Box flex={5} sx={{ border: "2px solid red", height: "100%" }}>
-              {loggedInUser.role === "admin" && selectedTab === "Dashboard" && (
-                <AdminHome />
-              )}
-              {loggedInUser.role === "admin" && selectedTab === "Analytics" && (
-                <Analytics />
-              )}
-              {loggedInUser.role === "admin" && selectedTab === "Employees" && (
-                <Employees />
-              )}
-              {loggedInUser.role === "employee" &&
-                selectedTab === "Dashboard" && <EmployeeHome />}
-              {loggedInUser.role === "employee" &&
-                selectedTab === "Apply Leave" && <ApplyLeave />}
-              {loggedInUser.role === "employee" &&
-                selectedTab === "Request Relocation" && <Relocation />}
-              {loggedInUser.role === "employee" &&
-                selectedTab === "Submit Resignation" && <Resignation />}
+            <Box flex={5} sx={{ height: "100%", position:'relative' }}>
+              <Header />
+              <Paper sx={{ height: "100%", paddingTop:"9%"}} elevation={0} square>
+                {loggedInUser.role === "admin" &&
+                  selectedTab === "Dashboard" && <AdminHome />}
+                {loggedInUser.role === "admin" &&
+                  selectedTab === "Analytics" && <Analytics />}
+                {loggedInUser.role === "admin" &&
+                  selectedTab === "Employees" && <Employees />}
+                {loggedInUser.role === "employee" &&
+                  selectedTab === "Dashboard" && <EmployeeHome />}
+                {loggedInUser.role === "employee" &&
+                  selectedTab === "Apply Leave" && <ApplyLeave />}
+                {loggedInUser.role === "employee" &&
+                  selectedTab === "Request Relocation" && <Relocation />}
+                {loggedInUser.role === "employee" &&
+                  selectedTab === "Submit Resignation" && <Resignation />}
+              </Paper>
             </Box>
           </Stack>
-        </Box>
+        </Stack>
       </Box>
     </TabContext.Provider>
   );

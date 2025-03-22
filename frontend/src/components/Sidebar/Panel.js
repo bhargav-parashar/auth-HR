@@ -1,14 +1,48 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Stack, Typography, Switch, Box, Divider } from "@mui/material";
 import UserContext from "../../context/UserContext";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
+import config from "../../config/config";
+import { useSnackbar } from "notistack";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Panel = () => {
+  const [loggedInUser, setLoggedInUser] = useState(
+    JSON.parse(localStorage.getItem("loggedInUser"))
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if (!loggedInUser) {
+      navigate("/");
+      enqueueSnackbar("Logged out successfully", { variant: "success" });
+    }
+  }, [loggedInUser]);
+
   const { darkMode, setDarkMode } = useContext(UserContext);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+
   const handleModeChange = () => {
     setDarkMode((prev) => !prev);
   };
+
+  const handleLogout = async () => {
+    try {
+      setIsLoading(true);
+      const URL = `${config.endpoint}/auth/logout`;
+      const res = await axios.post(URL, {}, { withCredentials: true });
+      localStorage.removeItem("loggedInUser");
+      setLoggedInUser(localStorage.getItem("loggedInUser"));
+    } catch (err) {
+      enqueueSnackbar(`Something went wrong - ${err}`, { variant: "warning" });
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Box>
       <Divider
@@ -18,17 +52,16 @@ const Panel = () => {
           backgroundColor: "rgb(176, 169, 169)",
           borderRadius: "10px",
           height: "1px",
-          marginTop: "20%",
-          marginBottom: "20%",
+          marginTop: "0%",
+          marginBottom: "10%",
         }}
       />
       <Stack
         p={2}
-        paddingLeft={5}
+        paddingLeft="15%"
         direction="row"
         alignItems="center"
         justifyContent="flex-start"
-        // sx={{ border: "2px solid black" }}
       >
         <Stack
           direction="row"
@@ -36,11 +69,8 @@ const Panel = () => {
           justifyContent="flex-start"
           gap={1}
         >
-          <LogoutIcon />
-          <Typography
-            sx={{ cursor: "pointer" }}
-            onClick={() => handleClick(menuItem)}
-          >
+          <LogoutIcon sx={{ cursor: "pointer" }} onClick={handleLogout} />
+          <Typography sx={{ cursor: "pointer",fontSize:'1vw' }} onClick={handleLogout}>
             Logout
           </Typography>
         </Stack>
@@ -48,11 +78,10 @@ const Panel = () => {
 
       <Stack
         p={2}
-        paddingLeft={5}
+        paddingLeft="15%"
         direction="row"
         alignItems="center"
         justifyContent="flex-start"
-        // sx={{ border: "2px solid black" }}
       >
         <Stack
           direction="row"
@@ -62,7 +91,7 @@ const Panel = () => {
         >
           <DarkModeOutlinedIcon />
           <Typography
-            sx={{ cursor: "pointer" }}
+            sx={{ cursor: "pointer",fontSize:'1vw' }}
             onClick={() => handleClick(menuItem)}
           >
             Dark Mode

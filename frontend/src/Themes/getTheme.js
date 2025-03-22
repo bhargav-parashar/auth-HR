@@ -4,7 +4,10 @@ const getTheme = (mode) =>{
 
     const theme = createTheme({
         palette :{
-            mode : mode ? "dark" : "light"
+            mode : mode ? "dark" : "light",
+            primary :{
+                main : '#fff'
+            }
         }
     });
 

@@ -1,13 +1,11 @@
 import React from "react";
-import { Stack } from "@mui/material";
-import RequestCards from "../../components/Sections/RequestCards";
-import RequestGrid from "../../components/Sections/RequestGrid";
+import { Box } from "@mui/material";
 
 const EmployeeHome = () => {
   return (
-    <Stack mt={4} px={4} direction="column" gap={4}>
+    <Box >
       Employee Home
-    </Stack>
+    </Box>
   );
 };
 
