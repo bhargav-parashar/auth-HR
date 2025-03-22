@@ -24,7 +24,7 @@
     "swiper": "^11.2.5"
   },
   "@parcel/resolver-default": {
-      "packageExports": true
+    "packageExports": true
   },
   "devDependencies": {
     "buffer": "^6.0.3",

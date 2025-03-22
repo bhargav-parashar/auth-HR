@@ -14,7 +14,8 @@ import { useState, useEffect } from "react";
 import Loader from "../Loader/Loader";
 import { Drawer } from "@mui/material";
 import Sidebar from "../Sidebar/Sidebar";
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const Header = () => {
   const [loggedInUser, setLoggedInUser] = useState(
@@ -54,41 +55,55 @@ const Header = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, zIndex: 10, position: "relative" }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Box sx={{ flexGrow: 1 }}>
-            <MenuIcon sx={{display:{xs:"block", md:'none'}}} onClick={() => toggleDrawer(true)}/>
-          </Box>
-
-          {
-            <Stack direction="row" spacing={2} alignItems="center">
-              <AccountCircle />
-              <Typography>{loggedInUser || ""}</Typography>
-
-              {isLoading ? (
-                <Loader small={true} />
-              ) : (
-                <Button onClick={() => handleLogout()} color="inherit">
-                  Logout
-                </Button>
-              )}
+    <Box sx={{ flexGrow: 1, zIndex: 10, 
+      position: "relative" }}>
+        <AppBar 
+        position="static" 
+        elevation={0} >
+          <Toolbar>
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="flex-start"
+            >
+              <CheckCircleIcon fontSize="large" color="success" />
+              <Typography variant="h4">AuthHR</Typography>
             </Stack>
-          }
-        </Toolbar>
-      </AppBar>
-      <Drawer open={open} onClose={() => toggleDrawer(false)}>
-        <Box
-          sx={{
-            background:
-              "linear-gradient(0deg, rgba(246,228,204,1) 0%, rgba(108,140,181,1) 100%)",
-            height: "100%",
-          }}
-        >
-          <Sidebar />
-        </Box>
-      </Drawer>
-    </Box>
+            <Box sx={{ flexGrow: 1 }}>
+              <MenuIcon
+                sx={{ display: { xs: "block", md: "none" } }}
+                onClick={() => toggleDrawer(true)}
+              />
+            </Box>
+  
+            {
+              <Stack direction="row" spacing={2} alignItems="center">
+                <AccountCircle />
+                <Typography>{loggedInUser || ""}</Typography>
+  
+                {isLoading ? (
+                  <Loader small={true} />
+                ) : (
+                  <Button onClick={() => handleLogout()} color="inherit">
+                    Logout
+                  </Button>
+                )}
+              </Stack>
+            }
+          </Toolbar>
+        </AppBar>
+        <Drawer open={open} onClose={() => toggleDrawer(false)}>
+          <Box
+            sx={{
+              background:
+                "linear-gradient(0deg, rgba(246,228,204,1) 0%, rgba(108,140,181,1) 100%)",
+              height: "100%",
+            }}
+          >
+            <Sidebar />
+          </Box>
+        </Drawer>
+      </Box>
   );
 };
 

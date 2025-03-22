@@ -4,7 +4,6 @@ import DataUsageIcon from "@mui/icons-material/DataUsage";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LogoutIcon from '@mui/icons-material/Logout';
-import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import Icon from "../Sidebar/Icon";
 
 const SidebarCard = ({ menuItem, menuIcon, selectedTab, setSelectedTab }) => {
@@ -40,13 +39,12 @@ const SidebarCard = ({ menuItem, menuIcon, selectedTab, setSelectedTab }) => {
       direction="row"
       alignItems="center"
       justifyContent="flex-start"
-      sx={{ border: "2px solid black" }}
+      // sx={{ border: "2px solid black" }}
     >
       <Stack
         direction="row"
         alignItems="center"
         justifyContent="flex-start"
-        sx={{ border: "2px solid red" }}
         gap={1}
       >
         <Icon menuIcon={menuIcon} menuItem={menuItem} selectedTab={selectedTab} handleClick={handleClick} />
