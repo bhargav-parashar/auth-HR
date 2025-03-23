@@ -8,9 +8,8 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Drawer } from "@mui/material";
 import Sidebar from "../Sidebar/Sidebar";
 import MenuIcon from "@mui/icons-material/Menu";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-const Header = () => {
+const Header = ({selectedTab, setSelectedTab}) => {
   const [loggedInUser, setLoggedInUser] = useState(
     JSON.parse(localStorage.getItem("loggedInUser"))
   );
@@ -34,7 +33,7 @@ const Header = () => {
           {
             <Stack direction="row" spacing={1} alignItems="center">
               <AccountCircle />
-              <Typography sx={{fontSize:'1vw'}} >{loggedInUser || ""}</Typography>
+              <Typography  >{loggedInUser || ""}</Typography>
             </Stack>
           }
         </Toolbar>
@@ -47,7 +46,7 @@ const Header = () => {
             height: "100%",
           }}
         >
-          <Sidebar />
+          <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
         </Box>
       </Drawer>
     </Box>

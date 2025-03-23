@@ -70,7 +70,7 @@ const Panel = () => {
           gap={1}
         >
           <LogoutIcon sx={{ cursor: "pointer" }} onClick={handleLogout} />
-          <Typography sx={{ cursor: "pointer",fontSize:'1vw' }} onClick={handleLogout}>
+          <Typography variant="caption" sx={{ cursor: "pointer" }} onClick={handleLogout}>
             Logout
           </Typography>
         </Stack>
@@ -90,10 +90,7 @@ const Panel = () => {
           gap={1}
         >
           <DarkModeOutlinedIcon />
-          <Typography
-            sx={{fontSize:'1vw' }}
-          
-          >
+          <Typography variant="caption">
             Dark Mode
           </Typography>
           <Switch checked={darkMode} onChange={handleModeChange} />

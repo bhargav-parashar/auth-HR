@@ -15,7 +15,7 @@ const getTheme = (mode) =>{
             MuiTypography:{
                 styleOverrides :{
                     root:{
-                        fontSize :  {md:'50px'} 
+                        textAlign:'justify'
                     }
                 }
             } 

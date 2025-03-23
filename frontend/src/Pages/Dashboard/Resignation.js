@@ -8,7 +8,7 @@ import { resignSteps } from "../../constants/constants";
 import ResignationMobile from "./ResignationMobile";
 
 const Resignation = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -43,8 +43,8 @@ const Resignation = () => {
 
         <Stack direction={{ xs: "column", md: "row" }} sx={{ height: "60%" }}>
           <Box flex={2}>
-            <Typography variant="h6" mb={2}>{`${resignSteps[activeStep - 1].id}. ${resignSteps[activeStep - 1].step}`}</Typography>
-            <Typography>{resignSteps[activeStep - 1].desc}</Typography>
+            <Typography variant="h6" mb={2}>{`${resignSteps[activeStep].id}. ${resignSteps[activeStep].step}`}</Typography>
+            <Typography>{resignSteps[activeStep].desc}</Typography>
           </Box>
           <Box
             flex={1}
@@ -60,7 +60,7 @@ const Resignation = () => {
                 position: "absolute",
               }}
               alt="date_picker"
-              src={ resignSteps[activeStep - 1].id === 1 ? date_picker : resignSteps[activeStep - 1].id === 2 ? resign_feedback : resign_submit }
+              src={ resignSteps[activeStep].id === 1 ? date_picker : resignSteps[activeStep].id === 2 ? resign_feedback : resign_submit }
               display={{ xs: "none", md: "block" }}
             />
           </Box>
@@ -71,25 +71,25 @@ const Resignation = () => {
         >
           <Button
             color="inherit"
-            disabled={activeStep === 1}
+            disabled={activeStep === 0}
             onClick={handleBack}
             sx={{ mr: 1 }}
           >
             Back
           </Button>
           <Box sx={{ flex: "1 1 auto" }} />
-          {activeStep === resignSteps.length ? (
+          {activeStep === resignSteps.length -1 ? (
             <Button>Submit</Button>
           ) : (
             <Button onClick={handleNext}>Next</Button>
           )}
         </Box>
       </Stack>
-      <Stack justifyContent='center' alignItems='center' pt={3} sx={{ position:'relative', border:'2px solid green', height: "100%", display: { xs: "block", md: "none" } }}>
-        <Box sx={{border:'2px solid pink'}}>
+      <Box pt={3} sx={{ position:'relative', height: "100%", display: { xs: "block", md: "none" } }}>
+        <Stack sx={{height: "90%",}} justifyContent='center' alignItems='center'>
         <ResignationMobile />
-        </Box>
-      </Stack>
+        </Stack>
+      </Box>
     </Box>
   );
 };

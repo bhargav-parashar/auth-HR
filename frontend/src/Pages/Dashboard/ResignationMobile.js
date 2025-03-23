@@ -1,39 +1,21 @@
-import * as React from 'react';
-import {Box, Stack} from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import MobileStepper from '@mui/material/MobileStepper';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { resignSteps } from '../../constants/constants';
-
-const steps = [
-  {
-    label: 'Select campaign settings',
-    description: `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`,
-  },
-  {
-    label: 'Create an ad group',
-    description:
-      'An ad group contains one or more ads which target a shared set of keywords.',
-  },
-  {
-    label: 'Create an ad',
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-];
+import * as React from "react";
+import { Box, Stack } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import MobileStepper from "@mui/material/MobileStepper";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import { resignSteps } from "../../constants/constants";
+import date_picker from "../../assets/date_picker.svg";
+import resign_feedback from "../../assets/resign_feedback.svg";
+import resign_submit from "../../assets/resign_submit.svg";
 
 export default function TextMobileStepper() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = steps.length;
+  const maxSteps = resignSteps.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -44,54 +26,86 @@ export default function TextMobileStepper() {
   };
 
   return (
-    <Box sx={{ border:'2px solid white', position:'relative', height:'90%', maxWidth: 400, flexGrow: 1 }}>
+    <Box
+      sx={{ position: "relative", height: "90%", maxWidth: 400, flexGrow: 1 }}
+    >
       <Paper
         square
         elevation={0}
         sx={{
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
           height: 50,
           pl: 2,
-          bgcolor: 'background.default',
+          bgcolor: "background.default",
         }}
       >
-        <Typography>{steps[activeStep].label}</Typography>
+        <Typography variant="h6">{`${resignSteps[activeStep].id}. ${resignSteps[activeStep].step}`}</Typography>
       </Paper>
-      <Stack sx={{ height:'100%'}} direction='column' justifyContent='space-between'>
-      <Box sx={{ height: 255, maxWidth: 400, width: '100%', p: 2 }}>
-        {steps[activeStep].description}
-      </Box>
-      <MobileStepper
-        variant="text"
-        steps={maxSteps}
-        position="static"
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-          >
-            Next
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-            Back
-          </Button>
-        }
-      />
+      <Stack
+        sx={{ height: "100%" }}
+        direction="column"
+        justifyContent="space-between"
+      >
+        <Box sx={{ height: 255, maxWidth: 400, width: "100%", p: 2 }}>
+          <Typography textAlign="justify">
+            {resignSteps[activeStep].desc}
+          </Typography>
+        </Box>
+        <Stack justifyContent='flex-end' alignItems='center'
+          sx={{ position: "relative" }}
+        >
+          <Box
+            component="img"
+            sx={{
+              height: "70%",
+              width: "70%"
+            }}
+            alt="date_picker"
+            src={
+              resignSteps[activeStep].id === 1
+                ? date_picker
+                : resignSteps[activeStep].id === 2
+                ? resign_feedback
+                : resign_submit
+            }
+           
+          />
+        </Stack>
+        <MobileStepper
+          variant="text"
+          steps={maxSteps}
+          position="static"
+          activeStep={activeStep}
+          nextButton={
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep + 1 === maxSteps}
+            >
+              Next
+              {theme.direction === "rtl" ? (
+                <KeyboardArrowLeft />
+              ) : (
+                <KeyboardArrowRight />
+              )}
+            </Button>
+          }
+          backButton={
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+            >
+              {theme.direction === "rtl" ? (
+                <KeyboardArrowRight />
+              ) : (
+                <KeyboardArrowLeft />
+              )}
+              Back
+            </Button>
+          }
+        />
       </Stack>
     </Box>
   );

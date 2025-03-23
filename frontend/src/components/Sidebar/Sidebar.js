@@ -36,7 +36,7 @@ const Sidebar = ({ selectedTab, setSelectedTab }) => {
                 gap={1}
               >
                 <CheckCircleIcon fontSize="large" color="success" />
-                <Typography sx={{fontSize:'1.5vw'}} variant="h4">AuthHR</Typography>
+                <Typography  variant="h6">AuthHR</Typography>
               </Stack>
             </Stack>
             {loggedInUser.role === "admin" ? (
