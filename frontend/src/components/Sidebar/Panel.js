@@ -91,8 +91,8 @@ const Panel = () => {
         >
           <DarkModeOutlinedIcon />
           <Typography
-            sx={{ cursor: "pointer",fontSize:'1vw' }}
-            onClick={() => handleClick(menuItem)}
+            sx={{fontSize:'1vw' }}
+          
           >
             Dark Mode
           </Typography>

@@ -40,8 +40,8 @@ const SidebarCard = ({ menuItem, menuIcon, selectedTab, setSelectedTab }) => {
         justifyContent="flex-start"
         gap={1}
       >
-        <Icon menuIcon={menuIcon} menuItem={menuItem} selectedTab={selectedTab} handleClick={handleClick} />
-        <Typography sx={{cursor:"pointer", fontSize:'1vw'}} onClick={() => handleClick(menuItem)} >{menuItem}</Typography>
+        <Icon menuIcon={menuIcon} menuItem={menuItem} selectedTab={selectedTab} handleClick={handleClick}  />
+        <Typography sx={{cursor:"pointer", fontSize:'1vw', color: selectedTab === menuItem ? '#9696FF' : "" }} onClick={() => handleClick(menuItem)} >{menuItem}</Typography>
       </Stack>
     </Stack>
   );

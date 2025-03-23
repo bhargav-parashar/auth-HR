@@ -6,8 +6,19 @@ const getTheme = (mode) =>{
         palette :{
             mode : mode ? "dark" : "light",
             primary :{
-                main : '#fff'
+                main : '#fff',
+                fontBlack : '#000000',
+                fontGray : '#D3D3D3'
             }
+        },
+        components :{
+            MuiTypography:{
+                styleOverrides :{
+                    root:{
+                        fontSize :  {md:'50px'} 
+                    }
+                }
+            } 
         }
     });
 

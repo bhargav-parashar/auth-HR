@@ -54,7 +54,7 @@ const Dashboard = () => {
             </Box>
             <Box flex={5} sx={{ height: "100%", position:'relative' }}>
               <Header />
-              <Paper sx={{ height: "100%", paddingTop:"9%"}} elevation={0} square>
+              <Paper sx={{ height: "100%", paddingTop:"11%", paddingLeft:'2%', paddingRight:'2%', paddingBottom:'3%'}} elevation={0} square>
                 {loggedInUser.role === "admin" &&
                   selectedTab === "Dashboard" && <AdminHome />}
                 {loggedInUser.role === "admin" &&
