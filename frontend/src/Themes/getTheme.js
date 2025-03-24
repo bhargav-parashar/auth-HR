@@ -7,8 +7,13 @@ const getTheme = (mode) =>{
             mode : mode ? "dark" : "light",
             primary :{
                 main : '#fff',
-                fontBlack : '#000000',
-                fontGray : '#D3D3D3'
+                light : '#9696FF',
+                dark : '#D3D3D3',
+            },
+            secondary : {
+                main : '#fff',
+                light : '#9696FF',
+                dark : '#D3D3D3',
             }
         },
         components :{
@@ -18,7 +23,14 @@ const getTheme = (mode) =>{
                         textAlign:'justify'
                     }
                 }
-            } 
+            },
+            MuiButton :{
+                styleOverrides :{
+                    root :{
+                        background :'#9696FF'
+                    }
+                }
+            }
         }
     });
 

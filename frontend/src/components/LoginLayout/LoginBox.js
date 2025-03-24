@@ -85,7 +85,7 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
             background: " rgba(246,228,204,1)",
             color: "black",
             "&:hover": {
-              background: " rgb(105, 208, 240)",
+              background: " rgb(240, 188, 121)",
             },
           }}
           variant="contained"
@@ -114,6 +114,7 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
             height: "45px",
             width: "100%",
             borderRadius: "0.5rem",
+            background:'transparent',
             color: "white",
             "&:hover": {
               background: " rgba(246,228,204,1)",
@@ -133,6 +134,7 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
             width: "100%",
             borderRadius: "0.5rem",
             color: "white",
+            background:'transparent',
             "&:hover": {
               background: " rgba(246,228,204,1)",
               color: "black",

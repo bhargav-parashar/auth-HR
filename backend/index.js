@@ -5,6 +5,7 @@ const connectDB = require("./DB/connect");
 require("dotenv").config();
 
 const authRoute = require("./routes/auth.routes");
+const userRoute = require("./routes/user.routes");
 
 
 const server = express();
@@ -22,5 +23,6 @@ server.use(cookieParser());
 server.use(cors(corsOptions));
 server.use(express.json());
 server.use("/api/auth", authRoute);
+server.use("/api/user", userRoute);
 
 server.listen(PORT,()=>console.log(`Server running on PORT : ${PORT}`));

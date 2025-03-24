@@ -106,6 +106,9 @@ const RegisterBox = ({ formData, handleChange, handleRegister, isLoading }) => {
             borderRadius: "0.5rem",
             marginTop: "25px",
             background: " rgba(246,228,204,1)",
+            "&:hover": {
+              background: " rgb(240, 188, 121)",
+            },
             color: "black",
           }}
           variant="contained"
