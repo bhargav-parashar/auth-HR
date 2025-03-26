@@ -10,6 +10,7 @@ import DatePicker from "../../components/DatePicker/DatePickerField";
 import config from "../../config/config";
 import Questionnaire from "../../components/Questionnaire/Questionnaire";
 import axios from "axios";
+import { useSnackbar } from "notistack";
 
 const Resignation = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -18,6 +19,7 @@ const Resignation = () => {
   const [responses, setResponses] = useState({});
   const [questionResponseMapping, setQuestionResponseMapping] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const {enqueueSnackbar} = useSnackbar();
 
   useEffect(() => {
     const URL = `${config.endpoint}/user/questionnaire`;
@@ -104,13 +106,12 @@ const Resignation = () => {
           direction="column"
           sx={{
             borderRadius: "0.6rem",
-            //border: "2px solid white",
             height: "100%",
             display: { xs: "none", md: "block" },
           }}
         >
           <Box sx={{ height: "20%", position: "relative", width: "100%" }}>
-            <Typography mb={4} sx={{ fontSize: "2vw" }}>
+            <Typography variant="h5" mb={2} >
               Submit Resignation
             </Typography>
             <ResignStepper
@@ -123,15 +124,16 @@ const Resignation = () => {
 
           <Stack direction={{ xs: "column", md: "row" }} sx={{ height: "70%" }}>
             <Box sx={{ position: "relative" }} flex={2}>
-              <Paper elevation={2} sx={{ padding: 2, height: "100%" }}>
+              <Paper  elevation={2} sx={{ position:'relative', padding: 2, height: "100%" }}>
                 <Typography
                   color="primary.light"
-                  variant="h6"
+                  variant="body1"
                   mb={2}
                 >{`${resignSteps[activeStep].id}. ${resignSteps[activeStep].step}`}</Typography>
-                <Typography mb={2}>{resignSteps[activeStep].desc}</Typography>
+                <Typography  variant="body2" mb={2}>{resignSteps[activeStep].desc}</Typography>
                 {activeStep === 0 && <DatePicker lwd={lwd} setLwd={setLwd} />}
                 {activeStep === 1 && (
+                
                   <Questionnaire
                     handleInputChange={handleInputChange}
                     questionResponseMapping={questionResponseMapping}
@@ -140,10 +142,10 @@ const Resignation = () => {
                 {activeStep === 2 && (
                   <Box>
                     <Stack direction="row" gap={1}>
-                      <Typography color="primary.dark">
+                      <Typography variant="body2" color="primary.dark">
                         Last Working Day :
                       </Typography>
-                      <Typography color="primary.light">{lwd}</Typography>
+                      <Typography variant="body2" color="primary.light">{lwd}</Typography>
                     </Stack>
                     <Box mt={2}>
                       <Questionnaire
@@ -211,7 +213,9 @@ const Resignation = () => {
                 sx={{ height: "30px" }}
                 onClick={handleNext}
                 disabled={
-                  (activeStep === 0 && lwd.length === 0) 
+                  (activeStep === 0 && lwd.length === 0) || 
+                  (activeStep === 1 && questionResponseMapping[0]['response'].length === 0) ||
+                  (activeStep === 1 && questionResponseMapping[1]['response'].length === 0)
                     ? true
                     : false
                 }

@@ -3,7 +3,7 @@ import QuestionItem from "./QuestionItem";
 
 const Questionnaire = ({ isReview, questionResponseMapping, handleInputChange}) => {
   return (
-    <Box   >
+    <Box  sx={{  height:'70%',  overflowY:'clip'}}  >
       {questionResponseMapping.map((item, idx) => (
         <QuestionItem
           key={item.questionId}

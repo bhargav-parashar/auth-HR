@@ -8,7 +8,13 @@ const ResignStepper = ({activeStep, resignSteps }) => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Stepper activeStep={activeStep}>
+      <Stepper 
+       sx={{
+        "& .MuiStepLabel-label": { fontSize: "0.8rem" }, 
+        "& .MuiStepIcon-root": { fontSize: "0.8rem" }, 
+        "& .MuiStepConnector-line": { minHeight: "1px" }, 
+      }}
+      activeStep={activeStep}>
         {resignSteps.map((item, index) => {
           const stepProps = {};
           const labelProps = {};

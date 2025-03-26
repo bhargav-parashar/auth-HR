@@ -158,7 +158,7 @@ const LoginInput = ({ isRegister = false }) => {
       sx={{
         height: "100%",
       }}
-      pt={{ xs: 4, sm: 10 }}
+      pt={{ xs: 4, sm:1 }}
     >
       {isRegister ? (
         <RegisterBox

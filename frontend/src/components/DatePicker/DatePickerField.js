@@ -38,9 +38,22 @@ export default function BasicDatePicker({ lwd, setLwd, disabled }) {
             disabled={disabled}
             value={dayjs(lwd)}
             onChange={handleDateChange}
+            sx={{width:"50%"}}
+            slotProps={{
+              textField: { size: "small" },
+              popper: {
+                placement: "right", // Force calendar to open above
+              },
+            }} 
           />
         ) : (
             <DatePicker
+            slotProps={{
+              textField: { size: "small" },
+              popper: {
+                placement: "right", // Force calendar to open above
+              },
+            }} 
               disabled={disabled}
               onChange={handleDateChange}
             />

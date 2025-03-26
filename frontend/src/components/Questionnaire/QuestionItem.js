@@ -8,7 +8,7 @@ const QuestionItem = ({ handleInputChange, questionitem, idx, isReview }) => {
     <>
       {!isReview ? (
         <>
-          <Typography sx={{ mb: 1 }}>{`${String.fromCharCode(65 + idx)}. ${
+          <Typography variant="body2" sx={{ mb: 1 }}>{`${String.fromCharCode(65 + idx)}. ${
             questionitem.questionText
           } *`}</Typography>
 
@@ -20,7 +20,8 @@ const QuestionItem = ({ handleInputChange, questionitem, idx, isReview }) => {
             variant="outlined"
             value={questionitem.response}
             size="small"
-            sx={{ width: "100%", mb: 3 }}
+            sx={{ width: "100%", mb: 3, }}
+            inputProps={{style: {fontSize: "0.8rem"}}} 
             onChange={(e) =>
               handleInputChange(questionitem.questionId, e.target.value)
             }
@@ -28,7 +29,7 @@ const QuestionItem = ({ handleInputChange, questionitem, idx, isReview }) => {
         </>
       ) : (
         <>
-          <Typography sx={{ mb: 1 }}>{`${String.fromCharCode(65 + idx)}. ${
+          <Typography variant="body2" sx={{ mb: 1 }}>{`${String.fromCharCode(65 + idx)}. ${
             questionitem.questionText
           }`}</Typography>
 
@@ -39,7 +40,8 @@ const QuestionItem = ({ handleInputChange, questionitem, idx, isReview }) => {
             value={questionitem.response}
             disabled={true}
             variant="outlined"
-            sx={{ width: "100%", mb: 3 }}
+            inputProps={{style: {fontSize: "0.8rem"}}} 
+            sx={{ width: "100%", mb: {xs:1, lg:2} }}
           />
         </>
       )}

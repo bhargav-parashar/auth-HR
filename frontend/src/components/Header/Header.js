@@ -33,7 +33,7 @@ const Header = ({selectedTab, setSelectedTab}) => {
           {
             <Stack direction="row" spacing={1} alignItems="center">
               <AccountCircle />
-              <Typography  >{loggedInUser || ""}</Typography>
+              <Typography variant="body2" >{loggedInUser || ""}</Typography>
             </Stack>
           }
         </Toolbar>
