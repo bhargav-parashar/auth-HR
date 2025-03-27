@@ -25,7 +25,7 @@ function convert(str) {
   return [date[3], mnths[date[1]], date[2]].join("-");
 }
 
-export default function BasicDatePicker({ lwd, setLwd, disabled }) {
+export default function BasicDatePicker({ lwd, setLwd, disabled, isMobile }) {
   const handleDateChange = (e) => {
     setLwd(convert(e.$d.toString()));
   };
@@ -38,9 +38,9 @@ export default function BasicDatePicker({ lwd, setLwd, disabled }) {
             disabled={disabled}
             value={dayjs(lwd)}
             onChange={handleDateChange}
-            sx={{width:"50%"}}
+            sx={{width: isMobile? "100%" : "50%" }}
             slotProps={{
-              textField: { size: "small" },
+              textField: { size: isMobile?"large":"small" },
               popper: {
                 placement: "right", // Force calendar to open above
               },
@@ -49,7 +49,7 @@ export default function BasicDatePicker({ lwd, setLwd, disabled }) {
         ) : (
             <DatePicker
             slotProps={{
-              textField: { size: "small" },
+              textField: { size: isMobile?"large":"small" },
               popper: {
                 placement: "right", // Force calendar to open above
               },

@@ -225,7 +225,7 @@ const Resignation = () => {
             )}
           </Box>
         </Stack>
-      </Paper>
+      
       <Box
         pt={3}
         sx={{
@@ -239,9 +239,11 @@ const Resignation = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <ResignationMobile />
+         
+          <ResignationMobile lwd={lwd} setLwd={setLwd} />
         </Stack>
       </Box>
+      </Paper>
     </Box>
   );
 };

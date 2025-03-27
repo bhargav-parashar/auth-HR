@@ -11,8 +11,9 @@ import { resignSteps } from "../../constants/constants";
 import date_picker from "../../assets/date_picker.svg";
 import resign_feedback from "../../assets/resign_feedback.svg";
 import resign_submit from "../../assets/resign_submit.svg";
+import  DatePicker  from "../../components/DatePicker/DatePickerField";
 
-export default function TextMobileStepper() {
+export default function ResignationMobile({lwd, setLwd}) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = resignSteps.length;
@@ -48,9 +49,11 @@ export default function TextMobileStepper() {
         justifyContent="space-between"
       >
         <Box sx={{ height: 255, maxWidth: 400, width: "100%", p: 2 }}>
-          <Typography textAlign="justify">
+          <Typography mb={10} textAlign="justify">
             {resignSteps[activeStep].desc}
           </Typography>
+        
+        {activeStep === 0 && <DatePicker isMobile lwd={lwd} setLwd={setLwd} />}
         </Box>
         <Stack justifyContent='flex-end' alignItems='center'
           sx={{ position: "relative" }}
