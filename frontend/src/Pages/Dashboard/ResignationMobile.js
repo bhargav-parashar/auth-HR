@@ -11,9 +11,16 @@ import { resignSteps } from "../../constants/constants";
 import date_picker from "../../assets/date_picker.svg";
 import resign_feedback from "../../assets/resign_feedback.svg";
 import resign_submit from "../../assets/resign_submit.svg";
-import  DatePicker  from "../../components/DatePicker/DatePickerField";
+import DatePicker from "../../components/DatePicker/DatePickerField";
+import Questionnaire from "../../components/Questionnaire/Questionnaire";
 
-export default function ResignationMobile({lwd, setLwd}) {
+export default function ResignationMobile({
+  lwd,
+  setLwd,
+  handleInputChange,
+  questionResponseMapping,
+  handleSubmit
+}) {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = resignSteps.length;
@@ -30,6 +37,9 @@ export default function ResignationMobile({lwd, setLwd}) {
     <Box
       sx={{ position: "relative", height: "90%", maxWidth: 400, flexGrow: 1 }}
     >
+      <Typography color="primary.light" variant="h4" pb={5} pt={5}>
+        Submit Resignation
+      </Typography>
       <Paper
         square
         elevation={0}
@@ -47,15 +57,46 @@ export default function ResignationMobile({lwd, setLwd}) {
         sx={{ height: "100%" }}
         direction="column"
         justifyContent="space-between"
+        pb={15}
       >
         <Box sx={{ height: 255, maxWidth: 400, width: "100%", p: 2 }}>
           <Typography mb={10} textAlign="justify">
             {resignSteps[activeStep].desc}
           </Typography>
-        
-        {activeStep === 0 && <DatePicker isMobile lwd={lwd} setLwd={setLwd} />}
+
+          {activeStep === 0 && (
+            <DatePicker isMobile lwd={lwd} setLwd={setLwd} />
+          )}
+          {activeStep === 1 && (
+            <Questionnaire
+              isMobile
+              handleInputChange={handleInputChange}
+              questionResponseMapping={questionResponseMapping}
+            />
+          )}
+          {activeStep === 2 && (
+            <Box>
+              <Stack direction="row" gap={1}>
+                <Typography variant="body2" color="primary.dark">
+                  Last Working Day :
+                </Typography>
+                <Typography variant="body2" color="primary.light">
+                  {lwd}
+                </Typography>
+              </Stack>
+              <Box mt={2}>
+                <Questionnaire
+                  handleInputChange={handleInputChange}
+                  questionResponseMapping={questionResponseMapping}
+                  isReview={true}
+                />
+              </Box>
+            </Box>
+          )}
         </Box>
-        <Stack justifyContent='flex-end' alignItems='center'
+        <Stack
+          justifyContent="flex-end"
+          alignItems="center"
           sx={{ position: "relative" }}
         >
           <Box
@@ -72,7 +113,6 @@ export default function ResignationMobile({lwd, setLwd}) {
                 ? resign_feedback
                 : resign_submit
             }
-           
           />
         </Stack>
         <MobileStepper
@@ -83,10 +123,18 @@ export default function ResignationMobile({lwd, setLwd}) {
           nextButton={
             <Button
               size="small"
-              onClick={handleNext}
-              disabled={activeStep + 1 === maxSteps}
+              onClick={activeStep === 2 ? handleSubmit : handleNext}
+              disabled={
+                (activeStep === 0 && lwd.length === 0) ||
+                (activeStep === 1 &&
+                  questionResponseMapping[0]["response"].length === 0) ||
+                (activeStep === 1 &&
+                  questionResponseMapping[1]["response"].length === 0)
+                  ? true
+                  : false
+              }
             >
-              Next
+              {activeStep === 2 ? "Submit" : "Next"}
               {theme.direction === "rtl" ? (
                 <KeyboardArrowLeft />
               ) : (

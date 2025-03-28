@@ -1,9 +1,9 @@
 import { Box, Typography, Stack, Button } from "@mui/material";
 import QuestionItem from "./QuestionItem";
 
-const Questionnaire = ({ isReview, questionResponseMapping, handleInputChange}) => {
+const Questionnaire = ({ isMobile, isReview, questionResponseMapping, handleInputChange}) => {
   return (
-    <Box  sx={{  height:'70%',  overflowY:'clip'}}  >
+    <Box  sx={{  height: isMobile ? "100%":"70%",  overflowY:'clip'}}  >
       {questionResponseMapping.map((item, idx) => (
         <QuestionItem
           key={item.questionId}

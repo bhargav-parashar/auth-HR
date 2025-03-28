@@ -240,7 +240,7 @@ const Resignation = () => {
           alignItems="center"
         >
          
-          <ResignationMobile lwd={lwd} setLwd={setLwd} />
+          <ResignationMobile lwd={lwd} setLwd={setLwd} questionResponseMapping={questionResponseMapping} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
         </Stack>
       </Box>
       </Paper>
