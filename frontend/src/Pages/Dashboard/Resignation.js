@@ -100,7 +100,7 @@ const Resignation = () => {
 
   return (
     <Box sx={{ height: "100%" }}>
-      <Paper elevation={1} sx={{ height: "100%" }}>
+      <Paper  elevation={1} sx={{ height: "100%", bgcolor:'primary.bg2' }}>
         <Stack
           p={2}
           direction="column"
@@ -124,11 +124,12 @@ const Resignation = () => {
 
           <Stack direction={{ xs: "column", md: "row" }} sx={{ height: "70%" }}>
             <Box sx={{ position: "relative" }} flex={2}>
-              <Paper  elevation={2} sx={{ position:'relative', padding: 2, height: "100%" }}>
+              <Paper  elevation={2} sx={{ bgcolor:'primary.bg1', position:'relative', padding: 2, height: "100%" }}>
                 <Typography
-                  color="primary.light"
+                  color="text.heading"
                   variant="body1"
                   mb={2}
+                  sx={{fontWeight:'bold'}}
                 >{`${resignSteps[activeStep].id}. ${resignSteps[activeStep].step}`}</Typography>
                 <Typography  variant="body2" mb={2}>{resignSteps[activeStep].desc}</Typography>
                 {activeStep === 0 && <DatePicker lwd={lwd} setLwd={setLwd} />}
@@ -210,7 +211,7 @@ const Resignation = () => {
             ) : (
               <Button
                 variant="contained"
-                sx={{ height: "30px" }}
+                sx={{ height: "30px", bgcolor:'text.heading', color:'text.primary' }}
                 onClick={handleNext}
                 disabled={
                   (activeStep === 0 && lwd.length === 0) || 

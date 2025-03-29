@@ -1,21 +1,26 @@
-import {createTheme} from "@mui/material";
-
-const getTheme = (mode) =>{
-
-    const theme = createTheme(
-        {
+export const lightTheme = () => (
+    {
         palette :{
-            mode : mode ? "dark" : "light",
+            mode : "light",
             primary :{
                 main : '#fff',
                 light : '#9696FF',
                 dark : '#D3D3D3',
+                bg1 : "#fafafa",
+                bg2 : '#D3D3D3',
+                bg3 : '#000000'
             },
             secondary : {
                 main : '#fff',
-                light : '#9696FF',
+                light : 'rgb(68, 68, 168)',
                 dark : '#D3D3D3',
-            }
+            },
+            text: {
+                primary: "#000000",
+                secondary: "rgba(0,0,0,0.5)",
+                heading:'rgb(81, 81, 228)',
+                contrast: "#fafafa"
+              },
         },
         components :{
             MuiTypography:{
@@ -35,9 +40,3 @@ const getTheme = (mode) =>{
         }
     }
 );
-
-    return theme;
-}
-
-
-export default getTheme;

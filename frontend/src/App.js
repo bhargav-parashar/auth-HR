@@ -3,13 +3,19 @@ import { Outlet } from "react-router-dom";
 import UserContext from "./context/UserContext";
 import useAuth from "./Hooks/useAuth";
 import getTheme from "./Themes/getTheme";
-import { ThemeProvider } from "@mui/material";
-import {useState} from 'react';
+import { createTheme, ThemeProvider } from "@mui/material";
+import {useState, useMemo} from 'react';
+import { darkTheme } from "./Themes/DarkTheme";
+import { lightTheme } from "./Themes/LightTheme";
 
 const App = () => {
   const { loggedInUser, setLoggedInUser } = useAuth();
   const [darkMode, setDarkMode ] = useState(true);
-  const theme = getTheme(darkMode);
+  const theme = useMemo(
+    () => (darkMode ? createTheme(darkTheme()) : createTheme(lightTheme()) )
+  );
+  
+  //getTheme(darkMode);
 
   return (
     <>

@@ -33,6 +33,7 @@ const Dashboard = () => {
             "linear-gradient(0deg, rgba(246,228,204,1) 0%, rgba(108,140,181,1) 100%)",
         }}
       >
+       
         <Stack direction="column" gap={0} sx={{ height: "100%" }}>
           <Stack
             direction={{ xs: "column", md: "row" }}
@@ -52,9 +53,22 @@ const Dashboard = () => {
                 setSelectedTab={handleTabChange}
               />
             </Box>
-            <Box flex={5} sx={{ height: "100%", position:'relative' }}>
-              <Header selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-              <Paper sx={{ height: "100%", paddingTop:"8%", paddingLeft:'2%', paddingRight:'2%', paddingBottom:'3%'}} elevation={0} square>
+            <Box flex={5} sx={{ height: "100%", position: "relative" }}>
+              <Header
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
+              <Paper
+                sx={{
+                  height: "100%",
+                  paddingTop: "8%",
+                  paddingLeft: "2%",
+                  paddingRight: "2%",
+                  paddingBottom: "3%",
+                }}
+                elevation={0}
+                square
+              >
                 {loggedInUser.role === "admin" &&
                   selectedTab === "Dashboard" && <AdminHome />}
                 {loggedInUser.role === "admin" &&
