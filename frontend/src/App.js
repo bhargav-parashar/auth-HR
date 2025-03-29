@@ -2,7 +2,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Outlet } from "react-router-dom";
 import UserContext from "./context/UserContext";
 import useAuth from "./Hooks/useAuth";
-import getTheme from "./Themes/getTheme";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {useState, useMemo} from 'react';
 import { darkTheme } from "./Themes/DarkTheme";
@@ -15,7 +14,6 @@ const App = () => {
     () => (darkMode ? createTheme(darkTheme()) : createTheme(lightTheme()) )
   );
   
-  //getTheme(darkMode);
 
   return (
     <>

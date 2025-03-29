@@ -80,9 +80,9 @@ const Dashboard = () => {
                 {loggedInUser.role === "employee" &&
                   selectedTab === "Apply Leave" && <ApplyLeave />}
                 {loggedInUser.role === "employee" &&
-                  selectedTab === "Request Relocation" && <Relocation />}
+                  selectedTab === "Relocation" && <Relocation />}
                 {loggedInUser.role === "employee" &&
-                  selectedTab === "Submit Resignation" && <Resignation />}
+                  selectedTab === "Resignation" && <Resignation />}
               </Paper>
             </Box>
           </Stack>

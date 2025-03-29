@@ -8,13 +8,11 @@ export const darkTheme = () => (
                 dark : '#D3D3D3',
                 bg1 : '#181717',
                 bg2 : '#141414',
-                bg3 : '#000000'
+                bg3 : '#000000',
+                success : "#4CAF50", 
+                inactive:'rgb(151, 144, 144)'
             },
-            secondary : {
-                main : '#fff',
-                light : '#9696FF',
-                dark : '#D3D3D3',
-            },
+           
             text: {
                 primary: "#ffffff",
                 secondary: "rgba(255,255,255,0.7)",

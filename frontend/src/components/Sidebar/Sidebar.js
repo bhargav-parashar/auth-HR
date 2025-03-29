@@ -1,6 +1,6 @@
 import React from "react";
 import { Paper, Stack, Box, Typography } from "@mui/material";
-import SidebarCard from "../../components/Cards/SidebarCard";
+import SidebarCard from "../../components/Sidebar/SidebarCard";
 import {
   adminSidebarOptions,
   empSidebarOptions,

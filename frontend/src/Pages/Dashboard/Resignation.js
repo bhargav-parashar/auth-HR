@@ -111,7 +111,7 @@ const Resignation = () => {
           }}
         >
           <Box sx={{ height: "20%", position: "relative", width: "100%" }}>
-            <Typography variant="h5" mb={2} >
+            <Typography sx={{fontWeight:'bold', }} variant="h5" mb={2} >
               Submit Resignation
             </Typography>
             <ResignStepper
@@ -143,10 +143,10 @@ const Resignation = () => {
                 {activeStep === 2 && (
                   <Box>
                     <Stack direction="row" gap={1}>
-                      <Typography variant="body2" color="primary.dark">
+                      <Typography variant="body2">
                         Last Working Day :
                       </Typography>
-                      <Typography variant="body2" color="primary.light">{lwd}</Typography>
+                      <Typography variant="body2" color="text.heading">{lwd}</Typography>
                     </Stack>
                     <Box mt={2}>
                       <Questionnaire
@@ -195,7 +195,7 @@ const Resignation = () => {
               variant="contained"
               disabled={activeStep === 0}
               onClick={handleBack}
-              sx={{ mr: 1, height: "30px" }}
+              sx={{ mr: 1, height: "30px",bgcolor:'text.heading', color:'text.contrast' }}
             >
               Back
             </Button>
@@ -203,7 +203,7 @@ const Resignation = () => {
             {activeStep === resignSteps.length - 1 ? (
               <Button
                 variant="contained"
-                sx={{ height: "30px" }}
+                sx={{ height: "30px",bgcolor:'text.heading', color:'text.contrast' }}
                 onClick={handleSubmit}
               >
                 Submit
@@ -211,7 +211,7 @@ const Resignation = () => {
             ) : (
               <Button
                 variant="contained"
-                sx={{ height: "30px", bgcolor:'text.heading', color:'text.primary' }}
+                sx={{ height: "30px", bgcolor:'text.heading', color:'text.contrast' }}
                 onClick={handleNext}
                 disabled={
                   (activeStep === 0 && lwd.length === 0) || 

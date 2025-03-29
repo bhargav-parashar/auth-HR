@@ -8,7 +8,7 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 const Icon = ({ menuIcon, menuItem, selectedTab, handleClick }) => {
   let currIcon = (
     <HomeOutlinedIcon
-      sx={{ cursor: "pointer", color: selectedTab === menuItem ? '#9696FF' : "" }}
+      sx={{ cursor: "pointer", color: selectedTab === menuItem ? 'text.heading' : "" }}
       onClick={()=>handleClick(menuItem)}
     />
   );
@@ -16,7 +16,7 @@ const Icon = ({ menuIcon, menuItem, selectedTab, handleClick }) => {
     case "HomeOutlinedIcon":
       currIcon = (
         <HomeOutlinedIcon
-          sx={{ cursor: "pointer", color: selectedTab === menuItem ? '#9696FF' : "" }}
+          sx={{ cursor: "pointer", color: selectedTab === menuItem ? 'text.heading' : "" }}
           onClick={()=>handleClick(menuItem)}
         />
       );
@@ -24,7 +24,7 @@ const Icon = ({ menuIcon, menuItem, selectedTab, handleClick }) => {
     case "DataUsageIcon":
       currIcon = (
         <DataUsageIcon
-          sx={{ cursor: "pointer",color: selectedTab === menuItem ? '#9696FF' : "" }}
+          sx={{ cursor: "pointer",color: selectedTab === menuItem ? 'text.heading' : "" }}
           onClick={()=>handleClick(menuItem)}
         />
       );
@@ -32,7 +32,7 @@ const Icon = ({ menuIcon, menuItem, selectedTab, handleClick }) => {
     case "GroupsIcon":
       currIcon = (
         <GroupsIcon
-          sx={{ cursor: "pointer",color: selectedTab === menuItem ? '#9696FF' : "" }}
+          sx={{ cursor: "pointer",color: selectedTab === menuItem ? 'text.heading' : "" }}
           onClick={()=>handleClick(menuItem)}
         />
       );
@@ -40,7 +40,7 @@ const Icon = ({ menuIcon, menuItem, selectedTab, handleClick }) => {
     case "LogoutIcon":
       currIcon = (
         <LogoutIcon
-          sx={{ cursor: "pointer",color: selectedTab === menuItem ? '#9696FF' : "" }}
+          sx={{ cursor: "pointer",color: selectedTab === menuItem ? 'text.heading' : "" }}
           onClick={()=>handleClick(menuItem)}
         />
       );
@@ -48,7 +48,7 @@ const Icon = ({ menuIcon, menuItem, selectedTab, handleClick }) => {
     case "DarkModeOutlinedIcon":
       currIcon = (
         <DarkModeOutlinedIcon
-          sx={{ cursor: "pointer",color: selectedTab === menuItem ? '#9696FF' : "" }}
+          sx={{ cursor: "pointer",color: selectedTab === menuItem ? 'text.heading' : "" }}
           onClick={()=>handleClick(menuItem)}
         />
       );
@@ -56,7 +56,7 @@ const Icon = ({ menuIcon, menuItem, selectedTab, handleClick }) => {
     default:
       currIcon = (
         <HomeOutlinedIcon
-          sx={{ cursor: "pointer",color: selectedTab === menuItem ? '#9696FF' : "" }}
+          sx={{ cursor: "pointer",color: selectedTab === menuItem ? 'text.heading' : "" }}
           onClick={()=>handleClick(menuItem)}
         />
       );

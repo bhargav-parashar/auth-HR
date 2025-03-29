@@ -77,12 +77,12 @@ const empSidebarOptions = [
   },
   {
     id: 3,
-    option: "Request Relocation",
+    option: "Relocation",
     icon: "GroupsIcon",
   },
   {
     id: 4,
-    option: "Submit Resignation",
+    option: "Resignation",
     icon: "GroupsIcon",
   },
 ];
