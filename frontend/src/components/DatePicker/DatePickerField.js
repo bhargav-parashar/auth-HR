@@ -1,4 +1,4 @@
-import * as React from "react";
+import {useEffect, useState} from "react";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -20,45 +20,44 @@ function convert(str) {
     Nov: "11",
     Dec: "12",
   };
+  if(!str) return null;
   let date = str.split(" ");
 
   return [date[3], mnths[date[1]], date[2]].join("-");
 }
 
 export default function BasicDatePicker({ lwd, setLwd, disabled, isMobile }) {
+  
+  const[date, setDate] = useState(null);
+  
+  useEffect(()=>{
+    if(lwd){
+      setDate(dayjs(lwd));
+    }
+    
+  },[lwd]);
+
   const handleDateChange = (e) => {
-    setLwd(convert(e.$d.toString()));
+    setLwd(convert(e?.$d.toString()));
   };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DatePicker"]}>
-        {lwd.length > 0 ? (
-          <DatePicker
+        
+    <DatePicker
+            disablePast
             disabled={disabled}
-            value={dayjs(lwd)}
+            value={ date  }
             onChange={handleDateChange}
             sx={{width: isMobile? "100%" : "50%" }}
             slotProps={{
               textField: { size: isMobile?"large":"small" },
               popper: {
-                placement: "right", // Force calendar to open above
+                placement: "right", 
               },
             }} 
           />
-        ) : (
-            <DatePicker
-            slotProps={{
-              textField: { size: isMobile?"large":"small" },
-              popper: {
-                placement: "right", // Force calendar to open above
-              },
-            }} 
-              disabled={disabled}
-              onChange={handleDateChange}
-            />
-          )
-    }
       </DemoContainer>
     </LocalizationProvider>
   );

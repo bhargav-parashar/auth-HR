@@ -11,15 +11,18 @@ import config from "../../config/config";
 import Questionnaire from "../../components/Questionnaire/Questionnaire";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import submitResignation from "../../utility/submitResignation";
+import Modal from "../../components/Modal/Modal";
 
-const Resignation = () => {
+const Resignation = ({ setSelectedTab }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const [lwd, setLwd] = useState("");
+  const [lwd, setLwd] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState({});
   const [questionResponseMapping, setQuestionResponseMapping] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const {enqueueSnackbar} = useSnackbar();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const URL = `${config.endpoint}/user/questionnaire`;
@@ -67,40 +70,32 @@ const Resignation = () => {
     setQuestionResponseMapping(update);
   };
 
-  const handleSubmit = async () => {
-    const URL = `${config.endpoint}/user/resign`;
-    const body = {
-      lwd: lwd,
-    };
-    try {
-      setIsLoading(true);
-      const res = await axios.post(URL, body, { withCredentials: true });
-      if (res.status === 200) {
-        const URL = `${config.endpoint}/user/responses`;
-        const body = {
-          responses: questionResponseMapping,
-        };
-        await axios.post(URL, body, { withCredentials: true });
-        enqueueSnackbar("Resignation submitted", { variant: "success" });
-        navigate("/dashboard");
-        console.log(res);
-      }
-    } catch (err) {
-      if (err.status === 400) {
-        enqueueSnackbar(
-          `${err.response.data.message} - ${err.response.data.holiday}  `,
-          { variant: "warning" }
-        );
-      }
-      console.log(err);
-    } finally {
-      setIsLoading(false);
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+  const handleOutsideClick = (e) => {
+    if (e.target.id === "Outer-Modal") {
+      setIsModalOpen(false);
     }
+  };
+
+  const handleSubmit = () => {
+    submitResignation({
+      lwd,
+      setIsLoading,
+      questionResponseMapping,
+      enqueueSnackbar,
+      setSelectedTab,
+    });
+    handleModalClose();
   };
 
   return (
     <Box sx={{ height: "100%" }}>
-      <Paper  elevation={1} sx={{ height: "100%", bgcolor:'primary.bg2' }}>
+      <Paper elevation={1} sx={{  height: "100%", bgcolor: "primary.bg2" }}>
         <Stack
           p={2}
           direction="column"
@@ -111,7 +106,7 @@ const Resignation = () => {
           }}
         >
           <Box sx={{ height: "20%", position: "relative", width: "100%" }}>
-            <Typography sx={{fontWeight:'bold', }} variant="h5" mb={2} >
+            <Typography sx={{ fontWeight: "bold" }} variant="h5" mb={2}>
               Submit Resignation
             </Typography>
             <ResignStepper
@@ -124,17 +119,26 @@ const Resignation = () => {
 
           <Stack direction={{ xs: "column", md: "row" }} sx={{ height: "70%" }}>
             <Box sx={{ position: "relative" }} flex={2}>
-              <Paper  elevation={2} sx={{ bgcolor:'primary.bg1', position:'relative', padding: 2, height: "100%" }}>
+              <Paper
+                elevation={2}
+                sx={{
+                  bgcolor: "primary.bg1",
+                  position: "relative",
+                  padding: 2,
+                  height: "100%",
+                }}
+              >
                 <Typography
                   color="text.heading"
                   variant="body1"
                   mb={2}
-                  sx={{fontWeight:'bold'}}
+                  sx={{ fontWeight: "bold" }}
                 >{`${resignSteps[activeStep].id}. ${resignSteps[activeStep].step}`}</Typography>
-                <Typography  variant="body2" mb={2}>{resignSteps[activeStep].desc}</Typography>
+                <Typography variant="body2" mb={2}>
+                  {resignSteps[activeStep].desc}
+                </Typography>
                 {activeStep === 0 && <DatePicker lwd={lwd} setLwd={setLwd} />}
                 {activeStep === 1 && (
-                
                   <Questionnaire
                     handleInputChange={handleInputChange}
                     questionResponseMapping={questionResponseMapping}
@@ -146,7 +150,9 @@ const Resignation = () => {
                       <Typography variant="body2">
                         Last Working Day :
                       </Typography>
-                      <Typography variant="body2" color="text.heading">{lwd}</Typography>
+                      <Typography variant="body2" color="text.heading">
+                        {lwd}
+                      </Typography>
                     </Stack>
                     <Box mt={2}>
                       <Questionnaire
@@ -195,7 +201,12 @@ const Resignation = () => {
               variant="contained"
               disabled={activeStep === 0}
               onClick={handleBack}
-              sx={{ mr: 1, height: "30px",bgcolor:'text.heading', color:'text.contrast' }}
+              sx={{
+                mr: 1,
+                height: "30px",
+                bgcolor: "text.heading",
+                color: "text.contrast",
+              }}
             >
               Back
             </Button>
@@ -203,20 +214,30 @@ const Resignation = () => {
             {activeStep === resignSteps.length - 1 ? (
               <Button
                 variant="contained"
-                sx={{ height: "30px",bgcolor:'text.heading', color:'text.contrast' }}
-                onClick={handleSubmit}
+                sx={{
+                  height: "30px",
+                  bgcolor: "text.heading",
+                  color: "text.contrast",
+                }}
+                onClick={handleModalOpen}
               >
                 Submit
               </Button>
             ) : (
               <Button
                 variant="contained"
-                sx={{ height: "30px", bgcolor:'text.heading', color:'text.contrast' }}
+                sx={{
+                  height: "30px",
+                  bgcolor: "text.heading",
+                  color: "text.contrast",
+                }}
                 onClick={handleNext}
                 disabled={
-                  (activeStep === 0 && lwd.length === 0) || 
-                  (activeStep === 1 && questionResponseMapping[0]['response'].length === 0) ||
-                  (activeStep === 1 && questionResponseMapping[1]['response'].length === 0)
+                  (activeStep === 0 && !lwd) ||
+                  (activeStep === 1 &&
+                    questionResponseMapping[0]["response"].length === 0) ||
+                  (activeStep === 1 &&
+                    questionResponseMapping[1]["response"].length === 0)
                     ? true
                     : false
                 }
@@ -226,25 +247,37 @@ const Resignation = () => {
             )}
           </Box>
         </Stack>
-      
-      <Box
-        pt={3}
-        sx={{
-          position: "relative",
-          height: "100%",
-          display: { xs: "block", md: "none" },
-        }}
-      >
-        <Stack
-          sx={{ height: "90%" }}
-          justifyContent="center"
-          alignItems="center"
+
+        <Box
+          pt={3}
+          sx={{
+           
+            height: "100%",
+            display: { xs: "block", md: "none" },
+          }}
         >
-         
-          <ResignationMobile lwd={lwd} setLwd={setLwd} questionResponseMapping={questionResponseMapping} handleInputChange={handleInputChange} handleSubmit={handleSubmit} />
-        </Stack>
-      </Box>
+          <Stack
+            sx={{ height: "90%" }}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <ResignationMobile
+              lwd={lwd}
+              setLwd={setLwd}
+              questionResponseMapping={questionResponseMapping}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+            />
+          </Stack>
+        </Box>
       </Paper>
+      {isModalOpen && (
+        <Modal
+          handleOutsideClick={handleOutsideClick}
+          handleModalClose={handleModalClose}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </Box>
   );
 };

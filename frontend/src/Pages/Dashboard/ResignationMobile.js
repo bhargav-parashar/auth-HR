@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { Box, Stack } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
@@ -13,16 +13,18 @@ import resign_feedback from "../../assets/resign_feedback.svg";
 import resign_submit from "../../assets/resign_submit.svg";
 import DatePicker from "../../components/DatePicker/DatePickerField";
 import Questionnaire from "../../components/Questionnaire/Questionnaire";
+import Modal from "../../components/Modal/Modal";
 
 export default function ResignationMobile({
   lwd,
   setLwd,
   handleInputChange,
   questionResponseMapping,
-  handleSubmit
+  handleSubmit,
 }) {
   const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const maxSteps = resignSteps.length;
 
   const handleNext = () => {
@@ -33,88 +35,106 @@ export default function ResignationMobile({
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  return (
-    <Box
-      sx={{ position: "relative", height: "90%", maxWidth: 400, flexGrow: 1 }}
-    >
-      <Typography color="primary.light" variant="h4" pb={5} pt={5}>
-        Submit Resignation
-      </Typography>
-      <Paper
-        square
-        elevation={0}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          height: 50,
-          pl: 2,
-          bgcolor: "background.default",
-        }}
-      >
-        <Typography variant="h6">{`${resignSteps[activeStep].id}. ${resignSteps[activeStep].step}`}</Typography>
-      </Paper>
-      <Stack
-        sx={{ height: "100%" }}
-        direction="column"
-        justifyContent="space-between"
-        pb={15}
-      >
-        <Box sx={{ height: 255, maxWidth: 400, width: "100%", p: 2 }}>
-          <Typography mb={10} textAlign="justify">
-            {resignSteps[activeStep].desc}
-          </Typography>
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+  const handleOutsideClick = (e) => {
+    if (e.target.id === "Outer-Modal") {
+      setIsModalOpen(false);
+    }
+  };
 
-          {activeStep === 0 && (
-            <DatePicker isMobile lwd={lwd} setLwd={setLwd} />
-          )}
-          {activeStep === 1 && (
-            <Questionnaire
-              isMobile
-              handleInputChange={handleInputChange}
-              questionResponseMapping={questionResponseMapping}
-            />
-          )}
-          {activeStep === 2 && (
+  return (
+    <Box sx={{height: "90%", maxWidth: 400, flexGrow: 1 }}>
+      <Stack
+        sx={{ height: "90vh" }}
+        direction="column"
+        justifyContent="space-around"
+        pb={5}
+      >
+        <Paper
+          elevation={0}
+          sx={{ maxWidth: 400, height: "100%", width: "100%", p: 2 }}
+        >
+          <Stack height='100%'  justifyContent="space-between">
+          <Box>
             <Box>
-              <Stack direction="row" gap={1}>
-                <Typography variant="body2" color="primary.dark">
-                  Last Working Day :
+              <Box pb="5%">
+                <Typography
+                  sx={{ fontWeight: "bold" }}
+                  variant="h5"
+                  pb={2}
+                  pt={5}
+                >
+                  Submit Resignation
                 </Typography>
-                <Typography variant="body2" color="primary.light">
-                  {lwd}
+                <Typography color="text.heading" variant="h6">
+                  {`${resignSteps[activeStep].id}. ${resignSteps[activeStep].step}`}
                 </Typography>
-              </Stack>
-              <Box mt={2}>
-                <Questionnaire
-                  handleInputChange={handleInputChange}
-                  questionResponseMapping={questionResponseMapping}
-                  isReview={true}
-                />
+                <Typography variant="caption" mb={5} textAlign="justify">
+                  {resignSteps[activeStep].desc}
+                </Typography>
+              </Box>
+
+              <Box>
+                {activeStep === 0 && (
+                  <DatePicker isMobile lwd={lwd} setLwd={setLwd} />
+                )}
+                {activeStep === 1 && (
+                  <Questionnaire
+                    isMobile
+                    handleInputChange={handleInputChange}
+                    questionResponseMapping={questionResponseMapping}
+                  />
+                )}
+                {activeStep === 2 && (
+                  <Box>
+                    <Stack direction="row" gap={1}>
+                      <Typography variant="body2" >
+                        Last Working Day :
+                      </Typography>
+                      <Typography variant="body2" color="primary.light">
+                        {lwd}
+                      </Typography>
+                    </Stack>
+                    <Box mt={2}>
+                      <Questionnaire
+                        handleInputChange={handleInputChange}
+                        questionResponseMapping={questionResponseMapping}
+                        isReview={true}
+                      />
+                    </Box>
+                  </Box>
+                )}
               </Box>
             </Box>
-          )}
-        </Box>
-        <Stack
-          justifyContent="flex-end"
-          alignItems="center"
-          sx={{ position: "relative" }}
-        >
-          <Box
-            component="img"
-            sx={{
-              height: "70%",
-              width: "70%"
-            }}
-            alt="date_picker"
-            src={
-              resignSteps[activeStep].id === 1
-                ? date_picker
-                : resignSteps[activeStep].id === 2
-                ? resign_feedback
-                : resign_submit
-            }
-          />
-        </Stack>
+            <Stack
+              justifyContent="flex-end"
+              alignItems="center"
+              sx={{ position: "relative" }}
+              pt={5}
+            >
+              <Box
+                component="img"
+                sx={{
+                  height: "45%",
+                  width: "45%",
+                }}
+                alt="date_picker"
+                src={
+                  activeStep === 0
+                    ? date_picker
+                    : activeStep === 1
+                    ? resign_feedback
+                    : resign_submit
+                }
+              />
+            </Stack>
+          </Box>
+
         <MobileStepper
           variant="text"
           steps={maxSteps}
@@ -122,10 +142,11 @@ export default function ResignationMobile({
           activeStep={activeStep}
           nextButton={
             <Button
+              sx={{ bgcolor: "text.heading", color: "text.contrast" }}
               size="small"
-              onClick={activeStep === 2 ? handleSubmit : handleNext}
+              onClick={activeStep === 2 ? handleModalOpen : handleNext}
               disabled={
-                (activeStep === 0 && lwd.length === 0) ||
+                (activeStep === 0 && !lwd) ||
                 (activeStep === 1 &&
                   questionResponseMapping[0]["response"].length === 0) ||
                 (activeStep === 1 &&
@@ -147,6 +168,7 @@ export default function ResignationMobile({
               size="small"
               onClick={handleBack}
               disabled={activeStep === 0}
+              sx={{ bgcolor: "text.heading", color: "text.contrast" }}
             >
               {theme.direction === "rtl" ? (
                 <KeyboardArrowRight />
@@ -157,7 +179,17 @@ export default function ResignationMobile({
             </Button>
           }
         />
+        </Stack>
+        </Paper>
       </Stack>
+
+      {isModalOpen && (
+        <Modal
+          handleOutsideClick={handleOutsideClick}
+          handleModalClose={handleModalClose}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </Box>
   );
 }

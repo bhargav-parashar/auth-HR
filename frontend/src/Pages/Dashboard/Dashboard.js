@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Paper, Stack } from "@mui/material";
+import { Box, Paper, Stack, Button } from "@mui/material";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import AdminHome from "./AdminHome";
@@ -13,6 +13,7 @@ import { useState } from "react";
 import TabContext from "../../context/tabContext";
 import UserContext from "../../context/UserContext";
 import { useContext } from "react";
+import Modal from "../../components/Modal/Modal";
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState("Dashboard");
@@ -22,6 +23,7 @@ const Dashboard = () => {
     setSelectedTab(tab);
   };
 
+  
   return (
     <TabContext.Provider value={{ selectedTab, handleTabChange }}>
       <Box
@@ -33,7 +35,6 @@ const Dashboard = () => {
             "linear-gradient(0deg, rgba(246,228,204,1) 0%, rgba(108,140,181,1) 100%)",
         }}
       >
-       
         <Stack direction="column" gap={0} sx={{ height: "100%" }}>
           <Stack
             direction={{ xs: "column", md: "row" }}
@@ -53,7 +54,8 @@ const Dashboard = () => {
                 setSelectedTab={handleTabChange}
               />
             </Box>
-            <Box flex={5} sx={{ height: "100%", position: "relative" }}>
+            <Box flex={5} sx={{ height: "100%"
+               }}>
               <Header
                 selectedTab={selectedTab}
                 setSelectedTab={setSelectedTab}
@@ -65,6 +67,7 @@ const Dashboard = () => {
                   paddingLeft: "2%",
                   paddingRight: "2%",
                   paddingBottom: "3%",
+                  
                 }}
                 elevation={0}
                 square
@@ -82,11 +85,14 @@ const Dashboard = () => {
                 {loggedInUser.role === "employee" &&
                   selectedTab === "Relocation" && <Relocation />}
                 {loggedInUser.role === "employee" &&
-                  selectedTab === "Resignation" && <Resignation />}
+                  selectedTab === "Resignation" && (
+                    <Resignation setSelectedTab={setSelectedTab} />
+                  )}
               </Paper>
             </Box>
           </Stack>
         </Stack>
+        
       </Box>
     </TabContext.Provider>
   );
