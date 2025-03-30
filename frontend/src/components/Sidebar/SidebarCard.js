@@ -5,7 +5,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import GroupsIcon from "@mui/icons-material/Groups";
 import Icon from "../Sidebar/Icon";
 
-const SidebarCard = ({ menuItem, menuIcon, selectedTab, setSelectedTab }) => {
+const SidebarCard = ({  menuItem, menuIcon, selectedTab, setSelectedTab,toggleDrawer }) => {
   let icon = <HomeOutlinedIcon />;
   switch (menuIcon) {
     case "HomeOutlinedIcon":
@@ -23,6 +23,10 @@ const SidebarCard = ({ menuItem, menuIcon, selectedTab, setSelectedTab }) => {
 
   const handleClick = (val) => {
     setSelectedTab(val);
+    if(toggleDrawer){
+      toggleDrawer(false);
+    }
+    
   };
 
   return (

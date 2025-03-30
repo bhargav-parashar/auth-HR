@@ -10,13 +10,15 @@ export const darkTheme = () => (
                 bg2 : '#141414',
                 bg3 : '#000000',
                 success : "#4CAF50", 
-                inactive:'rgb(151, 144, 144)'
+                inactive:'rgb(151, 144, 144)',
+                contrast:'rgb(81, 81, 228)'
             },
            
             text: {
                 primary: "#ffffff",
                 secondary: "rgba(255,255,255,0.7)",
                 heading:'#9696FF',
+                headingContrast : 'rgb(81, 81, 228)',
                 contrast: '#000000'
             },
         },

@@ -46,7 +46,7 @@ const Header = ({selectedTab, setSelectedTab}) => {
             height: "100%",
           }}
         >
-          <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+          <Sidebar isMobile  selectedTab={selectedTab} setSelectedTab={setSelectedTab} toggleDrawer={toggleDrawer} />
         </Box>
       </Drawer>
     </Box>

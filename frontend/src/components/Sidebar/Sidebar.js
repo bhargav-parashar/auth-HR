@@ -10,16 +10,26 @@ import { useContext } from "react";
 import Panel from "./Panel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-const Sidebar = ({ selectedTab, setSelectedTab }) => {
+const Sidebar = ({ selectedTab, setSelectedTab, toggleDrawer }) => {
   const { loggedInUser } = useContext(UserContext);
 
   return (
     <Paper sx={{ height: "100%" }} elevation={0} square>
-      <Box sx={{ height: "100%", paddingRight:'2%', paddingTop:'12%', paddingBottom:'12%'}}>
+      <Box
+        sx={{
+          height: "100%",
+          paddingRight: "2%",
+          paddingTop: "12%",
+          paddingBottom: "12%",
+        }}
+      >
         <Stack
           direction="column"
           justifyContent="space-between"
-          sx={{ height: "100%", borderRight:'2px solid gray' }}
+          sx={{
+            height: "100%",
+            borderRight: { xs: "none", md: "2px solid gray" },
+          }}
         >
           <Box>
             <Stack
@@ -36,7 +46,7 @@ const Sidebar = ({ selectedTab, setSelectedTab }) => {
                 gap={1}
               >
                 <CheckCircleIcon fontSize="large" color="success" />
-                <Typography  variant="h6">AuthHR</Typography>
+                <Typography variant="h6">AuthHR</Typography>
               </Stack>
             </Stack>
             {loggedInUser.role === "admin" ? (
@@ -47,6 +57,7 @@ const Sidebar = ({ selectedTab, setSelectedTab }) => {
                   menuIcon={item.icon}
                   selectedTab={selectedTab}
                   setSelectedTab={setSelectedTab}
+                  toggleDrawer={toggleDrawer}
                 />
               ))
             ) : loggedInUser.role === "employee" ? (
@@ -57,6 +68,7 @@ const Sidebar = ({ selectedTab, setSelectedTab }) => {
                   menuIcon={item.icon}
                   selectedTab={selectedTab}
                   setSelectedTab={setSelectedTab}
+                  toggleDrawer={toggleDrawer}
                 />
               ))
             ) : (
@@ -65,7 +77,7 @@ const Sidebar = ({ selectedTab, setSelectedTab }) => {
           </Box>
           {loggedInUser.role && <Panel />}
         </Stack>
-        </Box>
+      </Box>
     </Paper>
   );
 };
