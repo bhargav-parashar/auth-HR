@@ -11,9 +11,14 @@ import Dropdown from "../Dropdown/Dropdown";
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import LoginCarousel from "../Carousel/LoginCarousel";
-import { loadingCarousel } from "../../constants/constants";
+import {
+  loadingCarousel,
+  departments,
+  locations,
+} from "../../constants/constants";
 
 const CustomTextBox = styled(TextField)(() => ({
+  marginBottom:10,
   width: "100%",
   color: "white",
   "& .MuiInputLabel-root": { color: "lightgray" },
@@ -32,7 +37,7 @@ const CustomTextBox = styled(TextField)(() => ({
 const RegisterBox = ({ formData, handleChange, handleRegister, isLoading }) => {
   return (
     <Stack direction="column" gap={2}>
-      <Typography color="white" variant="h2">
+      <Typography color="white" variant="h4">
         Register
       </Typography>
       <Typography mb={2} color="lightgray" variant="subtitle2">
@@ -42,24 +47,14 @@ const RegisterBox = ({ formData, handleChange, handleRegister, isLoading }) => {
         </Link>
       </Typography>
       <Stack direction="column" gap={1}>
-        <Stack direction="row" gap={1}>
-          <CustomTextBox
-            id="username"
-            name="username"
-            label="User Name"
-            variant="outlined"
-            value={formData.username}
-            onChange={handleChange}
-          />
-          <Dropdown
-            id="department"
-            name="department"
-            value={formData.department}
-            handleChange={handleChange}
-            placeholder="Department"
-            items={["Finance", "IT", "Sales", "Marketing", "Operations"]}
-          />
-        </Stack>
+        <CustomTextBox
+          id="username"
+          name="username"
+          label="User Name"
+          variant="outlined"
+          value={formData.username}
+          onChange={handleChange}
+        />
 
         <CustomTextBox
           id="password"
@@ -70,7 +65,7 @@ const RegisterBox = ({ formData, handleChange, handleRegister, isLoading }) => {
           value={formData.password}
           onChange={handleChange}
         />
-        <Typography mt={1} mb={2} color="lightgray" variant="subtitle2">
+        <Typography mb={1} color="lightgray" variant="subtitle2">
           Password must be atleast 5 characters long
         </Typography>
         <CustomTextBox
@@ -82,29 +77,47 @@ const RegisterBox = ({ formData, handleChange, handleRegister, isLoading }) => {
           value={formData.confirmpassword}
           onChange={handleChange}
         />
+        <Stack  direction="row" gap={1}>
+          <Dropdown
+            id="location"
+            name="location"
+            value={formData.location}
+            handleChange={handleChange}
+            placeholder="Location"
+            items={locations}
+          />
+          <Dropdown
+            id="department"
+            name="department"
+            value={formData.department}
+            handleChange={handleChange}
+            placeholder="Department"
+            items={departments}
+          />
+        </Stack>
       </Stack>
       {isLoading ? (
         <Box mt={5}>
-        <Stack direction='row' >
-        <Loader  />
-        <LoginCarousel
-            slidesPerView={1}
-            delay={3000}
-            data={loadingCarousel.map((slide) => (
-              <Typography key={slide.id} sx={{ color: "white" }}>{slide.txt}</Typography>
-            ))}
-          />
-          
-        </Stack>
-      </Box>
+          <Stack direction="row">
+            <Loader />
+            <LoginCarousel
+              slidesPerView={1}
+              delay={3000}
+              data={loadingCarousel.map((slide) => (
+                <Typography key={slide.id} sx={{ color: "white" }}>
+                  {slide.txt}
+                </Typography>
+              ))}
+            />
+          </Stack>
+        </Box>
       ) : (
         <Button
           sx={{
-            marginTop: "25px",
+            marginTop: "15px",
             marginBottom: "25px",
             height: "45px",
             borderRadius: "0.5rem",
-            marginTop: "25px",
             background: " rgba(246,228,204,1)",
             "&:hover": {
               background: " rgb(240, 188, 121)",

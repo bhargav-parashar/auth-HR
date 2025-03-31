@@ -87,6 +87,10 @@ const empSidebarOptions = [
   },
 ];
 
+const departments = ["Finance", "IT", "Sales", "Marketing", "Operations"];
+
+const locations = ["Bengaluru", "Gurgaon",  "Hyderabad", "Mumbai", "Pune"];
+
 const guestAdmin = {
   username: "admin",
   password: "admin",
@@ -123,4 +127,6 @@ export {
   guestEmployee,
   loadingCarousel,
   resignSteps,
+  departments,
+  locations
 };

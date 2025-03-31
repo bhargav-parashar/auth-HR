@@ -16,11 +16,12 @@ const LoginInput = ({ isRegister = false }) => {
     password: "",
     confirmpassword: "",
     department: "",
+    location: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
-  const { loggedInUser, setLoggedInUser} = useContext(UserContext);
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,9 +37,6 @@ const LoginInput = ({ isRegister = false }) => {
         variant: "warning",
       });
       return false;
-    } else if (formData.department.length === 0) {
-      enqueueSnackbar("Department is a required field", { variant: "warning" });
-      return false;
     } else if (formData.password.length === 0) {
       enqueueSnackbar("Password is a required field", { variant: "warning" });
       return false;
@@ -49,6 +47,12 @@ const LoginInput = ({ isRegister = false }) => {
       return false;
     } else if (formData.password !== formData.confirmpassword) {
       enqueueSnackbar("Passwords do not match", { variant: "warning" });
+      return false;
+    } else if (formData.location.length === 0) {
+      enqueueSnackbar("Location is a required field", { variant: "warning" });
+      return false;
+    } else if (formData.department.length === 0) {
+      enqueueSnackbar("Department is a required field", { variant: "warning" });
       return false;
     } else {
       return true;
@@ -85,6 +89,7 @@ const LoginInput = ({ isRegister = false }) => {
       username: formData.username,
       password: formData.password,
       department: formData.department,
+      location: formData.location,
     };
 
     try {
@@ -95,6 +100,7 @@ const LoginInput = ({ isRegister = false }) => {
         password: "",
         confirmPassword: "",
         department: "",
+        location: "",
       });
       enqueueSnackbar("Registered successfully", { variant: "success" });
       navigate("/");
@@ -105,7 +111,11 @@ const LoginInput = ({ isRegister = false }) => {
     }
   };
 
-  const handleLogin = async (isGuestAdmin = false, isGuestEmp = false, isManualLogin=true ) => {
+  const handleLogin = async (
+    isGuestAdmin = false,
+    isGuestEmp = false,
+    isManualLogin = true
+  ) => {
     if (isManualLogin && !loginValidateInput(formData)) return;
     const URL = `${config.endpoint}/auth/login`;
 
@@ -130,8 +140,8 @@ const LoginInput = ({ isRegister = false }) => {
         password: "",
       });
       localStorage.setItem("loggedInUser", JSON.stringify(body.username));
-      setLoggedInUser({username:body.username, role : res.data.role});
-      
+      setLoggedInUser({ username: body.username, role: res.data.role });
+
       enqueueSnackbar(
         `Logged In as ${
           isGuestAdmin
@@ -144,7 +154,7 @@ const LoginInput = ({ isRegister = false }) => {
           variant: "success",
         }
       );
-       navigate("/dashboard");
+      navigate("/dashboard");
     } catch (err) {
       console.log(err);
       enqueueSnackbar(err.response.data.message, { variant: "warning" });
@@ -158,7 +168,7 @@ const LoginInput = ({ isRegister = false }) => {
       sx={{
         height: "100%",
       }}
-      pt={{ xs: 4, sm:1 }}
+      pt={{ xs: 2, sm: 1 }}
     >
       {isRegister ? (
         <RegisterBox

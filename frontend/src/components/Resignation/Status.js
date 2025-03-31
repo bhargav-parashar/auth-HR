@@ -1,12 +1,14 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
 import StepHeader from "../StepHeader/StepHeader";
 import { resignSteps } from "../../constants/constants";
-import date_picker from "../../assets/date_picker.svg";
-import resign_feedback from "../../assets/resign_feedback.svg";
+// import date_picker from "../../assets/date_picker.svg";
+// import resign_feedback from "../../assets/resign_feedback.svg";
 import resign_submit from "../../assets/resign_submit.svg";
 import { format } from "date-fns";
+import StatusMobile from "./StatusMobile";
 
 const Status = ({ stepType, resignation }) => {
+  console.log(resignation);
   return (
     <Box sx={{ height: "100%" }}>
       <Paper elevation={1} sx={{ height: "100%", bgcolor: "primary.bg2" }}>
@@ -24,8 +26,10 @@ const Status = ({ stepType, resignation }) => {
             activeStep={4}
             steps={resignSteps}
           />
-          <Box
+          <Stack
             p={1}
+            mb={2}
+            justifyContent="center"
             sx={{
               width: "100%",
               bgcolor: "primary.successLight",
@@ -38,7 +42,7 @@ const Status = ({ stepType, resignation }) => {
             <Typography sx={{ color: "primary.success" }}>
               Resignation successfully submitted !
             </Typography>
-          </Box>
+          </Stack>
           <Box
             mt={1}
             p={0.1}
@@ -60,7 +64,10 @@ const Status = ({ stepType, resignation }) => {
                 borderRadius: "0.6rem",
               }}
             >
-              <Typography>{`Status : ${resignation[0].status}`}</Typography>
+               <Stack direction="row" sx={{ width: "100%" }}>
+                <Typography variant="body2" pl={1}>Status :</Typography>
+                <Typography variant="body2" fontWeight='bold' color="text.heading" px={1}>{resignation[0].status}</Typography>
+              </Stack>
             </Stack>
             <Stack
               m={2}
@@ -132,7 +139,9 @@ const Status = ({ stepType, resignation }) => {
                 >
                   <Typography m={2}>{`Last Working Day`}</Typography>
                   <Typography fontWeight="bold" color="text.heading" m={2}>
-                    {format(resignation[0].lwd, "dd MMM, yyyy")}
+                    {
+                      resignation[0]?.lwd ? format(resignation[0].lwd, "dd MMM, yyyy") : ""
+                    }
                   </Typography>
                 </Box>
                 <Box
@@ -175,7 +184,9 @@ const Status = ({ stepType, resignation }) => {
             sx={{ height: "90%" }}
             justifyContent="center"
             alignItems="center"
-          ></Stack>
+          >
+            <StatusMobile stepType="resignation" resignation={resignation} />
+          </Stack>
         </Box>
       </Paper>
     </Box>

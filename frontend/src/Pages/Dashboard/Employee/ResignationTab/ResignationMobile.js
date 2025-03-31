@@ -14,6 +14,8 @@ import resign_submit from "../../../../assets/resign_submit.svg";
 import DatePicker from "../../../../components/DatePicker/DatePickerField";
 import Questionnaire from "../../../../components/Questionnaire/Questionnaire";
 import Modal from "../../../../components/Modal/Modal";
+import useModal from "../../../../Hooks/useModal";
+import useActiveStep from "../../../../Hooks/useActiveStep";
 
 export default function ResignationMobile({
   lwd,
@@ -23,32 +25,13 @@ export default function ResignationMobile({
   handleSubmit,
 }) {
   const theme = useTheme();
-  const [activeStep, setActiveStep] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } = useModal();
+  const {activeStep, handleNext, handleBack} = useActiveStep();
   const maxSteps = resignSteps.length;
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-  };
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
-  const handleOutsideClick = (e) => {
-    if (e.target.id === "Outer-Modal") {
-      setIsModalOpen(false);
-    }
-  };
 
   return (
-    <Box sx={{height: "90%", maxWidth: 400, flexGrow: 1 }}>
+    <Box sx={{ height: "90%", maxWidth: 400, flexGrow: 1 }}>
       <Stack
         sx={{ height: "90vh" }}
         direction="column"
@@ -59,127 +42,128 @@ export default function ResignationMobile({
           elevation={0}
           sx={{ maxWidth: 400, height: "100%", width: "100%", p: 2 }}
         >
-          <Stack height='100%'  justifyContent="space-between">
-          <Box>
+          <Stack height="100%" justifyContent="space-between">
             <Box>
-              <Box pb="5%">
-                <Typography
-                  sx={{ fontWeight: "bold" }}
-                  variant="h5"
-                  pb={2}
-                  pt={5}
-                >
-                  Submit Resignation
-                </Typography>
-                <Typography color="text.heading" variant="h6">
-                  {`${resignSteps[activeStep].id}. ${resignSteps[activeStep].step}`}
-                </Typography>
-                <Typography variant="caption" mb={5} textAlign="justify">
-                  {resignSteps[activeStep].desc}
-                </Typography>
-              </Box>
-
               <Box>
-                {activeStep === 0 && (
-                  <DatePicker isMobile lwd={lwd} setLwd={setLwd} />
-                )}
-                {activeStep === 1 && (
-                  <Questionnaire
-                    isMobile
-                    handleInputChange={handleInputChange}
-                    questionResponseMapping={questionResponseMapping}
-                  />
-                )}
-                {activeStep === 2 && (
-                  <Box>
-                    <Stack direction="row" gap={1}>
-                      <Typography variant="body2" >
-                        Last Working Day :
-                      </Typography>
-                      <Typography variant="body2" color="primary.light">
-                        {lwd}
-                      </Typography>
-                    </Stack>
-                    <Box mt={2}>
-                      <Questionnaire
-                        handleInputChange={handleInputChange}
-                        questionResponseMapping={questionResponseMapping}
-                        isReview={true}
-                      />
-                    </Box>
-                  </Box>
-                )}
-              </Box>
-            </Box>
-            <Stack
-              justifyContent="flex-end"
-              alignItems="center"
-              sx={{ position: "relative" }}
-              pt={5}
-            >
-              <Box
-                component="img"
-                sx={{
-                  height: "45%",
-                  width: "45%",
-                }}
-                alt="date_picker"
-                src={
-                  activeStep === 0
-                    ? date_picker
-                    : activeStep === 1
-                    ? resign_feedback
-                    : resign_submit
-                }
-              />
-            </Stack>
-          </Box>
+                <Box pb="5%">
+                  <Typography
+                    sx={{ fontWeight: "bold" }}
+                    variant="h5"
+                    pb={2}
+                    pt={2}
+                  >
+                    Submit Resignation
+                  </Typography>
+                  <Typography color="text.heading" variant="h6">
+                    {`${resignSteps[activeStep].id}. ${resignSteps[activeStep].step}`}
+                  </Typography>
+                  <Typography variant="caption" mb={5} textAlign="justify">
+                    {resignSteps[activeStep].desc}
+                  </Typography>
+                </Box>
 
-        <MobileStepper
-          variant="text"
-          steps={maxSteps}
-          position="static"
-          activeStep={activeStep}
-          nextButton={
-            <Button
-              sx={{ bgcolor: "text.heading", color: "text.contrast" }}
-              size="small"
-              onClick={activeStep === 2 ? handleModalOpen : handleNext}
-              disabled={
-                (activeStep === 0 && !lwd) ||
-                (activeStep === 1 &&
-                  questionResponseMapping[0]["response"].length === 0) ||
-                (activeStep === 1 &&
-                  questionResponseMapping[1]["response"].length === 0)
-                  ? true
-                  : false
+
+                <Box>
+                  {activeStep === 0 && (
+                    <DatePicker isMobile lwd={lwd} setLwd={setLwd} />
+                  )}
+                  {activeStep === 1 && (
+                    <Questionnaire
+                      isMobile
+                      handleInputChange={handleInputChange}
+                      questionResponseMapping={questionResponseMapping}
+                    />
+                  )}
+                  {activeStep === 2 && (
+                    <Box>
+                      <Stack direction="row" gap={1}>
+                        <Typography variant="body2">
+                          Last Working Day :
+                        </Typography>
+                        <Typography variant="body2" color="primary.light">
+                          {lwd}
+                        </Typography>
+                      </Stack>
+                      <Box mt={2}>
+                        <Questionnaire
+                          handleInputChange={handleInputChange}
+                          questionResponseMapping={questionResponseMapping}
+                          isReview={true}
+                        />
+                      </Box>
+                    </Box>
+                  )}
+                </Box>
+              </Box>
+              <Stack
+                justifyContent="flex-end"
+                alignItems="center"
+                sx={{ position: "relative" }}
+                pt={5}
+              >
+                <Box
+                  component="img"
+                  sx={{
+                    height: "45%",
+                    width: "45%",
+                  }}
+                  alt="date_picker"
+                  src={
+                    activeStep === 0
+                      ? date_picker
+                      : activeStep === 1
+                      ? resign_feedback
+                      : resign_submit
+                  }
+                />
+              </Stack>
+            </Box>
+
+            <MobileStepper
+              variant="text"
+              steps={maxSteps}
+              position="static"
+              activeStep={activeStep}
+              nextButton={
+                <Button
+                  sx={{ bgcolor: "text.heading", color: "text.contrast" }}
+                  size="small"
+                  onClick={activeStep === 2 ? handleModalOpen : handleNext}
+                  disabled={
+                    (activeStep === 0 && !lwd) ||
+                    (activeStep === 1 &&
+                      questionResponseMapping[0]["response"].length === 0) ||
+                    (activeStep === 1 &&
+                      questionResponseMapping[1]["response"].length === 0)
+                      ? true
+                      : false
+                  }
+                >
+                  {activeStep === 2 ? "Submit" : "Next"}
+                  {theme.direction === "rtl" ? (
+                    <KeyboardArrowLeft />
+                  ) : (
+                    <KeyboardArrowRight />
+                  )}
+                </Button>
               }
-            >
-              {activeStep === 2 ? "Submit" : "Next"}
-              {theme.direction === "rtl" ? (
-                <KeyboardArrowLeft />
-              ) : (
-                <KeyboardArrowRight />
-              )}
-            </Button>
-          }
-          backButton={
-            <Button
-              size="small"
-              onClick={handleBack}
-              disabled={activeStep === 0}
-              sx={{ bgcolor: "text.heading", color: "text.contrast" }}
-            >
-              {theme.direction === "rtl" ? (
-                <KeyboardArrowRight />
-              ) : (
-                <KeyboardArrowLeft />
-              )}
-              Back
-            </Button>
-          }
-        />
-        </Stack>
+              backButton={
+                <Button
+                  size="small"
+                  onClick={handleBack}
+                  disabled={activeStep === 0}
+                  sx={{ bgcolor: "text.heading", color: "text.contrast" }}
+                >
+                  {theme.direction === "rtl" ? (
+                    <KeyboardArrowRight />
+                  ) : (
+                    <KeyboardArrowLeft />
+                  )}
+                  Back
+                </Button>
+              }
+            />
+          </Stack>
         </Paper>
       </Stack>
 

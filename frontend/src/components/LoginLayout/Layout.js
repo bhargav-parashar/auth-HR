@@ -117,14 +117,14 @@ const Login = ({ children }) => {
             justifyContent="center"
             sx={{
               position: "absolute",
-              bottom: "3%",
+              bottom: "2%",
               left: "1%",
               right: "1%",
               display: "flex",
               justifyContent: "center",
             }}
           >
-            <Typography variant="caption" color="lightgray">
+            <Typography  variant="caption" color="lightgray">
               Made with ❤️ and countless console.log()s.
             </Typography>
           </Box>
