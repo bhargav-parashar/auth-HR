@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack } from "@mui/material";
-import RequestCards from "../../components/Sections/RequestCards";
-import RequestGrid from "../../components/Sections/RequestGrid";
+import RequestCards from "../../../../components/Sections/RequestCards";
+import RequestGrid from "../../../../components/Sections/RequestGrid";
 
 const AdminHome = () => {
   return (

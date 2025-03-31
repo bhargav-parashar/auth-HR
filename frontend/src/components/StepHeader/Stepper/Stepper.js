@@ -4,7 +4,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepConnector  from "@mui/material/StepConnector";
 
-const ResignStepper = ({ activeStep, resignSteps }) => {
+const StepperComponent = ({ activeStep, steps }) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper
@@ -24,7 +24,7 @@ const ResignStepper = ({ activeStep, resignSteps }) => {
           />
         }
       >
-        {resignSteps.map((item, index) => {
+        {steps.map((item, index) => {
           const stepProps = {};
           const labelProps = {};
 
@@ -58,4 +58,4 @@ const ResignStepper = ({ activeStep, resignSteps }) => {
   );
 };
 
-export default ResignStepper;
+export default StepperComponent;

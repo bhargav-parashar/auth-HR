@@ -1,0 +1,66 @@
+import { Box, Button } from "@mui/material";
+
+const ButtonLayout = ({
+  activeStep,
+  handleBack,
+  handleNext,
+  resignSteps,
+  handleModalOpen,
+  lwd,
+  questionResponseMapping
+}) => {
+  return (
+    <Box sx={{ height: "10%", display: "flex", flexDirection: "row", p: 2 }}>
+      <Button
+        variant="contained"
+        disabled={activeStep === 0}
+        onClick={handleBack}
+        sx={{
+          mr: 1,
+          height: "30px",
+          bgcolor: "text.heading",
+          color: "text.contrast",
+        }}
+      >
+        Back
+      </Button>
+      <Box sx={{ flex: "1 1 auto" }} />
+      {activeStep === resignSteps.length - 1 ? (
+        <Button
+          variant="contained"
+          sx={{
+            height: "30px",
+            bgcolor: "text.heading",
+            color: "text.contrast",
+          }}
+          onClick={handleModalOpen}
+        >
+          Submit
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          sx={{
+            height: "30px",
+            bgcolor: "text.heading",
+            color: "text.contrast",
+          }}
+          onClick={handleNext}
+          disabled={
+            (activeStep === 0 && !lwd) ||
+            (activeStep === 1 &&
+              questionResponseMapping[0]["response"].length === 0) ||
+            (activeStep === 1 &&
+              questionResponseMapping[1]["response"].length === 0)
+              ? true
+              : false
+          }
+        >
+          Next
+        </Button>
+      )}
+    </Box>
+  );
+};
+
+export default ButtonLayout;

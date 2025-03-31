@@ -9,9 +9,12 @@ export const lightTheme = () => (
                 bg1 : "rgb(239, 237, 247)",
                 bg2 : 'rgb(203, 197, 246)',
                 bg3 : '#000000',
+                shimmer : "rgb(203, 201, 211)",
                 success : "#4CAF50",
                 inactive:'#D3D3D3',
-                contrast:'#9696FF'
+                inactive2 : 'rgb(209, 207, 207)',
+                contrast:'#9696FF',
+                successLight :"rgb(222, 248, 223)"
             },
             
             text: {

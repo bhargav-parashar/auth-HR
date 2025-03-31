@@ -1,19 +1,18 @@
 import React from "react";
-import { Box, Paper, Stack, Button } from "@mui/material";
+import { Box, Paper, Stack} from "@mui/material";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import AdminHome from "./AdminHome";
-import EmployeeHome from "./EmployeeHome";
-import ApplyLeave from "./ApplyLeave";
-import Relocation from "./Relocation";
-import Resignation from "./Resignation";
-import Analytics from "./Analytics";
-import Employees from "./Employees";
+import AdminHome from "./HR/HomeTab/AdminHome";
+import EmployeeHome from "./Employee/HomeTab/EmployeeHome";
+import ApplyLeave from "./Employee/LeaveTab/ApplyLeave";
+import Relocation from "./Employee/RelocationTab/Relocation";
+import Resignation from "./Employee/ResignationTab/Resignation";
+import Analytics from "./HR/AnalyticsTab/Analytics";
+import Employees from "./HR/EmployeesTab/Employees";
 import { useState } from "react";
 import TabContext from "../../context/tabContext";
 import UserContext from "../../context/UserContext";
 import { useContext } from "react";
-import Modal from "../../components/Modal/Modal";
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState("Dashboard");

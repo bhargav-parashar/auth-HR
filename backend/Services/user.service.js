@@ -105,6 +105,14 @@ class UserService{
             },
         },
         {
+            $lookup: {
+              from: "userresponses",
+              localField: "employeeId",
+              foreignField: "userId",
+              as: "userResponses"
+            },
+        },
+        {
             $project: {
             _id:1,
             employeeId:1,
@@ -112,7 +120,8 @@ class UserService{
             status:1,
             createdAt:1,
             updatedAt:1,
-            userDetails: { $arrayElemAt: ["$userDetails.username", 0] }
+            userDetails: { $arrayElemAt: ["$userDetails.username", 0] },
+            userResponses: { $arrayElemAt: ["$userResponses.responses", 0] }
           }
         }
     ]);

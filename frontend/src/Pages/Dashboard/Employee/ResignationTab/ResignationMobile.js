@@ -7,13 +7,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { resignSteps } from "../../constants/constants";
-import date_picker from "../../assets/date_picker.svg";
-import resign_feedback from "../../assets/resign_feedback.svg";
-import resign_submit from "../../assets/resign_submit.svg";
-import DatePicker from "../../components/DatePicker/DatePickerField";
-import Questionnaire from "../../components/Questionnaire/Questionnaire";
-import Modal from "../../components/Modal/Modal";
+import { resignSteps } from "../../../../constants/constants";
+import date_picker from "../../../../assets/date_picker.svg";
+import resign_feedback from "../../../../assets/resign_feedback.svg";
+import resign_submit from "../../../../assets/resign_submit.svg";
+import DatePicker from "../../../../components/DatePicker/DatePickerField";
+import Questionnaire from "../../../../components/Questionnaire/Questionnaire";
+import Modal from "../../../../components/Modal/Modal";
 
 export default function ResignationMobile({
   lwd,

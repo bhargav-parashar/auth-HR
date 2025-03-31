@@ -6,12 +6,16 @@ export const darkTheme = () => (
                 main : '#fff',
                 light : '#9696FF',
                 dark : '#D3D3D3',
-                bg1 : '#181717',
+                bg1 : ' #181717',
                 bg2 : '#141414',
                 bg3 : '#000000',
+                shimmer : 'rgb(61, 58, 58)',
                 success : "#4CAF50", 
                 inactive:'rgb(151, 144, 144)',
-                contrast:'rgb(81, 81, 228)'
+                inactive2 : 'rgb(37, 37, 37)',
+                contrast:'rgb(81, 81, 228)',
+                successLight :"rgb(222, 248, 223)"
+                
             },
            
             text: {
