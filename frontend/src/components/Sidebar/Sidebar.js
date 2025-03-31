@@ -3,7 +3,7 @@ import { Paper, Stack, Box, Typography } from "@mui/material";
 import SidebarCard from "../../components/Sidebar/SidebarCard";
 import {
   adminSidebarOptions,
-  empSidebarOptions,
+  empSidebarOptions
 } from "../../constants/constants";
 import UserContext from "../../context/UserContext";
 import { useContext } from "react";
@@ -12,7 +12,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const Sidebar = ({ selectedTab, setSelectedTab, toggleDrawer }) => {
   const { loggedInUser } = useContext(UserContext);
-
+  
   return (
     <Paper sx={{ height: "100%" }} elevation={0} square>
       <Box

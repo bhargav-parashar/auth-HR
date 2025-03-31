@@ -73,17 +73,17 @@ const empSidebarOptions = [
   {
     id: 2,
     option: "Apply Leave",
-    icon: "DataUsageIcon",
+    icon: "OutputIcon",
   },
   {
     id: 3,
     option: "Relocation",
-    icon: "GroupsIcon",
+    icon: "PlaceIcon",
   },
   {
     id: 4,
     option: "Resignation",
-    icon: "GroupsIcon",
+    icon: "DescriptionIcon",
   },
 ];
 

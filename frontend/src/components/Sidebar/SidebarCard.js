@@ -1,25 +1,9 @@
 import React from "react";
 import { Stack, Typography, Box } from "@mui/material";
-import DataUsageIcon from "@mui/icons-material/DataUsage";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import GroupsIcon from "@mui/icons-material/Groups";
 import Icon from "../Sidebar/Icon";
 
 const SidebarCard = ({  menuItem, menuIcon, selectedTab, setSelectedTab,toggleDrawer }) => {
-  let icon = <HomeOutlinedIcon />;
-  switch (menuIcon) {
-    case "HomeOutlinedIcon":
-      icon = <HomeOutlinedIcon sx={{ cursor: "pointer" }} />;
-      break;
-    case "DataUsageIcon":
-      icon = <DataUsageIcon />;
-      break;
-    case "GroupsIcon":
-      icon = <GroupsIcon />;
-      break;
-    default:
-      icon = <HomeOutlinedIcon />;
-  }
+ 
 
   const handleClick = (val) => {
     setSelectedTab(val);
