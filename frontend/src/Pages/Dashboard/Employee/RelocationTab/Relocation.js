@@ -1,34 +1,34 @@
 import { useState, useEffect } from "react";
 import config from "../../../../config/config";
 import axios from "axios";
-import ResignationDesktop from "../ResignationTab/ResignationDesktop";
-import Shimmer from "../../../../components/Resignation/Shimmer";
+//import ResignationDesktop from "../ResignationTab/ResignationDesktop";
+import Shimmer from "../../../../components/ShimmerUI/Shimmer";
 import Status from "../../../../components/Resignation/Status";
 
 const Relocation = () => {
-  const [resignation, setResignation] = useState([]);
+  const [relocation, setRelocation] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const URL = `${config.endpoint}/user/relocation`;
-    const getResignation = async () => {
+    const getRelocation = async () => {
       try {
         setIsLoading(true);
         const { data } = await axios.get(URL, { withCredentials: true });
-        setResignation(data);
+        setRelocation(data);
       } catch (err) {
         console.log(err);
       } finally {
         setIsLoading(false);
       }
     };
-    getResignation();
+    getRelocation();
   }, []);
   return (
     <>
       {isLoading && <Shimmer />}
-      {!isLoading && resignation.length > 0 && <Status stepType="resignation" resignation={resignation} />} 
-      {!isLoading && resignation.length === 0 && <ResignationDesktop />} 
+      {/* {!isLoading && relocation.length > 0 && <Status stepType="resignation" resignation={resignation} />} 
+      {!isLoading && relocation.length === 0 && <ResignationDesktop />}  */}
     </>
   );
 };

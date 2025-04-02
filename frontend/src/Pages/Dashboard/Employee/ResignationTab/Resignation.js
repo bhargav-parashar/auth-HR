@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import config from "../../../../config/config";
 import axios from "axios";
 import ResignationDesktop from "./ResignationDesktop";
-import Shimmer from "../../../../components/Resignation/Shimmer";
+import Shimmer from "../../../../components/ShimmerUI/Shimmer";
 import Status from "../../../../components/Resignation/Status";
 
 const Resignation = () => {
