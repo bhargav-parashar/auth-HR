@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const {
+  leave,
+  getLeavesByUserId,
   resign,
   submitResponse,
   questionnaire,
@@ -15,9 +17,35 @@ const {
   userValidationSchema,
   responsesValidationSchema,
   relocationValidationSchema,
-  relocationResponsesValidationSchema
+  relocationResponsesValidationSchema,
+  leaveValidationSchema
 } = require("../validations/user.validations");
 const { dateValidation } = require("../middlewares/dateValidation.middleware");
+
+//LEAVE
+router.post(
+  "/leave",
+  jwtAuthorize,
+  validateSchema(leaveValidationSchema),
+  leave
+);
+router.get("/leave-applications", jwtAuthorize, getLeavesByUserId);
+
+//RELOCATION
+router.post(
+  "/relocate",
+  jwtAuthorize,
+  validateSchema(relocationValidationSchema),
+  relocate
+);
+router.post(
+    "/relocationresponses",
+    jwtAuthorize,
+    validateSchema(relocationResponsesValidationSchema),
+    submitRelocationResponse
+  );
+router.get("/relocationquestionnaire", relocationQuestionnaire);
+router.get("/relocation", jwtAuthorize, getRelocationByUserId);
 
 //RESIGNATION
 router.post(
@@ -36,21 +64,7 @@ router.post(
 router.get("/questionnaire", questionnaire);
 router.get("/resignation", jwtAuthorize, getResignationByUserId);
 
-//RELOCATION
-router.post(
-  "/relocate",
-  jwtAuthorize,
-  validateSchema(relocationValidationSchema),
-  relocate
-);
-router.post(
-    "/relocationresponses",
-    jwtAuthorize,
-    validateSchema(relocationResponsesValidationSchema),
-    submitRelocationResponse
-  );
-router.get("/relocationquestionnaire", relocationQuestionnaire);
-router.get("/relocation", jwtAuthorize, getRelocationByUserId);
+
 
 module.exports = router;
 
