@@ -1,12 +1,8 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
-import StepHeader from "../../../../components/StepHeader/StepHeader";
-import { relocationSteps } from "../../../../constants/constants";
-import date_picker from "../../../../assets/date_picker.svg";
-import resign_feedback from "../../../../assets/resign_feedback.svg";
 import resign_submit from "../../../../assets/resign_submit.svg";
 import { format } from "date-fns";
 
-const StatusMobile = ({ resignation }) => {
+const StatusMobile = ({ relocation }) => {
   return (
     <Box  sx={{ height: "90%", width: "100%",  flexGrow: 1 }}>
       <Stack
@@ -17,7 +13,7 @@ const StatusMobile = ({ resignation }) => {
         <Paper elevation={0} sx={{ height: "100%", width: "100%", p: 2 }}>
           <Box sx={{ height: "15%" }} pb="5%">
             <Typography sx={{ fontWeight: "bold" }} variant="h5" pb={2} pt={5}>
-              Submit Resignation
+              Request Relocation
             </Typography>
           </Box>
           <Box sx={{ width: "100%", height: "65%" }}>
@@ -33,7 +29,7 @@ const StatusMobile = ({ resignation }) => {
               }}
             >
               <Typography px={1} sx={{ color: "primary.success" }}>
-                Resignation successfully submitted !
+                Relocation request successfully submitted !
               </Typography>
             </Stack>
             <Stack
@@ -51,12 +47,12 @@ const StatusMobile = ({ resignation }) => {
             >
               <Stack direction="row" sx={{ width: "100%" }}>
                 <Typography variant="body2" pl={1}>Status :</Typography>
-                <Typography variant="body2" fontWeight='bold' color="text.heading" px={1}>{resignation[0].status}</Typography>
+                <Typography variant="body2" fontWeight='bold' color="text.heading" px={1}>{relocation[0].status}</Typography>
               </Stack>
               <Stack  sx={{ width: "100%" }}>
                 <Typography variant="body2" pl={1}>Last working day</Typography>
                 <Typography variant="body2" pl={1}  color="text.heading">
-                    {resignation[0]?.lwd ? format(resignation[0].lwd, "dd MMM, yyyy") : ""}
+                    {relocation[0]?.lwd ? format(relocation[0].lwd, "dd MMM, yyyy") : ""}
                   </Typography>
               </Stack>
             </Stack>
@@ -75,12 +71,12 @@ const StatusMobile = ({ resignation }) => {
                   variant="body2"
                   textAlign="left"
                   m={2}
-                >{`1. ${resignation[0].userResponses[0].questionText}`}</Typography>
+                >{`1. ${relocation[0].userResponses[0].questionText}`}</Typography>
                 <Typography
                   variant="body2"
                   textAlign="left"
                   m={2}
-                >{`${resignation[0].userResponses[0].response}`}</Typography>
+                >{`${relocation[0].userResponses[0].response}`}</Typography>
               </Box>
               <Box
                 flex={1}
@@ -96,9 +92,9 @@ const StatusMobile = ({ resignation }) => {
                   textAlign="left"
                   m={2}
                   sx={{ textAlign: "left" }}
-                >{`2. ${resignation[0].userResponses[1].questionText}`}</Typography>
+                >{`2. ${relocation[0].userResponses[1].questionText}`}</Typography>
                 <Typography variant="body2" textAlign="left" m={2}>
-                  {resignation[0].userResponses[1].response}
+                  {relocation[0].userResponses[1].response}
                 </Typography>
               </Box>
             </Stack>

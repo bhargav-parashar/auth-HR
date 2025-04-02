@@ -27,7 +27,7 @@ const Resignation = () => {
   return (
     <>
       {isLoading && <Shimmer />}
-      {!isLoading && resignation.length > 0 && <Status stepType="resignation" resignation={resignation} />}
+      {!isLoading && resignation.length > 0 && <Status resignation={resignation} />}
       {!isLoading && resignation.length === 0 && <ResignationDesktop />}
     </>
   );

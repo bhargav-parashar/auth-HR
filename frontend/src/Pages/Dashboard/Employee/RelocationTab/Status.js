@@ -1,11 +1,10 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
 import StepHeader from "../../../../components/StepHeader/StepHeader";
-import { resignSteps } from "../../../../constants/constants";
+import { relocationSteps } from "../../../../constants/constants";
 import resign_submit from "../../../../assets/resign_submit.svg";
-import { format } from "date-fns";
 import StatusMobile from "./StatusMobile";
 
-const Status = ({  resignation }) => {
+const Status = ({ stepType, relocation }) => {
   
   return (
     <Box sx={{ height: "100%" }}>
@@ -21,8 +20,8 @@ const Status = ({  resignation }) => {
         >
           <StepHeader
             header={"Submit Resignation"}
-            activeStep={resignSteps.length + 1}
-            steps={resignSteps}
+            activeStep={relocationSteps.length + 1}
+            steps={relocationSteps}
           />
           <Stack
             p={1}
@@ -38,7 +37,7 @@ const Status = ({  resignation }) => {
             }}
           >
             <Typography sx={{ color: "primary.success" }}>
-              Resignation successfully submitted !
+              Relocation request successfully submitted !
             </Typography>
           </Stack>
           <Box
@@ -64,7 +63,7 @@ const Status = ({  resignation }) => {
             >
                <Stack direction="row" sx={{ width: "100%" }}>
                 <Typography variant="body2" pl={1}>Status :</Typography>
-                <Typography variant="body2" fontWeight='bold' color="text.heading" px={1}>{resignation[0].status}</Typography>
+                <Typography variant="body2" fontWeight='bold' color="text.heading" px={1}>{relocation[0].status}</Typography>
               </Stack>
             </Stack>
             <Stack
@@ -95,10 +94,10 @@ const Status = ({  resignation }) => {
                 >
                   <Typography
                     m={2}
-                  >{`1. ${resignation[0].userResponses[0].questionText}`}</Typography>
+                  >{`1. ${relocation[0].userResponses[0].questionText}`}</Typography>
                   <Typography
                     m={2}
-                  >{`${resignation[0].userResponses[0].response}`}</Typography>
+                  >{`${relocation[0].userResponses[0].response}`}</Typography>
                 </Box>
                 <Box
                   flex={1}
@@ -112,9 +111,9 @@ const Status = ({  resignation }) => {
                   <Typography
                     m={2}
                     sx={{ textAlign: "left" }}
-                  >{`2. ${resignation[0].userResponses[1].questionText}`}</Typography>
+                  >{`2. ${relocation[0].userResponses[1].questionText}`}</Typography>
                   <Typography m={2}>
-                    {resignation[0].userResponses[1].response}
+                    {relocation[0].userResponses[1].response}
                   </Typography>
                 </Box>
               </Stack>
@@ -135,10 +134,10 @@ const Status = ({  resignation }) => {
                     bgcolor: "primary.inactive2",
                   }}
                 >
-                  <Typography m={2}>{`Last Working Day`}</Typography>
+                  <Typography m={2}>{`New Location Requested`}</Typography>
                   <Typography fontWeight="bold" color="text.heading" m={2}>
                     {
-                      resignation[0]?.lwd ? format(resignation[0].lwd, "dd MMM, yyyy") : ""
+                      relocation[0]?.location 
                     }
                   </Typography>
                 </Box>
@@ -183,7 +182,7 @@ const Status = ({  resignation }) => {
             justifyContent="center"
             alignItems="center"
           >
-            <StatusMobile resignation={resignation} />
+            <StatusMobile  relocation={relocation} />
           </Stack>
         </Box>
       </Paper>
