@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import config from "../../../../config/config";
 import axios from "axios";
-//import ResignationDesktop from "../ResignationTab/ResignationDesktop";
+import RelocationDesktop from "./RelocationDesktop";
 import Shimmer from "../../../../components/ShimmerUI/Shimmer";
-import Status from "../../../../components/Resignation/Status";
+//import Status from "../../../../components/Resignation/Status";
 
 const Relocation = () => {
   const [relocation, setRelocation] = useState([]);
@@ -27,8 +27,8 @@ const Relocation = () => {
   return (
     <>
       {isLoading && <Shimmer />}
-      {/* {!isLoading && relocation.length > 0 && <Status stepType="resignation" resignation={resignation} />} 
-      {!isLoading && relocation.length === 0 && <ResignationDesktop />}  */}
+      {/* {!isLoading && relocation.length > 0 && <Status stepType="resignation" resignation={resignation} />}  */}
+      {!isLoading && relocation.length === 0 && <RelocationDesktop />} 
     </>
   );
 };

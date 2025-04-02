@@ -119,6 +119,24 @@ const resignSteps = [
   },
 ];
 
+const relocationSteps = [
+  {
+    id: 1,
+    step: "Select Work Location",
+    desc: "Please pick your preferred work location. Make sure to check with your manager to confirm feasibility of transfer."
+  },
+  {
+    id: 2,
+    step: "Relocation Justification",
+    desc: "Please provide a clear justification for your request to change your work location. Your responses will help us understand the reasons behind your request, how it aligns with your role, and its potential impact on your job performance and career growth. "
+  },
+  {
+    id: 3,
+    step: "Review & Submit",
+    desc:"Almost done! Review your details to ensure everything is correct. Once submitted, your relocation request will be sent to HR for processing. You won’t be able to edit it afterward."
+  },
+];
+
 export {
   carouselSlides,
   adminSidebarOptions,
@@ -128,5 +146,6 @@ export {
   loadingCarousel,
   resignSteps,
   departments,
-  locations
+  locations,
+  relocationSteps
 };

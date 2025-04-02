@@ -1,12 +1,14 @@
 import { Box, Button } from "@mui/material";
 
 const ButtonLayout = ({
+  stepCategory,
   activeStep,
   handleBack,
   handleNext,
-  resignSteps,
+  steps,
   handleModalOpen,
   lwd,
+  location,
   questionResponseMapping
 }) => {
   return (
@@ -25,7 +27,7 @@ const ButtonLayout = ({
         Back
       </Button>
       <Box sx={{ flex: "1 1 auto" }} />
-      {activeStep === resignSteps.length - 1 ? (
+      {activeStep === steps.length - 1 ? (
         <Button
           variant="contained"
           sx={{
@@ -47,7 +49,10 @@ const ButtonLayout = ({
           }}
           onClick={handleNext}
           disabled={
-            (activeStep === 0 && !lwd) ||
+           ( 
+             ( activeStep === 0 && !lwd && stepCategory === "Resignation" ) || 
+             ( activeStep === 0 && !location && stepCategory === "Relocation" )
+           ) ||
             (activeStep === 1 &&
               questionResponseMapping[0]["response"].length === 0) ||
             (activeStep === 1 &&

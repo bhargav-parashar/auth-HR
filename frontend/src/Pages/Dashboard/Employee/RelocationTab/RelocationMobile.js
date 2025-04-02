@@ -6,19 +6,19 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { resignSteps } from "../../../../constants/constants";
+import { relocationSteps, locations } from "../../../../constants/constants";
 import date_picker from "../../../../assets/date_picker.svg";
 import resign_feedback from "../../../../assets/resign_feedback.svg";
 import resign_submit from "../../../../assets/resign_submit.svg";
-import DatePicker from "../../../../components/DatePicker/DatePickerField";
 import Questionnaire from "../../../../components/Questionnaire/Questionnaire";
 import Modal from "../../../../components/Modal/Modal";
 import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
+import Dropdown from "../../../../components/Dropdown/Dropdown";
 
-export default function ResignationMobile({
-  lwd,
-  setLwd,
+export default function RelocationMobile({
+  location,
+  setLocation,
   handleInputChange,
   questionResponseMapping,
   handleSubmit,
@@ -26,7 +26,7 @@ export default function ResignationMobile({
   const theme = useTheme();
   const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } = useModal();
   const {activeStep, handleNext, handleBack} = useActiveStep();
-  const maxSteps = resignSteps.length;
+  const maxSteps = relocationSteps.length;
 
 
   return (
@@ -51,20 +51,27 @@ export default function ResignationMobile({
                     pb={2}
                     pt={2}
                   >
-                    Submit Resignation
+                    Request Relocation
                   </Typography>
                   <Typography color="text.heading" variant="h6">
-                    {`${resignSteps[activeStep].id}. ${resignSteps[activeStep].step}`}
+                    {`${relocationSteps[activeStep].id}. ${relocationSteps[activeStep].step}`}
                   </Typography>
                   <Typography variant="caption" mb={5} textAlign="justify">
-                    {resignSteps[activeStep].desc}
+                    {relocationSteps[activeStep].desc}
                   </Typography>
                 </Box>
 
 
                 <Box>
                   {activeStep === 0 && (
-                    <DatePicker isMobile lwd={lwd} setLwd={setLwd} />
+                     <Dropdown
+                     id="location"
+                     name="location"
+                     value={location}
+                     handleChange={handleLocationChange}
+                     placeholder="Location"
+                     items={locations}
+                   />
                   )}
                   {activeStep === 1 && (
                     <Questionnaire
@@ -77,10 +84,10 @@ export default function ResignationMobile({
                     <Box>
                       <Stack direction="row" gap={1}>
                         <Typography variant="body2">
-                          Last Working Day :
+                          New work location :
                         </Typography>
                         <Typography variant="body2" color="primary.light">
-                          {lwd}
+                          {location}
                         </Typography>
                       </Stack>
                       <Box mt={2}>
@@ -129,7 +136,7 @@ export default function ResignationMobile({
                   size="small"
                   onClick={activeStep === 2 ? handleModalOpen : handleNext}
                   disabled={
-                    (activeStep === 0 && !lwd) ||
+                    (activeStep === 0 && !location) ||
                     (activeStep === 1 &&
                       questionResponseMapping[0]["response"].length === 0) ||
                     (activeStep === 1 &&

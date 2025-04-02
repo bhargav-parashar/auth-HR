@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Box, Stack, Paper } from "@mui/material";
-import { resignSteps } from "../../../../constants/constants";
-import ResignationMobile from "./ResignationMobile";
+import { relocationSteps } from "../../../../constants/constants";
+import RelocationMobile from "./RelocationMobile";
 import config from "../../../../config/config";
 import axios from "axios";
 import { useSnackbar } from "notistack";
-import submitResignation from "../../../../utility/submitResignation";
+import submitRelocation from "../../../../utility/submitRelocation";
 import Modal from "../../../../components/Modal/Modal";
 import ButtonLayout from "../../../../components/ButtonLayout/ButtonLayout";
 import Contents from "../../../../components/Contents/Contents";
@@ -13,8 +13,8 @@ import StepHeader from "../../../../components/StepHeader/StepHeader";
 import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
 
-const ResignationDesktop = ({ setSelectedTab }) => {
-  const [lwd, setLwd] = useState(null);
+const RelocationDesktop = ({ setSelectedTab }) => {
+  const [location, setLocation] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState({});
   const [questionResponseMapping, setQuestionResponseMapping] = useState([]);
@@ -24,7 +24,7 @@ const ResignationDesktop = ({ setSelectedTab }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    const URL = `${config.endpoint}/user/questionnaire`;
+    const URL = `${config.endpoint}/user/relocationquestionnaire`;
     const callApi = async () => {
       try {
         const { data } = await axios.get(URL);
@@ -62,8 +62,8 @@ const ResignationDesktop = ({ setSelectedTab }) => {
   };
 
   const handleSubmit = () => {
-    submitResignation({
-      lwd,
+    submitRelocation({
+      location,
       setIsLoading,
       questionResponseMapping,
       enqueueSnackbar,
@@ -85,31 +85,31 @@ const ResignationDesktop = ({ setSelectedTab }) => {
           }}
         >
           <StepHeader
-            header={"Submit Resignation"}
+            header={"Request Relocation"}
             activeStep={activeStep}
             handleBack={handleBack}
             handleNext={handleNext}
-            steps={resignSteps}
+            steps={relocationSteps}
           />
 
           <Contents
-            stepCategory="Resignation"
+            stepCategory="Relocation"
             activeStep={activeStep}
-            steps={resignSteps}
-            lwd={lwd}
-            setLwd={setLwd}
+            steps={relocationSteps}
+            location={location}
+            setLocation={setLocation}
             handleInputChange={handleInputChange}
             questionResponseMapping={questionResponseMapping}
           />
 
           <ButtonLayout
-            stepCategory="Resignation"
+            stepCategory="Relocation"
             activeStep={activeStep}
             handleBack={handleBack}
             handleNext={handleNext}
-            steps={resignSteps}
+            steps={relocationSteps}
             handleModalOpen={handleModalOpen}
-            lwd={lwd}
+            location={location}
             questionResponseMapping={questionResponseMapping}
           />
         </Stack>
@@ -126,9 +126,9 @@ const ResignationDesktop = ({ setSelectedTab }) => {
             justifyContent="center"
             alignItems="center"
           >
-            <ResignationMobile
-              lwd={lwd}
-              setLwd={setLwd}
+            <RelocationMobile
+              location={location}
+              setLocation={setLocation}
               questionResponseMapping={questionResponseMapping}
               handleInputChange={handleInputChange}
               handleSubmit={handleSubmit}
@@ -147,4 +147,4 @@ const ResignationDesktop = ({ setSelectedTab }) => {
   );
 };
 
-export default ResignationDesktop;
+export default RelocationDesktop;

@@ -3,7 +3,7 @@ import config from "../../../../config/config";
 import axios from "axios";
 import ResignationDesktop from "./ResignationDesktop";
 import Shimmer from "../../../../components/ShimmerUI/Shimmer";
-import Status from "../../../../components/Resignation/Status";
+import Status from "./Status";
 
 const Resignation = () => {
   const [resignation, setResignation] = useState([]);

@@ -84,9 +84,8 @@ const Dashboard = () => {
                 {loggedInUser.role === "employee" &&
                   selectedTab === "Relocation" && <Relocation />}
                 {loggedInUser.role === "employee" &&
-                  selectedTab === "Resignation" && (
-                    <Resignation setSelectedTab={setSelectedTab} />
-                  )}
+                  selectedTab === "Resignation" && <Resignation  />
+                }
               </Paper>
             </Box>
           </Stack>
