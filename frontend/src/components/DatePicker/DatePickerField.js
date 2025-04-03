@@ -26,19 +26,19 @@ function convert(str) {
   return [date[3], mnths[date[1]], date[2]].join("-");
 }
 
-export default function BasicDatePicker({ lwd, setLwd, disabled, isMobile }) {
+export default function BasicDatePicker({ date, setDate, disabled, isMobile }) {
   
   const[date, setDate] = useState(null);
   
   useEffect(()=>{
-    if(lwd){
-      setDate(dayjs(lwd));
+    if(date){
+      setDate(dayjs(date));
     }
     
-  },[lwd]);
+  },[date]);
 
   const handleDateChange = (e) => {
-    setLwd(convert(e?.$d.toString()));
+    setDate(convert(e?.$d.toString()));
   };
 
   return (

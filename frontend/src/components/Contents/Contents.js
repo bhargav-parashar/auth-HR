@@ -1,11 +1,10 @@
-import { Box, Typography, Stack, Paper } from "@mui/material";
+import { Box, Typography, Stack, Paper, Select, MenuItem } from "@mui/material";
 import Questionnaire from "../Questionnaire/Questionnaire";
 import DatePicker from "../DatePicker/DatePickerField";
 import date_picker from "../../assets/date_picker.svg";
 import resign_feedback from "../../assets/resign_feedback.svg";
 import resign_submit from "../../assets/resign_submit.svg";
-import Dropdown from "../Dropdown/Dropdown";
-import { locations } from "../../constants/constants";
+import { locations, leaveTypes } from "../../constants/constants";
 
 const Contents = ({
   stepCategory,
@@ -17,10 +16,16 @@ const Contents = ({
   setLocation,
   handleInputChange,
   questionResponseMapping,
+  leaveData,
+  setLeaveData
 }) => {
   handleLocationChange = (e) => {
     const { value } = e.target;
     setLocation(value);
+  };
+  handleLeaveDataChange = (e)=>{
+    const {name,value} = e.target;
+    setLeaveData((prev) => ({ ...prev, [name]: value }));
   };
   return (
     <Stack direction={{ xs: "column", md: "row" }} sx={{ height: "70%" }}>
@@ -44,9 +49,9 @@ const Contents = ({
             {steps[activeStep].desc}
           </Typography>
           {activeStep === 0 && stepCategory === "Resignation" && (
-            <DatePicker lwd={lwd} setLwd={setLwd} />
+            <DatePicker date={lwd} setDate={setLwd} />
           )}
-          {activeStep === 1 && (
+          {activeStep === 1 &&  stepCategory !== "Leave" &&  (
             <Questionnaire
               handleInputChange={handleInputChange}
               questionResponseMapping={questionResponseMapping}
@@ -70,15 +75,21 @@ const Contents = ({
             </Box>
           )}
           {activeStep === 0 && stepCategory === "Relocation" && (
-            <Dropdown
-              id="location"
+            <Select
               name="location"
               value={location}
-              handleChange={handleLocationChange}
-              placeholder="Location"
-              items={locations}
-            />
-           
+              onChange={handleLocationChange}
+              sx={{width:'50%'}}
+            >
+              <MenuItem disabled value="">
+                Location
+              </MenuItem>
+              {locations.map((item, idx) => (
+                <MenuItem key={idx} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>
           )}
           {activeStep === 2 && stepCategory === "Relocation" && (
             <Box>
@@ -97,6 +108,33 @@ const Contents = ({
               </Box>
             </Box>
           )}
+          {
+            activeStep === 0 && stepCategory === "Leave" && (
+              <Select
+              name="leaveType"
+              value={leaveData.leaveType}
+              onChange={handleLeaveDataChange}
+              sx={{width:'50%'}}
+            >
+              <MenuItem disabled value="">
+                Leave Type
+              </MenuItem>
+              {leaveTypes.map((item, idx) => (
+                <MenuItem key={idx} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>
+            )
+          }
+          {
+            activeStep === 1 && stepCategory === "Leave" && (
+              <Stack direction='row' gap={1}>
+               <DatePicker date={leaveData.startDate} setDate={handleLeaveDataChange} />
+               <DatePicker date={leaveData.endDate} setDate={handleLeaveDataChange} />
+            </Stack>
+            )
+          }
         </Paper>
       </Box>
       <Box

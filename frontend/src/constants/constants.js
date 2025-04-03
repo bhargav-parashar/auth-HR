@@ -91,6 +91,8 @@ const departments = ["Finance", "IT", "Sales", "Marketing", "Operations"];
 
 const locations = ["Bengaluru", "Gurgaon",  "Hyderabad", "Mumbai", "Pune"];
 
+leaveTypes = ["Sick Leave", "Casual Leave", "Maternity Leave", "Paternity Leave"];
+
 const guestAdmin = {
   username: "admin",
   password: "admin",
@@ -137,6 +139,25 @@ const relocationSteps = [
   },
 ];
 
+const leaveSteps = [
+  {
+    id: 1,
+    step: "Select Leave Type",
+    desc: "Please specify the type of leave you want to apply for."
+  },
+  {
+    id: 2,
+    step: "Select Leave Duration",
+    desc: "Please provide a duration of leave."
+  },
+  {
+    id: 3,
+    step: "Review & Submit",
+    desc:"Almost done! Review your details to ensure everything is correct. Once submitted, your leave request will be sent to HR for processing. You won’t be able to edit it afterward."
+  },
+];
+
+
 export {
   carouselSlides,
   adminSidebarOptions,
@@ -147,5 +168,7 @@ export {
   resignSteps,
   departments,
   locations,
-  relocationSteps
+  relocationSteps,
+  leaveSteps,
+  leaveTypes
 };

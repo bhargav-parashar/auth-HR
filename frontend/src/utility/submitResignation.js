@@ -23,7 +23,6 @@ export default submitResignation = async ({
       await axios.post(URL, body, { withCredentials: true });
       enqueueSnackbar("Resignation submitted", { variant: "success" });
       setSelectedTab("Dashboard");
-      console.log(res);
     }
   } catch (err) {
     if (err.status === 400) {

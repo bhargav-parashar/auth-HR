@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Select, MenuItem } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
 import Paper from "@mui/material/Paper";
@@ -14,7 +14,6 @@ import Questionnaire from "../../../../components/Questionnaire/Questionnaire";
 import Modal from "../../../../components/Modal/Modal";
 import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
-import Dropdown from "../../../../components/Dropdown/Dropdown";
 
 export default function RelocationMobile({
   location,
@@ -64,14 +63,21 @@ export default function RelocationMobile({
 
                 <Box>
                   {activeStep === 0 && (
-                     <Dropdown
-                     id="location"
+                     <Select
                      name="location"
                      value={location}
-                     handleChange={handleLocationChange}
-                     placeholder="Location"
-                     items={locations}
-                   />
+                     onChange={handleLocationChange}
+                     sx={{width:'50%'}}
+                   >
+                     <MenuItem disabled value="">
+                       Location
+                     </MenuItem>
+                     {locations.map((item, idx) => (
+                       <MenuItem key={idx} value={item}>
+                         {item}
+                       </MenuItem>
+                     ))}
+                   </Select>
                   )}
                   {activeStep === 1 && (
                     <Questionnaire

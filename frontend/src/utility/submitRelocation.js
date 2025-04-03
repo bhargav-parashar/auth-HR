@@ -23,7 +23,6 @@ export default submitRelocation = async ({
       await axios.post(URL, body, { withCredentials: true });
       enqueueSnackbar("Relocation request submitted", { variant: "success" });
       setSelectedTab("Dashboard");
-      console.log(res);
     }
   } catch (err) {
     console.log(err);

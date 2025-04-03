@@ -9,7 +9,8 @@ const ButtonLayout = ({
   handleModalOpen,
   lwd,
   location,
-  questionResponseMapping
+  questionResponseMapping,
+  leaveType
 }) => {
   return (
     <Box sx={{ height: "10%", display: "flex", flexDirection: "row", p: 2 }}>
@@ -51,11 +52,16 @@ const ButtonLayout = ({
           disabled={
            ( 
              ( activeStep === 0 && !lwd && stepCategory === "Resignation" ) || 
-             ( activeStep === 0 && !location && stepCategory === "Relocation" )
+             ( activeStep === 0 && !location && stepCategory === "Relocation" ) ||
+             ( activeStep === 0 && !leaveType && stepCategory === "Leave" )
            ) ||
-            (activeStep === 1 &&
+            (activeStep === 1 && stepCategory === "Resignation" &&
               questionResponseMapping[0]["response"].length === 0) ||
-            (activeStep === 1 &&
+            (activeStep === 1 && stepCategory === "Resignation" &&
+              questionResponseMapping[1]["response"].length === 0) ||
+            (activeStep === 1 && stepCategory === "Relocation" &&
+              questionResponseMapping[0]["response"].length === 0) ||
+            (activeStep === 1 && stepCategory === "Relocation" &&
               questionResponseMapping[1]["response"].length === 0)
               ? true
               : false

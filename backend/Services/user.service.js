@@ -231,7 +231,9 @@ class UserService{
             $project: {
             _id:1,
             employeeId:1,
-            lwd:1,
+            leavrType:1,
+            startDate:1,
+            endDate:1,
             status:1,
             createdAt:1,
             updatedAt:1,
