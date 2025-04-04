@@ -19,7 +19,7 @@ const Status = ({ relocation }) => {
           }}
         >
           <StepHeader
-            header={"Submit Resignation"}
+            header={"Request Relocation"}
             activeStep={relocationSteps.length + 1}
             steps={relocationSteps}
           />
