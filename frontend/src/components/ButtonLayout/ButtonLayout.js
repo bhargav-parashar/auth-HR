@@ -10,7 +10,9 @@ const ButtonLayout = ({
   lwd,
   location,
   questionResponseMapping,
-  leaveType
+  leaveType,
+  startDate,
+  endDate
 }) => {
   return (
     <Box sx={{ height: "10%", display: "flex", flexDirection: "row", p: 2 }}>
@@ -62,7 +64,8 @@ const ButtonLayout = ({
             (activeStep === 1 && stepCategory === "Relocation" &&
               questionResponseMapping[0]["response"].length === 0) ||
             (activeStep === 1 && stepCategory === "Relocation" &&
-              questionResponseMapping[1]["response"].length === 0)
+              questionResponseMapping[1]["response"].length === 0) ||
+            (activeStep === 1 && stepCategory === "Leave" && (!startDate || !endDate))
               ? true
               : false
           }

@@ -14,7 +14,7 @@ import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
 
 const RelocationDesktop = ({ setSelectedTab }) => {
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState("");
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState({});
   const [questionResponseMapping, setQuestionResponseMapping] = useState([]);

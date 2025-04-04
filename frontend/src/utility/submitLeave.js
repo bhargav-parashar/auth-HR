@@ -2,16 +2,18 @@ import config from "../config/config";
 import axios from "axios";
 
 export default submitLeave = async ({
-  leaveData,
+  startDate,
+  endDate,
+  leaveType,
   setIsLoading,
   enqueueSnackbar,
   setSelectedTab
 }) => {
   const URL = `${config.endpoint}/user/leave`;
   const body = {
-    leaveType : leaveData.leaveType,
-    startDate : leaveData.startDate,
-    endDate : leaveData.endDate
+    leaveType : leaveType,
+    startDate : startDate,
+    endDate : endDate
   };
   try {
     setIsLoading(true);

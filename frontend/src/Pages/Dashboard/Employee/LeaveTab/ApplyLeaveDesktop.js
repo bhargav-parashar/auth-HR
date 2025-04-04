@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Box, Stack, Paper } from "@mui/material";
 import { leaveSteps } from "../../../../constants/constants";
-//import RelocationMobile from "./RelocationMobile";
-import config from "../../../../config/config";
-import axios from "axios";
+import ApplyLeaveMobile from "./ApplyLeaveMobile";
 import { useSnackbar } from "notistack";
 import submitLeave from "../../../../utility/submitLeave";
 import Modal from "../../../../components/Modal/Modal";
@@ -14,24 +12,23 @@ import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
 
 const ApplyLeaveDesktop = ({ setSelectedTab }) => {
-  const [leaveData, setLeaveData] = useState({
-    startDate: null,
-    endDate : null,
-    leaveType: null
-  });
+
+  const[startDate, setStartDate] = useState(null);
+  const[endDate, setEndDate] = useState(null);
+  const[leaveType, setLeaveType] = useState("");
   const [questions, setQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } = useModal();
   const {activeStep, handleNext, handleBack} = useActiveStep();
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleInputChange = () => {
-    
-  };
+  
 
   const handleSubmit = () => {
     submitLeave({
-      leaveData,
+      startDate,
+      endDate,
+      leaveType,
       setIsLoading,
       enqueueSnackbar,
       setSelectedTab,
@@ -63,9 +60,12 @@ const ApplyLeaveDesktop = ({ setSelectedTab }) => {
             stepCategory="Leave"
             activeStep={activeStep}
             steps={leaveSteps}
-            leaveData={leaveData}
-            setLeaveData={setLeaveData}
-            handleInputChange={handleInputChange}
+            startDate={startDate}
+            setStartDate={setStartDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            leaveType={leaveType}
+            setLeaveType={setLeaveType}
           />
 
           <ButtonLayout
@@ -75,7 +75,9 @@ const ApplyLeaveDesktop = ({ setSelectedTab }) => {
             handleNext={handleNext}
             steps={leaveSteps}
             handleModalOpen={handleModalOpen}
-            leaveType={leaveData.leaveType}
+            leaveType={leaveType}
+            startDate={startDate}
+            endDate={endDate}
           />
         </Stack>
 
@@ -91,13 +93,15 @@ const ApplyLeaveDesktop = ({ setSelectedTab }) => {
             justifyContent="center"
             alignItems="center"
           >
-            {/* <RelocationMobile
-              location={location}
-              setLocation={setLocation}
-              questionResponseMapping={questionResponseMapping}
-              handleInputChange={handleInputChange}
+            <ApplyLeaveMobile
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              leaveType={leaveType}
+              setLeaveType={setLeaveType}
               handleSubmit={handleSubmit}
-            /> */}
+            />
           </Stack>
         </Box>
       </Paper>

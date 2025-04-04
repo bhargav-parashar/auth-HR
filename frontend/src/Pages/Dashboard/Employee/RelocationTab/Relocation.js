@@ -5,7 +5,7 @@ import RelocationDesktop from "./RelocationDesktop";
 import Shimmer from "../../../../components/ShimmerUI/Shimmer";
 import Status from "./Status";
 
-const Relocation = () => {
+const Relocation = ({setSelectedTab}) => {
   const [relocation, setRelocation] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -28,7 +28,7 @@ const Relocation = () => {
     <>
       {isLoading && <Shimmer />}
       {!isLoading && relocation.length > 0 && <Status relocation={relocation} />} 
-      {!isLoading && relocation.length === 0 && <RelocationDesktop />} 
+      {!isLoading && relocation.length === 0 && <RelocationDesktop setSelectedTab={setSelectedTab} />} 
     </>
   );
 };

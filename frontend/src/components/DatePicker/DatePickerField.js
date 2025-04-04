@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -20,44 +20,50 @@ function convert(str) {
     Nov: "11",
     Dec: "12",
   };
-  if(!str) return null;
-  let date = str.split(" ");
+  if (!str) return null;
+  let currDate = str.split(" ");
 
-  return [date[3], mnths[date[1]], date[2]].join("-");
+  return [currDate[3], mnths[currDate[1]], currDate[2]].join("-");
 }
 
-export default function BasicDatePicker({ date, setDate, disabled, isMobile }) {
-  
-  const[date, setDate] = useState(null);
-  
-  useEffect(()=>{
-    if(date){
-      setDate(dayjs(date));
+export default function BasicDatePicker({
+  minDate,
+  dateField,
+  setDateField,
+  disabled,
+  isMobile,
+  label,
+}) {
+  const [date, setDate] = useState(null);
+
+  useEffect(() => {
+    if (dateField) {
+      setDate(dayjs(dateField));
     }
-    
-  },[date]);
+  }, [dateField]);
 
   const handleDateChange = (e) => {
-    setDate(convert(e?.$d.toString()));
+    setDateField(convert(e?.$d.toString()));
   };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DatePicker"]}>
-        
-    <DatePicker
-            disablePast
-            disabled={disabled}
-            value={ date  }
-            onChange={handleDateChange}
-            sx={{width: isMobile? "100%" : "50%" }}
-            slotProps={{
-              textField: { size: isMobile?"large":"small" },
-              popper: {
-                placement: "right", 
-              },
-            }} 
-          />
+        <DatePicker
+          label={label}
+          minDate={dayjs(minDate)}
+          disablePast
+          disabled={disabled}
+          value={date}
+          onChange={handleDateChange}
+          sx={{ width: isMobile ? "100%" : "50%" }}
+          slotProps={{
+            textField: { size: isMobile ? "large" : "small" },
+            popper: {
+              placement: "right",
+            },
+          }}
+        />
       </DemoContainer>
     </LocalizationProvider>
   );

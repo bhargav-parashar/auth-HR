@@ -5,7 +5,7 @@ import ResignationDesktop from "./ResignationDesktop";
 import Shimmer from "../../../../components/ShimmerUI/Shimmer";
 import Status from "./Status";
 
-const Resignation = () => {
+const Resignation = ({setSelectedTab}) => {
   const [resignation, setResignation] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -28,7 +28,7 @@ const Resignation = () => {
     <>
       {isLoading && <Shimmer />}
       {!isLoading && resignation.length > 0 && <Status resignation={resignation} />}
-      {!isLoading && resignation.length === 0 && <ResignationDesktop />}
+      {!isLoading && resignation.length === 0 && <ResignationDesktop setSelectedTab={setSelectedTab} />}
     </>
   );
 };

@@ -189,7 +189,7 @@ class UserService{
             $project: {
             _id:1,
             employeeId:1,
-            lwd:1,
+            location:1,
             status:1,
             createdAt:1,
             updatedAt:1,
@@ -231,7 +231,7 @@ class UserService{
             $project: {
             _id:1,
             employeeId:1,
-            leavrType:1,
+            leaveType:1,
             startDate:1,
             endDate:1,
             status:1,

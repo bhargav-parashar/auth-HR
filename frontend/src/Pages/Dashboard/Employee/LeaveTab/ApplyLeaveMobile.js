@@ -1,4 +1,4 @@
-import { Box, Stack, Select, MenuItem } from "@mui/material";
+import { Box, Stack, Select, MenuItem, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
 import Paper from "@mui/material/Paper";
@@ -6,29 +6,37 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { relocationSteps, locations } from "../../../../constants/constants";
+import { leaveSteps,leaveTypes } from "../../../../constants/constants";
 import date_picker from "../../../../assets/date_picker.svg";
 import resign_feedback from "../../../../assets/resign_feedback.svg";
 import resign_submit from "../../../../assets/resign_submit.svg";
+import DatePicker from "../../../../components/DatePicker/DatePickerField";
 import Questionnaire from "../../../../components/Questionnaire/Questionnaire";
 import Modal from "../../../../components/Modal/Modal";
 import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import { formatDistance } from "date-fns";
 
-export default function RelocationMobile({
-  location,
-  setLocation,
-  handleInputChange,
-  questionResponseMapping,
+export default function ApplyLeaveMobile({
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+  leaveType,
+  setLeaveType,
   handleSubmit,
 }) {
   const theme = useTheme();
   const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } =
     useModal();
   const { activeStep, handleNext, handleBack } = useActiveStep();
-  const maxSteps = relocationSteps.length;
+  const maxSteps = leaveSteps.length;
+
+  handleLeaveTypeChange = (e) => {
+    setLeaveType(e.target.value);
+  };
 
   return (
     <Box sx={{ height: "90%", maxWidth: 400, flexGrow: 1 }}>
@@ -52,63 +60,97 @@ export default function RelocationMobile({
                     pb={2}
                     pt={2}
                   >
-                    Request Relocation
+                    Apply Leave
                   </Typography>
                   <Typography color="text.heading" variant="h6">
-                    {`${relocationSteps[activeStep].id}. ${relocationSteps[activeStep].step}`}
+                    {`${leaveSteps[activeStep].id}. ${leaveSteps[activeStep].step}`}
                   </Typography>
-                  <Typography variant="caption" mb={5} textAlign="justify">
-                    {relocationSteps[activeStep].desc}
+                  <Typography  variant="caption" mb={5} textAlign="justify">
+                    {leaveSteps[activeStep].desc}
                   </Typography>
                 </Box>
 
-                <Box>
+                <Box >
                   {activeStep === 0 && (
-                    <FormControl size="small" sx={{ width: "100%" }}>
+                    <Box mb={20}   sx={{ height:'100%', position:'relative'}}  >
+                    <FormControl  size="small" sx={{  width: "100%" }}>
                       <InputLabel id="location-picker">
-                        {!location ? "Work Location" : null}
+                        {!leaveType ? "Leave Type" : null}
                       </InputLabel>
                       <Select
-                        name="location"
-                        value={location}
-                        onChange={handleLocationChange}
-                        sx={{ width: "50%" }}
+                        name="leaveType"
+                        value={leaveType}
+                        onChange={handleLeaveTypeChange}
+                        sx={{ width: "100%" }}
                       >
                         <MenuItem disabled value="">
-                          Location
+                          Leave Type
                         </MenuItem>
-                        {locations.map((item, idx) => (
+                        {leaveTypes.map((item, idx) => (
                           <MenuItem key={idx} value={item}>
                             {item}
                           </MenuItem>
                         ))}
                       </Select>
                     </FormControl>
+                    </Box>
                   )}
                   {activeStep === 1 && (
-                    <Questionnaire
-                      isMobile
-                      handleInputChange={handleInputChange}
-                      questionResponseMapping={questionResponseMapping}
-                    />
+                    <Stack mb={5} pt={5} direction="column" alignItems="center"  gap={2}>
+                      <DatePicker
+                        label="Start Date"
+                        dateField={startDate}
+                        setDateField={setStartDate}
+                      />
+                      <DatePicker
+                        label="End Date"
+                        minDate={startDate}
+                        dateField={endDate}
+                        setDateField={setEndDate}
+                      />
+                      {startDate && endDate && (
+                        <Stack justifyContent="center">
+                          <Typography color="primary.light">
+                            {formatDistance(startDate, endDate)}
+                          </Typography>
+                        </Stack>
+                      )}
+                    </Stack>
                   )}
                   {activeStep === 2 && (
                     <Box>
-                      <Stack direction="row" gap={1}>
-                        <Typography variant="body2">
-                          New work location :
+                      
+                      <Stack alignItems='center' direction="column" gap={3}>
+                        <DatePicker
+                          label="Start Date"
+                          disabled={true}
+                          dateField={startDate}
+                          setDateField={setStartDate}
+                        />
+                        <DatePicker
+                          label="End Date"
+                          disabled={true}
+                          minDate={startDate}
+                          dateField={endDate}
+                          setDateField={setEndDate}
+                        />
+                      </Stack>
+                      <Stack mt={3} justifyContent='center' direction="row" gap={1}>
+                        <Typography variant="body2" mb={1}>
+                          Applying for :{" "}
                         </Typography>
-                        <Typography variant="body2" color="primary.light">
-                          {location}
+                        <Typography color="primary.light" variant="body2">
+                          {leaveType}{" "}
                         </Typography>
                       </Stack>
-                      <Box mt={2}>
-                        <Questionnaire
-                          handleInputChange={handleInputChange}
-                          questionResponseMapping={questionResponseMapping}
-                          isReview={true}
-                        />
-                      </Box>
+                      <Stack  justifyContent='center'  direction="row" gap={1}>
+                        <Typography variant="body2" mb={3}>
+                          No of days :{" "}
+                        </Typography>
+                        <Typography color="primary.light" variant="body2">
+                          {formatDistance(startDate, endDate)}{" "}
+                        </Typography>
+                      </Stack>
                     </Box>
                   )}
                 </Box>
@@ -148,11 +190,8 @@ export default function RelocationMobile({
                   size="small"
                   onClick={activeStep === 2 ? handleModalOpen : handleNext}
                   disabled={
-                    (activeStep === 0 && !location) ||
-                    (activeStep === 1 &&
-                      questionResponseMapping[0]["response"].length === 0) ||
-                    (activeStep === 1 &&
-                      questionResponseMapping[1]["response"].length === 0)
+                    (activeStep === 0 && !leaveType) ||
+                    (activeStep === 1 && (!startDate || !endDate))
                       ? true
                       : false
                   }
