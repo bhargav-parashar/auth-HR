@@ -5,8 +5,7 @@ import resign_submit from "../../../../assets/resign_submit.svg";
 import { format } from "date-fns";
 import StatusMobile from "./StatusMobile";
 
-const Status = ({  resignation }) => {
-  
+const Status = ({ resignation }) => {
   return (
     <Box sx={{ height: "100%" }}>
       <Paper elevation={1} sx={{ height: "100%", bgcolor: "primary.bg2" }}>
@@ -20,60 +19,26 @@ const Status = ({  resignation }) => {
           }}
         >
           <StepHeader
+            isSubmitted
             header={"Submit Resignation"}
             activeStep={resignSteps.length + 1}
             steps={resignSteps}
           />
-          <Stack
-            p={1}
-            mb={2}
-            justifyContent="center"
+          
+          <Box
+            p={2}
             sx={{
-              width: "100%",
-              bgcolor: "primary.successLight",
-              border: "1.5px solid ",
-              borderColor: "primary.success",
-              height: "6%",
+              bgcolor: "primary.bg1",
+              height: "80%",
               borderRadius: "0.6rem",
             }}
           >
-            <Typography sx={{ color: "primary.success" }}>
-              Resignation successfully submitted !
-            </Typography>
-          </Stack>
-          <Box
-            mt={1}
-            p={0.1}
-            sx={{
-              bgcolor: "primary.bg1",
-              height: "70%",
-              borderRadius: "0.6rem"
-            }}
-          >
             <Stack
-              m={2}
-              px={2}
-              alignItems="center"
-              justifyContent="flex-end"
-              direction="row"
-              sx={{
-                height: "10%",
-                bgcolor: "primary.inactive2",
-                borderRadius: "0.6rem",
-              }}
-            >
-               <Stack direction="row" sx={{ width: "100%" }}>
-                <Typography variant="body2" pl={1}>Status :</Typography>
-                <Typography variant="body2" fontWeight='bold' color="text.heading" px={1}>{resignation[0].status}</Typography>
-              </Stack>
-            </Stack>
-            <Stack
-              m={2}
               alignItems="center"
               justifyContent="space-between"
               direction="row"
               gap={1}
-              sx={{ height: "80%" }}
+              sx={{ height: "100%" }}
             >
               <Stack
                 flex={2}
@@ -95,8 +60,10 @@ const Status = ({  resignation }) => {
                 >
                   <Typography
                     m={2}
+                    variant="body2"
                   >{`1. ${resignation[0].userResponses[0].questionText}`}</Typography>
                   <Typography
+                    variant="body2"
                     m={2}
                   >{`${resignation[0].userResponses[0].response}`}</Typography>
                 </Box>
@@ -111,9 +78,10 @@ const Status = ({  resignation }) => {
                 >
                   <Typography
                     m={2}
+                    variant="body2"
                     sx={{ textAlign: "left" }}
                   >{`2. ${resignation[0].userResponses[1].questionText}`}</Typography>
-                  <Typography m={2}>
+                  <Typography m={2} variant="body2">
                     {resignation[0].userResponses[1].response}
                   </Typography>
                 </Box>
@@ -127,6 +95,32 @@ const Status = ({  resignation }) => {
                   width: "100%",
                 }}
               >
+                <Stack
+                  px={2}
+                  py={2}
+                  alignItems="center"
+                  justifyContent="flex-end"
+                  direction="row"
+                  sx={{
+                    height: "10%",
+                    bgcolor: "primary.inactive2",
+                    borderRadius: "0.6rem",
+                  }}
+                >
+                  <Stack  direction="row" sx={{ width: "100%" }}>
+                    <Typography variant="body2" >
+                      Status :
+                    </Typography>
+                    <Typography
+                      variant='body2'
+                      fontWeight="bold"
+                      color="text.heading"
+                      px={1}
+                    >
+                      {resignation[0].status}
+                    </Typography>
+                  </Stack>
+                </Stack>
                 <Box
                   flex={1}
                   sx={{
@@ -135,15 +129,21 @@ const Status = ({  resignation }) => {
                     bgcolor: "primary.inactive2",
                   }}
                 >
-                  <Typography m={2}>{`Last Working Day`}</Typography>
-                  <Typography fontWeight="bold" color="text.heading" m={2}>
-                    {
-                      resignation[0]?.lwd ? format(resignation[0].lwd, "dd MMM, yyyy") : ""
-                    }
+                  <Typography variant="body2" mt={2} mx={2}>{`Last Working Day`}</Typography>
+                  <Typography
+                    mb={2}
+                    mx={2}
+                    variant="body2"
+                    fontWeight="bold"
+                    color="text.heading"
+                  >
+                    {resignation[0]?.lwd
+                      ? format(resignation[0].lwd, "dd MMM, yyyy")
+                      : ""}
                   </Typography>
                 </Box>
                 <Box
-                  flex={3}
+                  flex={4}
                   sx={{
                     position: "relative",
                     height: "100%",

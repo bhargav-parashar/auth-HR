@@ -9,7 +9,9 @@ const {
   relocate,
   getRelocationByUserId,
   relocationQuestionnaire,
-  submitRelocationResponse
+  submitRelocationResponse,
+  userDetails,
+  getRequestHistoryByUserId
 } = require("../controllers/user.controller");
 const jwtAuthorize = require("../middlewares/authorizeJwt.middleware");
 const { validateSchema } = require("../middlewares/validate.middleware");
@@ -21,6 +23,10 @@ const {
   leaveValidationSchema
 } = require("../validations/user.validations");
 const { dateValidation } = require("../middlewares/dateValidation.middleware");
+
+//USER DETAILS
+router.get("/details",jwtAuthorize,userDetails);
+router.get("/request-history",jwtAuthorize,getRequestHistoryByUserId);
 
 //LEAVE
 router.post(

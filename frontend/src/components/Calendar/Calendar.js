@@ -82,6 +82,8 @@ export default function WeekPicker({ startDate, endDate }) {
           }),
         }}
         sx={{
+          marginY:'auto',
+          marginX:'auto',
           '.MuiPickersDay-today': {
       borderRadius: '50%'
     },

@@ -1,7 +1,7 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
 import StepHeader from "../../../../components/StepHeader/StepHeader";
 import { leaveSteps } from "../../../../constants/constants";
-import resign_submit from "../../../../assets/resign_submit.svg";
+import relax from "../../../../assets/relax.svg";
 import StatusMobile from "./StatusMobile";
 import Calendar from "../../../../components/Calendar/Calendar";
 import dayjs from "dayjs";
@@ -19,69 +19,27 @@ const Status = ({ leave }) => {
           }}
         >
           <StepHeader
+            isSubmitted
             header={"Apply Leave"}
             activeStep={leaveSteps.length + 1}
             steps={leaveSteps}
           />
-          <Stack
-            p={1}
-            mb={2}
-            justifyContent="center"
-            sx={{
-              width: "100%",
-              bgcolor: "primary.successLight",
-              border: "1.5px solid ",
-              borderColor: "primary.success",
-              height: "6%",
-              borderRadius: "0.6rem",
-            }}
-          >
-            <Typography sx={{ color: "primary.success" }}>
-              Leave request successfully submitted !
-            </Typography>
-          </Stack>
+
           <Box
-            mt={1}
-            p={0.1}
+            p={2}
             sx={{
               bgcolor: "primary.bg1",
-              height: "70%",
+              height: "80%",
               borderRadius: "0.6rem",
             }}
           >
             <Stack
-              m={2}
-              px={2}
-              alignItems="center"
-              justifyContent="flex-end"
-              direction="row"
-              sx={{
-                height: "10%",
-                bgcolor: "primary.inactive2",
-                borderRadius: "0.6rem",
-              }}
-            >
-              <Stack direction="row" sx={{ width: "100%" }}>
-                <Typography variant="body2" pl={1}>
-                  Status :
-                </Typography>
-                <Typography
-                  variant="body2"
-                  fontWeight="bold"
-                  color="text.heading"
-                  px={1}
-                >
-                  {leave[0].status}
-                </Typography>
-              </Stack>
-            </Stack>
-            <Stack
-              m={2}
+           
               alignItems="center"
               justifyContent="space-between"
               direction="row"
               gap={1}
-              sx={{ height: "80%" }}
+              sx={{ height: "100%" }}
             >
               <Stack
                 flex={2}
@@ -93,10 +51,13 @@ const Status = ({ leave }) => {
                 }}
               >
                 <Stack
+                  
                   flex={1}
-                  direction='row-reverse'
-                  alignItems='center'
+                  direction="row"
+                  alignItems="center"
+                  justifyContent='center'
                   sx={{
+                    position:'relative',
                     bgcolor: "primary.inactive2",
                     overflowY: "clip",
                     height: "100%",
@@ -118,6 +79,32 @@ const Status = ({ leave }) => {
                   width: "100%",
                 }}
               >
+                <Stack
+                  px={2}
+                  py={2}
+                  alignItems="center"
+                  justifyContent="flex-end"
+                  direction="row"
+                  sx={{
+                    height: "10%",
+                    bgcolor: "primary.inactive2",
+                    borderRadius: "0.6rem",
+                  }}
+                >
+                  <Stack direction="row" sx={{ width: "100%" }}>
+                    <Typography variant="body2" >
+                      Status :
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      fontWeight="bold"
+                      color="text.heading"
+                      px={1}
+                    >
+                      {leave[0].status}
+                    </Typography>
+                  </Stack>
+                </Stack>
                 <Box
                   flex={1}
                   sx={{
@@ -126,8 +113,13 @@ const Status = ({ leave }) => {
                     bgcolor: "primary.inactive2",
                   }}
                 >
-                  <Typography m={2}>{`Leave Requested`}</Typography>
-                  <Typography fontWeight="bold" color="text.heading" m={2}>
+                  <Typography mt={2} mx={2}>{`Leave Requested`}</Typography>
+                  <Typography
+                    mb={2}
+                    mx={2}
+                    fontWeight="bold"
+                    color="text.heading"
+                  >
                     {leave[0]?.leaveType}
                   </Typography>
                 </Box>
@@ -150,8 +142,8 @@ const Status = ({ leave }) => {
                       right: 0,
                       position: "absolute",
                     }}
-                    alt="resign"
-                    src={resign_submit}
+                    alt="relax"
+                    src={relax}
                     display={{ xs: "none", md: "block" }}
                   />
                 </Box>
@@ -172,7 +164,7 @@ const Status = ({ leave }) => {
             justifyContent="center"
             alignItems="center"
           >
-            <StatusMobile  leave={leave} />
+            <StatusMobile leave={leave} />
           </Stack>
         </Box>
       </Paper>

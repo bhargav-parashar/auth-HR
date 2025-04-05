@@ -1,6 +1,33 @@
 const UserService = require("../services/user.service");
 const UserServiceInstance = new UserService();
 
+//USER DETAILS
+
+const userDetails = async (req, res) =>{
+  try{
+    const user = await UserServiceInstance.findByUserId(req.user._id);
+    res.status(200).send({user});
+  }catch(err){
+    res.status(500).send({ message: "Could not get user details!", err });
+  }
+};
+
+const getRequestHistoryByUserId = async (req, res) =>{
+  try{
+    const leaveHistory = await UserServiceInstance.getleavesByUserId(req.user._id);
+    const relocationHistory = await UserServiceInstance.getRelocationByUserId(req.user._id);
+    const resignationHistory = await UserServiceInstance.getResignationByUserId(req.user._id);
+    const requestHistory = {
+      leaves : leaveHistory,
+      relocations : relocationHistory,
+      resignations : resignationHistory
+    }; 
+    res.status(200).send(requestHistory);
+  }catch(err){
+    res.status(500).send({ message: "Could not get user request history!", err });
+  }
+}
+
 //LEAVE
 const leave = async (req, res) => {
   try {
@@ -157,4 +184,6 @@ module.exports = {
   getRelocationByUserId,
   relocationQuestionnaire,
   submitRelocationResponse,
+  userDetails,
+  getRequestHistoryByUserId
 };

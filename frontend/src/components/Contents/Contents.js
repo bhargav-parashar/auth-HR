@@ -6,9 +6,11 @@ import DatePicker from "../DatePicker/DatePickerField";
 import date_picker from "../../assets/date_picker.svg";
 import resign_feedback from "../../assets/resign_feedback.svg";
 import resign_submit from "../../assets/resign_submit.svg";
+import relax from "../../assets/relax.svg";
+
 import { locations, leaveTypes } from "../../constants/constants";
 import { formatDistance, addDays } from "date-fns";
-
+import locationImg from "../../assets/location.svg";
 const Contents = ({
   stepCategory,
   activeStep,
@@ -120,7 +122,7 @@ const Contents = ({
                   {location}
                 </Typography>
               </Stack>
-              <Box mt={2}>
+              <Box mt={1}>
                 <Questionnaire
                   handleInputChange={handleInputChange}
                   questionResponseMapping={questionResponseMapping}
@@ -220,14 +222,15 @@ const Contents = ({
             right: 0,
             position: "absolute",
           }}
-          alt="date_picker"
-          src={
-            steps[activeStep].id === 1
-              ? date_picker
-              : steps[activeStep].id === 2
-              ? resign_feedback
-              : resign_submit
-          }
+          alt="step"
+          src= {
+            
+            steps[activeStep].id === 1 && stepCategory === 'Leave'? relax :
+            steps[activeStep].id === 2 && stepCategory === 'Leave'? date_picker :
+            steps[activeStep].id === 1 && stepCategory === "Relocation" ? locationImg :
+            steps[activeStep].id === 1 && stepCategory === "Resignation" ? date_picker :
+            steps[activeStep].id === 2 ? resign_feedback : resign_submit
+          } 
           display={{ xs: "none", md: "block" }}
         />
       </Box>

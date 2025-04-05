@@ -91,7 +91,7 @@ const departments = ["Finance", "IT", "Sales", "Marketing", "Operations"];
 
 const locations = ["Bengaluru", "Gurgaon",  "Hyderabad", "Mumbai", "Pune"];
 
-leaveTypes = ["Sick Leave", "Casual Leave", "Maternity Leave", "Paternity Leave"];
+leaveTypes = ["Sick Leave", "Casual Leave", "Earned Leave"];
 
 const guestAdmin = {
   username: "admin",
@@ -117,7 +117,7 @@ const resignSteps = [
   {
     id: 3,
     step: "Review & Submit",
-    desc:"Almost done! Review your details to ensure everything is correct. Once submitted, your resignation request will be sent to HR for processing. You won’t be able to edit it afterward."
+    desc:"Almost done! Review your details to ensure everything is correct. Once submitted, your resignation request will be sent to HR for processing."
   },
 ];
 
@@ -130,12 +130,12 @@ const relocationSteps = [
   {
     id: 2,
     step: "Relocation Justification",
-    desc: "Please provide a clear justification for your request to change your work location. Your responses will help us understand the reasons behind your request, how it aligns with your role, and its potential impact on your job performance and career growth. "
+    desc: "Please provide a clear justification for your request to change your work location."
   },
   {
     id: 3,
     step: "Review & Submit",
-    desc:"Almost done! Review your details to ensure everything is correct. Once submitted, your relocation request will be sent to HR for processing. You won’t be able to edit it afterward."
+    desc:"Almost done! Review your details to ensure everything is correct. Once submitted, your relocation request will be sent to HR for processing."
   },
 ];
 
@@ -153,7 +153,7 @@ const leaveSteps = [
   {
     id: 3,
     step: "Review & Submit",
-    desc:"Almost done! Review your details to ensure everything is correct. Once submitted, your leave request will be sent to HR for processing. You won’t be able to edit it afterward."
+    desc:"Almost done! Review your details to ensure everything is correct. Once submitted, your leave request will be sent to HR for processing."
   },
 ];
 
