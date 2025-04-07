@@ -102,7 +102,7 @@ const RequestsGrid = ({ requests }) => {
           justifyContent="center"
           alignItems="center"
           sx={{
-            height: "50%",
+            height: "40%",
             width: "100%",
             border: "1px solid",
             borderColor: "primary.inactive",
@@ -168,7 +168,7 @@ const RequestsGrid = ({ requests }) => {
           justifyContent="center"
           alignItems="center"
           sx={{
-            height: "50%",
+            height: "40%",
             width: "100%",
             border: "1px solid",
             borderColor: "primary.inactive",
@@ -234,7 +234,7 @@ const RequestsGrid = ({ requests }) => {
           justifyContent="center"
           alignItems="center"
           sx={{
-            height: "50%",
+            height: "40%",
             width: "100%",
             border: "1px solid",
             borderColor: "primary.inactive",
