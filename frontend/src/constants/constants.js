@@ -91,7 +91,7 @@ const departments = ["Finance", "IT", "Sales", "Marketing", "Operations"];
 
 const locations = ["Bengaluru", "Gurgaon",  "Hyderabad", "Mumbai", "Pune"];
 
-leaveTypes = ["Sick Leave", "Casual Leave", "Earned Leave"];
+const leaveTypes = ["Sick Leave", "Casual Leave", "Earned Leave"];
 
 const guestAdmin = {
   username: "admin",
@@ -157,6 +157,21 @@ const leaveSteps = [
   },
 ];
 
+const reqHistoryPills = [
+  {
+    id: 1,
+    label : "Leaves"
+  },
+  {
+    id: 2,
+    label : "Relocations"
+  },
+  {
+    id: 3,
+    label : "Resignations"
+  }
+];
+
 
 export {
   carouselSlides,
@@ -170,5 +185,6 @@ export {
   locations,
   relocationSteps,
   leaveSteps,
+  reqHistoryPills,
   leaveTypes
 };

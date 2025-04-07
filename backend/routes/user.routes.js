@@ -11,7 +11,9 @@ const {
   relocationQuestionnaire,
   submitRelocationResponse,
   userDetails,
-  getRequestHistoryByUserId
+  getRequestHistoryByUserId,
+  getLeaveBalByUserId,
+  updateLeaveBal
 } = require("../controllers/user.controller");
 const jwtAuthorize = require("../middlewares/authorizeJwt.middleware");
 const { validateSchema } = require("../middlewares/validate.middleware");
@@ -27,6 +29,8 @@ const { dateValidation } = require("../middlewares/dateValidation.middleware");
 //USER DETAILS
 router.get("/details",jwtAuthorize,userDetails);
 router.get("/request-history",jwtAuthorize,getRequestHistoryByUserId);
+router.get("/leaveBal",jwtAuthorize, getLeaveBalByUserId);
+router.post("/updateLeaveBal",jwtAuthorize,updateLeaveBal );
 
 //LEAVE
 router.post(

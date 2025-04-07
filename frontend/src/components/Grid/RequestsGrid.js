@@ -8,24 +8,45 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import GridPill from "./GridPill";
+import { reqHistoryPills } from "../../constants/constants";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 
 const RequestsGrid = ({ requests }) => {
-  const [type, setType] = useState(0);
+  const [type, setType] = useState(1);
 
   const leaves = requests?.leaves;
   const relocations = requests?.relocations;
   const resignations = requests?.resignations;
   
-  
+  const handleTabChange = (val) => {
+    setType(val);
+  };
+
+  const getColor = (status) => {
+    if (status === "approved") {
+      return "green";
+    } else if (status === "rejected") {
+      return "red";
+    } else {
+      return "primary.light";
+    }
+  };
+
   return (
     <>
-      <Stack mb={1} direction="row" gap={1} justifyContent='flex-start'>
-        <GridPill label="Leaves" />
-        <GridPill label="Relocations" />
-        <GridPill label="Resignations" />
+      <Stack mb={1} direction="row" gap={1} justifyContent="flex-start">
+        {reqHistoryPills.map((pill) => (
+          <GridPill
+            key={pill.id}
+            id={pill.id}
+            label={pill.label}
+            type={type}
+            handleTabChange={handleTabChange}
+          />
+        ))}
       </Stack>
 
-      {type === 0 && (
+      {leaves && type === 1 && (
         <TableContainer component={Paper}>
           <Table
             sx={{
@@ -44,24 +65,29 @@ const RequestsGrid = ({ requests }) => {
               <TableRow>
                 <TableCell>ID</TableCell>
                 <TableCell align="left">Category</TableCell>
-                <TableCell align="left">Status</TableCell>
                 <TableCell align="left">Submitted On</TableCell>
+                <TableCell align="left">Status</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody key={123}>
               {leaves &&
                 leaves.map((item, idx) => (
                   <TableRow
-                    key={item.id}
+                    key={item.id || `leave-${idx}`}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
                       {idx + 1}
                     </TableCell>
                     <TableCell align="left">{item.leaveType}</TableCell>
-                    <TableCell align="left">{item.status}</TableCell>
                     <TableCell align="left">
                       {format(item.createdAt, "dd MMM, yyyy")}
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: getColor(item.status) }}
+                      align="left"
+                    >
+                      {item.status}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -69,7 +95,24 @@ const RequestsGrid = ({ requests }) => {
           </Table>
         </TableContainer>
       )}
-      {type === 1 && (
+      {(!leaves || leaves.length === 0) && type === 1 && (
+        <Stack
+          gap={1}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            height: "50%",
+            width: "100%",
+            border: "1px solid",
+            borderColor: "primary.inactive",
+          }}
+        >
+          <FolderOpenIcon sx={{ color: "primary.inactive" }} />
+          <Typography sx={{ color: "primary.inactive" }}>No items</Typography>
+        </Stack>
+      )}
+      {relocations && type === 2 && (
         <TableContainer component={Paper}>
           <Table
             sx={{
@@ -88,24 +131,29 @@ const RequestsGrid = ({ requests }) => {
               <TableRow>
                 <TableCell>ID</TableCell>
                 <TableCell align="left">Category</TableCell>
-                <TableCell align="left">Status</TableCell>
                 <TableCell align="left">Submitted On</TableCell>
+                <TableCell align="left">Status</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {leaves &&
-                leaves.map((item, idx) => (
+            <TableBody key={2}>
+              {relocations &&
+                relocations.map((item, idx) => (
                   <TableRow
-                    key={item.id}
+                    key={item.id || `relocation-${idx}`}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
                       {idx + 1}
                     </TableCell>
-                    <TableCell align="left">{item.leaveType}</TableCell>
-                    <TableCell align="left">{item.status}</TableCell>
+                    <TableCell align="left">Relocation</TableCell>
                     <TableCell align="left">
                       {format(item.createdAt, "dd MMM, yyyy")}
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: getColor(item.status) }}
+                      align="left"
+                    >
+                      {item.status}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -113,7 +161,24 @@ const RequestsGrid = ({ requests }) => {
           </Table>
         </TableContainer>
       )}
-      {type === 2 && (
+      {(!relocations || relocations.length === 0) && type === 2 && (
+        <Stack
+          gap={1}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            height: "50%",
+            width: "100%",
+            border: "1px solid",
+            borderColor: "primary.inactive",
+          }}
+        >
+          <FolderOpenIcon sx={{ color: "primary.inactive" }} />
+          <Typography sx={{ color: "primary.inactive" }}>No items</Typography>
+        </Stack>
+      )}
+      {resignations && type === 3 && (
         <TableContainer component={Paper}>
           <Table
             sx={{
@@ -132,30 +197,52 @@ const RequestsGrid = ({ requests }) => {
               <TableRow>
                 <TableCell>ID</TableCell>
                 <TableCell align="left">Category</TableCell>
-                <TableCell align="left">Status</TableCell>
                 <TableCell align="left">Submitted On</TableCell>
+                <TableCell align="left">Status</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {leaves &&
-                leaves.map((item, idx) => (
+            <TableBody key={3}>
+              {resignations &&
+                resignations.map((item, idx) => (
                   <TableRow
-                    key={item.id}
+                    key={item.id || `resignation-${idx}`}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
                       {idx + 1}
                     </TableCell>
-                    <TableCell align="left">{item.leaveType}</TableCell>
-                    <TableCell align="left">{item.status}</TableCell>
+                    <TableCell align="left">Resignation</TableCell>
                     <TableCell align="left">
                       {format(item.createdAt, "dd MMM, yyyy")}
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: getColor(item.status) }}
+                      align="left"
+                    >
+                      {item.status}
                     </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
           </Table>
         </TableContainer>
+      )}
+      {(!resignations || resignations.length === 0) && type === 3 && (
+        <Stack
+          gap={1}
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          sx={{
+            height: "50%",
+            width: "100%",
+            border: "1px solid",
+            borderColor: "primary.inactive",
+          }}
+        >
+          <FolderOpenIcon sx={{ color: "primary.inactive" }} />
+          <Typography sx={{ color: "primary.inactive" }}>No items</Typography>
+        </Stack>
       )}
     </>
   );

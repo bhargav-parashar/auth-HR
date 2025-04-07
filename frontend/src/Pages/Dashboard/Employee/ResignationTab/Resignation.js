@@ -8,6 +8,7 @@ import Status from "./Status";
 const Resignation = ({setSelectedTab}) => {
   const [resignation, setResignation] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const[refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     const URL = `${config.endpoint}/user/resignation`;
@@ -23,12 +24,13 @@ const Resignation = ({setSelectedTab}) => {
       }
     };
     getResignation();
-  }, []);
+  }, [refresh]);
+
   return (
     <>
       {isLoading && <Shimmer />}
       {!isLoading && resignation.length > 0 && <Status resignation={resignation} />}
-      {!isLoading && resignation.length === 0 && <ResignationDesktop setSelectedTab={setSelectedTab} />}
+      {!isLoading && resignation.length === 0 && <ResignationDesktop setRefresh={setRefresh} setSelectedTab={setSelectedTab} />}
     </>
   );
 };

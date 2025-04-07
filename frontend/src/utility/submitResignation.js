@@ -6,7 +6,8 @@ export default submitResignation = async ({
   setIsLoading,
   questionResponseMapping,
   enqueueSnackbar,
-  setSelectedTab
+  setSelectedTab,
+  setRefresh
 }) => {
   const URL = `${config.endpoint}/user/resign`;
   const body = {
@@ -22,7 +23,8 @@ export default submitResignation = async ({
       };
       await axios.post(URL, body, { withCredentials: true });
       enqueueSnackbar("Resignation submitted", { variant: "success" });
-      setSelectedTab("Dashboard");
+      setSelectedTab("Resignation");
+      setRefresh(prev=>prev+1);
     }
   } catch (err) {
     if (err.status === 400) {

@@ -32,7 +32,7 @@ export default function Progress({ currValue }) {
       >
         <Typography
           p={0.3}
-          pr={1}
+          pr={0.5}
           sx={{ fontSize: "0.8rem" }}
           textAlign="right"
         >

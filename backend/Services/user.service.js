@@ -64,6 +64,7 @@ class UserService {
     }
   };
 
+
   //RESIGNATION
   resign = async (id, lastWorkDay) => {
     try {
@@ -213,6 +214,22 @@ class UserService {
       return newLeave;
     } catch (err) {
       throw err;
+    }
+  };
+
+  updateLeaveBal = async (userId, newBal) =>{
+    console.log('reached');
+    console.log(userId);
+    console.log(newBal);
+    try{
+      const newLeaveBal = await User.findOneAndUpdate(
+        { _id: userId },
+        { $set: { leaveBal : newBal } }, 
+        { new: true }
+      );
+      return newLeaveBal;
+    }catch(err){
+      throw(err);
     }
   };
 

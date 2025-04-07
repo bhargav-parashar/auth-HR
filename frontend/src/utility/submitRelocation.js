@@ -6,7 +6,8 @@ export default submitRelocation = async ({
   setIsLoading,
   questionResponseMapping,
   enqueueSnackbar,
-  setSelectedTab
+  setSelectedTab,
+  setRefresh
 }) => {
   const URL = `${config.endpoint}/user/relocate`;
   const body = {
@@ -22,7 +23,8 @@ export default submitRelocation = async ({
       };
       await axios.post(URL, body, { withCredentials: true });
       enqueueSnackbar("Relocation request submitted", { variant: "success" });
-      setSelectedTab("Dashboard");
+      setSelectedTab("Relocation");
+      setRefresh(prev=>prev+1);
     }
   } catch (err) {
     console.log(err);

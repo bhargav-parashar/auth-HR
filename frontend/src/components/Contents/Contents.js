@@ -1,16 +1,19 @@
 import { Box, Typography, Stack, Paper, Select, MenuItem } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import Questionnaire from "../Questionnaire/Questionnaire";
-import DatePicker from "../DatePicker/DatePickerField";
 import date_picker from "../../assets/date_picker.svg";
 import resign_feedback from "../../assets/resign_feedback.svg";
 import resign_submit from "../../assets/resign_submit.svg";
 import relax from "../../assets/relax.svg";
-
-import { locations, leaveTypes } from "../../constants/constants";
-import { formatDistance, addDays } from "date-fns";
 import locationImg from "../../assets/location.svg";
+import ResignationsStep1 from "./ResignationsStep1";
+import ResignationStep2 from "./ResignationStep2";
+import ResignationStep3 from "./ResignationStep3";
+import RelocationStep1 from "./RelocationStep1";
+import RelocationStep2 from "./RelocationStep2";
+import RelocationStep3 from "./RelocationStep3";
+import LeaveStep1 from "./LeaveStep1";
+import LeaveStep2 from "./LeaveStep2";
+import LeaveStep3 from "./LeaveStep3";
+
 const Contents = ({
   stepCategory,
   activeStep,
@@ -27,6 +30,7 @@ const Contents = ({
   setEndDate,
   leaveType,
   setLeaveType,
+  leaveBal
 }) => {
   handleLocationChange = (e) => {
     const { value } = e.target;
@@ -35,6 +39,7 @@ const Contents = ({
   handleLeaveTypeChange = (e) => {
     setLeaveType(e.target.value);
   };
+
 
   return (
     <Stack direction={{ xs: "column", md: "row" }} sx={{ height: "70%" }}>
@@ -54,156 +59,80 @@ const Contents = ({
             mb={2}
             sx={{ fontWeight: "bold" }}
           >{`${steps[activeStep].id}. ${steps[activeStep].step}`}</Typography>
+
           <Typography variant="body2" mb={2}>
             {steps[activeStep].desc}
           </Typography>
 
+          {/* LEAVE STEPS */}
+          {activeStep === 0 && stepCategory === "Leave" && (
+            <LeaveStep1
+              leaveType={leaveType}
+              handleLeaveTypeChange={handleLeaveTypeChange}
+            />
+          )}
+          {activeStep === 1 && stepCategory === "Leave" && (
+            <LeaveStep2
+              startDate={startDate}
+              endDate={endDate}
+              setStartDate={setStartDate}
+              setEndDate={setEndDate}
+              leaveType={leaveType}
+              leaveBal={leaveBal}
+            />
+          )}
+          {activeStep === 2 && stepCategory === "Leave" && (
+            <LeaveStep3
+              leaveType={leaveType}
+              startDate={startDate}
+              endDate={endDate}
+              setStartDate={setStartDate}
+              setEndDate={setEndDate}
+            />
+          )}
+
+          {/* RELOCATION STEPS */}
+          {activeStep === 0 && stepCategory === "Relocation" && (
+            <RelocationStep1
+              location={location}
+              handleLocationChange={handleLocationChange}
+            />
+          )}
+          {activeStep === 1 && stepCategory === "Relocation" && (
+            <RelocationStep2
+              handleInputChange={handleInputChange}
+              questionResponseMapping={questionResponseMapping}
+            />
+          )}
+          {activeStep === 2 && stepCategory === "Relocation" && (
+            <RelocationStep3
+              location={location}
+              handleInputChange={handleInputChange}
+              questionResponseMapping={questionResponseMapping}
+            />
+          )}
+
+          {/* RESIGNATION STEPS */}
           {activeStep === 0 && stepCategory === "Resignation" && (
-            <DatePicker
-              label={"Last Working Day"}
+            <ResignationsStep1
+              label="Last Working Day"
               dateField={lwd}
               setDateField={setLwd}
             />
           )}
-          {activeStep === 1 && stepCategory !== "Leave" && (
-            <Questionnaire
+          {activeStep === 1 && stepCategory === "Resignation" && (
+            <ResignationStep2
               handleInputChange={handleInputChange}
               questionResponseMapping={questionResponseMapping}
             />
           )}
           {activeStep === 2 && stepCategory === "Resignation" && (
-            <Box>
-              <Stack direction="row" gap={1}>
-                <Typography variant="body2">Last Working Day :</Typography>
-                <Typography variant="body2" color="text.heading">
-                  {lwd}
-                </Typography>
-              </Stack>
-              <Box mt={2}>
-                <Questionnaire
-                  handleInputChange={handleInputChange}
-                  questionResponseMapping={questionResponseMapping}
-                  isReview={true}
-                />
-              </Box>
-            </Box>
-          )}
-          {activeStep === 0 && stepCategory === "Relocation" && (
-            <FormControl size="small" sx={{ width: "100%" }}>
-              <InputLabel id="location-picker">
-                {!location ? "Location" : null}
-              </InputLabel>
-              <Select
-                labelId="location-picker"
-                name="location"
-                value={location}
-                onChange={handleLocationChange}
-                sx={{
-                  width: "50%",
-                  
-                }}
-              >
-                <MenuItem disabled value="">
-                  Location
-                </MenuItem>
-                {locations.map((item, idx) => (
-                  <MenuItem key={idx} value={item}>
-                    {item}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          )}
-          {activeStep === 2 && stepCategory === "Relocation" && (
-            <Box>
-              <Stack direction="row" gap={1}>
-                <Typography variant="body2">New Work Location :</Typography>
-                <Typography variant="body2" color="text.heading">
-                  {location}
-                </Typography>
-              </Stack>
-              <Box mt={1}>
-                <Questionnaire
-                  handleInputChange={handleInputChange}
-                  questionResponseMapping={questionResponseMapping}
-                  isReview={true}
-                />
-              </Box>
-            </Box>
-          )}
-          {activeStep === 0 && stepCategory === "Leave" && (
-            <FormControl size="small" sx={{ width: "100%" }}>
-              <InputLabel id="location-picker">
-                {!leaveType ? "Leave Type" : null}
-              </InputLabel>
-              <Select
-                name="leaveType"
-                value={leaveType}
-                onChange={handleLeaveTypeChange}
-                sx={{ width: "50%" }}
-              >
-                <MenuItem disabled value="">
-                  Leave Type
-                </MenuItem>
-                {leaveTypes.map((item, idx) => (
-                  <MenuItem key={idx} value={item}>
-                    {item}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          )}
-          {activeStep === 1 && stepCategory === "Leave" && (
-          
-              <Stack direction="row" gap={1}>
-                <DatePicker
-                  label="Start Date"
-                  dateField={startDate}
-                  setDateField={setStartDate}
-                />
-                <DatePicker
-                  label="End Date"
-                  minDate={startDate}
-                  dateField={endDate}
-                  setDateField={setEndDate}
-                />
-                {startDate && endDate && (
-                  <Stack  justifyContent='center'>
-                    <Typography color="primary.light" >{formatDistance(startDate, addDays(endDate, 1))}</Typography>
-                  </Stack>
-                )}
-              </Stack>
-            
-          )}
-          {activeStep === 2 && stepCategory === "Leave" && (
-          <Box>
-            <Stack direction='row' gap={1}>
-            <Typography variant="body2" mb={1}>Applying for : </Typography>
-            <Typography color="primary.light" variant="body2" >{leaveType} </Typography>
-            </Stack>
-            <Stack direction='row' gap={1}>
-            <Typography variant="body2" mb={3}>No of days : </Typography>
-            <Typography color="primary.light" variant="body2" >{formatDistance(startDate, addDays(endDate, 1))} </Typography>
-            </Stack>
-          <Stack direction="row" gap={1}>
-            <DatePicker
-              label="Start Date"
-              disabled={true}
-              dateField={startDate}
-              setDateField={setStartDate}
+            <ResignationStep3
+              lwd={lwd}
+              handleInputChange={handleInputChange}
+              questionResponseMapping={questionResponseMapping}
             />
-            <DatePicker
-              label="End Date"
-              disabled={true}
-              minDate={startDate}
-              dateField={endDate}
-              setDateField={setEndDate}
-            />
-           
-          </Stack>
-          </Box>
-        
-      )}
+          )}
         </Paper>
       </Box>
       <Box
@@ -223,14 +152,19 @@ const Contents = ({
             position: "absolute",
           }}
           alt="step"
-          src= {
-            
-            steps[activeStep].id === 1 && stepCategory === 'Leave'? relax :
-            steps[activeStep].id === 2 && stepCategory === 'Leave'? date_picker :
-            steps[activeStep].id === 1 && stepCategory === "Relocation" ? locationImg :
-            steps[activeStep].id === 1 && stepCategory === "Resignation" ? date_picker :
-            steps[activeStep].id === 2 ? resign_feedback : resign_submit
-          } 
+          src={
+            steps[activeStep].id === 1 && stepCategory === "Leave"
+              ? relax
+              : steps[activeStep].id === 2 && stepCategory === "Leave"
+              ? date_picker
+              : steps[activeStep].id === 1 && stepCategory === "Relocation"
+              ? locationImg
+              : steps[activeStep].id === 1 && stepCategory === "Resignation"
+              ? date_picker
+              : steps[activeStep].id === 2
+              ? resign_feedback
+              : resign_submit
+          }
           display={{ xs: "none", md: "block" }}
         />
       </Box>

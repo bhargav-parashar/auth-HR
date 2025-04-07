@@ -1,12 +1,12 @@
 import {useState, useEffect } from 'react';
-import { Box, Stack, Paper, Typography } from "@mui/material";
+import { Box, Stack, Paper } from "@mui/material";
 import Details from "./Details";
 import LeaveBal from "./LeaveBal";
 import Announcements from "./Announcements";
 import RequestHistory from './RequestHistory';
 import config from "../../../../config/config";
 import axios from "axios";
-//import StatusMobile from "./StatusMobile";
+import MobileDash from "./MobileDash";
 
 const EmployeeHome = () => {
 
@@ -95,7 +95,7 @@ const EmployeeHome = () => {
             justifyContent="center"
             alignItems="center"
           >
-            {/* <StatusMobile resignation={resignation} /> */}
+            <MobileDash user={user} />
           </Stack>
         </Box>
       </Paper>

@@ -6,8 +6,10 @@ import Shimmer from "../../../../components/ShimmerUI/Shimmer";
 import Status from "./Status";
 
 const ApplyLeave = ({ setSelectedTab }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const[leave, setLeave] = useState([]);
+  const [refresh, setRefresh] = useState(0);
+
   useEffect(() => {
     const URL = `${config.endpoint}/user/leave-applications`;
     const getLeaves = async () => {
@@ -22,7 +24,8 @@ const ApplyLeave = ({ setSelectedTab }) => {
       }
     };
     getLeaves();
-  }, []);
+  },[refresh]);
+
   return (
     <>
       {isLoading && <Shimmer />}
@@ -30,7 +33,7 @@ const ApplyLeave = ({ setSelectedTab }) => {
         <Status leave={leave} />
       )}
       {!isLoading && leave.length === 0 && (
-        <ApplyLeaveDesktop setSelectedTab={setSelectedTab} />
+        <ApplyLeaveDesktop setRefresh={setRefresh} setSelectedTab={setSelectedTab} />
       )}
     </>
   );

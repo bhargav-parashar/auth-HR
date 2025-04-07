@@ -34,8 +34,8 @@ root.render(
   <SnackbarProvider
   maxSnack={1}
   anchorOrigin={{
-    vertical: "bottom",
-    horizontal : "right"
+    vertical: "top",
+    horizontal : "center"
   }}
   preventDuplicate
   action={ (snackbarId) =>(

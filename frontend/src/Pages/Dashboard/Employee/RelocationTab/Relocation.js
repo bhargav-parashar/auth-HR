@@ -8,6 +8,7 @@ import Status from "./Status";
 const Relocation = ({setSelectedTab}) => {
   const [relocation, setRelocation] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     const URL = `${config.endpoint}/user/relocation`;
@@ -23,12 +24,12 @@ const Relocation = ({setSelectedTab}) => {
       }
     };
     getRelocation();
-  }, []);
+  }, [refresh]);
   return (
     <>
       {isLoading && <Shimmer />}
       {!isLoading && relocation.length > 0 && <Status relocation={relocation} />} 
-      {!isLoading && relocation.length === 0 && <RelocationDesktop setSelectedTab={setSelectedTab} />} 
+      {!isLoading && relocation.length === 0 && <RelocationDesktop setRefresh={setRefresh} setSelectedTab={setSelectedTab} />} 
     </>
   );
 };

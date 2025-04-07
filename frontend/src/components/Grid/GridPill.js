@@ -1,20 +1,24 @@
 import React from "react";
-import { Box, Stack, Paper, Typography } from "@mui/material";
+import { Box, Stack, Paper, Typography, Button } from "@mui/material";
 
-const GridPill = ({ label, currTab }) => {
+const GridPill = ({ id, label, type, handleTabChange }) => {
   return (
-    <Box
-      px={1}
+    <Button
+      px={0.5}
+      size="small"
+      onClick={() => handleTabChange(id)}
       sx={{
+        color:'text.primary',
+        height: "25px",
         cursor: "pointer",
         border: "2px solid",
         borderColor: "primary.light",
         borderRadius: "0.9rem",
-        bgcolor:  'primary.light'
+        bgcolor: id === type ? "primary.light" : "transparent",
       }}
     >
-      <Typography variant="caption">{label}</Typography>
-    </Box>
+      <Typography variant="caption"> {label} </Typography>
+    </Button>
   );
 };
 

@@ -28,6 +28,16 @@ const getRequestHistoryByUserId = async (req, res) =>{
   }
 }
 
+const getLeaveBalByUserId = async (req, res) =>{
+  try{
+    const user = await UserServiceInstance.findByUserId(req.user._id);
+    const {leaveBal} = user;
+    res.status(200).send(leaveBal);
+  }catch(err){
+    res.status(500).send({ message: "Could not get user leave balance!", err });
+  }
+};
+
 //LEAVE
 const leave = async (req, res) => {
   try {
@@ -39,9 +49,9 @@ const leave = async (req, res) => {
     );
     const body = {
       data: {
-        relocation: {
-          _id: newLeave._id,
-        },
+        leave: {
+          _id: newLeave._id
+        }
       },
     };
     res.status(200).json(body);
@@ -49,6 +59,17 @@ const leave = async (req, res) => {
     res.status(500).send({ message: "Leave submission failed!", err });
   }
 };
+
+const updateLeaveBal = async (req, res ) =>{
+  try{
+    const newUser = await UserServiceInstance.updateLeaveBal( req.user._id, req.body.newBal );
+    res.status(200).json(newUser);
+  }catch(err){
+    res.status(500).send({ message: "Could not update leave balance!", err });
+  }
+}
+
+
 
 const getLeavesByUserId = async (req, res) => {
     try {
@@ -185,5 +206,7 @@ module.exports = {
   relocationQuestionnaire,
   submitRelocationResponse,
   userDetails,
-  getRequestHistoryByUserId
+  getRequestHistoryByUserId,
+  getLeaveBalByUserId,
+  updateLeaveBal
 };

@@ -1,8 +1,8 @@
-import { Box, Stack, Paper, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import useGetReqHistory from "../../../../Hooks/useGetReqHistory";
 import RequestsGrid from "../../../../components/Grid/RequestsGrid";
 
-const RequestHistory = ({ user }) => {
+const RequestHistory = ({ isMobile }) => {
   const requests = useGetReqHistory();
 
   return (
@@ -17,7 +17,7 @@ const RequestHistory = ({ user }) => {
           " rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
       }}
     >
-      <Typography mb={2} pt={1} variant="h5">
+      <Typography mb={2} pt={1} variant={isMobile?"h6":"h5"}>
         Request History
       </Typography>
       <Box

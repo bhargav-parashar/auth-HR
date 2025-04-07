@@ -10,8 +10,9 @@ import Contents from "../../../../components/Contents/Contents";
 import StepHeader from "../../../../components/StepHeader/StepHeader";
 import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
+import useGetUserLeaveBalance from "../../../../Hooks/useGetUserLeaveBal";
 
-const ApplyLeaveDesktop = ({ setSelectedTab }) => {
+const ApplyLeaveDesktop = ({ setSelectedTab, setRefresh }) => {
 
   const[startDate, setStartDate] = useState(null);
   const[endDate, setEndDate] = useState(null);
@@ -21,20 +22,37 @@ const ApplyLeaveDesktop = ({ setSelectedTab }) => {
   const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } = useModal();
   const {activeStep, handleNext, handleBack} = useActiveStep();
   const { enqueueSnackbar } = useSnackbar();
-
+  const {allLeaveBal, setAllLeaveBal} = useGetUserLeaveBalance();
   
 
   const handleSubmit = () => {
-    submitLeave({
-      startDate,
-      endDate,
-      leaveType,
-      setIsLoading,
-      enqueueSnackbar,
-      setSelectedTab,
-    });
-    handleModalClose();
-  };
+    
+   submitLeave({
+    startDate,
+    endDate,
+    leaveType,
+    setIsLoading,
+    enqueueSnackbar,
+    setSelectedTab,
+    allLeaveBal,
+    setRefresh
+  });
+  handleModalClose();
+};
+
+getBalance = (leaveType, allLeaveBal) => {
+  if (leaveType === "Earned Leave") {
+    return allLeaveBal?.earned;
+  } else if (leaveType === "Casual Leave") {
+    return allLeaveBal?.casual;
+  } else if (leaveType === "Sick Leave") {
+    return allLeaveBal?.sick;
+  } else {
+    return 0;
+  }
+};
+
+const leaveBal = getBalance(leaveType, allLeaveBal);
 
   return (
     <Box sx={{ height: "100%" }}>
@@ -66,6 +84,7 @@ const ApplyLeaveDesktop = ({ setSelectedTab }) => {
             setEndDate={setEndDate}
             leaveType={leaveType}
             setLeaveType={setLeaveType}
+            leaveBal={leaveBal}
           />
 
           <ButtonLayout
@@ -78,6 +97,7 @@ const ApplyLeaveDesktop = ({ setSelectedTab }) => {
             leaveType={leaveType}
             startDate={startDate}
             endDate={endDate}
+            leaveBal={leaveBal}
           />
         </Stack>
 
@@ -94,6 +114,7 @@ const ApplyLeaveDesktop = ({ setSelectedTab }) => {
             alignItems="center"
           >
             <ApplyLeaveMobile
+              stepCategory="Leave"
               startDate={startDate}
               setStartDate={setStartDate}
               endDate={endDate}
@@ -101,6 +122,7 @@ const ApplyLeaveDesktop = ({ setSelectedTab }) => {
               leaveType={leaveType}
               setLeaveType={setLeaveType}
               handleSubmit={handleSubmit}
+              leaveBal={leaveBal}
             />
           </Stack>
         </Box>

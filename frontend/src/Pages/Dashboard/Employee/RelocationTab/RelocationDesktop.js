@@ -13,7 +13,7 @@ import StepHeader from "../../../../components/StepHeader/StepHeader";
 import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
 
-const RelocationDesktop = ({ setSelectedTab }) => {
+const RelocationDesktop = ({ setSelectedTab, setRefresh }) => {
   const [location, setLocation] = useState("");
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState({});
@@ -68,6 +68,7 @@ const RelocationDesktop = ({ setSelectedTab }) => {
       questionResponseMapping,
       enqueueSnackbar,
       setSelectedTab,
+      setRefresh
     });
     handleModalClose();
   };

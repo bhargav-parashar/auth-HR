@@ -2,7 +2,7 @@ import { Box, Stack, Paper, Typography } from "@mui/material";
 import avatar from "../../../../assets/avatar.svg";
 import { format } from "date-fns";
 
-const Details = ({user}) => {
+const Details = ({user, isMobile}) => {
     
   return (
     <Box
@@ -15,7 +15,7 @@ const Details = ({user}) => {
         boxShadow:" rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
       }}
     >
-      <Typography pt={1} pl={1}  variant="h5">Employee Details</Typography>
+      <Typography pt={1} pl={1}  variant={isMobile?"h6":"h5"}>Employee Details</Typography>
       <Stack mt={2} direction="row">
         <Box
           component="img"
@@ -30,7 +30,7 @@ const Details = ({user}) => {
           }}
           alt="profile"
           src={avatar}
-          display={{ xs: "none", md: "block" }}
+          // display={{ xs: "none", md: "block" }}
         />
 
         <Stack justifyContent="center" sx={{ minWidth: "100px" }}>

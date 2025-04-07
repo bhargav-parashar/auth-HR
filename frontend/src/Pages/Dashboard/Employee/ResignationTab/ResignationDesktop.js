@@ -13,7 +13,7 @@ import StepHeader from "../../../../components/StepHeader/StepHeader";
 import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
 
-const ResignationDesktop = ({ setSelectedTab }) => {
+const ResignationDesktop = ({ setSelectedTab, setRefresh }) => {
   const [lwd, setLwd] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [responses, setResponses] = useState({});
@@ -68,6 +68,7 @@ const ResignationDesktop = ({ setSelectedTab }) => {
       questionResponseMapping,
       enqueueSnackbar,
       setSelectedTab,
+      setRefresh
     });
     handleModalClose();
   };
