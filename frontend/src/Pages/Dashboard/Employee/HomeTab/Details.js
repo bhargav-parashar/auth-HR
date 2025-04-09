@@ -41,25 +41,25 @@ const Details = ({ user, isMobile, isGrid }) => {
           <Typography
             fontWeight="bold"
             color="primary.light"
-            variant="body2"
+            variant="caption"
             mr={1}
           >{`Name`}</Typography>
           <Typography
             fontWeight="bold"
             color="primary.light"
-            variant="body2"
+            variant="caption"
             mr={1}
           >{`Department`}</Typography>
           <Typography
             fontWeight="bold"
             color="primary.light"
-            variant="body2"
+            variant="caption"
             mr={1}
           >{`Location`}</Typography>
           <Typography
             fontWeight="bold"
             color="primary.light"
-            variant="body2"
+            variant="caption"
             mr={1}
           >{`Joining Date`}</Typography>
         </Stack>
@@ -67,33 +67,33 @@ const Details = ({ user, isMobile, isGrid }) => {
           <Typography
             fontWeight="bold"
             color="primary.inactive"
-            variant="body2"
+            variant="caption"
             mr={1}
           >{`:`}</Typography>
           <Typography
             fontWeight="bold"
             color="primary.inactive"
-            variant="body2"
+            variant="caption"
             mr={1}
           >{`:`}</Typography>
           <Typography
             fontWeight="bold"
             color="primary.inactive"
-            variant="body2"
+            variant="caption"
             mr={1}
           >{`:`}</Typography>
           <Typography
             fontWeight="bold"
             color="primary.inactive"
-            variant="body2"
+            variant="caption"
             mr={1}
           >{`:`}</Typography>
         </Stack>
         <Stack justifyContent="center" sx={{ width: "100%" }}>
-          <Typography variant="body2">{user.username}</Typography>
-          <Typography variant="body2">{user.department}</Typography>
-          <Typography variant="body2">{user.location}</Typography>
-          <Typography variant="body2">
+          <Typography variant="caption">{user.username}</Typography>
+          <Typography variant="caption">{user.department}</Typography>
+          <Typography variant="caption">{user.location}</Typography>
+          <Typography variant="caption">
             {user?.createdAt ? format(user?.createdAt, "dd MMM, yyyy") : ""}
           </Typography>
         </Stack>

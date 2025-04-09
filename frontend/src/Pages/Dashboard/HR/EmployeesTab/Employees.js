@@ -138,23 +138,28 @@ const Employees = () => {
             }
           </FormControl>
         </Stack>
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-          }}
-        >
-          {filteredData &&
-            filteredData.length > 0 &&
-            filteredData.map((user, idx) => (
-              <Box
-                key={idx}
-                sx={{ width: "33.33%", height: "100%", padding: 1 }}
-              >
-                <Details isGrid isMobile user={user} />
-              </Box>
-            ))}
-        </Box>
+        {filteredData && (
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+            }}
+          >
+            {filteredData &&
+              filteredData.length > 0 &&
+              filteredData.map((user, idx) => (
+                <Box
+                  key={idx}
+                  sx={{ width: "33.33%", height: "100%", padding: 1 }}
+                >
+                  <Details isGrid isMobile user={user} />
+                </Box>
+              ))}
+          </Box>
+        )}
+        {(!filteredData || filteredData.length === 0) && (
+          <Typography mt={5} textAlign="center">No employees found !</Typography>
+        )}
       </Box>
       <EmployeeMobile
         searchInput={searchInput}

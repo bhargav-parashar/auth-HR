@@ -5,7 +5,7 @@ import {
   Stack,
   TextField,
   FormControl,
-  Select
+  Select,
 } from "@mui/material";
 import Details from "../../Employee/HomeTab/Details";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -21,7 +21,7 @@ const EmployeeMobile = ({
   handleDeptChange,
   location,
   handleLocationChange,
-  filteredData
+  filteredData,
 }) => {
   return (
     <Box mt={5} sx={{ display: { xs: "block", md: "none" } }}>
@@ -125,20 +125,27 @@ const EmployeeMobile = ({
           }
         </FormControl>
       </Stack>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-        }}
-      >
-        {filteredData &&
-          filteredData.length > 0 &&
-          filteredData.map((user, idx) => (
-            <Box key={idx} sx={{ width: "100%", height: "100%", padding: 1 }}>
-              <Details isGrid isMobile user={user} />
-            </Box>
-          ))}
-      </Box>
+      {filteredData && (
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+          }}
+        >
+          {filteredData &&
+            filteredData.length > 0 &&
+            filteredData.map((user, idx) => (
+              <Box key={idx} sx={{ width: "100%", height: "100%", padding: 1 }}>
+                <Details isGrid isMobile user={user} />
+              </Box>
+            ))}
+        </Box>
+      )}
+      {(!filteredData || filteredData.length === 0) && (
+        <Typography mt={5} textAlign="center">
+          No employees found !
+        </Typography>
+      )}
     </Box>
   );
 };
