@@ -218,9 +218,6 @@ class UserService {
   };
 
   updateLeaveBal = async (userId, newBal) =>{
-    console.log('reached');
-    console.log(userId);
-    console.log(newBal);
     try{
       const newLeaveBal = await User.findOneAndUpdate(
         { _id: userId },

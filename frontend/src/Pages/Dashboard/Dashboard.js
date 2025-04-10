@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Paper, Stack} from "@mui/material";
+import { Box, Paper, Stack } from "@mui/material";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import AdminHome from "./HR/HomeTab/AdminHome";
@@ -13,16 +13,17 @@ import { useState } from "react";
 import TabContext from "../../context/tabContext";
 import UserContext from "../../context/UserContext";
 import { useContext } from "react";
+import useGetAnalytics from "../../Hooks/useGetAnalytics";
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState("Dashboard");
+  const { totalEmployees, isLoading, locationMap, groupedByDepartment, deptMap } = useGetAnalytics();
   const { loggedInUser } = useContext(UserContext);
 
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
   };
 
-  
   return (
     <TabContext.Provider value={{ selectedTab, handleTabChange }}>
       <Box
@@ -53,8 +54,7 @@ const Dashboard = () => {
                 setSelectedTab={handleTabChange}
               />
             </Box>
-            <Box flex={5} sx={{ height: "100%"
-               }}>
+            <Box flex={5} sx={{ height: "100%" }}>
               <Header
                 selectedTab={selectedTab}
                 setSelectedTab={setSelectedTab}
@@ -66,31 +66,63 @@ const Dashboard = () => {
                   paddingLeft: "2%",
                   paddingRight: "2%",
                   paddingBottom: "3%",
-                  
                 }}
                 elevation={0}
                 square
               >
-                {loggedInUser.role === "admin" &&
-                  selectedTab === "Dashboard" && <AdminHome />}
-                {loggedInUser.role === "admin" &&
-                  selectedTab === "Analytics" && <Analytics />}
-                {loggedInUser.role === "admin" &&
-                  selectedTab === "Employees" && <Employees />}
+
+                {/* HR DASHBOARD */}
+                { loggedInUser.role === "admin" && selectedTab === "Dashboard" && (
+                <AdminHome />
+                )}
+
+                
+                {/* HR ANALYTICS TAB*/}
+                {loggedInUser.role === "admin" && selectedTab === "Analytics" && (
+                    <Analytics
+                      totalEmployees={totalEmployees}
+                      isLoading={isLoading}
+                      locationMap={locationMap}
+                      groupedByDepartment={groupedByDepartment}
+                      deptMap={deptMap}
+                    />
+                )}
+
+                
+                {/* HR ALL EMPLOYEES TAB*/}
+                {loggedInUser.role === "admin" && selectedTab === "Employees" && (
+                  <Employees />
+                )}
+
+
+                {/* EMPLOYEE DASHBOARD */}
+                {loggedInUser.role === "employee" && selectedTab === "Dashboard" && (
+                <EmployeeHome />
+                )}
+
+
+                {/* EMPLOYEE APPLY LEAVE TAB */}
+                {loggedInUser.role === "employee" && selectedTab === "Apply Leave" && ( 
+                <ApplyLeave setSelectedTab={setSelectedTab} />
+                )}
+                
+                
+                {/* EMPLOYEE REQUEST RELOCATION TAB */}
+                {loggedInUser.role === "employee" && selectedTab === "Relocation" && ( 
+                <Relocation setSelectedTab={setSelectedTab} />
+                )}
+                
+
+                {/* EMPLOYEE RESIGNATION TAB */}
                 {loggedInUser.role === "employee" &&
-                  selectedTab === "Dashboard" && <EmployeeHome />}
-                {loggedInUser.role === "employee" &&
-                  selectedTab === "Apply Leave" && <ApplyLeave setSelectedTab={setSelectedTab} />}
-                {loggedInUser.role === "employee" &&
-                  selectedTab === "Relocation" && <Relocation setSelectedTab={setSelectedTab}/>}
-                {loggedInUser.role === "employee" &&
-                  selectedTab === "Resignation" && <Resignation setSelectedTab={setSelectedTab}  />
-                }
+                  selectedTab === "Resignation" && (
+                    <Resignation setSelectedTab={setSelectedTab} />
+                )}
+
               </Paper>
             </Box>
           </Stack>
         </Stack>
-        
       </Box>
     </TabContext.Provider>
   );

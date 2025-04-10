@@ -16,8 +16,9 @@ const ReqPerDept = ({data}) => {
       <BarChart
         layout="vertical"
         data={data}
-        margin={{ right: 20, left: 40 }}
+        margin={{  right: 20, left: 40 }}
         barCategoryGap={10}
+        style={{cursor:'pointer'}}
       >
         <CartesianGrid
           stroke="#ccc"

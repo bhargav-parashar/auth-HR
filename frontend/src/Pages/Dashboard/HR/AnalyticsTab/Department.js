@@ -9,7 +9,12 @@ import {
 } from "@mui/material";
 import Barchart from "../../../../components/Barchart/Barchart";
 
-const Department = () => {
+const Department = ({deptMap}) => {
+  const data = [];
+  for (let [key, val] of deptMap) {
+    data.push({ department: key, employees: val });
+  };
+  
   return (
   <Stack
        alignItems="center"
@@ -28,12 +33,7 @@ const Department = () => {
          EMPLOYEES BY DEPARTMENT
        </Typography>
        <Barchart
-        data={[
-          { department: "Finance", employees: 42 },
-          { department: "IT", employees: 15 },
-          { department: "Marketing", employees: 20 },
-          { department: "Operations", employees: 15 }
-        ]}
+        data={data}
       />
        
      </Stack>

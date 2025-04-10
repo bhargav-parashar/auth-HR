@@ -9,6 +9,7 @@ const useDebouncedSearchFilter = () => {
   const [department, setDepartment] = useState("");
   const [location, setLocation] = useState("");
   const [searchInput, setSearchInput] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   //GET INITIAL LIST OF USERS
   useEffect(() => {
@@ -23,6 +24,8 @@ const useDebouncedSearchFilter = () => {
       setFilteredData(data);
     } catch (err) {
       console.log(err);
+    }finally{
+      setIsLoading(false);
     }
   };
 
@@ -90,6 +93,7 @@ const useDebouncedSearchFilter = () => {
     handleLocationChange,
     searchInput,
     handleSearchInputChange,
+    isLoading
   };
 };
 

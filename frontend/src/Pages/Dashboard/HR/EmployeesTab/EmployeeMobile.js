@@ -13,6 +13,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import MenuItem from "@mui/material/MenuItem";
+import Shimmer from "../../../../components/ShimmerUI/Shimmer";
 
 const EmployeeMobile = ({
   searchInput,
@@ -22,9 +23,10 @@ const EmployeeMobile = ({
   location,
   handleLocationChange,
   filteredData,
+  isLoading
 }) => {
   return (
-    <Box mt={5} sx={{ display: { xs: "block", md: "none" } }}>
+    <Box mt={5} sx={{ height:'100%', display: { xs: "block", md: "none" } }}>
       <Typography mb={1} variant="h5">
         Employees
       </Typography>
@@ -125,7 +127,7 @@ const EmployeeMobile = ({
           }
         </FormControl>
       </Stack>
-      {filteredData && (
+      { !isLoading && filteredData && (
         <Box
           sx={{
             display: "flex",
@@ -141,11 +143,25 @@ const EmployeeMobile = ({
             ))}
         </Box>
       )}
-      {(!filteredData || filteredData.length === 0) && (
+      { !isLoading && ( !filteredData || filteredData.length === 0)  && (
         <Typography mt={5} textAlign="center">
           No employees found !
         </Typography>
       )}
+      {isLoading && (
+          <Box
+            alignItems="center"
+            flex={1}
+            p={1}
+            sx={{
+              height: "100%",
+              borderRadius: "0.6rem",
+              bgcolor: "primary.inactive3",
+            }}
+          >
+            <Shimmer />
+          </Box>
+        )}
     </Box>
   );
 };

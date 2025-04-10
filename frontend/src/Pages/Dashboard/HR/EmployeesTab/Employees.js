@@ -16,6 +16,9 @@ import MenuItem from "@mui/material/MenuItem";
 import useDebouncedSearchFilter from "../../../../Hooks/useDebouncedSearchFilter";
 import { departments, locations } from "../../../../constants/constants";
 import EmployeeMobile from "./EmployeeMobile";
+import Shimmer from "../../../../components/ShimmerUI/Shimmer";
+
+
 
 const Employees = () => {
   const {
@@ -26,6 +29,7 @@ const Employees = () => {
     handleLocationChange,
     searchInput,
     handleSearchInputChange,
+    isLoading,
   } = useDebouncedSearchFilter();
 
   return (
@@ -36,7 +40,7 @@ const Employees = () => {
         paddingX: 2,
       }}
     >
-      <Box sx={{ display: { xs: "none", md: "block" } }}>
+      <Box sx={{ height: "70%", display: { xs: "none", md: "block" } }}>
         <Typography px={2} mb={1} variant="h5">
           Employees
         </Typography>
@@ -138,7 +142,7 @@ const Employees = () => {
             }
           </FormControl>
         </Stack>
-        {filteredData && (
+        {filteredData && !isLoading && (
           <Box
             sx={{
               display: "flex",
@@ -157,8 +161,24 @@ const Employees = () => {
               ))}
           </Box>
         )}
-        {(!filteredData || filteredData.length === 0) && (
-          <Typography mt={5} textAlign="center">No employees found !</Typography>
+        {!isLoading && (!filteredData || filteredData.length === 0) && (
+          <Typography mt={5} textAlign="center">
+            No employees found !
+          </Typography>
+        )}
+        {isLoading && (
+          <Box
+            alignItems="center"
+            flex={1}
+            p={1}
+            sx={{
+              height: "100%",
+              borderRadius: "0.6rem",
+              bgcolor: "primary.inactive3",
+            }}
+          >
+            <Shimmer />
+          </Box>
         )}
       </Box>
       <EmployeeMobile
@@ -169,6 +189,7 @@ const Employees = () => {
         location={location}
         handleLocationChange={handleLocationChange}
         filteredData={filteredData}
+        isLoading={isLoading}
       />
     </Box>
   );

@@ -1,64 +1,3 @@
-// import React from "react";
-// import {
-//   PieChart,
-//   Pie,
-//   Sector,
-//   Cell,
-//   ResponsiveContainer,
-//   Legend,
-// } from "recharts";
-
-// const COLORS = ["#A000FF", "#FF9304", "#FDE006"];
-
-// const RADIAN = Math.PI / 180;
-// const renderCustomizedLabel = ({
-//   cx,
-//   cy,
-//   midAngle,
-//   innerRadius,
-//   outerRadius,
-//   percent,
-//   index,
-// }) => {
-//   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-//   const x = cx + radius * Math.cos(-midAngle * RADIAN);
-//   const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-//   return (
-//     <text
-//       x={x}
-//       y={y}
-//       fill="white"
-//       textAnchor={x > cx ? "start" : "end"}
-//       dominantBaseline="central"
-//     >
-//       {`${(percent * 100).toFixed(0)}%`}
-//     </text>
-//   );
-// };
-// export default function PieChartComponent({ data }) {
-//   return (
-//     <ResponsiveContainer width="100%" height="100%">
-//       <PieChart width="100%" height="100%">
-//         <Pie
-//           data={data}
-//           labelLine={false}
-//           label={renderCustomizedLabel}
-//           outerRadius={60}
-//           fill="#8884d8"
-//           dataKey="value"
-//           isAnimationActive={true}
-//         >
-//           {data.map((entry, index) => (
-//             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-//           ))}
-//         </Pie>
-//         <Legend iconType="rect" verticalAlign="bottom" />
-//       </PieChart>
-//     </ResponsiveContainer>
-//   );
-// }
-
 import {
   PieChart,
   Pie,
@@ -70,19 +9,20 @@ import {
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f7f"];
 
-const PieChartComponent = ({ data }) => {
+const PieChartComponent = ({ data, isMobile }) => {
+  const outRad = isMobile ? 40 : 60;
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieChart>
         <Pie
+          style={{cursor:'pointer'}}
           data={data}
           dataKey="employees"
           nameKey="location"
           cx="50%"
           cy="50%"
-          outerRadius={60}
+          outerRadius={outRad}
           fill="#8884d8"
-          // label
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -91,6 +31,7 @@ const PieChartComponent = ({ data }) => {
         <Tooltip />
         <Legend />
       </PieChart>
+      
     </ResponsiveContainer>
   );
 };

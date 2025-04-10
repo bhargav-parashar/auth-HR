@@ -2,8 +2,10 @@ import React from "react";
 import { Typography, Stack } from "@mui/material";
 import ReqPerDept from "../../../../components/Barchart/ReqPerDept";
 
-const Requests = () => {
+const Requests = ({groupedByDepartment}) => {
+
   return (
+  
     <Stack
       alignItems="center"
       flex={1}
@@ -21,12 +23,7 @@ const Requests = () => {
         REQUESTS PER DEPARTMENT
       </Typography>
       <ReqPerDept
-        data={[
-          { department: "Finance", leave: 5, relocation: 1, resignation: 2 },
-          { department: "IT", leave: 10, relocation: 2, resignation: 1 },
-          { department: "Marketing", leave: 6, relocation: 1, resignation: 2 },
-          { department: "Operations", leave: 8, relocation: 2, resignation: 3 }
-        ]}
+        data={groupedByDepartment}
       />
     </Stack>
   );

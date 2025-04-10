@@ -12,6 +12,7 @@ const Barchart = ({ data }) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
+        style={{ cursor: "pointer" }}
         layout="vertical"
         data={data}
         margin={{ top: 10, bottom: 5, right: 20, left: 40 }}

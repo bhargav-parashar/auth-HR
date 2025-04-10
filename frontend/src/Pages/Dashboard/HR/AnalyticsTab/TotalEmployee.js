@@ -8,7 +8,7 @@ import {
     Select,
   } from "@mui/material";
 
-const TotalEmployee = () => {
+const TotalEmployee = ({totalEmployees}) => {
   return (
     <Stack
     alignItems="center"
@@ -37,7 +37,7 @@ const TotalEmployee = () => {
         textAlign="center"
         variant="h6"
       >
-        26
+        {totalEmployees}
       </Typography>
     </Stack>
   </Stack>

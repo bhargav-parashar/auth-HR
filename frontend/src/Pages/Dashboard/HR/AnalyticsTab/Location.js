@@ -9,7 +9,13 @@ import {
 } from "@mui/material";
 import PieChartComponent from "../../../../components/Piechart/Piechart";
 
-const Location = () => {
+const Location = ({ locationMap, totalEmployees, isMobile }) => {
+  const data = [];
+  for (let [key, val] of locationMap) {
+    let percent = Number(((val / totalEmployees) * 100).toFixed(2));
+    data.push({ location: key, employees: percent });
+  }
+  
   return (
     <Stack
       alignItems="center"
@@ -28,14 +34,7 @@ const Location = () => {
         EMPLOYEES BY LOCATION
       </Typography>
 
-      <PieChartComponent
-        data={[
-          { location: "New York", employees: 40 },
-          { location: "London", employees: 25 },
-          { location: "Berlin", employees: 20 },
-          { location: "Tokyo", employees: 15 },
-        ]}
-      />
+      <PieChartComponent isMobile={isMobile} data={data} />
     </Stack>
   );
 };
