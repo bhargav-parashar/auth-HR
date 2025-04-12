@@ -3,7 +3,6 @@ import StepHeader from "../../../../components/StepHeader/StepHeader";
 import { leaveSteps } from "../../../../constants/constants";
 import relax from "../../../../assets/relax.svg";
 import StatusMobile from "./StatusMobile";
-import Calendar from "../../../../components/Calendar/Calendar";
 import dayjs from "dayjs";
 const Status = ({ leave }) => {
   return (

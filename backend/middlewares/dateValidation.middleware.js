@@ -6,7 +6,7 @@ const API_ENDPOINT = `${API_URL}/holidays?&api_key=${API_KEY}&country=${country}
 
 const dateValidation =async (req,res,next) =>{
     try{
-        const fetch = (await import("node-fetch")).default; // Dynamically import node-fetch
+        const fetch = (await import("node-fetch")).default; 
         const date = new Date(req.body.lwd);
        /*CHECK IF LWD IS WEEKEND*/
         if(date.getDay() % 6 === 0)

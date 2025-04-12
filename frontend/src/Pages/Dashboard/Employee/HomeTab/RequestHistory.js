@@ -4,7 +4,7 @@ import RequestsGrid from "../../../../components/Grid/RequestsGrid";
 
 const RequestHistory = ({ isMobile }) => {
   const requests = useGetReqHistory();
-
+  console.log(requests);
   return (
     <Box
       p={2}

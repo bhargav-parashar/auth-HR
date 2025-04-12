@@ -17,7 +17,16 @@ import useGetAnalytics from "../../Hooks/useGetAnalytics";
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState("Dashboard");
-  const { totalEmployees, isLoading, locationMap, groupedByDepartment, deptMap } = useGetAnalytics();
+  const { 
+    totalEmployees, 
+    isLoading, 
+    locationMap, 
+    groupedByDepartment, 
+    deptMap, 
+    avgLeaveBal, 
+    attrition, 
+    currMonthHires 
+  } = useGetAnalytics();
   const { loggedInUser } = useContext(UserContext);
 
   const handleTabChange = (tab) => {
@@ -73,7 +82,12 @@ const Dashboard = () => {
 
                 {/* HR DASHBOARD */}
                 { loggedInUser.role === "admin" && selectedTab === "Dashboard" && (
-                <AdminHome />
+                <AdminHome 
+                  totalEmployees={totalEmployees} 
+                  avgLeaveBal = {avgLeaveBal} 
+                  attrition={attrition} 
+                  currMonthHires={currMonthHires} 
+                  isLoading={isLoading}  />
                 )}
 
                 

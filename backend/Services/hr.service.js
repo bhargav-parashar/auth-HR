@@ -1,15 +1,10 @@
 const User = require("../models/user.model");
+const Leaves = require("../models/leave.model");
+const Relocations = require("../models/relocation.model");
+const Resignations = require("../models/resignation.model");
+const Announcement = require("../models/announcement.model");
 
 class HRService {
-  // getAllUsers = () => {
-  //   try {
-  //     const users = User.find({});
-  //     return users;
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // };
-
   getAllUsers = () => {
     try {
       const users = User.aggregate([
@@ -57,6 +52,91 @@ class HRService {
       throw err;
     }
   };
+
+  getPendingLeaves = () => {
+    try {
+      const pendingLeaves = Leaves.find({ status: "Pending" });
+      return pendingLeaves;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  getPendingRelocations = () => {
+    try {
+      const pendingRelocations = Relocations.find({ status: "Pending" });
+      return pendingRelocations;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  getPendingResignations = () => {
+    try {
+      const pendingResignations = Resignations.find({ status: "Pending" });
+      return pendingResignations;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  getCurrMonthResignations = () => {
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+    try {
+      const currMonthResignations = Resignations.find({
+        createdAt: { $gte: startOfMonth, $lt: startOfNextMonth },
+      });
+      return currMonthResignations;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  createAnnouncement = (announcement) => {
+    try {
+      const body = {
+        body: announcement,
+      };
+      const newAnn = Announcement.create(body);
+      return newAnn;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  getAnnouncements = () =>{
+    try{
+      const ann = Announcement.find({});
+      return ann;
+    }catch(err){
+      throw err;
+    }
+  }
+
+  updateAnnouncement = (id, announcement) => {
+    try {
+      const body = {
+        body: announcement,
+      };
+      const updatedAnn = Announcement.findByIdAndUpdate(id, body, {
+        new: true,
+      });
+      return updatedAnn;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  deleteAnnouncement = (id) =>{
+    try{
+      const deletedAnn = Announcement.findByIdAndDelete(id, {new:true});
+      return deletedAnn;
+    }catch(err){
+      throw err;
+    }
+  }
 }
 
 module.exports = HRService;
