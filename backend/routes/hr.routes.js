@@ -31,12 +31,12 @@ router.get("/current-month-resignations", jwtAuthorize, getCurrMonthResignations
 router.post("/create-announcement", jwtAuthorize, createAnnouncement);
 
 //GET ALL ANNOUNCEMENTS 
-router.get("/announcements", jwtAuthorize, getAnnouncements);
+router.get("/announcements",  getAnnouncements);
 
 //UPDATE ANNOUNCEMENT 
-router.put("/update-announcement", jwtAuthorize, updateAnnouncement);
+router.put("/update-announcement",  updateAnnouncement);
 
 //DELETE ANNOUNCEMENT
-router.delete("/delete-announcement",jwtAuthorize,deleteAnnouncement);
+router.delete("/delete-announcement", deleteAnnouncement);
 
 module.exports = router;

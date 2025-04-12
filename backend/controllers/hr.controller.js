@@ -80,10 +80,10 @@ const createAnnouncement = async (req,res) => {
   // DELETE ANNOUNCEMENT
   const deleteAnnouncement = async (req,res) =>{
     try{
-      const deletedAnn = Announcement.findByIdAndDelete(id, {new:true});
-      return deletedAnn;
+      const deletedAnn = await HRServiceInstance.deleteAnnouncement(req.body.id);
+      res.status(200).json(deletedAnn);
     }catch(err){
-      throw err;
+        res.status(500).json({ message: "Failed to delete Announcement", err });
     }
   }
 
