@@ -1,30 +1,29 @@
-import {useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { Box, Stack, Paper } from "@mui/material";
 import Details from "./Details";
 import LeaveBal from "./LeaveBal";
 import Announcements from "./Announcements";
-import RequestHistory from './RequestHistory';
+import RequestHistory from "./RequestHistory";
 import config from "../../../../config/config";
 import axios from "axios";
 import MobileDash from "./MobileDash";
+import useAnnouncements from "../../../../Hooks/useAnnouncements";
 
 const EmployeeHome = () => {
-
   const [user, setUser] = useState([]);
-
-
+  const { announcements } = useAnnouncements();
   useEffect(() => {
-      const URL = `${config.endpoint}/user/details`;
-      try {
-        const getDetails = async () => {
-          const { data } = await axios.get(URL, { withCredentials: true });
-          setUser(data?.user);
-        };
-        getDetails();
-      } catch (err) {
-        console.log(err);
-      }
-    }, []);
+    const URL = `${config.endpoint}/user/details`;
+    try {
+      const getDetails = async () => {
+        const { data } = await axios.get(URL, { withCredentials: true });
+        setUser(data?.user);
+      };
+      getDetails();
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   return (
     <Box sx={{ height: "100%" }}>
@@ -33,8 +32,8 @@ const EmployeeHome = () => {
           direction="column"
           p={1}
           sx={{
-            background:'primary.bg1',
-            borderRadius:'0.6rem',
+            background: "primary.bg1",
+            borderRadius: "0.6rem",
             height: "100%",
             display: { xs: "none", md: "block" },
           }}
@@ -62,7 +61,7 @@ const EmployeeHome = () => {
                   width: "100%",
                 }}
               >
-                <Details user={user}/> 
+                <Details user={user} />
                 <LeaveBal user={user} />
               </Stack>
 
@@ -75,10 +74,9 @@ const EmployeeHome = () => {
                   width: "100%",
                 }}
               >
-                <Announcements/> 
-                <RequestHistory/>
+                <Announcements announcements={announcements} />
+                <RequestHistory />
               </Stack>
-
             </Stack>
           </Box>
         </Stack>

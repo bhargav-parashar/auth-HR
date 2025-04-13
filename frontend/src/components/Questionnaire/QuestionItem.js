@@ -1,9 +1,7 @@
 import { TextField, Typography } from "@mui/material";
 
 const QuestionItem = ({ handleInputChange, questionitem, idx, isReview }) => {
-  const handleChange = (e) => {
-    setResponses((prev) => [...prev]);
-  };
+  
   return (
     <>
       {!isReview ? (

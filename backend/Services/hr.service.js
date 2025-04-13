@@ -108,7 +108,7 @@ class HRService {
 
   getAnnouncements = () =>{
     try{
-      const ann = Announcement.find({});
+      const ann = Announcement.find().sort({ createdAt: -1 });
       return ann;
     }catch(err){
       throw err;

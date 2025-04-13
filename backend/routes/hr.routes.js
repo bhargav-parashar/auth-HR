@@ -11,32 +11,34 @@ const {
   deleteAnnouncement
 } = require("../controllers/hr.controller");
 const jwtAuthorize = require("../middlewares/authorizeJwt.middleware");
+const { validateSchema } = require("../middlewares/validate.middleware");
+const {annValidateSchema} = require("../validations/hr.validations");
 
-//ALL USER DETAILS
+//GET ALL USER DETAILS
 router.get("/all-user-details", jwtAuthorize, getAllUsers);
 
-//PENDING LEAVES
+//GET PENDING LEAVES
 router.get("/pending-leaves", jwtAuthorize, getPendingLeaves);
 
-//PENDING RELOCATIONS
+//GET PENDING RELOCATIONS
 router.get("/pending-relocations", jwtAuthorize, getPendingRelocations);
 
-//PENDING RESIGNATIONS
+//GET PENDING RESIGNATIONS
 router.get("/pending-resignations", jwtAuthorize, getPendingResignations);
 
-//CURRENT MONTH RESIGNATIONS
+//GET CURRENT MONTH RESIGNATIONS
 router.get("/current-month-resignations", jwtAuthorize, getCurrMonthResignations);
 
-//CREATE ANNOUNCEMENT 
-router.post("/create-announcement", jwtAuthorize, createAnnouncement);
+//POST ANNOUNCEMENT 
+router.post("/create-announcement", jwtAuthorize, validateSchema(annValidateSchema), createAnnouncement);
 
 //GET ALL ANNOUNCEMENTS 
-router.get("/announcements",  getAnnouncements);
+router.get("/announcements",jwtAuthorize,  getAnnouncements);
 
 //UPDATE ANNOUNCEMENT 
-router.put("/update-announcement",  updateAnnouncement);
+router.put("/update-announcement",jwtAuthorize,  updateAnnouncement);
 
 //DELETE ANNOUNCEMENT
-router.delete("/delete-announcement", deleteAnnouncement);
+router.delete("/delete-announcement",jwtAuthorize, deleteAnnouncement);
 
 module.exports = router;

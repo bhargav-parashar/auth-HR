@@ -50,7 +50,7 @@ const getCurrMonthResignations = async (req,res) =>{
 // CREATE ANNOUNCEMENT
 const createAnnouncement = async (req,res) => {
     try {
-      const newAnn = await HRServiceInstance.createAnnouncement(req.body.announcement);
+      const newAnn = await HRServiceInstance.createAnnouncement(req.body.body);
       res.status(200).json(newAnn);
     } catch (err) {
         res.status(500).json({ message: "Failed to create Announcement", err });
@@ -70,7 +70,7 @@ const createAnnouncement = async (req,res) => {
   // UPDATE ANNOUNCEMENTS
   const updateAnnouncement = async (req,res) => {
     try {
-       const updatedAnn = await HRServiceInstance.updateAnnouncement(req.body.id, req.body.announcement);
+       const updatedAnn = await HRServiceInstance.updateAnnouncement(req.body.id, req.body.body);
        res.status(200).json(updatedAnn);
     } catch (err) {
         res.status(500).json({ message: "Failed to update Announcement", err });
