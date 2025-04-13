@@ -2,7 +2,7 @@ import { Box, Stack, Paper, Typography } from "@mui/material";
 import avatar from "../../../../assets/avatar.svg";
 import { format } from "date-fns";
 
-const Details = ({ user, isMobile, isGrid }) => {
+const Details = ({ user, isMobile, isGrid, isReview }) => {
   return (
     <Box
       p={1}
@@ -10,7 +10,7 @@ const Details = ({ user, isMobile, isGrid }) => {
       sx={{
         height: "50%",
         borderRadius: "0.6rem",
-        bgcolor: "primary.inactive3",
+        bgcolor: isReview? "" : "primary.inactive3",
         boxShadow:
           " rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
       }}

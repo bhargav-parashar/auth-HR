@@ -87,6 +87,26 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
+  //UPDATE LEAVE BALANCE
+  const updateLeaveBal = async (req,res) =>{
+    try{
+      const updated = await HRServiceInstance.updateLeaveBal(req.body.id, req.body.newLeaveBal);
+      res.status(200).json(updated);
+    }catch(err){
+        res.status(500).json({ message: "Failed to update leave balance", err });
+    }
+  }
+
+  //UPDATE LEAVE STATUS
+  const updateLeaveStatus = async (req,res) =>{
+    try{
+      const updated = await HRServiceInstance.updateLeaveStatus(req.body.id, req.body.newStatus);
+      res.status(200).json(updated);
+    }catch(err){
+        res.status(500).json({ message: "Failed to update leave status", err });
+    }
+  }
+
 module.exports = {
     getAllUsers,
     getPendingLeaves,
@@ -96,5 +116,7 @@ module.exports = {
     createAnnouncement,
     getAnnouncements,
     updateAnnouncement,
-    deleteAnnouncement
+    deleteAnnouncement,
+    updateLeaveBal,
+    updateLeaveStatus
 };

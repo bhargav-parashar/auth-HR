@@ -1,9 +1,7 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
 import Progress from "../../../../components/Progress/Progress";
 
-const LeaveBal = ({user, isMobile}) => {
-  
-
+const LeaveBal = ({ isReview, user, isMobile }) => {
   return (
     <Box
       p={2}
@@ -11,12 +9,28 @@ const LeaveBal = ({user, isMobile}) => {
       sx={{
         height: "50%",
         borderRadius: "0.6rem",
-        bgcolor: "primary.inactive3",
-        boxShadow:" rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
+        bgcolor: isReview ? "" : "primary.inactive3",
+        boxShadow:
+          " rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
       }}
     >
-     <Typography pt={1}  variant={isMobile?"h6":"h5"}>Leave Balance</Typography>
-      <Stack  mt={2} direction="row">
+      {!isReview && (
+        <Typography pt={1} variant={isMobile ? "h6" : "h5"}>
+          Leave Balance
+        </Typography>
+      )}
+      {isReview && (
+        <Typography
+          sx={{ fontWeight: "bold" }}
+          variant="body2"
+          color="primary.inactive"
+          pt={1}
+        >
+          Employee's new leave balance after approval
+        </Typography>
+      )}
+
+      <Stack mt={2} direction="row">
         <Stack gap={2} justifyContent="center" sx={{ minWidth: "100px" }}>
           <Typography
             fontWeight="bold"
@@ -58,9 +72,9 @@ const LeaveBal = ({user, isMobile}) => {
           >{`:`}</Typography>
         </Stack>
         <Stack gap={1} justifyContent="center" sx={{ width: "100%" }}>
-         <Progress currValue={user?.leaveBal?.earned}/>
-         <Progress currValue={user?.leaveBal?.sick}/>
-         <Progress currValue={user?.leaveBal?.casual}/>
+          <Progress currValue={user?.leaveBal?.earned} />
+          <Progress currValue={user?.leaveBal?.sick} />
+          <Progress currValue={user?.leaveBal?.casual} />
         </Stack>
       </Stack>
     </Box>

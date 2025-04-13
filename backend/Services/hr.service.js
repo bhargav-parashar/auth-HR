@@ -55,7 +55,31 @@ class HRService {
 
   getPendingLeaves = () => {
     try {
-      const pendingLeaves = Leaves.find({ status: "Pending" });
+      const pendingLeaves = Leaves.aggregate([
+        {
+          $match: { status: "Pending" },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "employeeId",
+            foreignField: "_id",
+            as: "userDetails",
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            status: 1,
+            startDate : 1,
+            endDate : 1,
+            leaveType:1,
+            createdAt: 1,
+            updatedAt: 1,
+            userDetails: 1,
+          },
+        },
+      ])
       return pendingLeaves;
     } catch (err) {
       throw err;
@@ -133,6 +157,32 @@ class HRService {
     try{
       const deletedAnn = Announcement.findByIdAndDelete(id, {new:true});
       return deletedAnn;
+    }catch(err){
+      throw err;
+    }
+  }
+
+  updateLeaveBal = (id, newLeaveBal) =>{
+    try{
+      const updated = User.findByIdAndUpdate(
+        id, 
+        {$set:{leaveBal : newLeaveBal}},
+        {new:true}
+      );
+      return updated;
+    }catch(err){
+      throw err;
+    }
+  }
+
+  updateLeaveStatus = (id, newStatus) =>{
+    try{
+      const updated = Leaves.findByIdAndUpdate(
+        id, 
+        {$set:{status : newStatus}},
+        {new:true}
+      );
+      return updated;
     }catch(err){
       throw err;
     }

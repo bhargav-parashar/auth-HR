@@ -8,7 +8,9 @@ const {
   createAnnouncement,
   getAnnouncements,
   updateAnnouncement,
-  deleteAnnouncement
+  deleteAnnouncement,
+  updateLeaveBal,
+  updateLeaveStatus
 } = require("../controllers/hr.controller");
 const jwtAuthorize = require("../middlewares/authorizeJwt.middleware");
 const { validateSchema } = require("../middlewares/validate.middleware");
@@ -40,5 +42,11 @@ router.put("/update-announcement",jwtAuthorize,  updateAnnouncement);
 
 //DELETE ANNOUNCEMENT
 router.delete("/delete-announcement",jwtAuthorize, deleteAnnouncement);
+
+//UPDATE LEAVE BALANCE
+router.put("/update-leave-bal",jwtAuthorize, updateLeaveBal);
+
+//UPDATE LEAVE STATUS
+router.put("/update-leave-status",jwtAuthorize, updateLeaveStatus );
 
 module.exports = router;

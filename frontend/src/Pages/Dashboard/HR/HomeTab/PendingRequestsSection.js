@@ -1,11 +1,8 @@
 import { Stack, Box, Typography } from "@mui/material";
-import useGetPendingRequests from "../../../../Hooks/useGetPendingRequests";
 import DashCard from "../../../../components/Cards/DashCards";
-import Shimmer from "../../../../components/ShimmerUI/Shimmer";
 
-const PendingRequestsSection = () => {
-  const { isLoading, penRequests } = useGetPendingRequests();
-
+const PendingRequestsSection = ({isLoading, penRequests, setSelectedReqTab}) => {
+  
   return (
     <Stack
       mb={2}
@@ -20,16 +17,19 @@ const PendingRequestsSection = () => {
         label="Leaves"
         count={penRequests.leaves.length}
         isLoading={isLoading}
+        setSelectedReqTab={setSelectedReqTab}
       />
       <DashCard
         label="Relocations"
         count={penRequests.relocations.length}
         isLoading={isLoading}
+        setSelectedReqTab={setSelectedReqTab}
       />
       <DashCard
         label="Resignations"
         count={penRequests.resignations.length}
         isLoading={isLoading}
+        setSelectedReqTab={setSelectedReqTab}
       />
     </Stack>
   );

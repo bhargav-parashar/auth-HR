@@ -3,16 +3,21 @@ import { Box, Typography, Stack } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
 import Shimmer from "../ShimmerUI/Shimmer";
 
-const DashCard = ({ label, count, isLoading }) => {
+const DashCard = ({ label, count, isLoading, setSelectedReqTab }) => {
+  handleclick = () => {
+    setSelectedReqTab(label);
+  };
   return (
-    <Box sx={{ height: "100%", width: "100%" }}>
+    <Box
+      onClick={handleclick}
+      sx={{ height: "100%", width: "100%", cursor: "pointer" }}
+    >
       {isLoading && (
         <Box
           sx={{
-             width: "100%",
-             cursor: "pointer",
-             height: "103px",
-            
+            width: "100%",
+            cursor: "pointer",
+            height: "103px",
           }}
         >
           <Shimmer cover />

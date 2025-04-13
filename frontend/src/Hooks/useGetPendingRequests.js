@@ -3,7 +3,7 @@ import config from "../config/config";
 import axios from "axios";
 
 const useGetPendingRequests = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isReqLoading, setIsReqLoading] = useState(true);
   const [penRequests, setPenRequests] = useState({
     leaves: [],
     relocations: [],
@@ -29,7 +29,7 @@ const useGetPendingRequests = () => {
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false);
+      setIsReqLoading(false);
     }
   };
 
@@ -37,7 +37,7 @@ const useGetPendingRequests = () => {
     getPenRequests();
   }, []);
 
-  return { isLoading, penRequests };
+  return { isReqLoading, penRequests,getPenRequests };
 };
 
 export default useGetPendingRequests;
