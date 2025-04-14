@@ -10,7 +10,9 @@ const {
   updateAnnouncement,
   deleteAnnouncement,
   updateLeaveBal,
-  updateLeaveStatus
+  updateLeaveStatus,
+  updateRelocationStatus,
+  updateResignationStatus
 } = require("../controllers/hr.controller");
 const jwtAuthorize = require("../middlewares/authorizeJwt.middleware");
 const { validateSchema } = require("../middlewares/validate.middleware");
@@ -48,5 +50,11 @@ router.put("/update-leave-bal",jwtAuthorize, updateLeaveBal);
 
 //UPDATE LEAVE STATUS
 router.put("/update-leave-status",jwtAuthorize, updateLeaveStatus );
+
+//UPDATE RELOCATION STATUS
+router.put("/update-relocation-status",jwtAuthorize, updateRelocationStatus );
+
+//UPDATE RESIGNATION STATUS
+router.put("/update-resignation-status",jwtAuthorize, updateResignationStatus );
 
 module.exports = router;

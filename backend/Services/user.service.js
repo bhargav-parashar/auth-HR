@@ -132,6 +132,41 @@ class UserService {
       },
     ]);
 
+    getPendingResignationByUserId = (userId) =>
+      Resignation.aggregate([
+        {
+          $match: { employeeId: userId, status:"Pending" },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "employeeId",
+            foreignField: "_id",
+            as: "userDetails",
+          },
+        },
+        {
+          $lookup: {
+            from: "userresponses",
+            localField: "employeeId",
+            foreignField: "userId",
+            as: "userResponses",
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            employeeId: 1,
+            lwd: 1,
+            status: 1,
+            createdAt: 1,
+            updatedAt: 1,
+            userDetails: { $arrayElemAt: ["$userDetails.username", 0] },
+            userResponses: { $arrayElemAt: ["$userResponses.responses", 0] },
+          },
+        },
+      ]);
+
   //RELOCATION
   relocate = async (id, location) => {
     try {
@@ -201,6 +236,43 @@ class UserService {
       },
     ]);
 
+  getPendingRelocationByUserId = (userId) =>
+    Relocation.aggregate([
+      {
+        $match: { employeeId: userId, status:"Pending" },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "employeeId",
+          foreignField: "_id",
+          as: "userDetails",
+        },
+      },
+      {
+        $lookup: {
+          from: "relocationresponses",
+          localField: "employeeId",
+          foreignField: "userId",
+          as: "relocationResponses",
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          employeeId: 1,
+          location: 1,
+          status: 1,
+          createdAt: 1,
+          updatedAt: 1,
+          userDetails: { $arrayElemAt: ["$userDetails.username", 0] },
+          relocationResponses: {
+            $arrayElemAt: ["$relocationResponses.responses", 0],
+          },
+        },
+      },
+    ]);
+
   //LEAVE
   leave = async (id, startDate, endDate, leaveType) => {
     try {
@@ -234,6 +306,34 @@ class UserService {
     Leave.aggregate([
       {
         $match: { employeeId: userId },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "employeeId",
+          foreignField: "_id",
+          as: "userDetails"
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          employeeId: 1,
+          leaveType: 1,
+          startDate: 1,
+          endDate: 1,
+          status: 1,
+          createdAt: 1,
+          updatedAt: 1,
+          userDetails: { $arrayElemAt: ["$userDetails.username", 0] }
+        },
+      },
+    ]);
+  
+  getPendingleavesByUserId = (userId) =>
+    Leave.aggregate([
+      {
+        $match: { employeeId: userId, status:"Pending" },
       },
       {
         $lookup: {

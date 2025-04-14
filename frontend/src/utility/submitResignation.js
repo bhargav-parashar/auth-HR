@@ -19,6 +19,7 @@ export default submitResignation = async ({
     if (res.status === 200) {
       const URL = `${config.endpoint}/user/responses`;
       const body = {
+        resignationId: res.data.data.resignation._id,
         responses: questionResponseMapping,
       };
       await axios.post(URL, body, { withCredentials: true });

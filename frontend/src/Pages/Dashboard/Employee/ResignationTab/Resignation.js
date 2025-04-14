@@ -11,7 +11,7 @@ const Resignation = ({setSelectedTab}) => {
   const[refresh, setRefresh] = useState(0);
 
   useEffect(() => {
-    const URL = `${config.endpoint}/user/resignation`;
+    const URL = `${config.endpoint}/user/pending-resignation`;
     const getResignation = async () => {
       try {
         setIsLoading(true);

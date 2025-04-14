@@ -11,6 +11,7 @@ const responseSchema = new mongoose.Schema(
 const relocationSchema = new mongoose.Schema(
     {   
         userId:{type:  mongoose.Schema.Types.ObjectId, required:true},
+        relocationId:{type:  mongoose.Schema.Types.ObjectId, required:true},
         responses:{type: [responseSchema], default:[]}
     },
     {

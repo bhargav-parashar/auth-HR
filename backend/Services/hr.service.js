@@ -76,10 +76,10 @@ class HRService {
             leaveType:1,
             createdAt: 1,
             updatedAt: 1,
-            userDetails: 1,
+            userDetails: 1
           },
-        },
-      ])
+        }
+      ]);
       return pendingLeaves;
     } catch (err) {
       throw err;
@@ -88,7 +88,38 @@ class HRService {
 
   getPendingRelocations = () => {
     try {
-      const pendingRelocations = Relocations.find({ status: "Pending" });
+      const pendingRelocations = Relocations.aggregate([
+        {
+          $match: { status: "Pending" },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "employeeId",
+            foreignField: "_id",
+            as: "userDetails",
+          }
+        },
+        {
+          $lookup: {
+            from: "relocationresponses",
+            localField: "employeeId",
+            foreignField: "userId",
+            as: "userResponses",
+          }
+        },
+        {
+          $project: {
+            _id: 1,
+            status: 1,
+            location:1,
+            createdAt: 1,
+            updatedAt: 1,
+            userDetails: 1,
+            userResponses: 1
+          },
+        }
+      ]);
       return pendingRelocations;
     } catch (err) {
       throw err;
@@ -97,7 +128,38 @@ class HRService {
 
   getPendingResignations = () => {
     try {
-      const pendingResignations = Resignations.find({ status: "Pending" });
+      const pendingResignations = Resignations.aggregate([
+        {
+          $match: { status: "Pending" },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "employeeId",
+            foreignField: "_id",
+            as: "userDetails",
+          }
+        },
+        {
+          $lookup: {
+            from: "userresponses",
+            localField: "employeeId",
+            foreignField: "userId",
+            as: "userResponses",
+          }
+        },
+        {
+          $project: {
+            _id: 1,
+            status: 1,
+            lwd:1,
+            createdAt: 1,
+            updatedAt: 1,
+            userDetails: 1,
+            userResponses: 1
+          },
+        }
+      ]);
       return pendingResignations;
     } catch (err) {
       throw err;
@@ -187,6 +249,32 @@ class HRService {
       throw err;
     }
   }
+
+  updateRelocationStatus = (id, newStatus) =>{
+    try{
+      const updated = Relocations.findByIdAndUpdate(
+        id, 
+        {$set:{status : newStatus}},
+        {new:true}
+      );
+      return updated;
+    }catch(err){
+      throw err;
+    }
+  } 
+
+  updateResignationStatus = (id, newStatus) =>{
+    try{
+      const updated = Resignations.findByIdAndUpdate(
+        id, 
+        {$set:{status : newStatus}},
+        {new:true}
+      );
+      return updated;
+    }catch(err){
+      throw err;
+    }
+  } 
 }
 
 module.exports = HRService;

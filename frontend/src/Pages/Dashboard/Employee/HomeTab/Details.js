@@ -90,9 +90,9 @@ const Details = ({ user, isMobile, isGrid, isReview }) => {
           >{`:`}</Typography>
         </Stack>
         <Stack justifyContent="center" sx={{ width: "100%" }}>
-          <Typography variant="caption">{user.username}</Typography>
-          <Typography variant="caption">{user.department}</Typography>
-          <Typography variant="caption">{user.location}</Typography>
+          <Typography variant="caption">{user?.username}</Typography>
+          <Typography variant="caption">{user?.department}</Typography>
+          <Typography variant="caption">{user?.location}</Typography>
           <Typography variant="caption">
             {user?.createdAt ? format(user?.createdAt, "dd MMM, yyyy") : ""}
           </Typography>

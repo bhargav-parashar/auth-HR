@@ -11,7 +11,7 @@ const Relocation = ({setSelectedTab}) => {
   const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
-    const URL = `${config.endpoint}/user/relocation`;
+    const URL = `${config.endpoint}/user/pending-relocation`;
     const getRelocation = async () => {
       try {
         setIsLoading(true);

@@ -6,7 +6,7 @@ const UserServiceInstance = new UserService();
 const userDetails = async (req, res) =>{
   try{
     const user = await UserServiceInstance.findByUserId(req.user._id);
-    res.status(200).send({user});
+    res.status(200).send(user);
   }catch(err){
     res.status(500).send({ message: "Could not get user details!", err });
   }
@@ -82,6 +82,18 @@ const getLeavesByUserId = async (req, res) => {
     }
 };
 
+const getPendingLeavesByUserId = async (req, res) => {
+  try {
+    const leave = await UserServiceInstance.getPendingleavesByUserId(
+      req.user._id
+    );
+    res.status(200).json(leave);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch pending leaves", err });
+  }
+};
+
+
 
 //RELOCATON
 const relocate = async (req, res) => {
@@ -136,6 +148,17 @@ const getRelocationByUserId = async (req, res) => {
     res.status(200).json(relocation);
   } catch (err) {
     res.status(500).json({ message: "Failed to fetch relocation", err });
+  }
+};
+
+const getPendingRelocationByUserId = async (req, res) => {
+  try {
+    const relocation = await UserServiceInstance.getPendingRelocationByUserId(
+      req.user._id
+    );
+    res.status(200).json(relocation);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch pending relocations", err });
   }
 };
 
@@ -194,13 +217,27 @@ const getResignationByUserId = async (req, res) => {
   }
 };
 
+const getPendingResignationByUserId = async (req, res) => {
+  try {
+    const resignation = await UserServiceInstance.getPendingResignationByUserId(
+      req.user._id
+    );
+    res.status(200).json(resignation);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to fetch pending resignations", err });
+  }
+};
+
 module.exports = {
   leave,
   getLeavesByUserId,
+  getPendingLeavesByUserId,
+  getPendingRelocationByUserId,
   resign,
   submitResponse,
   questionnaire,
   getResignationByUserId,
+  getPendingResignationByUserId,
   relocate,
   getRelocationByUserId,
   relocationQuestionnaire,

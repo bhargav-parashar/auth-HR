@@ -19,6 +19,7 @@ export default submitRelocation = async ({
     if (res.status === 200) {
       const URL = `${config.endpoint}/user/relocationresponses`;
       const body = {
+        relocationId: res.data.data.relocation._id,
         responses: questionResponseMapping,
       };
       await axios.post(URL, body, { withCredentials: true });

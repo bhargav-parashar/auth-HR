@@ -107,6 +107,26 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
+  //UPDATE RELOCATION STATUS
+  const updateRelocationStatus = async (req,res) =>{
+    try{
+      const updated = await HRServiceInstance.updateRelocationStatus(req.body.id, req.body.newStatus);
+      res.status(200).json(updated);
+    }catch(err){
+        res.status(500).json({ message: "Failed to update relocation status", err });
+    }
+  }
+
+  //UPDATE RESIGNATION STATUS
+  const updateResignationStatus = async (req,res) =>{
+    try{
+      const updated = await HRServiceInstance.updateResignationStatus(req.body.id, req.body.newStatus);
+      res.status(200).json(updated);
+    }catch(err){
+        res.status(500).json({ message: "Failed to update resignation status", err });
+    }
+  }
+
 module.exports = {
     getAllUsers,
     getPendingLeaves,
@@ -118,5 +138,7 @@ module.exports = {
     updateAnnouncement,
     deleteAnnouncement,
     updateLeaveBal,
-    updateLeaveStatus
+    updateLeaveStatus,
+    updateRelocationStatus,
+    updateResignationStatus
 };

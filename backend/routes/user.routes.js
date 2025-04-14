@@ -2,12 +2,15 @@ const router = require("express").Router();
 const {
   leave,
   getLeavesByUserId,
+  getPendingLeavesByUserId,
   resign,
   submitResponse,
   questionnaire,
   getResignationByUserId,
+  getPendingResignationByUserId,
   relocate,
   getRelocationByUserId,
+  getPendingRelocationByUserId,
   relocationQuestionnaire,
   submitRelocationResponse,
   userDetails,
@@ -40,6 +43,7 @@ router.post(
   leave
 );
 router.get("/leave-applications", jwtAuthorize, getLeavesByUserId);
+router.get("/pending-leave-applications", jwtAuthorize, getPendingLeavesByUserId);
 
 //RELOCATION
 router.post(
@@ -56,6 +60,7 @@ router.post(
   );
 router.get("/relocationquestionnaire", relocationQuestionnaire);
 router.get("/relocation", jwtAuthorize, getRelocationByUserId);
+router.get("/pending-relocation", jwtAuthorize, getPendingRelocationByUserId);
 
 //RESIGNATION
 router.post(
@@ -73,6 +78,7 @@ router.post(
 );
 router.get("/questionnaire", questionnaire);
 router.get("/resignation", jwtAuthorize, getResignationByUserId);
+router.get("/pending-resignation", jwtAuthorize, getPendingResignationByUserId);
 
 
 

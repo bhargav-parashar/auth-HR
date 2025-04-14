@@ -18,6 +18,7 @@ const responseValidationSchema = Joi.object().keys({
 });
 const responsesValidationSchema = Joi.object().keys({
   userId: Joi.string(),
+  resignationId : Joi.string(),
   responses: Joi.array().items(responseValidationSchema),
 });
 
@@ -32,6 +33,7 @@ const relocationResponseValidationSchema = Joi.object().keys({
 });
 const relocationResponsesValidationSchema = Joi.object().keys({
   userId: Joi.string(),
+  relocationId:Joi.string(),
   responses: Joi.array().items(relocationResponseValidationSchema),
 });
 

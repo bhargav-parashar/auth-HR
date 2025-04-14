@@ -3,8 +3,12 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import { Select, MenuItem } from "@mui/material";
 import { locations } from "../../constants/constants";
+import useGetLoggedInUser from '../../Hooks/useGetLoggedInUser';
 
 const RelocationStep1 = ({location, handleLocationChange}) => {
+  const {user} = useGetLoggedInUser();
+  const currLocationn = user?.location;
+  const updatedLocations = locations.filter((item)=>item !== currLocationn);
   return (
     <FormControl size="small" sx={{ width: "100%" }}>
               <InputLabel id="location-picker">
@@ -22,7 +26,7 @@ const RelocationStep1 = ({location, handleLocationChange}) => {
                 <MenuItem disabled value="">
                   Location
                 </MenuItem>
-                {locations.map((item, idx) => (
+                {updatedLocations.map((item, idx) => (
                   <MenuItem key={idx} value={item}>
                     {item}
                   </MenuItem>

@@ -1,7 +1,7 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
 import Progress from "../../../../components/Progress/Progress";
 
-const LeaveBal = ({ isReview, user, isMobile }) => {
+const LeaveBal = ({ isReview, user, isMobile, label }) => {
   return (
     <Box
       p={2}
@@ -26,7 +26,7 @@ const LeaveBal = ({ isReview, user, isMobile }) => {
           color="primary.inactive"
           pt={1}
         >
-          Employee's new leave balance after approval
+         {label}
         </Typography>
       )}
 

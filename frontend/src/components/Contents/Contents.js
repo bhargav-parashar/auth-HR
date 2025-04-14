@@ -40,7 +40,6 @@ const Contents = ({
     setLeaveType(e.target.value);
   };
 
-
   return (
     <Stack direction={{ xs: "column", md: "row" }} sx={{ height: "70%" }}>
       <Box sx={{ position: "relative" }} flex={2}>

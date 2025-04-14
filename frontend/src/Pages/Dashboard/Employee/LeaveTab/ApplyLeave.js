@@ -11,7 +11,7 @@ const ApplyLeave = ({ setSelectedTab }) => {
   const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
-    const URL = `${config.endpoint}/user/leave-applications`;
+    const URL = `${config.endpoint}/user/pending-leave-applications`;
     const getLeaves = async () => {
       try {
         setIsLoading(true);

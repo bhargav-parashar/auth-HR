@@ -15,18 +15,18 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import config from "../../config/config";
 
-const RequestsModal = ({
+const RelocationModal = ({
   handleOutsideClick,
   handleModalClose,
   handleSubmit,
   selectedReq,
-  getPenRequests
+  getPenRequests,
 }) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  reject = async (balanceObject) => {
+  reject = async () => {
     try {
-      const URL = `${config.endpoint}/hr/update-leave-status`;
+      const URL = `${config.endpoint}/hr/update-relocation-status`;
       const id = selectedReq?._id;
       const res = await axios.put(
         URL,
@@ -34,72 +34,35 @@ const RequestsModal = ({
         { withCredentials: true }
       );
       if (res.status === 200) {
-        const URL1 = `${config.endpoint}/hr/update-leave-bal`;
-        const id = selectedReq?.userDetails[0]?._id;
-        const updated = await axios.put(
-          URL1,
-          { id: id, newLeaveBal: balanceObject },
-          { withCredentials: true }
-        );
-        if (updated.status === 200) {
-          getPenRequests();
-          handleModalClose();
-          enqueueSnackbar("Request Rejected", { variant: "success" });
-        }
+        getPenRequests();
+        handleModalClose();
+        enqueueSnackbar("Request Approved", { variant: "success" });
       }
     } catch (err) {
       console.log(err);
       enqueueSnackbar(err, { variant: "warning" });
     }
-    
   };
 
   approve = async () => {
     try {
-        const URL = `${config.endpoint}/hr/update-leave-status`;
-        const id = selectedReq?._id;
-        const res = await axios.put(
-          URL,
-          { id: id, newStatus: "Approved" },
-          { withCredentials: true }
-        );
-        if (res.status === 200) {
-            getPenRequests();
-            handleModalClose();
-            enqueueSnackbar("Request Approved", { variant: "success" });
-        }
+      const URL = `${config.endpoint}/hr/update-relocation-status`;
+      const id = selectedReq?._id;
+      const res = await axios.put(
+        URL,
+        { id: id, newStatus: "Approved" },
+        { withCredentials: true }
+      );
+      if (res.status === 200) {
+        getPenRequests();
+        handleModalClose();
+        enqueueSnackbar("Request Approved", { variant: "success" });
+      }
     } catch (err) {
       console.log(err);
       enqueueSnackbar(err, { variant: "warning" });
     }
-    
   };
-
-  handleClose = () => {
-    //Add duration number of days back to the type of leave for the specific user
-    const balanceObject = selectedReq?.userDetails[0]?.leaveBal;
-    const lt = selectedReq.leaveType;
-    const category =
-      lt === "Casual Leave"
-        ? "casual"
-        : lt === "Sick Leave"
-        ? "sick"
-        : lt === "Earned Leave"
-        ? "earned"
-        : "casual";
-    const oldBal = balanceObject[category];
-    const difference = differenceInDays(
-      addDays(selectedReq.endDate, 1),
-      selectedReq.startDate
-    );
-    const newBal = oldBal + difference;
-    balanceObject[category] = newBal;
-    reject(balanceObject);
-  };
-
-  handleApprove = () =>{
-    approve();
-  }
 
   return (
     <Box id="Outer-Modal" className={styles.modal} onClick={handleOutsideClick}>
@@ -115,7 +78,7 @@ const RequestsModal = ({
             variant="h6"
             color="text.headingContrast"
           >
-            {selectedReq.leaveType}
+            Relocation Request
           </Typography>
           <Typography
             sx={{ fontWeight: "bold" }}
@@ -129,7 +92,66 @@ const RequestsModal = ({
         <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction="row">
           <Box sx={{ width: "50%", height: "100%" }}>
             <Details isReview isGrid user={selectedReq?.userDetails[0]} />
-            <LeaveBal isReview user={selectedReq?.userDetails[0]} />
+            <Box
+              p={2}
+              flex={1}
+              sx={{
+                height: "50%",
+                borderRadius: "0.6rem",
+                boxShadow:
+                  " rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+              }}
+            >
+              <Typography
+                sx={{ fontWeight: "bold" }}
+                variant="body2"
+                color="primary.inactive"
+              >
+                Questionnaire
+              </Typography>
+              <Box
+                mt={1}
+                p={1}
+                sx={{
+                  width: "100%",
+                  borderRadius: "0.6rem",
+                  overflowWrap: "break-word",
+                  bgcolor: "primary.dark",
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  fontWeight="bold"
+                  color="primary.light"
+                >
+                  {selectedReq?.userResponses[0]?.responses[0]?.questionText}
+                </Typography>
+                <Typography mt={1} sx={{ display: "block" }} variant="caption">
+                  {selectedReq?.userResponses[0]?.responses[0]?.response}
+                </Typography>
+              </Box>
+              <Box
+                mt={1}
+                p={1}
+                sx={{
+                  width: "100%",
+                  bgcolor: "primary.dark",
+                  borderRadius: "0.6rem",
+                  overflowWrap: "break-word",
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  fontWeight="bold"
+                  color="primary.light"
+                >
+                  {selectedReq?.userResponses[0]?.responses[1]?.questionText}
+                </Typography>
+                <Typography mt={1} sx={{ display: "block" }} variant="caption">
+                  {selectedReq?.userResponses[0]?.responses[1]?.response}
+                </Typography>
+              </Box>
+            </Box>
           </Box>
           <Box sx={{ width: "50%", height: "100%" }}>
             <Box
@@ -142,25 +164,22 @@ const RequestsModal = ({
               }}
             >
               <Stack direction="row">
-                <Stack justifyContent="center" sx={{ minWidth: "100px" }}>
+                <Stack
+                  justifyContent="center"
+                  sx={{ width: "40%", minWidth: "100px" }}
+                >
                   <Typography
                     fontWeight="bold"
                     color="primary.light"
                     variant="caption"
                     mr={1}
-                  >{`Start Date`}</Typography>
+                  >{`Current Location`}</Typography>
                   <Typography
                     fontWeight="bold"
                     color="primary.light"
                     variant="caption"
                     mr={1}
-                  >{`End Date`}</Typography>
-                  <Typography
-                    fontWeight="bold"
-                    color="primary.light"
-                    variant="caption"
-                    mr={1}
-                  >{`Duration`}</Typography>
+                  >{`Requested Location`}</Typography>
                 </Stack>
                 <Stack justifyContent="center" sx={{ width: "10%" }}>
                   <Typography
@@ -175,25 +194,13 @@ const RequestsModal = ({
                     variant="caption"
                     mr={1}
                   >{`:`}</Typography>
-                  <Typography
-                    fontWeight="bold"
-                    color="primary.inactive"
-                    variant="caption"
-                    mr={1}
-                  >{`:`}</Typography>
                 </Stack>
-                <Stack justifyContent="center" sx={{ width: "100%" }}>
+                <Stack justifyContent="center" sx={{ width: "50%" }}>
                   <Typography variant="caption">
-                    {format(selectedReq?.startDate, "PPP")}
+                    {selectedReq?.userDetails[0]?.location}
                   </Typography>
                   <Typography variant="caption">
-                    {format(selectedReq?.endDate, "PPP")}
-                  </Typography>
-                  <Typography variant="caption">
-                    {formatDistance(
-                      selectedReq?.startDate,
-                      addDays(selectedReq?.endDate, 1)
-                    )}
+                    {selectedReq?.location}
                   </Typography>
                 </Stack>
               </Stack>
@@ -232,13 +239,10 @@ const RequestsModal = ({
           justifyContent="flex-end"
           gap={0.5}
         >
-          <Button sx={{ bgcolor: "primary.inactive" }} onClick={handleClose}>
+          <Button sx={{ bgcolor: "primary.inactive" }} onClick={reject}>
             Reject
           </Button>
-          <Button
-            sx={{ bgcolor: "primary.contrast" }}
-            onClick={handleApprove}
-          >
+          <Button sx={{ bgcolor: "primary.contrast" }} onClick={approve}>
             Approve
           </Button>
         </Stack>
@@ -247,4 +251,4 @@ const RequestsModal = ({
   );
 };
 
-export default RequestsModal;
+export default RelocationModal;

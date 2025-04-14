@@ -8,22 +8,11 @@ import config from "../../../../config/config";
 import axios from "axios";
 import MobileDash from "./MobileDash";
 import useAnnouncements from "../../../../Hooks/useAnnouncements";
+import useGetLoggedInUser from "../../../../Hooks/useGetLoggedInUser";
 
 const EmployeeHome = () => {
-  const [user, setUser] = useState([]);
+  const { user, setUser } = useGetLoggedInUser();
   const { announcements } = useAnnouncements();
-  useEffect(() => {
-    const URL = `${config.endpoint}/user/details`;
-    try {
-      const getDetails = async () => {
-        const { data } = await axios.get(URL, { withCredentials: true });
-        setUser(data?.user);
-      };
-      getDetails();
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
 
   return (
     <Box sx={{ height: "100%" }}>
