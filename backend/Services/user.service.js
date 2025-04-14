@@ -113,8 +113,8 @@ class UserService {
       {
         $lookup: {
           from: "userresponses",
-          localField: "employeeId",
-          foreignField: "userId",
+          localField: "_id",
+          foreignField: "resignationId",
           as: "userResponses",
         },
       },
@@ -148,8 +148,8 @@ class UserService {
         {
           $lookup: {
             from: "userresponses",
-            localField: "employeeId",
-            foreignField: "userId",
+            localField: "_id",
+            foreignField: "resignationId",
             as: "userResponses",
           },
         },
@@ -215,8 +215,8 @@ class UserService {
       {
         $lookup: {
           from: "relocationresponses",
-          localField: "employeeId",
-          foreignField: "userId",
+          localField: "_id",
+          foreignField: "relocationId",
           as: "relocationResponses",
         },
       },
@@ -252,8 +252,8 @@ class UserService {
       {
         $lookup: {
           from: "relocationresponses",
-          localField: "employeeId",
-          foreignField: "userId",
+          localField: "_id",
+          foreignField: "relocationId",
           as: "relocationResponses",
         },
       },

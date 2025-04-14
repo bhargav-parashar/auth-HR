@@ -37,12 +37,15 @@ export default submitLeave = async ({
   try {
     setIsLoading(true);
     const res1 = await axios.post(URL1, body1, { withCredentials: true });
-    const res2 = await axios.post(URL2, body2, { withCredentials: true });
+    
 
-    if (res2.status === 200 && res1.status === 200) {
-      enqueueSnackbar("Leave request submitted", { variant: "success" });
-      setSelectedTab("Apply Leave");
-      setRefresh(prev=>prev+1);
+    if (res1.status === 200) {
+      const res2 = await axios.post(URL2, body2, { withCredentials: true });
+      if(res2.status === 200){
+        enqueueSnackbar("Leave request submitted", { variant: "success" });
+        setSelectedTab("Apply Leave");
+        setRefresh(prev=>prev+1);
+      }
     }
   } catch (err) {
     console.log(err);

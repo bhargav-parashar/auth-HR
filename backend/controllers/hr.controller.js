@@ -90,7 +90,7 @@ const createAnnouncement = async (req,res) => {
   //UPDATE LEAVE BALANCE
   const updateLeaveBal = async (req,res) =>{
     try{
-      const updated = await HRServiceInstance.updateLeaveBal(req.body.id, req.body.newLeaveBal);
+      const updated = await HRServiceInstance.updateLeaveBal(req.user._id, req.body.newLeaveBal);
       res.status(200).json(updated);
     }catch(err){
         res.status(500).json({ message: "Failed to update leave balance", err });
@@ -114,6 +114,16 @@ const createAnnouncement = async (req,res) => {
       res.status(200).json(updated);
     }catch(err){
         res.status(500).json({ message: "Failed to update relocation status", err });
+    }
+  }
+  
+  //UPDATE USER LOCATION 
+  const updateUserLocation = async (req,res) =>{
+    try{
+      const updated = await HRServiceInstance.updateUserLocation(req.user._id, req.body.newLocation);
+      res.status(200).json(updated);
+    }catch(err){
+        res.status(500).json({ message: "Failed to update user location", err });
     }
   }
 
@@ -140,5 +150,6 @@ module.exports = {
     updateLeaveBal,
     updateLeaveStatus,
     updateRelocationStatus,
-    updateResignationStatus
+    updateResignationStatus,
+    updateUserLocation
 };

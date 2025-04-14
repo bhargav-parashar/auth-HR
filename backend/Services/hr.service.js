@@ -103,8 +103,8 @@ class HRService {
         {
           $lookup: {
             from: "relocationresponses",
-            localField: "employeeId",
-            foreignField: "userId",
+            localField: "_id",
+            foreignField: "relocationId",
             as: "userResponses",
           }
         },
@@ -143,8 +143,8 @@ class HRService {
         {
           $lookup: {
             from: "userresponses",
-            localField: "employeeId",
-            foreignField: "userId",
+            localField: "_id",
+            foreignField: "resignationId",
             as: "userResponses",
           }
         },
@@ -261,7 +261,20 @@ class HRService {
     }catch(err){
       throw err;
     }
-  } 
+  }
+  
+  updateUserLocation = (id, newLocation) =>{
+    try{
+      const updated = User.findByIdAndUpdate(
+        id, 
+        {$set:{location : newLocation}},
+        {new:true}
+      );
+      return updated;
+    }catch(err){
+      throw err;
+    }
+  }
 
   updateResignationStatus = (id, newStatus) =>{
     try{

@@ -118,6 +118,7 @@ const relocate = async (req, res) => {
 const submitRelocationResponse = async (req, res) => {
   try {
     const body = {
+      relocationId: req.body.relocationId,
       userId: req.user._id,
       responses: req.body.responses,
     };
@@ -185,6 +186,7 @@ const resign = async (req, res) => {
 const submitResponse = async (req, res) => {
   try {
     const body = {
+      resignationId : req.body.resignationId,
       userId: req.user._id,
       responses: req.body.responses,
     };

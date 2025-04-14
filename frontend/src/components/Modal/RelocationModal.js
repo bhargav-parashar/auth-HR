@@ -54,9 +54,13 @@ const RelocationModal = ({
         { withCredentials: true }
       );
       if (res.status === 200) {
-        getPenRequests();
-        handleModalClose();
-        enqueueSnackbar("Request Approved", { variant: "success" });
+        const URL1 = `${config.endpoint}/hr/update-user-location`;
+        const res1 = await axios.put(URL1,{newLocation:selectedReq.location},{ withCredentials: true });
+        if(res1.status === 200){
+          getPenRequests();
+          handleModalClose();
+          enqueueSnackbar("Request Approved", { variant: "success" });
+        }
       }
     } catch (err) {
       console.log(err);
