@@ -16,7 +16,8 @@ export const darkTheme = () => (
                 inactive3 : 'rgb(39, 38, 38)',
                 contrast:'rgb(81, 81, 228)',
                 successLight :"rgb(222, 248, 223)",
-                highlight:'rgb(217, 133, 37)'
+                highlight:'rgb(217, 133, 37)',
+                calendar: 'rgb(39, 37, 37)'
             },
            
             text: {

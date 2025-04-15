@@ -23,6 +23,7 @@ const InfoCardSection = ({
           label="Total Employees"
           value={totalEmployees}
           isLoading={isLoading}
+          
         />
         <DashInfoCard
           label="Avg Leave Balance"

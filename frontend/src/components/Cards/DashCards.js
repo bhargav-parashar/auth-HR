@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography, Stack } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
 import Shimmer from "../ShimmerUI/Shimmer";
+import CircleIcon from '@mui/icons-material/Circle';
 
 const DashCard = ({ label, count, isLoading, setSelectedReqTab,selectedReqTab }) => {
   handleclick = () => {
@@ -32,17 +33,23 @@ const DashCard = ({ label, count, isLoading, setSelectedReqTab,selectedReqTab })
             width: "100%",
             cursor: "pointer",
             minHeight: "93px",
-            bgcolor:selectedReqTab === label ? "secondary.dark" : "primary.contrast",
+            bgcolor:selectedReqTab === label ? "rgb(70, 62, 220)" : "#8884d8",
             transition: 'transform 0.3s ease, background-color 0.3s ease',
             '&:hover': {
               transform: 'scale(1.015)',
-              //color: selectedReqTab !== label ? "primary.light" : "",
-              backgroundColor: 'secondary.dark'
+              backgroundColor: "rgb(70, 62, 220)"
             }
           }}
         >
           <Box sx={{ height: "100%" }}>
+            <Stack gap={1} alignItems='center' justifyContent="flex-start" direction='row' sx={{width:'100%'}} >
             <Typography mb={1}>{label}</Typography>
+            {
+              count > 0 &&
+              <CircleIcon  sx={{  color:'rgb(217, 85, 29)', marginBottom:1, height:'10px', width:'10px'}} /> 
+            }
+            </Stack>
+            
 
             <Stack
               direction="row"

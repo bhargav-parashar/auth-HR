@@ -58,11 +58,14 @@ const CalendarSection = ({ isLoading }) => {
     <Box
       sx={{
         borderRadius: "0.6rem",
-        border: "2px solid white",
         width: "100%",
         cursor: "pointer",
         height: "100%",
-        
+        bgcolor : "primary.calendar",
+        transition: 'transform 0.3s ease, background-color 0.3s ease',
+        '&:hover': {
+          transform: 'scale(1.015)'
+        }
       }}
     >
      
@@ -73,7 +76,6 @@ const CalendarSection = ({ isLoading }) => {
             <DemoContainer components={["DateCalendar"]}>
               <DemoItem>
                 <DateCalendar
-                 
                   views={["day"]}
                   defaultValue={dayjs(new Date())}
                   readOnly

@@ -8,11 +8,18 @@ const Details = ({ user, isMobile, isGrid, isReview }) => {
       p={1}
       flex={1}
       sx={{
+        cursor:'pointer',
         height: "50%",
         borderRadius: "0.6rem",
         bgcolor: isReview? "" : "primary.inactive3",
         boxShadow:
           " rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+        transition: !isReview ? 'transform 0.3s ease, background-color 0.3s ease' : "",
+        '&:hover': {
+          transform:!isReview ? 'scale(1.015)':"",
+          border:'1px solid',
+          borderColor:!isReview ? 'primary.light':""
+        }
       }}
     >
       {!isGrid && (

@@ -36,8 +36,20 @@ const Employees = () => {
     <Box
       sx={{
         height: "100%",
-        overflowY: "auto",
         paddingX: 2,
+        overflowY: "scroll",
+          "&::-webkit-scrollbar": {
+            width: "6px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "#888",
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-track": {
+            backgroundColor: "transparent",
+          },
+          scrollbarWidth: "thin",
+          scrollbarColor: "#888 transparent",
       }}
     >
       <Box sx={{ height: "70%", display: { xs: "none", md: "block" } }}>

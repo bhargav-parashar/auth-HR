@@ -2,21 +2,46 @@ import React from "react";
 import { Stack, Box, Typography } from "@mui/material";
 import Shimmer from "../ShimmerUI/Shimmer";
 
-const DashInfoCard = ({ label, value, isLoading }) => {
+const DashInfoCard = ({ label, value, isLoading}) => {
+  getBg=(label)=>{
+    if(isLoading) return "";
+    else if(label === "Current Month Hires"){
+      return "rgb(59, 165, 100)";
+    }else if(label === "Attrition Rate"){
+      return "rgb(253, 113, 113)";
+    }else if(label === "Total Employees"){
+      return "rgb(72, 139, 216)";
+    }else if(label === "Avg Leave Balance"){
+      return "rgb(212, 154, 19)";
+    }
+  }
+  getBgHighlight=(label)=>{
+    if(isLoading) return "";
+    else if(label === "Current Month Hires"){
+      return "rgb(4, 143, 57)";
+    }else if(label === "Attrition Rate"){
+      return  "rgb(246, 82, 82)";
+    }else if(label === "Total Employees"){
+      return "rgb(28, 107, 197)";
+    }else if(label === "Avg Leave Balance"){
+      return "rgb(212, 122, 19)";
+    }
+  }
   return (
     <Box
       p={1}
+      
       sx={{
         height: "100%",
         width: "100%",
         borderRadius: "0.6rem",
-        bgcolor:'primary.bg1',
+        bgcolor: getBg(label),
         transition: 'transform 0.3s ease, background-color 0.3s ease',
         '&:hover': {
           transform: 'scale(1.015)',
-          //color: selectedReqTab !== label ? "primary.light" : "",
-          backgroundColor: 'primary.contrast'
+          backgroundColor: getBgHighlight(label)
         }
+        
       }}
     >
       {!isLoading && (

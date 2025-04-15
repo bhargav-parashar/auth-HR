@@ -24,6 +24,8 @@ const Department = ({deptMap}) => {
          height: "100%",
          borderRadius: "0.6rem",
          bgcolor: "primary.inactive3",
+         cursor:"pointer",
+        
        }}
      >
        <Typography

@@ -53,8 +53,8 @@ const CreateAnnouncement = ({ isLoading }) => {
     <Box sx={{ height: "100%", width: "100%" }}>
       <Box
         sx={{
+          bgcolor:'primary.bg1',
           borderRadius: "0.6rem",
-          border: "2px solid white",
           width: "100%",
           cursor: "pointer",
           height: "100%",
@@ -72,6 +72,11 @@ const CreateAnnouncement = ({ isLoading }) => {
           },
           scrollbarWidth: "thin",
           scrollbarColor: "#888 transparent",
+          transition: 'transform 0.3s ease, background-color 0.3s ease',
+            '&:hover': {
+              transform: 'scale(1.015)',
+              
+            }
         }}
       >
         {isLoading && <Shimmer cover />}
