@@ -15,7 +15,8 @@ export const lightTheme = () => (
                 inactive:'rgb(92, 68, 68)',
                 bg1 : 'rgb(209, 207, 207)',
                 contrast:'#9696FF',
-                successLight :"rgb(222, 248, 223)"
+                successLight :"rgb(222, 248, 223)",
+                highlight:'rgb(225, 136, 34)'
             },
             
             text: {

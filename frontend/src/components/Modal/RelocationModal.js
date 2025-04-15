@@ -14,6 +14,8 @@ import review from "../../assets/reviewHR.svg";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import config from "../../config/config";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 const RelocationModal = ({
   handleOutsideClick,
@@ -55,8 +57,15 @@ const RelocationModal = ({
       );
       if (res.status === 200) {
         const URL1 = `${config.endpoint}/hr/update-user-location`;
-        const res1 = await axios.put(URL1,{newLocation:selectedReq.location},{ withCredentials: true });
-        if(res1.status === 200){
+        const res1 = await axios.put(
+          URL1,
+          {
+            id: selectedReq?.userDetails[0]._id,
+            newLocation: selectedReq.location,
+          },
+          { withCredentials: true }
+        );
+        if (res1.status === 200) {
           getPenRequests();
           handleModalClose();
           enqueueSnackbar("Request Approved", { variant: "success" });
@@ -71,6 +80,7 @@ const RelocationModal = ({
   return (
     <Box id="Outer-Modal" className={styles.modal} onClick={handleOutsideClick}>
       <Box className={styles["modal-content"]}>
+      <Stack direction='row' justifyContent='space-between'  sx={{width:'100%'}} >
         <Stack
           mb={1}
           direction="column"
@@ -92,7 +102,8 @@ const RelocationModal = ({
             {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
           </Typography>
         </Stack>
-
+        <CloseIcon onClick={handleModalClose} sx={{cursor:'pointer', color:'primary.contrast' }} />
+      </Stack>
         <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction="row">
           <Box sx={{ width: "50%", height: "100%" }}>
             <Details isReview isGrid user={selectedReq?.userDetails[0]} />

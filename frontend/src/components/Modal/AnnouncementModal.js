@@ -9,6 +9,7 @@ import {
   TextField,
 } from "@mui/material";
 import CampaignIcon from "@mui/icons-material/Campaign";
+import CloseIcon from '@mui/icons-material/Close';
 
 const CreateOrUpdateAnnouncement = ({
   handleOutsideClick,
@@ -48,6 +49,7 @@ const CreateOrUpdateAnnouncement = ({
   return (
     <Box id="Outer-Modal" className={styles.modal} onClick={handleOutsideClick}>
       <Box className={styles["modal-content"]}>
+         <Stack direction='row' alignItems='center' justifyContent='space-between' sx={{width:'100%'}}>
         <Stack
           mb={1}
           direction="row"
@@ -68,6 +70,8 @@ const CreateOrUpdateAnnouncement = ({
           </Typography>
 
           <CampaignIcon sx={{ color: "primary.contrast" }} />
+        </Stack>
+        <CloseIcon  onClick={handleModalClose} sx={{marginX:'10px', cursor:'pointer', color:'primary.contrast' }} />
         </Stack>
         {isDelete && (
           <Typography sx={{color:'primary.inactive'}} textAlign="left" pr={1}>

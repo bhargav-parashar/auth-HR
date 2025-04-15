@@ -58,9 +58,11 @@ export default function BasicDatePicker({
           onChange={handleDateChange}
           sx={{ width: isMobile ? "100%" : "50%" }}
           slotProps={{
-            textField: { size: isMobile ? "large" : "small" },
+            textField: { 
+              size: isMobile ? "large" : "small" 
+            },
             popper: {
-              placement: "right",
+              placement: "right"
             },
           }}
         />

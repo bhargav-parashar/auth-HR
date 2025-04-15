@@ -9,8 +9,14 @@ const DashInfoCard = ({ label, value, isLoading }) => {
       sx={{
         height: "100%",
         width: "100%",
-        border: "2px solid white",
         borderRadius: "0.6rem",
+        bgcolor:'primary.bg1',
+        transition: 'transform 0.3s ease, background-color 0.3s ease',
+        '&:hover': {
+          transform: 'scale(1.015)',
+          //color: selectedReqTab !== label ? "primary.light" : "",
+          backgroundColor: 'primary.contrast'
+        }
       }}
     >
       {!isLoading && (

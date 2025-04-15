@@ -27,6 +27,7 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
           onClick={handleBack}
           size="small"
           sx={{
+            bgcolor:'primary.contrast',
             "&:hover": {
               backgroundColor: "secondary.dark",
             },
@@ -34,7 +35,7 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
         >
           {`< Home `}
         </Button>
-        <Typography variant="h6">{`Pending ${selectedReqTab}`}</Typography>
+        <Typography  sx={{color:'secondary.dark'}} variant="h6">{`Pending ${selectedReqTab}`}</Typography>
       </Stack>
       <TableContainer component={Paper}>
         <Table
@@ -85,6 +86,7 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
                     <Button
                       onClick={() => handleLeaveReview(item._id)}
                       sx={{
+                        bgcolor:'primary.contrast',
                         "&:hover": {
                           backgroundColor: "secondary.dark",
                         },

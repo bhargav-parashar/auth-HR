@@ -62,6 +62,7 @@ const CalendarSection = ({ isLoading }) => {
         width: "100%",
         cursor: "pointer",
         height: "100%",
+        
       }}
     >
      

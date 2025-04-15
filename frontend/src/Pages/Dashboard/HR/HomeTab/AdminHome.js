@@ -61,6 +61,7 @@ const AdminHome = ({
     >
       <Box sx={{ height: "70%", display: { xs: "none", md: "block" } }}>
         <PendingRequestsSection
+          selectedReqTab={selectedReqTab}
           setSelectedReqTab={setSelectedReqTab}
           isLoading={isReqLoading}
           penRequests={penRequests}

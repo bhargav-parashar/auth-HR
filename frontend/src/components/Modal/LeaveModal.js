@@ -14,6 +14,8 @@ import review from "../../assets/reviewHR.svg";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import config from "../../config/config";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 const LeaveModal = ({
   handleOutsideClick,
@@ -104,28 +106,30 @@ const LeaveModal = ({
   return (
     <Box id="Outer-Modal" className={styles.modal} onClick={handleOutsideClick}>
       <Box className={styles["modal-content"]}>
-        <Stack
-          mb={1}
-          direction="column"
-          alignItems="flex-start"
-          sx={{ width: "100%" }}
-        >
-          <Typography
-            sx={{ fontWeight: "bold" }}
-            variant="h6"
-            color="text.headingContrast"
+        <Stack direction='row' justifyContent='space-between'  sx={{width:'100%'}} >
+          <Stack
+            mb={1}
+            direction="column"
+            alignItems="flex-start"
+            sx={{ width: "100%" }}
           >
-            {selectedReq.leaveType}
-          </Typography>
-          <Typography
-            sx={{ fontWeight: "bold" }}
-            variant="body2"
-            color="primary.inactive"
-          >
-            {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
-          </Typography>
+            <Typography
+              sx={{ fontWeight: "bold" }}
+              variant="h6"
+              color="text.headingContrast"
+            >
+              {selectedReq.leaveType}
+            </Typography>
+            <Typography
+              sx={{ fontWeight: "bold" }}
+              variant="body2"
+              color="primary.inactive"
+            >
+              {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
+            </Typography>
+          </Stack>
+          <CloseIcon onClick={handleModalClose} sx={{cursor:'pointer', color:'primary.contrast' }} />
         </Stack>
-
         <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction="row">
           <Box sx={{ width: "50%", height: "100%" }}>
             <Details isReview isGrid user={selectedReq?.userDetails[0]} />

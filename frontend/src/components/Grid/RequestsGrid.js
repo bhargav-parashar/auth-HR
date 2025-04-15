@@ -197,6 +197,7 @@ const RequestsGrid = ({ requests }) => {
               <TableRow>
                 <TableCell>ID</TableCell>
                 <TableCell align="left">Category</TableCell>
+                <TableCell align="left">Last Working Day</TableCell>
                 <TableCell align="left">Submitted On</TableCell>
                 <TableCell align="left">Status</TableCell>
               </TableRow>
@@ -212,8 +213,9 @@ const RequestsGrid = ({ requests }) => {
                       {idx + 1}
                     </TableCell>
                     <TableCell align="left">Resignation</TableCell>
+                    <TableCell align="left">{format(item.lwd, "PPP")}</TableCell>
                     <TableCell align="left">
-                      {format(item.createdAt, "dd MMM, yyyy")}
+                      {format(item.createdAt, "PPP")}
                     </TableCell>
                     <TableCell
                       sx={{ color: getColor(item.status) }}

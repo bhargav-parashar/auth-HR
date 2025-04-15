@@ -120,7 +120,7 @@ const createAnnouncement = async (req,res) => {
   //UPDATE USER LOCATION 
   const updateUserLocation = async (req,res) =>{
     try{
-      const updated = await HRServiceInstance.updateUserLocation(req.user._id, req.body.newLocation);
+      const updated = await HRServiceInstance.updateUserLocation(req.body.id, req.body.newLocation);
       res.status(200).json(updated);
     }catch(err){
         res.status(500).json({ message: "Failed to update user location", err });
@@ -130,7 +130,7 @@ const createAnnouncement = async (req,res) => {
   //UPDATE RESIGNATION STATUS
   const updateResignationStatus = async (req,res) =>{
     try{
-      const updated = await HRServiceInstance.updateResignationStatus(req.body.id, req.body.newStatus);
+      const updated = await HRServiceInstance.updateResignationStatus(req.body.id, req.body.newStatus, req.body.newLwd);
       res.status(200).json(updated);
     }catch(err){
         res.status(500).json({ message: "Failed to update resignation status", err });

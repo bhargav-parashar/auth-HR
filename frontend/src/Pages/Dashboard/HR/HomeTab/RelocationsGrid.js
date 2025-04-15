@@ -33,6 +33,7 @@ const RelocationsGrid = ({
           onClick={handleBack}
           size="small"
           sx={{
+            bgcolor:'primary.contrast',
             "&:hover": {
               backgroundColor: "secondary.dark",
             },
@@ -91,6 +92,7 @@ const RelocationsGrid = ({
                     <Button
                       onClick={() => handleRelocationReview(item._id)}
                       sx={{
+                        bgcolor:'primary.contrast',
                         "&:hover": {
                           backgroundColor: "secondary.dark",
                         },

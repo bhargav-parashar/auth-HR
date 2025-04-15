@@ -1,7 +1,7 @@
 import { Stack, Box, Typography } from "@mui/material";
 import DashCard from "../../../../components/Cards/DashCards";
 
-const PendingRequestsSection = ({isLoading, penRequests, setSelectedReqTab}) => {
+const PendingRequestsSection = ({isLoading, penRequests, setSelectedReqTab, selectedReqTab}) => {
   
   return (
     <Stack
@@ -18,18 +18,21 @@ const PendingRequestsSection = ({isLoading, penRequests, setSelectedReqTab}) => 
         count={penRequests.leaves.length}
         isLoading={isLoading}
         setSelectedReqTab={setSelectedReqTab}
+        selectedReqTab={selectedReqTab}
       />
       <DashCard
         label="Relocations"
         count={penRequests.relocations.length}
         isLoading={isLoading}
         setSelectedReqTab={setSelectedReqTab}
+        selectedReqTab={selectedReqTab}
       />
       <DashCard
         label="Resignations"
         count={penRequests.resignations.length}
         isLoading={isLoading}
         setSelectedReqTab={setSelectedReqTab}
+        selectedReqTab={selectedReqTab}
       />
     </Stack>
   );

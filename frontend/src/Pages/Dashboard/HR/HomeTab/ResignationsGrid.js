@@ -33,6 +33,7 @@ const ResignationsGrid = ({
           onClick={handleBack}
           size="small"
           sx={{
+            bgcolor:'primary.contrast',
             "&:hover": {
               backgroundColor: "secondary.dark",
             },
@@ -89,6 +90,7 @@ const ResignationsGrid = ({
                     <Button
                       onClick={() => handleResignationReview(item._id)}
                       sx={{
+                        bgcolor:'primary.contrast',
                         "&:hover": {
                           backgroundColor: "secondary.dark",
                         },

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./RequestModal.module.css";
 import {
   Box,
@@ -14,6 +15,10 @@ import review from "../../assets/reviewHR.svg";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import config from "../../config/config";
+import DatePicker from "../DatePicker/DatePickerField";
+import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 const ResignationModal = ({
   handleOutsideClick,
@@ -22,6 +27,7 @@ const ResignationModal = ({
   selectedReq,
   getPenRequests,
 }) => {
+  const [lwd, setLwd] = useState(selectedReq?.lwd);
   const { enqueueSnackbar } = useSnackbar();
 
   reject = async () => {
@@ -50,7 +56,7 @@ const ResignationModal = ({
       const id = selectedReq?._id;
       const res = await axios.put(
         URL,
-        { id: id, newStatus: "Approved" },
+        { id: id, newStatus: "Approved", newLwd : lwd },
         { withCredentials: true }
       );
       if (res.status === 200) {
@@ -65,8 +71,11 @@ const ResignationModal = ({
   };
 
   return (
+
+    
     <Box id="Outer-Modal" className={styles.modal} onClick={handleOutsideClick}>
       <Box className={styles["modal-content"]}>
+      <Stack direction='row' justifyContent='space-between'  sx={{width:'100%'}} >
         <Stack
           mb={1}
           direction="column"
@@ -88,7 +97,8 @@ const ResignationModal = ({
             {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
           </Typography>
         </Stack>
-
+        <CloseIcon onClick={handleModalClose} sx={{cursor:'pointer', color:'primary.contrast' }} />
+      </Stack>
         <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction="row">
           <Box sx={{ width: "50%", height: "100%" }}>
             <Details isReview isGrid user={selectedReq?.userDetails[0]} />
@@ -163,31 +173,31 @@ const ResignationModal = ({
                 borderRadius: "0.6rem",
               }}
             >
-              <Stack direction="row">
+              <Stack gap={1}>
                 <Stack
+                  bgcolor="rgb(157, 157, 247)"
+                  px={1}
+                  pb={1}
+                  borderRadius="0.6rem"
                   justifyContent="center"
-                  sx={{ width: "60%", minWidth: "100px" }}
+                  sx={{ width: "50%" }}
                 >
-                  <Typography
-                    fontWeight="bold"
-                    color="primary.light"
-                    variant="caption"
-                    mr={1}
-                  >{`Requested Last Working Day`}</Typography>
-                  
-                </Stack>
-                <Stack justifyContent="center" sx={{ width: "10%" }}>
-                  <Typography
-                    fontWeight="bold"
-                    color="primary.inactive"
-                    variant="caption"
-                    mr={1}
-                  >{`:`}</Typography>
-                </Stack>
-                <Stack justifyContent="center" sx={{ width: "50%" }}>
-                  <Typography variant="caption">
-                    {format(selectedReq?.lwd, "PPP")}
-                  </Typography>
+                  <Stack
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="flex-start"
+                    sx={{ width: "100%", minWidth: "100px" }}
+                    mt={1}
+                  >
+                    <Typography
+                      color="primary.main"
+                      variant="caption"
+                      mx={1}
+                    >{`Requested Last Working Day`}</Typography>
+                    <EditIcon fontSize="small" sx={{ color: "primary.main" }} />
+                  </Stack>
+
+                  <DatePicker label="" dateField={lwd} setDateField={setLwd} />
                 </Stack>
               </Stack>
             </Box>

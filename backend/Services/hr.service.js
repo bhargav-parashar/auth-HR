@@ -276,11 +276,11 @@ class HRService {
     }
   }
 
-  updateResignationStatus = (id, newStatus) =>{
+  updateResignationStatus = (id, newStatus, newLwd) =>{
     try{
       const updated = Resignations.findByIdAndUpdate(
         id, 
-        {$set:{status : newStatus}},
+        {$set:{status : newStatus, lwd: newLwd}},
         {new:true}
       );
       return updated;

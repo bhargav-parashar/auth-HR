@@ -3,10 +3,11 @@ import { Box, Typography, Stack } from "@mui/material";
 import LaunchIcon from "@mui/icons-material/Launch";
 import Shimmer from "../ShimmerUI/Shimmer";
 
-const DashCard = ({ label, count, isLoading, setSelectedReqTab }) => {
+const DashCard = ({ label, count, isLoading, setSelectedReqTab,selectedReqTab }) => {
   handleclick = () => {
     setSelectedReqTab(label);
   };
+  
   return (
     <Box
       onClick={handleclick}
@@ -28,10 +29,16 @@ const DashCard = ({ label, count, isLoading, setSelectedReqTab }) => {
           p={1}
           sx={{
             borderRadius: "0.6rem",
-            border: "2px solid white",
             width: "100%",
             cursor: "pointer",
             minHeight: "93px",
+            bgcolor:selectedReqTab === label ? "secondary.dark" : "primary.contrast",
+            transition: 'transform 0.3s ease, background-color 0.3s ease',
+            '&:hover': {
+              transform: 'scale(1.015)',
+              //color: selectedReqTab !== label ? "primary.light" : "",
+              backgroundColor: 'secondary.dark'
+            }
           }}
         >
           <Box sx={{ height: "100%" }}>
@@ -42,7 +49,7 @@ const DashCard = ({ label, count, isLoading, setSelectedReqTab }) => {
               alignItems="flex-end"
               justifyContent="space-between"
             >
-              <Typography variant="h4">{count} </Typography>
+              <Typography  variant="h4">{count} </Typography>
               <Stack gap={1} direction="row" alignItems="center">
                 <Typography variant="caption">Review</Typography>
                 <LaunchIcon fontSize="small" />
