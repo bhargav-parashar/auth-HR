@@ -7,8 +7,8 @@ import useGetLoggedInUser from '../../Hooks/useGetLoggedInUser';
 
 const RelocationStep1 = ({location, handleLocationChange}) => {
   const {user} = useGetLoggedInUser();
-  const currLocationn = user?.location;
-  const updatedLocations = locations.filter((item)=>item !== currLocationn);
+  const currLocation = user?.location;
+  const updatedLocations = locations.filter((item)=>item !== currLocation);
   return (
     <FormControl size="small" sx={{ width: "100%" }}>
               <InputLabel id="location-picker">

@@ -13,7 +13,9 @@ import useModal from "../../../../Hooks/useModal";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const CreateAnnouncement = ({ isLoading }) => {
+const CreateAnnouncement = ({
+  isLoading
+}) => {
   const {
     announcements,
     handleCreateAnnouncment,
@@ -53,7 +55,7 @@ const CreateAnnouncement = ({ isLoading }) => {
     <Box sx={{ height: "100%", width: "100%" }}>
       <Box
         sx={{
-          bgcolor:'primary.bg1',
+          bgcolor: "primary.inactive3",
           borderRadius: "0.6rem",
           width: "100%",
           cursor: "pointer",
@@ -72,11 +74,10 @@ const CreateAnnouncement = ({ isLoading }) => {
           },
           scrollbarWidth: "thin",
           scrollbarColor: "#888 transparent",
-          transition: 'transform 0.3s ease, background-color 0.3s ease',
-            '&:hover': {
-              transform: 'scale(1.015)',
-              
-            }
+          transition: "transform 0.3s ease, background-color 0.3s ease",
+          "&:hover": {
+            transform: "scale(1.015)",
+          },
         }}
       >
         {isLoading && <Shimmer cover />}
@@ -99,11 +100,11 @@ const CreateAnnouncement = ({ isLoading }) => {
                 aria-label="dense table"
               >
                 <TableHead>
-                  <TableRow>
+                  {/* <TableRow>
                     <TableCell align="left">Announcement</TableCell>
                     <TableCell align="left">Edit</TableCell>
                     <TableCell align="left">Delete</TableCell>
-                  </TableRow>
+                  </TableRow> */}
                 </TableHead>
                 <TableBody key={1}>
                   {announcements.length > 0 &&

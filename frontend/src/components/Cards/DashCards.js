@@ -4,13 +4,14 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import Shimmer from "../ShimmerUI/Shimmer";
 import CircleIcon from '@mui/icons-material/Circle';
 
-const DashCard = ({ label, count, isLoading, setSelectedReqTab,selectedReqTab }) => {
+const DashCard = ({ isMobile, label, count, isLoading, setSelectedReqTab,selectedReqTab }) => {
   handleclick = () => {
     setSelectedReqTab(label);
   };
   
   return (
     <Box
+      mt={ isMobile? 5: 0}
       onClick={handleclick}
       sx={{ height: "100%", width: "100%", cursor: "pointer" }}
     >
@@ -19,7 +20,7 @@ const DashCard = ({ label, count, isLoading, setSelectedReqTab,selectedReqTab })
           sx={{
             width: "100%",
             cursor: "pointer",
-            height: "103px",
+            height: isMobile?"80px" :"103px",
           }}
         >
           <Shimmer cover />
@@ -32,7 +33,7 @@ const DashCard = ({ label, count, isLoading, setSelectedReqTab,selectedReqTab })
             borderRadius: "0.6rem",
             width: "100%",
             cursor: "pointer",
-            minHeight: "93px",
+            minHeight: isMobile?"80px":"93px",
             bgcolor:selectedReqTab === label ? "rgb(70, 62, 220)" : "#8884d8",
             transition: 'transform 0.3s ease, background-color 0.3s ease',
             '&:hover': {

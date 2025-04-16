@@ -99,8 +99,8 @@ const ResignationModal = ({
         </Stack>
         <CloseIcon onClick={handleModalClose} sx={{cursor:'pointer', color:'primary.contrast' }} />
       </Stack>
-        <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction="row">
-          <Box sx={{ width: "50%", height: "100%" }}>
+        <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction={{xs:"column", md:"row"}}>
+          <Box sx={{ width: {xs:"100%", md:"50%"}, height: "100%" }}>
             <Details isReview isGrid user={selectedReq?.userDetails[0]} />
             <Box
               p={2}
@@ -163,7 +163,7 @@ const ResignationModal = ({
               </Box>
             </Box>
           </Box>
-          <Box sx={{ width: "50%", height: "100%" }}>
+          <Box sx={{ width: {xs:"100%", md:"50%"}, height: "100%" }}>
             <Box
               p={1}
               sx={{
@@ -173,14 +173,13 @@ const ResignationModal = ({
                 borderRadius: "0.6rem",
               }}
             >
-              <Stack gap={1}>
+              <Stack gap={1} sx={{width:'100%'}}>
                 <Stack
-                  bgcolor="rgb(157, 157, 247)"
                   px={1}
                   pb={1}
                   borderRadius="0.6rem"
                   justifyContent="center"
-                  sx={{ width: "50%" }}
+                  sx={{ width: "80%" }}
                 >
                   <Stack
                     direction="row"
@@ -190,14 +189,15 @@ const ResignationModal = ({
                     mt={1}
                   >
                     <Typography
-                      color="primary.main"
+                      color=""
                       variant="caption"
                       mx={1}
                     >{`Requested Last Working Day`}</Typography>
-                    <EditIcon fontSize="small" sx={{ color: "primary.main" }} />
+                    <EditIcon fontSize="small"  />
                   </Stack>
-
-                  <DatePicker label="" dateField={lwd} setDateField={setLwd} />
+                  <Box pb={1} px={1} sx={{ borderRadius:'0.6rem', bgcolor:'primary.light'}} >
+                  <DatePicker isMobile label="" dateField={lwd} setDateField={setLwd} />
+                  </Box>
                 </Stack>
               </Stack>
             </Box>

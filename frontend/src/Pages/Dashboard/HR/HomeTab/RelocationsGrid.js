@@ -16,6 +16,7 @@ const RelocationsGrid = ({
 
   return (
     <Stack
+    p={1}
       mb={2}
       gap={1}
       direction="column"
@@ -24,7 +25,7 @@ const RelocationsGrid = ({
       sx={{
         width: "100%",
         height: "100%",
-        border: "2px solid white",
+        bgcolor:'primary.inactive3',
         borderRadius: "0.6rem",
       }}
     >
@@ -41,7 +42,7 @@ const RelocationsGrid = ({
         >
           {`< Home `}
         </Button>
-        <Typography variant="h6">{`Pending ${selectedReqTab}`}</Typography>
+        <Typography  variant="h6">{`Pending ${selectedReqTab}`}</Typography>
       </Stack>
       <TableContainer component={Paper}>
         <Table

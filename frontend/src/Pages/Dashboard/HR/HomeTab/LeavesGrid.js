@@ -11,6 +11,7 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
   return (
     <Stack
       mb={2}
+      p={1}
       gap={1}
       direction="column"
       alignItems="space-between"
@@ -18,8 +19,8 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
       sx={{
         width: "100%",
         height: "100%",
-        border: "2px solid white",
         borderRadius: "0.6rem",
+        bgcolor:'primary.inactive3'
       }}
     >
       <Stack p={1} gap={2} direction="row" sx={{ width: "100%" }}>
@@ -35,7 +36,7 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
         >
           {`< Home `}
         </Button>
-        <Typography  sx={{color:'secondary.dark'}} variant="h6">{`Pending ${selectedReqTab}`}</Typography>
+        <Typography   variant="h6">{`Pending ${selectedReqTab}`}</Typography>
       </Stack>
       <TableContainer component={Paper}>
         <Table

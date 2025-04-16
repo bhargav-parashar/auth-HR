@@ -16,6 +16,7 @@ import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import useGetLoggedInUser from "../../../../Hooks/useGetLoggedInUser";
 
 export default function RelocationMobile({
   location,
@@ -29,6 +30,9 @@ export default function RelocationMobile({
     useModal();
   const { activeStep, handleNext, handleBack } = useActiveStep();
   const maxSteps = relocationSteps.length;
+  const {user} = useGetLoggedInUser();
+  const currLocation = user?.location;
+  const updatedLocations = locations.filter((item)=>item !== currLocation);
 
   return (
     <Box sx={{ height: "90%", maxWidth: 400, flexGrow: 1 }}>
@@ -77,7 +81,7 @@ export default function RelocationMobile({
                         <MenuItem disabled value="">
                           Location
                         </MenuItem>
-                        {locations.map((item, idx) => (
+                        {updatedLocations.map((item, idx) => (
                           <MenuItem key={idx} value={item}>
                             {item}
                           </MenuItem>

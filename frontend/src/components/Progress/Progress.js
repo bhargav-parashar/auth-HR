@@ -13,7 +13,7 @@ export default function Progress({ currValue }) {
   return (
     <Box
       sx={{
-        border: "1px solid white",
+        border: "1px solid",
         borderRadius: "0.8rem",
         width: "50%",
         height: "24%",

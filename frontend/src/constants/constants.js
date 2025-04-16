@@ -87,7 +87,7 @@ const empSidebarOptions = [
   },
 ];
 
-const departments = ["Finance", "IT", "Sales", "Marketing", "Operations", "Management"];
+const departments = ["Finance", "IT", "Marketing", "Operations"];
 
 const locations = ["Bengaluru", "Gurgaon",  "Hyderabad", "Mumbai", "Pune"];
 

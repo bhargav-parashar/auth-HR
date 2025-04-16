@@ -61,14 +61,13 @@ const CalendarSection = ({ isLoading }) => {
         width: "100%",
         cursor: "pointer",
         height: "100%",
-        bgcolor : "primary.calendar",
-        transition: 'transform 0.3s ease, background-color 0.3s ease',
-        '&:hover': {
-          transform: 'scale(1.015)'
-        }
+        bgcolor: "primary.inactive3",
+        transition: "transform 0.3s ease, background-color 0.3s ease",
+        "&:hover": {
+          transform: "scale(1.015)",
+        },
       }}
     >
-     
       {isLoading && <Shimmer cover />}
       {!isLoading && (
         <Stack direction="row" alignItems="center" justifyContent="center">
@@ -80,6 +79,7 @@ const CalendarSection = ({ isLoading }) => {
                   defaultValue={dayjs(new Date())}
                   readOnly
                   slots={{ day: CustomDay }}
+                  
                 />
               </DemoItem>
             </DemoContainer>

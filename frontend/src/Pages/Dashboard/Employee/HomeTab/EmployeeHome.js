@@ -82,7 +82,7 @@ const EmployeeHome = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <MobileDash user={user} />
+            <MobileDash user={user} announcements={announcements} />
           </Stack>
         </Box>
       </Paper>

@@ -104,8 +104,8 @@ const RelocationModal = ({
         </Stack>
         <CloseIcon onClick={handleModalClose} sx={{cursor:'pointer', color:'primary.contrast' }} />
       </Stack>
-        <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction="row">
-          <Box sx={{ width: "50%", height: "100%" }}>
+        <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction={{xs:'column',md:'row'}}>
+          <Box sx={{ width: {xs:"100%", md:"50%"}, height: "100%" }}>
             <Details isReview isGrid user={selectedReq?.userDetails[0]} />
             <Box
               p={2}
@@ -168,7 +168,7 @@ const RelocationModal = ({
               </Box>
             </Box>
           </Box>
-          <Box sx={{ width: "50%", height: "100%" }}>
+          <Box sx={{ width: {xs:"100%", md:"50%"}, height: "100%" }}>
             <Box
               p={1}
               sx={{

@@ -16,6 +16,7 @@ const ResignationsGrid = ({
   
   return (
     <Stack
+    p={1}
       mb={2}
       gap={1}
       direction="column"
@@ -24,7 +25,7 @@ const ResignationsGrid = ({
       sx={{
         width: "100%",
         height: "100%",
-        border: "2px solid white",
+        bgcolor:'primary.inactive3',
         borderRadius: "0.6rem",
       }}
     >

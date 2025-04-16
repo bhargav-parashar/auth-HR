@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Stack, Box} from "@mui/material";
+import { Stack, Box } from "@mui/material";
 import PendingRequestsSection from "./PendingRequestsSection";
 import CalendarSection from "./CalendarSection";
 import CreateAnnouncement from "./CreateAnnouncement";
@@ -25,7 +25,6 @@ const AdminHome = ({
   const { isReqLoading, penRequests, getPenRequests } = useGetPendingRequests();
   const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } =
     useModal();
-
   handleBack = () => {
     setSelectedReqTab("");
   };
@@ -59,18 +58,29 @@ const AdminHome = ({
         paddingX: 2,
       }}
     >
-      <Box sx={{ height: "70%", display: { xs: "none", md: "block" } }}>
-        <PendingRequestsSection
-          selectedReqTab={selectedReqTab}
-          setSelectedReqTab={setSelectedReqTab}
-          isLoading={isReqLoading}
-          penRequests={penRequests}
-        />
+      <Box sx={{ height: "70%" }}>
+        <Box sx={{ width: "100%", display: { xs: "block", md: "none" } }}>
+          <PendingRequestsSection
+            selectedReqTab={selectedReqTab}
+            setSelectedReqTab={setSelectedReqTab}
+            isLoading={isReqLoading}
+            penRequests={penRequests}
+            isMobile
+          />
+        </Box>
+        <Box sx={{ width: "100%", display: { xs: "none", md: "block" } }}>
+          <PendingRequestsSection
+            selectedReqTab={selectedReqTab}
+            setSelectedReqTab={setSelectedReqTab}
+            isLoading={isReqLoading}
+            penRequests={penRequests}
+          />
+        </Box>
         {selectedReqTab.length === 0 && (
           <Stack
             mb={2}
             gap={1}
-            direction="row"
+            direction={{ xs: "column", md: "row" }}
             justifyContent="space-between"
             alignItems="center"
             sx={{ width: "100%", height: "100%" }}
@@ -83,6 +93,7 @@ const AdminHome = ({
               isLoading={isLoading}
             />
             <CalendarSection isLoading={isLoading} />
+
             <CreateAnnouncement isLoading={isLoading} />
           </Stack>
         )}
@@ -111,6 +122,7 @@ const AdminHome = ({
           />
         )}
       </Box>
+
       {isModalOpen && selectedReqTab === "Leaves" && (
         <LeaveModal
           handleOutsideClick={handleOutsideClick}
@@ -135,7 +147,6 @@ const AdminHome = ({
           getPenRequests={getPenRequests}
         />
       )}
-
     </Box>
   );
 };
