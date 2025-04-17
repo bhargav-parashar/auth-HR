@@ -7,7 +7,13 @@ import TableRow from "@mui/material/TableRow";
 import { Stack, Box, Typography, Button, Paper } from "@mui/material";
 import { format, formatDistance, addDays } from "date-fns";
 
-const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) => {
+const LeavesGrid = ({
+  handleBack,
+  selectedReqTab,
+  penRequests,
+  handleLeaveReview,
+  isMobile,
+}) => {
   return (
     <Stack
       mb={2}
@@ -20,7 +26,7 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
         width: "100%",
         height: "100%",
         borderRadius: "0.6rem",
-        bgcolor:'primary.inactive3'
+        bgcolor: "primary.inactive3",
       }}
     >
       <Stack p={1} gap={2} direction="row" sx={{ width: "100%" }}>
@@ -28,7 +34,7 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
           onClick={handleBack}
           size="small"
           sx={{
-            bgcolor:'primary.contrast',
+            bgcolor: "primary.contrast",
             "&:hover": {
               backgroundColor: "secondary.dark",
             },
@@ -36,7 +42,7 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
         >
           {`< Home `}
         </Button>
-        <Typography   variant="h6">{`Pending ${selectedReqTab}`}</Typography>
+        <Typography variant="h6">{`Pending ${selectedReqTab}`}</Typography>
       </Stack>
       <TableContainer component={Paper}>
         <Table
@@ -56,7 +62,7 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
             <TableRow>
               <TableCell align="left">Sl No</TableCell>
               <TableCell align="left">Leave Type</TableCell>
-              <TableCell align="left">Duration</TableCell>
+              {!isMobile && <TableCell align="left">Duration</TableCell>}
               <TableCell align="left">Requested By</TableCell>
               <TableCell align="left">Requested On</TableCell>
               <TableCell align="left">Action</TableCell>
@@ -74,9 +80,14 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
                 >
                   <TableCell align="left">{idx + 1}</TableCell>
                   <TableCell align="left">{item.leaveType}</TableCell>
-                  <TableCell align="left">
+                  {!isMobile && (
+                    <TableCell align="left">
+                      {formatDistance(item.startDate, addDays(item.endDate, 1))}
+                    </TableCell>
+                  )}
+                  {/* <TableCell align="left">
                     {formatDistance(item.startDate, addDays(item.endDate, 1))}
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell align="left">
                     {item?.userDetails[0]?.username}
                   </TableCell>
@@ -87,7 +98,7 @@ const LeavesGrid = ({handleBack,selectedReqTab,penRequests, handleLeaveReview}) 
                     <Button
                       onClick={() => handleLeaveReview(item._id)}
                       sx={{
-                        bgcolor:'primary.contrast',
+                        bgcolor: "primary.contrast",
                         "&:hover": {
                           backgroundColor: "secondary.dark",
                         },

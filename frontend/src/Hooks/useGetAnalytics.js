@@ -7,26 +7,49 @@ const useGetAnalytics = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currMonResignations, setCurrMonResignations] = useState([]);
 
-  const callApi = async () => {
-    const URL1 = `${config.endpoint}/hr/all-user-details`;
-    const URL2 = `${config.endpoint}/hr/current-month-resignations`;
-
+  const getEmployees = async () =>{
+    const URL = `${config.endpoint}/hr/all-user-details`;
     try {
-      const employees = await axios.get(URL1, { withCredentials: true });
-      const currMonResign = await axios.get(URL2, { withCredentials: true });
-
+      const employees = await axios.get(URL, { withCredentials: true });
       setEmployees(employees.data);
+    } catch (err) {
+      throw err;
+    } 
+  };
+
+  const getCurrMonthResig = async () =>{
+    const URL = `${config.endpoint}/hr/current-month-resignations`;
+    try {
+      const currMonResign = await axios.get(URL, { withCredentials: true });
       setCurrMonResignations(currMonResign.data);
     } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
+      throw err;
     }
   };
 
+  const queryData = async () => {
+    try {
+        getEmployees();
+        getCurrMonthResig();
+    } catch (err) {
+        console.log(err);
+    } finally {
+        setIsLoading(false);
+    }
+  };
+
+  // GET DATA ON PAGE LOAD
   useEffect(() => {
-    callApi();
+    queryData();
   }, []);
+
+  const getEmployeeData = async ()=>{
+    try{
+      getEmployees();
+    }catch{
+      console.log(err);
+    }
+  }
 
   const totalEmployees = employees.length;
   let avgLeaveBal = 0;
@@ -68,17 +91,20 @@ const useGetAnalytics = () => {
     currMonthHires = filteredItems.length;
     
   };
-  const locationMap = new Map();
-  const deptMap = new Map();
 
+  //CREATE LOCATION-FREQUENCY MAP
+  const locationMap = new Map();
   employees.forEach((item) => {
     locationMap.set(item.location, (locationMap.get(item.location) || 0) + 1);
   });
 
+  //CREATE DEPARTMENT-FREQUENCY MAP
+  const deptMap = new Map();
   employees.forEach((item) => {
     deptMap.set(item.department, (deptMap.get(item.department) || 0) + 1);
   });
 
+  //CREATE DEPARTMENT-REQUESTS GROUPED DATA
   const groupedByDepartment = Object.values(
     employees.reduce((acc, emp) => {
       const dept = emp.department;
@@ -107,7 +133,8 @@ const useGetAnalytics = () => {
     isLoading,
     avgLeaveBal,
     attrition,
-    currMonthHires
+    currMonthHires,
+    getEmployeeData
   };
 };
 

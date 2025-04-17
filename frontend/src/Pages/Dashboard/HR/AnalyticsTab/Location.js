@@ -24,8 +24,7 @@ const Location = ({ locationMap, totalEmployees, isMobile }) => {
         height: "100%",
         borderRadius: "0.6rem",
         bgcolor: "primary.inactive3",
-        cursor:"pointer",
-        
+        cursor:"pointer", 
       }}
       p={1}
     >

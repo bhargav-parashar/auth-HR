@@ -11,12 +11,12 @@ const RelocationsGrid = ({
   handleBack,
   selectedReqTab,
   penRequests,
-  handleRelocationReview
+  handleRelocationReview,
+  isMobile,
 }) => {
-
   return (
     <Stack
-    p={1}
+      p={1}
       mb={2}
       gap={1}
       direction="column"
@@ -25,7 +25,7 @@ const RelocationsGrid = ({
       sx={{
         width: "100%",
         height: "100%",
-        bgcolor:'primary.inactive3',
+        bgcolor: "primary.inactive3",
         borderRadius: "0.6rem",
       }}
     >
@@ -34,7 +34,7 @@ const RelocationsGrid = ({
           onClick={handleBack}
           size="small"
           sx={{
-            bgcolor:'primary.contrast',
+            bgcolor: "primary.contrast",
             "&:hover": {
               backgroundColor: "secondary.dark",
             },
@@ -42,7 +42,7 @@ const RelocationsGrid = ({
         >
           {`< Home `}
         </Button>
-        <Typography  variant="h6">{`Pending ${selectedReqTab}`}</Typography>
+        <Typography variant="h6">{`Pending ${selectedReqTab}`}</Typography>
       </Stack>
       <TableContainer component={Paper}>
         <Table
@@ -61,7 +61,9 @@ const RelocationsGrid = ({
           <TableHead>
             <TableRow>
               <TableCell align="left">Sl No</TableCell>
-              <TableCell align="left">Current Location</TableCell>
+              {!isMobile && (
+                <TableCell align="left">Current Location</TableCell>
+              )}
               <TableCell align="left">Requested Location</TableCell>
               <TableCell align="left">Requested By</TableCell>
               <TableCell align="left">Requested On</TableCell>
@@ -79,9 +81,12 @@ const RelocationsGrid = ({
                   }}
                 >
                   <TableCell align="left">{idx + 1}</TableCell>
-                  <TableCell align="left">
-                    {item?.userDetails[0]?.location}
-                  </TableCell>
+                  {!isMobile && (
+                    <TableCell align="left">
+                      {item?.userDetails[0]?.location}
+                    </TableCell>
+                  )}
+
                   <TableCell align="left">{item.location}</TableCell>
                   <TableCell align="left">
                     {item?.userDetails[0]?.username}
@@ -93,7 +98,7 @@ const RelocationsGrid = ({
                     <Button
                       onClick={() => handleRelocationReview(item._id)}
                       sx={{
-                        bgcolor:'primary.contrast',
+                        bgcolor: "primary.contrast",
                         "&:hover": {
                           backgroundColor: "secondary.dark",
                         },

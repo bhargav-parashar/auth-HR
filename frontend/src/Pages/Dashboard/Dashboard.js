@@ -9,10 +9,9 @@ import Relocation from "./Employee/RelocationTab/Relocation";
 import Resignation from "./Employee/ResignationTab/Resignation";
 import Analytics from "./HR/AnalyticsTab/Analytics";
 import Employees from "./HR/EmployeesTab/Employees";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import TabContext from "../../context/tabContext";
 import UserContext from "../../context/UserContext";
-import { useContext } from "react";
 import useGetAnalytics from "../../Hooks/useGetAnalytics";
 
 const Dashboard = () => {
@@ -25,7 +24,8 @@ const Dashboard = () => {
     deptMap, 
     avgLeaveBal, 
     attrition, 
-    currMonthHires 
+    currMonthHires ,
+    getEmployeeData
   } = useGetAnalytics();
   const { loggedInUser } = useContext(UserContext);
 
@@ -87,7 +87,9 @@ const Dashboard = () => {
                   avgLeaveBal = {avgLeaveBal} 
                   attrition={attrition} 
                   currMonthHires={currMonthHires} 
-                  isLoading={isLoading}  />
+                  isLoading={isLoading}
+                  getEmployeeData = {getEmployeeData}
+                  />
                 )}
 
                 

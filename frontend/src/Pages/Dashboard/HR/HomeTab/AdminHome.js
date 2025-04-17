@@ -19,6 +19,7 @@ const AdminHome = ({
   attrition,
   currMonthHires,
   isLoading,
+  getEmployeeData 
 }) => {
   const [selectedReqTab, setSelectedReqTab] = useState("");
   const [selectedReq, setSelectedReq] = useState("");
@@ -103,6 +104,7 @@ const AdminHome = ({
             selectedReqTab={selectedReqTab}
             penRequests={penRequests}
             handleLeaveReview={handleLeaveReview}
+            isMobile={{xs:true,md:false}}
           />
         )}
         {selectedReqTab.length != 0 && selectedReqTab === "Relocations" && (
@@ -111,6 +113,7 @@ const AdminHome = ({
             selectedReqTab={selectedReqTab}
             penRequests={penRequests}
             handleRelocationReview={handleRelocationReview}
+            isMobile={{xs:true,md:false}}
           />
         )}
         {selectedReqTab.length != 0 && selectedReqTab === "Resignations" && (
@@ -137,6 +140,7 @@ const AdminHome = ({
           handleModalClose={handleModalClose}
           selectedReq={selectedReq}
           getPenRequests={getPenRequests}
+          getEmployeeData={getEmployeeData}
         />
       )}
       {isModalOpen && selectedReqTab === "Resignations" && (

@@ -20,9 +20,9 @@ import CloseIcon from '@mui/icons-material/Close';
 const RelocationModal = ({
   handleOutsideClick,
   handleModalClose,
-  handleSubmit,
   selectedReq,
   getPenRequests,
+  getEmployeeData
 }) => {
   const { enqueueSnackbar } = useSnackbar();
 
@@ -67,6 +67,7 @@ const RelocationModal = ({
         );
         if (res1.status === 200) {
           getPenRequests();
+          getEmployeeData();
           handleModalClose();
           enqueueSnackbar("Request Approved", { variant: "success" });
         }

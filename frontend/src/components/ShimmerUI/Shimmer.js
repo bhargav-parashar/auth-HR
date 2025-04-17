@@ -1,8 +1,8 @@
-import { Box, Skeleton } from "@mui/material";
+import { Box, Skeleton, Stack } from "@mui/material";
 
-const Shimmer = ({ cover }) => {
+const Shimmer = ({ cover, fullScreen }) => {
   return (
-    <Box sx={{ height: "100%", width: "100%" }}>
+    <Box p={fullScreen?"10px":'0px'} sx={{ height:fullScreen? "95vh" : "100%",  width: "100%" }}>
       {!cover && (
         <Box pt={2} sx={{ height: "100%" }}>
           <Box sx={{ height: "100%" }}>
@@ -31,6 +31,12 @@ const Shimmer = ({ cover }) => {
         </Box>
       )}
       {cover && <Skeleton sx={{ height:'100%',  bgcolor: "primary.shimmer" }} />}
+      {
+        fullScreen && (
+        <Stack>
+          <Skeleton sx={{ height:'100%',  bgcolor: "primary.shimmer" }}/>  
+        </Stack>)
+      }
     </Box>
   );
 };

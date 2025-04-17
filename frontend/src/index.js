@@ -1,13 +1,17 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage/Register";
 import Login from "./pages/LoginPage/Login";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Shimmer from "./components/ShimmerUI/Shimmer";
 import { SnackbarProvider,closeSnackbar } from "notistack";
 
+// INTIALIZE COMPONENTS FOR LAZY LOADING
+const Dashboard = lazy(()=>import("./pages/Dashboard/Dashboard"));
+
+//ROUTER
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,16 +23,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard/>
+        element: <Suspense fallback={<Shimmer fullScreen/>}><Dashboard/></Suspense> 
       },
       {
         path: "/",
-        element: <Login />,
+        element: <Login/>,
       },
     ],
   },
 ]);
 
+//CREATE AND RENDER ROOT ELEMENT
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <SnackbarProvider

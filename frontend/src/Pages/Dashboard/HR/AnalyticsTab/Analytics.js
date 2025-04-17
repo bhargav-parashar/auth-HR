@@ -29,7 +29,7 @@ const Analytics = ({
   isLoading,
   locationMap,
   groupedByDepartment,
-  deptMap,
+  deptMap
 }) => {
   return (
     <Box sx={{ height: "100%", overflowY: "auto" }}>
@@ -39,6 +39,7 @@ const Analytics = ({
             Analytics
           </Typography>
           <Stack gap={1} direction="row" sx={{ height: "100%" }}>
+           
             {/* TOTAL EMPLOYEES CARD */}
             {isLoading ? (
               <ShimmerUI />
