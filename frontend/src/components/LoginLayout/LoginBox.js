@@ -12,42 +12,62 @@ import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import LoginCarousel from "../Carousel/LoginCarousel";
 import { loadingCarousel } from "../../constants/constants";
+import ShimmerButton from "../ButtonLayout/ShimmerButton";
 
 const CustomTextBox = styled(TextField)(() => ({
+  marginBottom: 2,
   width: "100%",
   color: "white",
-  "& .MuiInputLabel-root": { color: "lightgray" },
-  "& label.Mui-focused": { color: "white" },
+  fontSize: "0.875rem",
+  "& .MuiInputLabel-root": {
+    color: "lightgray",
+    fontSize: "0.8rem",
+    transform: "translate(14px, -9px) scale(0.75)",
+    transformOrigin: "top left",
+  },
+  "& .MuiInputLabel-shrink": {
+    transform: "translate(14px, -9px) scale(0.75)",
+  },
+  "& label.Mui-focused": {
+    color: "white",
+  },
   "& .MuiOutlinedInput-root": {
     backgroundColor: "rgb(80, 79, 78)",
+    fontSize: "0.875rem",
     "& fieldset": { borderColor: "lightgray" },
     "&:hover fieldset": { borderColor: "white" },
     "&.Mui-focused fieldset": { borderColor: "white" },
   },
   "& .MuiInputBase-input": {
     color: "white",
+    padding: "8px 10px",
+    fontSize: "0.875rem",
   },
 }));
 
 const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
   return (
     <Stack direction="column" gap={2}>
-      <Typography color="white" variant="h2">
-        Login
-      </Typography>
-      <Typography mb={2} color="lightgray" variant="subtitle2">
-        Don't have an account ?{" "}
-        <Link
-          to="/register"
-          style={{ textDecoration: "none", color: "#1976d2" }}
-        >
-          Register
-        </Link>
-      </Typography>
+      <Box>
+        <Typography color="white" variant="h4">
+          Login
+        </Typography>
+        <Typography mb={2} color="lightgray" variant="subtitle2">
+          Don't have an account ?{" "}
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", color: "#1976d2" }}
+          >
+            Register
+          </Link>
+        </Typography>
+      </Box>
+
       <CustomTextBox
         id="username"
         name="username"
-        label="User Name"
+        placeholder="User Name"
+        label={formData.username ? "User Name" : ""}
         variant="outlined"
         value={formData.username}
         onChange={handleChange}
@@ -55,24 +75,26 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
       <CustomTextBox
         id="password"
         name="password"
-        label="Password"
+        placeholder="Password"
+        label={formData.password ? "Password" : ""}
         type="password"
         variant="outlined"
         value={formData.password}
         onChange={handleChange}
       />
       {isLoading ? (
-        <Box mt={5}>
-          <Stack direction='row' >
-          <Loader  />
-          <LoginCarousel
+        <Box sx={{ marginTop: "25px", marginBottom: "26px" }}>
+          <Stack direction="row">
+            <Loader />
+            <LoginCarousel
               slidesPerView={1}
               delay={3000}
               data={loadingCarousel.map((slide) => (
-                <Typography key={slide.id} sx={{ color: "white" }}>{slide.txt}</Typography>
+                <Typography key={slide.id} sx={{ color: "white" }}>
+                  {slide.txt}
+                </Typography>
               ))}
             />
-            
           </Stack>
         </Box>
       ) : (
@@ -85,7 +107,7 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
             background: " rgba(246,228,204,1)",
             color: "black",
             "&:hover": {
-              background: " rgb(240, 188, 121)",
+              background: "rgb(240, 188, 121)",
             },
           }}
           variant="contained"
@@ -108,44 +130,14 @@ const LoginBox = ({ formData, handleChange, handleLogin, isLoading }) => {
         </Typography>
       </Divider>
       <Stack sx={{ marginTop: "15px" }} direction="row" gap={1}>
-        <Button
-          sx={{
-            border: "1px solid white",
-            height: "45px",
-            width: "100%",
-            borderRadius: "0.5rem",
-            background:'transparent',
-            color: "white",
-            "&:hover": {
-              background: " rgba(246,228,204,1)",
-              color: "black",
-            },
-            fontSize: "11px",
-          }}
-          variant="outlined"
-          onClick={() => handleLogin(true, false, false)}
-        >
-          Guest HR
-        </Button>
-        <Button
-          sx={{
-            border: "1px solid white",
-            height: "45px",
-            width: "100%",
-            borderRadius: "0.5rem",
-            color: "white",
-            background:'transparent',
-            "&:hover": {
-              background: " rgba(246,228,204,1)",
-              color: "black",
-            },
-            fontSize: "11px",
-          }}
-          variant="outlined"
-          onClick={() => handleLogin(false, true, false)}
-        >
-          Guest Employee
-        </Button>
+        <ShimmerButton
+          label="Guest HR"
+          handleClick={() => handleLogin(true, false, false)}
+        />
+        <ShimmerButton
+          label="Guest Employee"
+          handleClick={() => handleLogin(false, true, false)}
+        />
       </Stack>
     </Stack>
   );

@@ -13,10 +13,10 @@ const useDebouncedSearchFilter = () => {
 
   //GET INITIAL LIST OF USERS
   useEffect(() => {
-    callApi();
+    queryEmployees();
   }, []);
 
-  const callApi = async () => {
+  const queryEmployees = async () => {
     try {
       const URL = `${config.endpoint}/hr/all-user-details`;
       const { data } = await axios.get(URL, { withCredentials: true });
@@ -93,7 +93,8 @@ const useDebouncedSearchFilter = () => {
     handleLocationChange,
     searchInput,
     handleSearchInputChange,
-    isLoading
+    isLoading,
+    queryEmployees
   };
 };
 

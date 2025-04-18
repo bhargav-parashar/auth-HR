@@ -1,18 +1,21 @@
-import React from "react";
+import React, {lazy, Suspense} from "react";
 import { Box, Paper, Stack } from "@mui/material";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import AdminHome from "./HR/HomeTab/AdminHome";
 import EmployeeHome from "./Employee/HomeTab/EmployeeHome";
-import ApplyLeave from "./Employee/LeaveTab/ApplyLeave";
-import Relocation from "./Employee/RelocationTab/Relocation";
-import Resignation from "./Employee/ResignationTab/Resignation";
-import Analytics from "./HR/AnalyticsTab/Analytics";
-import Employees from "./HR/EmployeesTab/Employees";
 import { useState,useContext } from "react";
 import TabContext from "../../context/tabContext";
 import UserContext from "../../context/UserContext";
 import useGetAnalytics from "../../Hooks/useGetAnalytics";
+import Shimmer from "../../components/ShimmerUI/Shimmer";
+
+//INITALIZE COMPONENTS FOR LAZY LOADING
+const Analytics = lazy(()=>import("./HR/AnalyticsTab/Analytics"));
+const Employees = lazy(()=>import("./HR/EmployeesTab/Employees"));
+const ApplyLeave = lazy(()=>import("./Employee/LeaveTab/ApplyLeave"));
+const Relocation = lazy(()=>import("./Employee/RelocationTab/Relocation"));
+const Resignation = lazy(()=>import("./Employee/ResignationTab/Resignation"));
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState("Dashboard");
@@ -93,21 +96,25 @@ const Dashboard = () => {
                 )}
 
                 
-                {/* HR ANALYTICS TAB*/}
+                {/* HR ANALYTICS TAB - LAZY LOAD*/}
                 {loggedInUser.role === "admin" && selectedTab === "Analytics" && (
+                 <Suspense fallback={<Shimmer fullScreen/>}>  
                     <Analytics
-                      totalEmployees={totalEmployees}
-                      isLoading={isLoading}
-                      locationMap={locationMap}
-                      groupedByDepartment={groupedByDepartment}
-                      deptMap={deptMap}
+                        totalEmployees={totalEmployees}
+                        isLoading={isLoading}
+                        locationMap={locationMap}
+                        groupedByDepartment={groupedByDepartment}
+                        deptMap={deptMap}
                     />
+                  </Suspense> 
                 )}
 
                 
-                {/* HR ALL EMPLOYEES TAB*/}
+                {/* HR ALL EMPLOYEES TAB - LAZY LOAD */}
                 {loggedInUser.role === "admin" && selectedTab === "Employees" && (
-                  <Employees />
+                  <Suspense fallback={<Shimmer fullScreen/>}>  
+                    <Employees getEmployeeData={getEmployeeData}  />
+                  </Suspense>
                 )}
 
 
@@ -117,22 +124,28 @@ const Dashboard = () => {
                 )}
 
 
-                {/* EMPLOYEE APPLY LEAVE TAB */}
+                {/* EMPLOYEE APPLY LEAVE TAB - LAZY LOAD */}
                 {loggedInUser.role === "employee" && selectedTab === "Apply Leave" && ( 
-                <ApplyLeave setSelectedTab={setSelectedTab} />
+                  <Suspense fallback={<Shimmer fullScreen/>}>  
+                    <ApplyLeave setSelectedTab={setSelectedTab} />
+                 </Suspense>
                 )}
                 
                 
-                {/* EMPLOYEE REQUEST RELOCATION TAB */}
+                {/* EMPLOYEE REQUEST RELOCATION TAB - LAZY LOAD */}
                 {loggedInUser.role === "employee" && selectedTab === "Relocation" && ( 
-                <Relocation setSelectedTab={setSelectedTab} />
+                  <Suspense fallback={<Shimmer fullScreen/>}> 
+                    <Relocation setSelectedTab={setSelectedTab} />
+                  </Suspense>
                 )}
                 
 
-                {/* EMPLOYEE RESIGNATION TAB */}
+                {/* EMPLOYEE RESIGNATION TAB - LAZY LOAD */}
                 {loggedInUser.role === "employee" &&
                   selectedTab === "Resignation" && (
-                    <Resignation setSelectedTab={setSelectedTab} />
+                    <Suspense fallback={<Shimmer fullScreen/>}> 
+                      <Resignation setSelectedTab={setSelectedTab} />
+                    </Suspense>
                 )}
 
               </Paper>

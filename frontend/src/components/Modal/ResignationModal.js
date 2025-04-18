@@ -97,7 +97,7 @@ const ResignationModal = ({
             {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
           </Typography>
         </Stack>
-        <CloseIcon onClick={handleModalClose} sx={{cursor:'pointer', color:'primary.contrast' }} />
+        <CloseIcon onClick={handleModalClose} sx={{ marginRight: 2, cursor:'pointer', color:'primary.contrast' }} />
       </Stack>
         <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction={{xs:"column", md:"row"}}>
           <Box sx={{ width: {xs:"100%", md:"50%"}, height: "100%" }}>

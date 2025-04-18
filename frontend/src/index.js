@@ -8,7 +8,8 @@ import Login from "./pages/LoginPage/Login";
 import Shimmer from "./components/ShimmerUI/Shimmer";
 import { SnackbarProvider,closeSnackbar } from "notistack";
 
-// INTIALIZE COMPONENTS FOR LAZY LOADING
+
+// INTIALIZE DASHBOARD FOR LAZY LOADING
 const Dashboard = lazy(()=>import("./pages/Dashboard/Dashboard"));
 
 //ROUTER
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Suspense fallback={<Shimmer fullScreen/>}><Dashboard/></Suspense> 
+        element:<Suspense fallback={<Shimmer fullScreen/>}><Dashboard/></Suspense> 
       },
       {
         path: "/",

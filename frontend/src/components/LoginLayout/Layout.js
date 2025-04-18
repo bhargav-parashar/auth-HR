@@ -84,7 +84,7 @@ const Login = ({ children }) => {
           <Box
             sx={{
               position: "absolute",
-              bottom: "11%",
+              bottom: "5%",
               left: "1%",
               right: "1%",
               px: "20%",

@@ -18,39 +18,57 @@ import {
 } from "../../constants/constants";
 
 const CustomTextBox = styled(TextField)(() => ({
-  marginBottom:10,
+  marginBottom: 10,
   width: "100%",
   color: "white",
-  "& .MuiInputLabel-root": { color: "lightgray" },
-  "& label.Mui-focused": { color: "white" },
+  fontSize: "0.875rem",
+  "& .MuiInputLabel-root": {
+    color: "lightgray",
+    fontSize: "0.8rem",
+    transform: "translate(14px, -9px) scale(0.75)",
+    transformOrigin: "top left",
+  },
+  "& .MuiInputLabel-shrink": {
+    transform: "translate(14px, -9px) scale(0.75)",
+  },
+  "& label.Mui-focused": {
+    color: "white",
+  },
   "& .MuiOutlinedInput-root": {
     backgroundColor: "rgb(80, 79, 78)",
+    fontSize: "0.875rem",
     "& fieldset": { borderColor: "lightgray" },
     "&:hover fieldset": { borderColor: "white" },
     "&.Mui-focused fieldset": { borderColor: "white" },
   },
   "& .MuiInputBase-input": {
     color: "white",
+    padding: "8px 10px",
+    fontSize: "0.875rem",
   },
 }));
 
 const RegisterBox = ({ formData, handleChange, handleRegister, isLoading }) => {
   return (
     <Stack direction="column" gap={2}>
-      <Typography color="white" variant="h4">
-        Register
-      </Typography>
-      <Typography mb={2} color="lightgray" variant="subtitle2">
-        Have an account ?{" "}
-        <Link to="/" style={{ textDecoration: "none", color: "#1976d2" }}>
-          Login
-        </Link>
-      </Typography>
+      <Box>
+        <Typography color="white" variant="h4">
+          Register
+        </Typography>
+        <Typography mb={2} color="lightgray" variant="subtitle2">
+          Have an account ?{" "}
+          <Link to="/" style={{ textDecoration: "none", color: "#1976d2" }}>
+            Login
+          </Link>
+        </Typography>
+      </Box>
+
       <Stack direction="column" gap={1}>
         <CustomTextBox
           id="username"
           name="username"
-          label="User Name"
+          placeholder="User Name"
+          label={formData.username ? "User Name" : ""}
           variant="outlined"
           value={formData.username}
           onChange={handleChange}
@@ -59,7 +77,8 @@ const RegisterBox = ({ formData, handleChange, handleRegister, isLoading }) => {
         <CustomTextBox
           id="password"
           name="password"
-          label="Password"
+          placeholder="Password"
+          label={formData.password ? "Password" : ""}
           type="password"
           variant="outlined"
           value={formData.password}
@@ -71,13 +90,14 @@ const RegisterBox = ({ formData, handleChange, handleRegister, isLoading }) => {
         <CustomTextBox
           id="confirmpassword"
           name="confirmpassword"
-          label="Confirm Password"
+          placeholder="Confirm Password"
+          label={formData.confirmpassword ? "Confirm Password" : ""}
           type="password"
           variant="outlined"
           value={formData.confirmpassword}
           onChange={handleChange}
         />
-        <Stack  direction="row" gap={1}>
+        <Stack direction="row" gap={1}>
           <Dropdown
             id="location"
             name="location"

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {
   Box,
   Typography,
@@ -6,6 +6,7 @@ import {
   TextField,
   FormControl,
   Select,
+  Button,
 } from "@mui/material";
 import Details from "../../Employee/HomeTab/Details";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -17,10 +18,14 @@ import useDebouncedSearchFilter from "../../../../Hooks/useDebouncedSearchFilter
 import { departments, locations } from "../../../../constants/constants";
 import EmployeeMobile from "./EmployeeMobile";
 import Shimmer from "../../../../components/ShimmerUI/Shimmer";
+import useModal from "../../../../Hooks/useModal";
+import AddEditEmpModal from "../../../../components/Modal/AddEditEmpModal";
 
+const Employees = ({getEmployeeData}) => {
+   
+  const [selectedUser, setSelectedUser] = useState('');
+  const [ isEdit, setIsEdit] = useState(false);
 
-
-const Employees = () => {
   const {
     filteredData,
     department,
@@ -30,32 +35,61 @@ const Employees = () => {
     searchInput,
     handleSearchInputChange,
     isLoading,
+    queryEmployees
   } = useDebouncedSearchFilter();
-
+  
+  const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } = useModal();
+  
+  handleAddEmployee = () => { 
+    setIsEdit(false);
+    setSelectedUser('');
+    handleModalOpen();
+  }
   return (
     <Box
       sx={{
         height: "100%",
         paddingX: 2,
         overflowY: "scroll",
-          "&::-webkit-scrollbar": {
-            width: "6px",
-          },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "#888",
-            borderRadius: "10px",
-          },
-          "&::-webkit-scrollbar-track": {
-            backgroundColor: "transparent",
-          },
-          scrollbarWidth: "thin",
-          scrollbarColor: "#888 transparent",
+        "&::-webkit-scrollbar": {
+          width: "6px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "#888",
+          borderRadius: "10px",
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: "transparent",
+        },
+        scrollbarWidth: "thin",
+        scrollbarColor: "#888 transparent",
       }}
     >
       <Box sx={{ height: "70%", display: { xs: "none", md: "block" } }}>
-        <Typography px={2} mb={1} variant="h5">
-          Employees
-        </Typography>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ width: "100%" }}
+        >
+          <Typography px={2} mb={1} variant="h5">
+            Employees
+          </Typography>
+          <Box px={3}>
+            <Button
+              onClick={handleAddEmployee}
+              sx={{
+                bgcolor: "primary.contrast",
+                "&:hover": {
+                  backgroundColor: "secondary.dark",
+                },
+              }}
+              size="small"
+            >
+              + Employee
+            </Button>
+          </Box>
+        </Stack>
         <Stack px={2} mb={2} direction="row" alignItems="center">
           <TextField
             sx={{
@@ -156,6 +190,8 @@ const Employees = () => {
         </Stack>
         {filteredData && !isLoading && (
           <Box
+            pr={2}
+            pl={1}
             sx={{
               display: "flex",
               flexWrap: "wrap",
@@ -168,7 +204,15 @@ const Employees = () => {
                   key={idx}
                   sx={{ width: "33.33%", height: "100%", padding: 1 }}
                 >
-                  <Details isGrid isMobile user={user} />
+                  <Details
+                    isHR
+                    isGrid
+                    isMobile
+                    setIsEdit={setIsEdit}
+                    user={user}
+                    handleModalOpen={handleModalOpen}
+                    setSelectedUser={setSelectedUser}
+                  />
                 </Box>
               ))}
           </Box>
@@ -203,6 +247,16 @@ const Employees = () => {
         filteredData={filteredData}
         isLoading={isLoading}
       />
+      {isModalOpen && (
+        <AddEditEmpModal
+          handleOutsideClick={handleOutsideClick}
+          handleModalClose={handleModalClose}
+          selectedUser={selectedUser}
+          isEdit={isEdit}
+          getEmployeeData={getEmployeeData}
+          queryEmployees={queryEmployees}
+        />
+      )}
     </Box>
   );
 };
