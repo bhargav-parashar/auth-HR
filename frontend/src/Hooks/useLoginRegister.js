@@ -8,7 +8,12 @@ import { guestAdmin, guestEmployee } from "../constants/constants";
 import { useContext } from "react";
 import UserContext from "../context/UserContext";
 
-const useLoginRegister = (isHR, getEmployeeData, handleModalClose,queryEmployees) => {
+const useLoginRegister = (
+  isHR,
+  getEmployeeData,
+  handleModalClose,
+  queryEmployees
+) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -74,13 +79,16 @@ const useLoginRegister = (isHR, getEmployeeData, handleModalClose,queryEmployees
         variant: "warning",
       });
       return false;
-    } else if (  (formData.password || formData.confirmpassword) && formData.password !== formData.confirmpassword) {
+    } else if (
+      (formData.password || formData.confirmpassword) &&
+      formData.password !== formData.confirmpassword
+    ) {
       enqueueSnackbar("Passwords do not match", { variant: "warning" });
       return false;
-    } else if ( !formData.location || formData.location.length === 0) {
+    } else if (!formData.location || formData.location.length === 0) {
       enqueueSnackbar("Location is a required field", { variant: "warning" });
       return false;
-    } else if ( !formData.department || formData.department.length === 0) {
+    } else if (!formData.department || formData.department.length === 0) {
       enqueueSnackbar("Department is a required field", { variant: "warning" });
       return false;
     } else {
@@ -131,15 +139,18 @@ const useLoginRegister = (isHR, getEmployeeData, handleModalClose,queryEmployees
         department: "",
         location: "",
       });
-      enqueueSnackbar("Registered successfully", { variant: "success" });
-      if(!isHR){ 
-        navigate("/")
-      }else{
-        queryEmployees();
-        getEmployeeData();
-        handleModalClose();
-      }
       
+      if(res.status === 200){
+        enqueueSnackbar("Registered successfully", { variant: "success" });
+        if (!isHR) {
+          navigate("/");
+        } else {
+          queryEmployees();
+          getEmployeeData();
+          handleModalClose();
+        }
+     }
+
     } catch (err) {
       console.log(err);
     } finally {
@@ -199,20 +210,32 @@ const useLoginRegister = (isHR, getEmployeeData, handleModalClose,queryEmployees
     }
   };
 
-  const handleUserUpdate = (data) =>{
+  const handleUserUpdate = async (data) => {
     if (!updateValidateInput(data)) return;
-    const userID = data._id;
-    const body  =  {
-      username : data.username,
-      password : data.password,
-      location : data.location, 
-      department : data.department 
+    const URL = `${config.endpoint}/hr/update-user-details`;
+    const id = data._id;
+    const body = {
+      username: data.username,
+      password: data.password,
+      location: data.location,
+      department: data.department,
     };
-    console.log(userID);
-    console.log(body);
-    handleModalClose();
-  }
+    try {
+      const res =  await axios.put(URL, { id, body }, { withCredentials: true });
+      if(res.status === 200){
+        enqueueSnackbar("User update successful", { variant: "success" });
+        queryEmployees();
+        getEmployeeData();
+        handleModalClose();  
+      }
+    } catch (err) {
+      enqueueSnackbar(`Error while updating user : ${err} `, { variant: "warn" });
+      console.log(err);
+    }
 
+    
+  };
+  
   return {
     formData,
     isLoading,

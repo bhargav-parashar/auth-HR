@@ -1,5 +1,7 @@
 const HRService = require("../services/hr.service");
 const HRServiceInstance = new HRService();
+const AuthService = require("../services/auth.service");
+const AuthServiceInstance = new AuthService();
 
 const getAllUsers = async (req,res) =>{
     try{
@@ -137,6 +139,44 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
+  //UPDATE USER
+  const updateUser = async (req, res ) =>{
+    const newPassword = req.body.body.password;
+    let hashedPassword = '';
+    let updatedUser;
+
+    try{
+
+      if(newPassword){
+
+        //Hash Password
+        hashedPassword = await AuthServiceInstance.generatePasswordHash(newPassword);
+        const newBody = {
+          username: req.body.body.username,
+          location: req.body.body.location,
+          department: req.body.body.department,
+          password: hashedPassword
+        };
+        updatedUser = await HRServiceInstance.updateUser(req.body.id, newBody );
+      
+      }else{
+
+        const newBody = {
+          username: req.body.body.username,
+          location: req.body.body.location,
+          department: req.body.body.department
+        };
+        updatedUser = await HRServiceInstance.updateUser(req.body.id, newBody );
+      
+      }
+
+      res.status(200).json(updatedUser);
+    
+    }catch(err){
+      res.status(500).json({ message: "Failed to update user", err });
+    }
+  }
+
 module.exports = {
     getAllUsers,
     getPendingLeaves,
@@ -151,5 +191,6 @@ module.exports = {
     updateLeaveStatus,
     updateRelocationStatus,
     updateResignationStatus,
-    updateUserLocation
+    updateUserLocation,
+    updateUser
 };

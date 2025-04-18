@@ -71,14 +71,14 @@ class HRService {
           $project: {
             _id: 1,
             status: 1,
-            startDate : 1,
-            endDate : 1,
-            leaveType:1,
+            startDate: 1,
+            endDate: 1,
+            leaveType: 1,
             createdAt: 1,
             updatedAt: 1,
-            userDetails: 1
+            userDetails: 1,
           },
-        }
+        },
       ]);
       return pendingLeaves;
     } catch (err) {
@@ -98,7 +98,7 @@ class HRService {
             localField: "employeeId",
             foreignField: "_id",
             as: "userDetails",
-          }
+          },
         },
         {
           $lookup: {
@@ -106,19 +106,19 @@ class HRService {
             localField: "_id",
             foreignField: "relocationId",
             as: "userResponses",
-          }
+          },
         },
         {
           $project: {
             _id: 1,
             status: 1,
-            location:1,
+            location: 1,
             createdAt: 1,
             updatedAt: 1,
             userDetails: 1,
-            userResponses: 1
+            userResponses: 1,
           },
-        }
+        },
       ]);
       return pendingRelocations;
     } catch (err) {
@@ -138,7 +138,7 @@ class HRService {
             localField: "employeeId",
             foreignField: "_id",
             as: "userDetails",
-          }
+          },
         },
         {
           $lookup: {
@@ -146,19 +146,19 @@ class HRService {
             localField: "_id",
             foreignField: "resignationId",
             as: "userResponses",
-          }
+          },
         },
         {
           $project: {
             _id: 1,
             status: 1,
-            lwd:1,
+            lwd: 1,
             createdAt: 1,
             updatedAt: 1,
             userDetails: 1,
-            userResponses: 1
+            userResponses: 1,
           },
-        }
+        },
       ]);
       return pendingResignations;
     } catch (err) {
@@ -192,14 +192,14 @@ class HRService {
     }
   };
 
-  getAnnouncements = () =>{
-    try{
+  getAnnouncements = () => {
+    try {
       const ann = Announcement.find().sort({ createdAt: -1 });
       return ann;
-    }catch(err){
+    } catch (err) {
       throw err;
     }
-  }
+  };
 
   updateAnnouncement = (id, announcement) => {
     try {
@@ -215,79 +215,119 @@ class HRService {
     }
   };
 
-  deleteAnnouncement = (id) =>{
-    try{
-      const deletedAnn = Announcement.findByIdAndDelete(id, {new:true});
+  deleteAnnouncement = (id) => {
+    try {
+      const deletedAnn = Announcement.findByIdAndDelete(id, { new: true });
       return deletedAnn;
-    }catch(err){
+    } catch (err) {
       throw err;
     }
-  }
+  };
 
-  updateLeaveBal = (id, newLeaveBal) =>{
-    try{
+  updateLeaveBal = (id, newLeaveBal) => {
+    try {
       const updated = User.findByIdAndUpdate(
-        id, 
-        {$set:{leaveBal : newLeaveBal}},
-        {new:true}
+        id,
+        { $set: { leaveBal: newLeaveBal } },
+        { new: true }
       );
       return updated;
-    }catch(err){
+    } catch (err) {
       throw err;
     }
-  }
+  };
 
-  updateLeaveStatus = (id, newStatus) =>{
-    try{
+  updateLeaveStatus = (id, newStatus) => {
+    try {
       const updated = Leaves.findByIdAndUpdate(
-        id, 
-        {$set:{status : newStatus}},
-        {new:true}
+        id,
+        { $set: { status: newStatus } },
+        { new: true }
       );
       return updated;
-    }catch(err){
+    } catch (err) {
       throw err;
     }
-  }
+  };
 
-  updateRelocationStatus = (id, newStatus) =>{
-    try{
+  updateRelocationStatus = (id, newStatus) => {
+    try {
       const updated = Relocations.findByIdAndUpdate(
-        id, 
-        {$set:{status : newStatus}},
-        {new:true}
+        id,
+        { $set: { status: newStatus } },
+        { new: true }
       );
       return updated;
-    }catch(err){
+    } catch (err) {
       throw err;
     }
-  }
-  
-  updateUserLocation = (id, newLocation) =>{
-    try{
-      const updated = User.findByIdAndUpdate(
-        id, 
-        {$set:{location : newLocation}},
-        {new:true}
-      );
-      return updated;
-    }catch(err){
-      throw err;
-    }
-  }
+  };
 
-  updateResignationStatus = (id, newStatus, newLwd) =>{
-    try{
-      const updated = Resignations.findByIdAndUpdate(
-        id, 
-        {$set:{status : newStatus, lwd: newLwd}},
-        {new:true}
+  updateUserLocation = (id, newLocation) => {
+    try {
+      const updated = User.findByIdAndUpdate(
+        id,
+        { $set: { location: newLocation } },
+        { new: true }
       );
       return updated;
-    }catch(err){
+    } catch (err) {
       throw err;
     }
-  } 
+  };
+
+  updateResignationStatus = (id, newStatus, newLwd) => {
+    try {
+      const updated = Resignations.findByIdAndUpdate(
+        id,
+        { $set: { status: newStatus, lwd: newLwd } },
+        { new: true }
+      );
+      return updated;
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  updateUser = (id, newBody) => {
+    try {
+      // const updatedUser = body.password
+      //   ? User.findByIdAndUpdate(
+      //       id,
+      //       {
+      //         $set: {
+      //           username: body.username,
+      //           location: body.location,
+      //           department: body.department,
+      //           password: body.password
+      //         }
+      //       },
+      //       { new: true }
+      //     )
+      //   : User.findByIdAndUpdate(
+      //       id,
+      //       {
+      //         $set: {
+      //           username: body.username,
+      //           location: body.location,
+      //           department: body.department
+      //         }
+      //       },
+      //       { new: true }
+      //     );
+
+      const updatedUser = User.findByIdAndUpdate(
+        id,
+        {
+          $set: newBody
+        },
+        { new: true }
+      );
+      return updatedUser;
+    } catch (err) {
+      throw err;
+    }
+  };
 }
 
 module.exports = HRService;
