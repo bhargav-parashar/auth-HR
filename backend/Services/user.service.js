@@ -11,53 +11,53 @@ const Leave = require("../models/leave.model");
 
 class UserService {
   //LOGIN & REGISTER
-  create = (payload) => {
+  create = async (payload) => {
     try {
-      const newUser = User.create(payload);
+      const newUser = await User.create(payload);
       return newUser;
     } catch (err) {
       throw err;
     }
   };
 
-  createUserRole = (payload) => {
+  createUserRole = async (payload) => {
     try {
-      const newUserRole = UserRole.create(payload);
+      const newUserRole = await UserRole.create(payload);
     } catch (err) {
       throw err;
     }
   };
 
-  getUserRoleMapping = (id) => {
+  getUserRoleMapping = async (id) => {
     try {
-      const userRoleMapping = UserRole.findOne({ userId: id });
+      const userRoleMapping = await UserRole.findOne({ userId: id });
       return userRoleMapping;
     } catch (err) {
       throw err;
     }
   };
 
-  findByUsername = (username) => {
+  findByUsername = async (username) => {
     try {
-      const reqUser = User.findOne({ username });
+      const reqUser = await User.findOne({ username });
       return reqUser;
     } catch (err) {
       throw err;
     }
   };
 
-  findByUserId = (userId) => {
+  findByUserId = async (userId) => {
     try {
-      const user = User.findById(userId);
+      const user = await User.findById(userId);
       return user;
     } catch (err) {
       throw err;
     }
   };
 
-  getRole = (roleId) => {
+  getRole = async (roleId) => {
     try {
-      const role = Role.findById(roleId);
+      const role = await Role.findById(roleId);
       return role;
     } catch (err) {
       throw err;
@@ -72,33 +72,33 @@ class UserService {
         employeeId: id,
         lwd: lastWorkDay,
       };
-      const newResignation = Resignation.create(body);
+      const newResignation = await Resignation.create(body);
       return newResignation;
     } catch (err) {
       throw err;
     }
   };
 
-  submitResponse = (payload) => {
+  submitResponse = async (payload) => {
     try {
-      const response = Response.create(payload);
+      const response = await Response.create(payload);
       return response;
     } catch (err) {
       throw err;
     }
   };
 
-  getQuestions = () => {
+  getQuestions = async () => {
     try {
-      const questions = Questionnaire.find({});
+      const questions = await Questionnaire.find({});
       return questions;
     } catch (err) {
       throw err;
     }
   };
 
-  getResignationByUserId = (userId) =>
-    Resignation.aggregate([
+  getResignationByUserId = async (userId) =>
+   await Resignation.aggregate([
       {
         $match: { employeeId: userId },
       },
@@ -132,8 +132,8 @@ class UserService {
       },
     ]);
 
-    getPendingResignationByUserId = (userId) =>
-      Resignation.aggregate([
+    getPendingResignationByUserId = async (userId) =>
+    await  Resignation.aggregate([
         {
           $match: { employeeId: userId, status:"Pending" },
         },
@@ -174,33 +174,33 @@ class UserService {
         employeeId: id,
         location: location,
       };
-      const newRelocation = Relocation.create(body);
+      const newRelocation = await Relocation.create(body);
       return newRelocation;
     } catch (err) {
       throw err;
     }
   };
 
-  submitRelocationResponse = (payload) => {
+  submitRelocationResponse = async (payload) => {
     try {
-      const response = RelocationResponse.create(payload);
+      const response = await RelocationResponse.create(payload);
       return response;
     } catch (err) {
       throw err;
     }
   };
 
-  getRelocationQuestions = () => {
+  getRelocationQuestions = async () => {
     try {
-      const questions = RelocationQuestionnaire.find({});
+      const questions = await RelocationQuestionnaire.find({});
       return questions;
     } catch (err) {
       throw err;
     }
   };
 
-  getRelocationByUserId = (userId) =>
-    Relocation.aggregate([
+  getRelocationByUserId = async (userId) =>
+    await Relocation.aggregate([
       {
         $match: { employeeId: userId },
       },
@@ -236,8 +236,8 @@ class UserService {
       },
     ]);
 
-  getPendingRelocationByUserId = (userId) =>
-    Relocation.aggregate([
+  getPendingRelocationByUserId = async (userId) =>
+   await Relocation.aggregate([
       {
         $match: { employeeId: userId, status:"Pending" },
       },
@@ -282,7 +282,7 @@ class UserService {
         leaveType: leaveType,
         endDate: endDate,
       };
-      const newLeave = Leave.create(body);
+      const newLeave = await Leave.create(body);
       return newLeave;
     } catch (err) {
       throw err;
@@ -302,8 +302,8 @@ class UserService {
     }
   };
 
-  getleavesByUserId = (userId) =>
-    Leave.aggregate([
+  getleavesByUserId =  async (userId) =>
+   await Leave.aggregate([
       {
         $match: { employeeId: userId },
       },
@@ -330,8 +330,8 @@ class UserService {
       },
     ]);
   
-  getPendingleavesByUserId = (userId) =>
-    Leave.aggregate([
+  getPendingleavesByUserId = async (userId) =>
+   await Leave.aggregate([
       {
         $match: { employeeId: userId, status:"Pending" },
       },

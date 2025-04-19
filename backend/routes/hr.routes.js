@@ -14,7 +14,8 @@ const {
   updateRelocationStatus,
   updateResignationStatus,
   updateUserLocation,
-  updateUser
+  updateUser,
+  deleteAllUserData
 } = require("../controllers/hr.controller");
 const jwtAuthorize = require("../middlewares/authorizeJwt.middleware");
 const { validateSchema } = require("../middlewares/validate.middleware");
@@ -64,5 +65,8 @@ router.put("/update-user-location",jwtAuthorize, updateUserLocation );
 
 //UPDATE USER DETAILS
 router.put("/update-user-details",jwtAuthorize, updateUser );
+
+//DELETE ALL USER DATA
+router.delete("/delete-all-user-data/:userId", jwtAuthorize, deleteAllUserData)
 
 module.exports = router;

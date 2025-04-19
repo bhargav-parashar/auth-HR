@@ -2,6 +2,7 @@ const HRService = require("../services/hr.service");
 const HRServiceInstance = new HRService();
 const AuthService = require("../services/auth.service");
 const AuthServiceInstance = new AuthService();
+const mongoose = require("mongoose");
 
 const getAllUsers = async (req,res) =>{
     try{
@@ -119,7 +120,7 @@ const createAnnouncement = async (req,res) => {
     }
   }
   
-  //UPDATE USER LOCATION 
+  // UPDATE USER LOCATION 
   const updateUserLocation = async (req,res) =>{
     try{
       const updated = await HRServiceInstance.updateUserLocation(req.body.id, req.body.newLocation);
@@ -129,7 +130,7 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
-  //UPDATE RESIGNATION STATUS
+  // UPDATE RESIGNATION STATUS
   const updateResignationStatus = async (req,res) =>{
     try{
       const updated = await HRServiceInstance.updateResignationStatus(req.body.id, req.body.newStatus, req.body.newLwd);
@@ -139,7 +140,7 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
-  //UPDATE USER
+  // UPDATE USER
   const updateUser = async (req, res ) =>{
     const newPassword = req.body.body.password;
     let hashedPassword = '';
@@ -149,7 +150,7 @@ const createAnnouncement = async (req,res) => {
 
       if(newPassword){
 
-        //Hash Password
+        // HASH PASSWORD
         hashedPassword = await AuthServiceInstance.generatePasswordHash(newPassword);
         const newBody = {
           username: req.body.body.username,
@@ -177,6 +178,72 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
+  
+
+  // DELETE USER AND ALL USER'S ROLES, REQUESTS, RESPONSES
+  const deleteAllUserData = async (req,res) =>{
+    const userId = req.params.userId;
+
+    // CREATE A MONGOOSE SESSION AND GROUP A SERIES OF TRANSACTIONS IN IT
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
+    try{
+
+      // DELETE USER BY USER ID
+      const user = await HRServiceInstance.deleteUserById(userId, session);
+
+      // IF NO USER ID FOUND, ABORT TRANSACTION
+      if(!user){
+        await session.abortTransaction();
+        res.status(404).json({ message: "User not found!" });
+      }
+
+      // PARALLELY DELETE ALL USER DOCUMENTS FROM RELATED COLLECTIONS USING PROMISE.ALL
+      const [
+        userRolesDeleted, 
+        leavesDeleted, 
+        relocationsDeleted, 
+        relocationRespDeleted, 
+        resignationsDeleted, 
+        resignationRespDeleted,
+       ] = await Promise.all([
+          HRServiceInstance.deleteUserRolesByUserId(userId,session),
+          HRServiceInstance.deleteLeavesByUserId(userId,session),
+          HRServiceInstance.deleteRelocationsByUserId(userId,session),
+          HRServiceInstance.deleteRelocationRespByUserId(userId,session),
+          HRServiceInstance.deleteResignationsByUserId(userId,session),
+          HRServiceInstance.deleteResignationRespByUserId(userId,session),
+       ]);
+
+       // COMMIT SESSION AND MAKE CHANGES PERMANENT, THEN END SESSION
+       await session.commitTransaction();
+       session.endSession();
+
+       //RETURN RESPONSE
+       res.status(200).json({
+        message: "User and all related data deleted",
+        deleteCount:{
+          userRoles        : userRolesDeleted.deletedCount,
+          leaves           : leavesDeleted.deletedCount,
+          relocations      : relocationsDeleted.deletedCount,
+          relocationResp   : relocationRespDeleted.deletedCount,
+          resignations     : resignationsDeleted.deletedCount,
+          resignationResp  : resignationRespDeleted.deletedCount
+        }
+       })
+
+    }catch(err){
+      console.log(err);
+       //ABORT AND ROLL BACK GROUP OF TRANSACTIONS AND END SESSION
+       await session.abortTransaction();
+       session.endSession();
+
+       //RETURN RESPONSE
+       res.status(500).json({message: 'Server Error', error: err.message});
+    }
+  }
+
 module.exports = {
     getAllUsers,
     getPendingLeaves,
@@ -192,5 +259,6 @@ module.exports = {
     updateRelocationStatus,
     updateResignationStatus,
     updateUserLocation,
-    updateUser
+    updateUser,
+    deleteAllUserData
 };

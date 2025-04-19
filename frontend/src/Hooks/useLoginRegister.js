@@ -129,7 +129,7 @@ const useLoginRegister = (
       location: formData.location,
     };
 
-    try {
+     try {
       setIsLoading(true);
       const res = await axios.post(URL, body);
       setFormData({
@@ -139,15 +139,15 @@ const useLoginRegister = (
         department: "",
         location: "",
       });
-      
-      if(res.status === 200){
+      console.log(`Res status : ${res} `)
+       if(res.status === 201){
         enqueueSnackbar("Registered successfully", { variant: "success" });
         if (!isHR) {
           navigate("/");
         } else {
-          queryEmployees();
-          getEmployeeData();
-          handleModalClose();
+           queryEmployees();
+           getEmployeeData();
+           handleModalClose();
         }
      }
 
@@ -235,6 +235,24 @@ const useLoginRegister = (
 
     
   };
+
+  const handleUserDelete = async (userId) => {
+
+    const URL = `${config.endpoint}/hr/delete-all-user-data/${userId}`;
+    console.log(URL);
+    try {
+      const res =  await axios.delete( URL, { withCredentials: true } );
+      if(res.status === 200){
+        enqueueSnackbar("User and related data deleted!", { variant: "success" });
+        queryEmployees();
+        getEmployeeData();
+        handleModalClose();  
+      }
+    } catch (err) {
+      enqueueSnackbar(`Error while deleting user : ${err} `, { variant: "warn" });
+      console.log(err);
+    }  
+  };
   
   return {
     formData,
@@ -242,7 +260,8 @@ const useLoginRegister = (
     handleChange,
     handleRegister,
     handleLogin,
-    handleUserUpdate
+    handleUserUpdate,
+    handleUserDelete
   };
 };
 

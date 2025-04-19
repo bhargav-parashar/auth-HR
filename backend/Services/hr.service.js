@@ -1,13 +1,16 @@
 const User = require("../models/user.model");
+const UserRole = require("../models/userRole.model");
 const Leaves = require("../models/leave.model");
 const Relocations = require("../models/relocation.model");
+const RelocationResp = require("../models/relocationResponse.model");
 const Resignations = require("../models/resignation.model");
+const ResignationResp = require("../models/userResponse.model");
 const Announcement = require("../models/announcement.model");
 
 class HRService {
-  getAllUsers = () => {
+  getAllUsers = async () => {
     try {
-      const users = User.aggregate([
+      const users = await User.aggregate([
         {
           $lookup: {
             from: "leaves",
@@ -53,9 +56,9 @@ class HRService {
     }
   };
 
-  getPendingLeaves = () => {
+  getPendingLeaves = async () => {
     try {
-      const pendingLeaves = Leaves.aggregate([
+      const pendingLeaves = await Leaves.aggregate([
         {
           $match: { status: "Pending" },
         },
@@ -86,9 +89,9 @@ class HRService {
     }
   };
 
-  getPendingRelocations = () => {
+  getPendingRelocations = async () => {
     try {
-      const pendingRelocations = Relocations.aggregate([
+      const pendingRelocations = await Relocations.aggregate([
         {
           $match: { status: "Pending" },
         },
@@ -126,9 +129,9 @@ class HRService {
     }
   };
 
-  getPendingResignations = () => {
+  getPendingResignations = async () => {
     try {
-      const pendingResignations = Resignations.aggregate([
+      const pendingResignations = await Resignations.aggregate([
         {
           $match: { status: "Pending" },
         },
@@ -166,12 +169,12 @@ class HRService {
     }
   };
 
-  getCurrMonthResignations = () => {
+  getCurrMonthResignations = async () => {
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
     const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
     try {
-      const currMonthResignations = Resignations.find({
+      const currMonthResignations = await Resignations.find({
         createdAt: { $gte: startOfMonth, $lt: startOfNextMonth },
       });
       return currMonthResignations;
@@ -180,33 +183,33 @@ class HRService {
     }
   };
 
-  createAnnouncement = (announcement) => {
+  createAnnouncement = async (announcement) => {
     try {
       const body = {
         body: announcement,
       };
-      const newAnn = Announcement.create(body);
+      const newAnn = await Announcement.create(body);
       return newAnn;
     } catch (err) {
       throw err;
     }
   };
 
-  getAnnouncements = () => {
+  getAnnouncements = async () => {
     try {
-      const ann = Announcement.find().sort({ createdAt: -1 });
+      const ann = await Announcement.find().sort({ createdAt: -1 });
       return ann;
     } catch (err) {
       throw err;
     }
   };
 
-  updateAnnouncement = (id, announcement) => {
+  updateAnnouncement = async (id, announcement) => {
     try {
       const body = {
         body: announcement,
       };
-      const updatedAnn = Announcement.findByIdAndUpdate(id, body, {
+      const updatedAnn = await Announcement.findByIdAndUpdate(id, body, {
         new: true,
       });
       return updatedAnn;
@@ -215,18 +218,18 @@ class HRService {
     }
   };
 
-  deleteAnnouncement = (id) => {
+  deleteAnnouncement = async (id) => {
     try {
-      const deletedAnn = Announcement.findByIdAndDelete(id, { new: true });
+      const deletedAnn = await Announcement.findByIdAndDelete(id, { new: true });
       return deletedAnn;
     } catch (err) {
       throw err;
     }
   };
 
-  updateLeaveBal = (id, newLeaveBal) => {
+  updateLeaveBal = async (id, newLeaveBal) => {
     try {
-      const updated = User.findByIdAndUpdate(
+      const updated = await User.findByIdAndUpdate(
         id,
         { $set: { leaveBal: newLeaveBal } },
         { new: true }
@@ -237,9 +240,9 @@ class HRService {
     }
   };
 
-  updateLeaveStatus = (id, newStatus) => {
+  updateLeaveStatus = async (id, newStatus) => {
     try {
-      const updated = Leaves.findByIdAndUpdate(
+      const updated = await Leaves.findByIdAndUpdate(
         id,
         { $set: { status: newStatus } },
         { new: true }
@@ -250,9 +253,9 @@ class HRService {
     }
   };
 
-  updateRelocationStatus = (id, newStatus) => {
+  updateRelocationStatus = async (id, newStatus) => {
     try {
-      const updated = Relocations.findByIdAndUpdate(
+      const updated = await Relocations.findByIdAndUpdate(
         id,
         { $set: { status: newStatus } },
         { new: true }
@@ -263,9 +266,9 @@ class HRService {
     }
   };
 
-  updateUserLocation = (id, newLocation) => {
+  updateUserLocation = async (id, newLocation) => {
     try {
-      const updated = User.findByIdAndUpdate(
+      const updated = await User.findByIdAndUpdate(
         id,
         { $set: { location: newLocation } },
         { new: true }
@@ -276,9 +279,9 @@ class HRService {
     }
   };
 
-  updateResignationStatus = (id, newStatus, newLwd) => {
+  updateResignationStatus = async (id, newStatus, newLwd) => {
     try {
-      const updated = Resignations.findByIdAndUpdate(
+      const updated = await Resignations.findByIdAndUpdate(
         id,
         { $set: { status: newStatus, lwd: newLwd } },
         { new: true }
@@ -289,34 +292,12 @@ class HRService {
     }
   };
 
-  updateUser = (id, newBody) => {
-    try {
-      // const updatedUser = body.password
-      //   ? User.findByIdAndUpdate(
-      //       id,
-      //       {
-      //         $set: {
-      //           username: body.username,
-      //           location: body.location,
-      //           department: body.department,
-      //           password: body.password
-      //         }
-      //       },
-      //       { new: true }
-      //     )
-      //   : User.findByIdAndUpdate(
-      //       id,
-      //       {
-      //         $set: {
-      //           username: body.username,
-      //           location: body.location,
-      //           department: body.department
-      //         }
-      //       },
-      //       { new: true }
-      //     );
 
-      const updatedUser = User.findByIdAndUpdate(
+
+  //UPDATE USER BY USER ID
+  updateUser = async (id, newBody) => {
+    try {
+      const updatedUser = await User.findByIdAndUpdate(
         id,
         {
           $set: newBody
@@ -328,6 +309,169 @@ class HRService {
       throw err;
     }
   };
+
+
+
+  // DELETE USER BY ID
+  deleteUserById = async ( userId, session = null ) => {
+    try {
+      // CREATE THE BASE QUERY
+      const query = User.findByIdAndDelete(userId);
+
+      // IF THE REQUEST IS PART OF SESSION, THEN MUTATE QUERY OBJECT AND ADD SESSION 
+      if(session){
+        query.session(session);
+      }
+
+      // EXECUTE QUERY
+      const result = await query;
+      
+      return result;
+
+    } catch (err) {
+      throw new Error(`Could not delete user : ${err.messge}`);
+    }
+  };
+
+
+
+  // DELETE USER ROLES BY USER ID
+  deleteUserRolesByUserId = async (userId, session = null ) =>{
+    try{
+      // CREATE THE BASE QUERY
+      const query = UserRole.deleteMany({userId : userId});
+
+      // IF THE REQUEST IS PART OF SESSION, THEN MUTATE QUERY OBJECT AND ADD SESSION 
+      if(session){
+        query.session(session);
+      }
+ 
+      // EXECUTE QUERY
+      const result = await query;
+      
+      return result;
+
+    }catch(err){
+      throw new Error(`Could not delete user roles : ${err.messge}`);
+    }
+  };
+
+
+
+  // DELETE USER LEAVES BY USER ID
+  deleteLeavesByUserId = async (userId, session = null ) =>{
+    try{
+      // CREATE THE BASE QUERY
+      const query = Leaves.deleteMany({employeeId : userId});
+
+      // IF THE REQUEST IS PART OF SESSION, THEN MUTATE QUERY OBJECT AND ADD SESSION 
+      if(session){
+        query.session(session);
+      }
+ 
+      // EXECUTE QUERY
+      const result = await query;
+      
+      return result;
+
+    }catch(err){
+      throw new Error(`Could not delete user's leaves : ${err.messge}`);
+    }
+  };
+
+
+
+  // DELETE USER RELOCATIONS BY USER ID
+  deleteRelocationsByUserId = async (userId, session = null ) =>{
+    try{
+      // CREATE THE BASE QUERY
+      const query = Relocations.deleteMany({employeeId : userId});
+
+      // IF THE REQUEST IS PART OF SESSION, THEN MUTATE QUERY OBJECT AND ADD SESSION 
+      if(session){
+        query.session(session);
+      }
+ 
+      // EXECUTE QUERY
+      const result = await query;
+      
+      return result;
+
+    }catch(err){
+      throw new Error(`Could not delete user's relocations : ${err.messge}`);
+    }
+  };
+
+
+
+  // DELETE USER RELOCATION RESPONSES BY USER ID
+  deleteRelocationRespByUserId = async (userId, session = null ) =>{
+    try{
+      // CREATE THE BASE QUERY
+      const query = RelocationResp.deleteMany({userId : userId});
+
+      // IF THE REQUEST IS PART OF SESSION, THEN MUTATE QUERY OBJECT AND ADD SESSION 
+      if(session){
+        query.session(session);
+      }
+ 
+      // EXECUTE QUERY
+      const result = await query;
+      
+      return result;
+
+    }catch(err){
+      throw new Error(`Could not delete user's relocation responses : ${err.messge}`);
+    }
+  };
+
+
+
+  // DELETE USER RESIGNATIONS BY USER ID
+  deleteResignationsByUserId = async (userId, session = null ) =>{
+    try{
+      // CREATE THE BASE QUERY
+      const query = Resignations.deleteMany({ employeeId : userId });
+
+      // IF THE REQUEST IS PART OF SESSION, THEN MUTATE QUERY OBJECT AND ADD SESSION 
+      if(session){
+        query.session(session);
+      }
+ 
+      // EXECUTE QUERY
+      const result = await query;
+      
+      return result;
+
+    }catch(err){
+      throw new Error(`Could not delete user's resignations : ${err.messge}`);
+    }
+  };
+
+
+
+  // DELETE USER RESIGNATION RESPONSES BY USER ID
+  deleteResignationRespByUserId = async (userId, session = null ) =>{
+    try{
+      // CREATE THE BASE QUERY
+      const query = ResignationResp.deleteMany({ userId : userId });
+
+      // IF THE REQUEST IS PART OF SESSION, THEN MUTATE QUERY OBJECT AND ADD SESSION 
+      if(session){
+        query.session(session);
+      }
+ 
+      // EXECUTE QUERY
+      const result = await query;
+      
+      return result;
+
+    }catch(err){
+      throw new Error(`Could not delete user's resignation responses : ${err.messge}`);
+    }
+  };
+
+
 }
 
 module.exports = HRService;

@@ -30,6 +30,7 @@ const Dashboard = () => {
     currMonthHires ,
     getEmployeeData
   } = useGetAnalytics();
+  
   const { loggedInUser } = useContext(UserContext);
 
   const handleTabChange = (tab) => {

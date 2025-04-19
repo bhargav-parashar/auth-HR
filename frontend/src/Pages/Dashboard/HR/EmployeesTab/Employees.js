@@ -246,6 +246,10 @@ const Employees = ({getEmployeeData}) => {
         handleLocationChange={handleLocationChange}
         filteredData={filteredData}
         isLoading={isLoading}
+        handleAddEmployee={handleAddEmployee}
+        setIsEdit={setIsEdit}
+        handleModalOpen={handleModalOpen}
+        setSelectedUser={setSelectedUser}
       />
       {isModalOpen && (
         <AddEditEmpModal

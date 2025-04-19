@@ -6,6 +6,7 @@ import {
   TextField,
   FormControl,
   Select,
+  Button,
 } from "@mui/material";
 import Details from "../../Employee/HomeTab/Details";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -23,13 +24,37 @@ const EmployeeMobile = ({
   location,
   handleLocationChange,
   filteredData,
-  isLoading
+  isLoading,
+  handleAddEmployee,
+  setIsEdit,
+  handleModalOpen,
+  setSelectedUser
 }) => {
   return (
-    <Box mt={5} sx={{ height:'100%', display: { xs: "block", md: "none" } }}>
-      <Typography mb={1} variant="h5">
-        Employees
-      </Typography>
+    <Box mt={5} sx={{ height: "100%", display: { xs: "block", md: "none" } }}>
+      <Stack
+        direction="row"
+        sx={{ width: "100%" }}
+        justifyContent="space-between"
+      >
+        <Typography mb={1} variant="h5">
+          Employees
+        </Typography>
+        <Box>
+          <Button
+            onClick={handleAddEmployee}
+            sx={{
+              bgcolor: "primary.contrast",
+              "&:hover": {
+                backgroundColor: "secondary.dark",
+              },
+            }}
+            size="small"
+          >
+            + Employee
+          </Button>
+        </Box>
+      </Stack>
       <TextField
         sx={{
           flex: 1,
@@ -127,7 +152,7 @@ const EmployeeMobile = ({
           }
         </FormControl>
       </Stack>
-      { !isLoading && filteredData && (
+      {!isLoading && filteredData && (
         <Box
           sx={{
             display: "flex",
@@ -138,30 +163,38 @@ const EmployeeMobile = ({
             filteredData.length > 0 &&
             filteredData.map((user, idx) => (
               <Box key={idx} sx={{ width: "100%", height: "100%", padding: 1 }}>
-                <Details isGrid isMobile user={user} />
+                <Details
+                  isHR
+                  isGrid
+                  isMobile
+                  user={user}
+                  setIsEdit={setIsEdit}
+                  handleModalOpen={handleModalOpen}
+                  setSelectedUser={setSelectedUser}
+                />
               </Box>
             ))}
         </Box>
       )}
-      { !isLoading && ( !filteredData || filteredData.length === 0)  && (
+      {!isLoading && (!filteredData || filteredData.length === 0) && (
         <Typography mt={5} textAlign="center">
           No employees found !
         </Typography>
       )}
       {isLoading && (
-          <Box
-            alignItems="center"
-            flex={1}
-            p={1}
-            sx={{
-              height: "100%",
-              borderRadius: "0.6rem",
-              bgcolor: "primary.inactive3",
-            }}
-          >
-            <Shimmer />
-          </Box>
-        )}
+        <Box
+          alignItems="center"
+          flex={1}
+          p={1}
+          sx={{
+            height: "100%",
+            borderRadius: "0.6rem",
+            bgcolor: "primary.inactive3",
+          }}
+        >
+          <Shimmer />
+        </Box>
+      )}
     </Box>
   );
 };
