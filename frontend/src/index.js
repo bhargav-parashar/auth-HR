@@ -7,6 +7,7 @@ import RegisterPage from "./pages/RegisterPage/Register";
 import Login from "./pages/LoginPage/Login";
 import Shimmer from "./components/ShimmerUI/Shimmer";
 import { SnackbarProvider,closeSnackbar } from "notistack";
+import Error from "./pages/Error/Error";
 
 
 // INTIALIZE DASHBOARD FOR LAZY LOADING
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement : <Error/>,
     children: [
       {
         path: "/register",
@@ -28,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/",
-        element: <Login/>,
+        element: <Login/>
       },
     ],
   },
