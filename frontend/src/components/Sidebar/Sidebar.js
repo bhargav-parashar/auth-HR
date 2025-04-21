@@ -3,18 +3,18 @@ import { Paper, Stack, Box, Typography } from "@mui/material";
 import SidebarCard from "../../components/Sidebar/SidebarCard";
 import {
   adminSidebarOptions,
-  empSidebarOptions
+  empSidebarOptions,
 } from "../../constants/constants";
 import UserContext from "../../context/UserContext";
 import { useContext } from "react";
 import Panel from "./Panel";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-const Sidebar = ({ selectedTab, setSelectedTab, toggleDrawer }) => {
+const Sidebar = ({ isMobile, selectedTab, setSelectedTab, toggleDrawer }) => {
   const { loggedInUser } = useContext(UserContext);
-  
+
   return (
-    <Paper sx={{ height: "100%" }} elevation={0} square>
+    <Paper sx={{ height: "100%", width: isMobile? '200px':'100%' }} elevation={0} square>
       <Box
         sx={{
           height: "100%",
@@ -75,8 +75,9 @@ const Sidebar = ({ selectedTab, setSelectedTab, toggleDrawer }) => {
               <></>
             )}
           </Box>
-          {loggedInUser.role && <Panel />}
+          {loggedInUser.role && <Panel selectedTab={selectedTab} setSelectedTab={setSelectedTab} toggleDrawer={toggleDrawer} />}
         </Stack>
+        
       </Box>
     </Paper>
   );

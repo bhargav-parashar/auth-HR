@@ -14,7 +14,6 @@ const Resignation = ({setSelectedTab}) => {
     const URL = `${config.endpoint}/user/pending-resignation`;
     const getResignation = async () => {
       try {
-        setIsLoading(true);
         const { data } = await axios.get(URL, { withCredentials: true });
         setResignation(data);
       } catch (err) {

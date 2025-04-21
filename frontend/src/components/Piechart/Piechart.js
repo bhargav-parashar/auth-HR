@@ -9,10 +9,10 @@ import {
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f7f", "rgb(149, 185, 218)"];
 
-const PieChartComponent = ({ data, isMobile }) => {
-  const outRad = isMobile ? 40 : 60;
+const PieChartComponent = ({ data }) => {
+
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="85%">
       <PieChart>
         <Pie
           style={{cursor:'pointer'}}
@@ -21,7 +21,7 @@ const PieChartComponent = ({ data, isMobile }) => {
           nameKey="location"
           cx="50%"
           cy="50%"
-          outerRadius={outRad}
+          outerRadius={{xs:40, md:50, xs:60}}
           fill="#8884d8"
         >
           {data.map((entry, index) => (

@@ -23,9 +23,9 @@ const Details = ({
     <Box
       p={1}
       flex={1}
-      onClick={ handleClick}
+      onClick={isHR ? handleClick : {} }
       sx={{
-        cursor: "pointer",
+        cursor: isHR ? "pointer" : "",
         height: "50%",
         borderRadius: "0.6rem",
         bgcolor: isReview ? "" : "primary.inactive3",
@@ -35,9 +35,9 @@ const Details = ({
           ? "transform 0.3s ease, background-color 0.3s ease"
           : "",
         "&:hover": {
-          transform: !isReview ? "scale(1.015)" : "",
-          border: "1px solid",
-          borderColor: !isReview ? "primary.light" : "",
+          transform:  isHR ? "scale(1.015)" : "",
+          border: isHR ?  "1px solid" : "none",
+          borderColor: isHR ? "primary.light" : "",
         },
       }}
     >

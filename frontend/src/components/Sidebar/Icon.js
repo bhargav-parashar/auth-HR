@@ -7,6 +7,8 @@ import OutputIcon from '@mui/icons-material/Output';
 import PlaceIcon from '@mui/icons-material/Place';
 import DescriptionIcon from '@mui/icons-material/Description';
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import Code from "@mui/icons-material/Code";
+
 
 const Icon = ({ menuIcon, menuItem, selectedTab, handleClick }) => {
   let currIcon = (
@@ -75,6 +77,14 @@ const Icon = ({ menuIcon, menuItem, selectedTab, handleClick }) => {
         case "DescriptionIcon":
         currIcon = (
           <DescriptionIcon
+            sx={{ cursor: "pointer",color: selectedTab === menuItem ? 'text.heading' : "" }}
+            onClick={()=>handleClick(menuItem)}
+          />
+        );
+        break;
+        case "Code":
+        currIcon = (
+          <Code
             sx={{ cursor: "pointer",color: selectedTab === menuItem ? 'text.heading' : "" }}
             onClick={()=>handleClick(menuItem)}
           />

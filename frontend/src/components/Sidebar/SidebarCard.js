@@ -1,16 +1,21 @@
 import React from "react";
 import { Stack, Typography, Box } from "@mui/material";
 import Icon from "../Sidebar/Icon";
+import ShimmerText from "../ShimmerText/ShimmerText";
 
-const SidebarCard = ({  menuItem, menuIcon, selectedTab, setSelectedTab,toggleDrawer }) => {
- 
-
+const SidebarCard = ({
+  menuItem,
+  menuIcon,
+  selectedTab,
+  setSelectedTab,
+  toggleDrawer,
+  isShimmer,
+}) => {
   const handleClick = (val) => {
     setSelectedTab(val);
-    if(toggleDrawer){
+    if (toggleDrawer) {
       toggleDrawer(false);
     }
-    
   };
 
   return (
@@ -37,17 +42,33 @@ const SidebarCard = ({  menuItem, menuIcon, selectedTab, setSelectedTab,toggleDr
           selectedTab={selectedTab}
           handleClick={handleClick}
         />
-        <Typography
-          variant="caption"
-          sx={{
-            cursor: "pointer",
-            fontWeight: selectedTab === menuItem ? "bold" : "",
-            color: selectedTab === menuItem ? "text.heading" : "",
-          }}
-          onClick={() => handleClick(menuItem)}
-        >
-          {menuItem}
-        </Typography>
+        {isShimmer && selectedTab != menuItem  ? (
+          <ShimmerText>
+            <Typography
+              variant="caption"
+              sx={{
+                cursor: "pointer",
+                fontWeight: selectedTab === menuItem ? "bold" : "",
+                color: selectedTab === menuItem ? "text.heading" : "",
+              }}
+              onClick={() => handleClick(menuItem)}
+            >
+              {menuItem}
+            </Typography>
+          </ShimmerText>
+        ) : (
+          <Typography
+            variant="caption"
+            sx={{
+              cursor: "pointer",
+              fontWeight: selectedTab === menuItem ? "bold" : "",
+              color: selectedTab === menuItem ? "text.heading" : "",
+            }}
+            onClick={() => handleClick(menuItem)}
+          >
+            {menuItem}
+          </Typography>
+        )}
       </Stack>
       {selectedTab === menuItem && (
         <Stack

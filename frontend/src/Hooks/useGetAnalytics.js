@@ -13,7 +13,7 @@ const useGetAnalytics = () => {
       const employees = await axios.get(URL, { withCredentials: true });
       setEmployees(employees.data);
     } catch (err) {
-      throw err;
+      console.log(err);
     } 
   };
 
@@ -23,7 +23,7 @@ const useGetAnalytics = () => {
       const currMonResign = await axios.get(URL, { withCredentials: true });
       setCurrMonResignations(currMonResign.data);
     } catch (err) {
-      throw err;
+      console.log(err)
     }
   };
 

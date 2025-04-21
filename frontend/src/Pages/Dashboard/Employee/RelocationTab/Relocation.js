@@ -14,7 +14,6 @@ const Relocation = ({setSelectedTab}) => {
     const URL = `${config.endpoint}/user/pending-relocation`;
     const getRelocation = async () => {
       try {
-        setIsLoading(true);
         const { data } = await axios.get(URL, { withCredentials: true });
         setRelocation(data);
       } catch (err) {

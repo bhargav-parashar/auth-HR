@@ -62,7 +62,7 @@ const Employees = ({getEmployeeData}) => {
           backgroundColor: "transparent",
         },
         scrollbarWidth: "thin",
-        scrollbarColor: "#888 transparent",
+        scrollbarColor: "#888 transparent"
       }}
     >
       <Box sx={{ height: "70%", display: { xs: "none", md: "block" } }}>

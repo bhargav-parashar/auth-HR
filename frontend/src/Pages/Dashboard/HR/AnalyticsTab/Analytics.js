@@ -32,9 +32,9 @@ const Analytics = ({
   deptMap
 }) => {
   return (
-    <Box sx={{ height: "100%", overflowY: "auto" }}>
+    <Box sx={{ height: "100%", overflowY: {xs:'auto', md:'clip'} }}>
       <Box sx={{ height: "100%", display: { xs: "none", md: "block" } }}>
-        <Stack gap={1} px={2} sx={{ height: "100%" }}>
+        <Stack px={2} sx={{ height: "100%" }}>
           <Typography px={2} mb={1} variant="h5">
             Analytics
           </Typography>

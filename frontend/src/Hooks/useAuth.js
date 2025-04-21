@@ -11,6 +11,7 @@ const useAuth = () =>{
   const navigate = useNavigate();
 
   useEffect(() => {
+   
     //CHECK IF USER IS ALREADY LOGGED IN BY SENDING STORED HTTP ONLY USER COOKIES IF AVAILABLE TO BACKEND
     const checkStatus = async (loggedUser) => {
       const URL = `${config.endpoint}/auth/loginstatus`;

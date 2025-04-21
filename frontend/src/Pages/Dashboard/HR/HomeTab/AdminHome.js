@@ -55,8 +55,8 @@ const AdminHome = ({
     <Box
       sx={{
         height: "100%",
-        overflowY: "auto",
         paddingX: 2,
+        overflowY: {xs:'auto', md:'clip'} 
       }}
     >
       <Box sx={{ height: "70%" }}>

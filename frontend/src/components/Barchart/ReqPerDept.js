@@ -12,7 +12,7 @@ import {
 
 const ReqPerDept = ({data}) => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="85%">
       <BarChart
         layout="vertical"
         data={data}
@@ -36,9 +36,9 @@ const ReqPerDept = ({data}) => {
           }}
         />
         <Legend />
-        <Bar dataKey="leave" stackId="a" fill="#8884d8" barSize={15} />
-        <Bar dataKey="relocation" stackId="a" fill="#82ca9d" barSize={15} />
-        <Bar dataKey="resignation" stackId="a" fill="#ff7f7f" barSize={15} />
+        <Bar dataKey="leave" stackId="a" fill="#8884d8" barSize={14} />
+        <Bar dataKey="relocation" stackId="a" fill="#82ca9d" barSize={14} />
+        <Bar dataKey="resignation" stackId="a" fill="#ff7f7f" barSize={14} />
       </BarChart>
     </ResponsiveContainer>
   );

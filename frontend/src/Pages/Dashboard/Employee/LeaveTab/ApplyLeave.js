@@ -6,7 +6,7 @@ import Shimmer from "../../../../components/ShimmerUI/Shimmer";
 import Status from "./Status";
 
 const ApplyLeave = ({ setSelectedTab }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const[leave, setLeave] = useState([]);
   const [refresh, setRefresh] = useState(0);
 
@@ -14,7 +14,6 @@ const ApplyLeave = ({ setSelectedTab }) => {
     const URL = `${config.endpoint}/user/pending-leave-applications`;
     const getLeaves = async () => {
       try {
-        setIsLoading(true);
         const { data } = await axios.get(URL, { withCredentials: true });
         setLeave(data);
       } catch (err) {

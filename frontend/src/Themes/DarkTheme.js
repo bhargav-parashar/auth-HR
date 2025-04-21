@@ -17,7 +17,9 @@ export const darkTheme = () => (
                 contrast:'rgb(81, 81, 228)',
                 successLight :"rgb(222, 248, 223)",
                 highlight:'rgb(217, 133, 37)',
-                calendar: 'rgb(39, 37, 37)'
+                calendar: 'rgb(39, 37, 37)',
+                badge:'rgb(53, 71, 100)',
+                
             },
            
             text: {
@@ -25,7 +27,10 @@ export const darkTheme = () => (
                 secondary: "rgba(255,255,255,0.7)",
                 heading:'#9696FF',
                 headingContrast : 'rgb(81, 81, 228)',
-                contrast: '#000000'
+                contrast: '#000000',
+                badge:'#f0fff0',
+                badgeSubtext : 'rgb(176, 191, 202)',
+                subHeader : 'rgb(137, 150, 160)',
             },
              background : {
                 light : '#9696FF'

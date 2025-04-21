@@ -7,8 +7,9 @@ import config from "../../config/config";
 import { useSnackbar } from "notistack";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import SidebarCard from "./SidebarCard";
 
-const Panel = () => {
+const Panel = ({ selectedTab, setSelectedTab,toggleDrawer }) => {
   const [loggedInUser, setLoggedInUser] = useState(
     JSON.parse(localStorage.getItem("loggedInUser"))
   );
@@ -70,7 +71,11 @@ const Panel = () => {
           gap={1}
         >
           <LogoutIcon sx={{ cursor: "pointer" }} onClick={handleLogout} />
-          <Typography variant="caption" sx={{ cursor: "pointer" }} onClick={handleLogout}>
+          <Typography
+            variant="caption"
+            sx={{ cursor: "pointer" }}
+            onClick={handleLogout}
+          >
             Logout
           </Typography>
         </Stack>
@@ -90,12 +95,19 @@ const Panel = () => {
           gap={1}
         >
           <DarkModeOutlinedIcon />
-          <Typography variant="caption">
-            Dark Mode
-          </Typography>
+          <Typography variant="caption">Dark Mode</Typography>
           <Switch checked={darkMode} onChange={handleModeChange} />
         </Stack>
       </Stack>
+      <SidebarCard
+        key='100'
+        menuItem='About the Developer'
+        menuIcon="Code"
+        selectedTab={selectedTab}
+        setSelectedTab={setSelectedTab}
+        toggleDrawer={toggleDrawer}
+        isShimmer
+      />
     </Box>
   );
 };

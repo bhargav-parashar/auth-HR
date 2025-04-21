@@ -1,4 +1,4 @@
-import { Box, Typography, Stack, Paper, Select, MenuItem } from "@mui/material";
+import { Box, Typography, Stack, Paper } from "@mui/material";
 import date_picker from "../../assets/date_picker.svg";
 import resign_feedback from "../../assets/resign_feedback.svg";
 import resign_submit from "../../assets/resign_submit.svg";

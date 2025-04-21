@@ -10,7 +10,7 @@ import {
 
 const Barchart = ({ data }) => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="85%">
       <BarChart
         style={{ cursor: "pointer" }}
         layout="vertical"
@@ -34,7 +34,7 @@ const Barchart = ({ data }) => {
             color: "transparent",
           }}
         />
-        <Bar dataKey="employees" fill="#8884d8" barSize={18} />
+        <Bar dataKey="employees" fill="#8884d8" barSize={14} />
       </BarChart>
     </ResponsiveContainer>
   );

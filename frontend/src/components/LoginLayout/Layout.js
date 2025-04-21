@@ -3,6 +3,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import Img from "../../assets/welcome.jpg";
 import LoginCarousel from "../Carousel/LoginCarousel";
 import { carouselSlides } from "../../constants/constants";
+import MadeWithLove from "../MadeWithLove/MadeWithLove";
 
 const Login = ({ children }) => {
   return (
@@ -124,9 +125,7 @@ const Login = ({ children }) => {
               justifyContent: "center",
             }}
           >
-            <Typography  variant="caption" color="lightgray">
-              Made with ❤️ and countless console.log()s.
-            </Typography>
+            <MadeWithLove size="0.7rem" />
           </Box>
         </Box>
       </Stack>
