@@ -125,7 +125,7 @@ const Login = ({ children }) => {
               justifyContent: "center",
             }}
           >
-            <MadeWithLove size="0.7rem" />
+            <MadeWithLove isLogin size="0.7rem" />
           </Box>
         </Box>
       </Stack>

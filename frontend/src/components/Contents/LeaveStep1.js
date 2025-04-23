@@ -14,7 +14,7 @@ const LeaveStep1 = ({leaveType,handleLeaveTypeChange}) => {
       name="leaveType"
       value={leaveType}
       onChange={handleLeaveTypeChange}
-      sx={{ width: "50%" }}
+      sx={{ width: "50%", bgcolor:'primary.dropdown' }}
     >
       <MenuItem disabled value="">
         Leave Type

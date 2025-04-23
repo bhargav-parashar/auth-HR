@@ -10,7 +10,7 @@ const AboutDeveloper = () => {
         elevation={1}
         sx={{
           height: "100%",
-          bgcolor: "primary.bg2",
+          bgcolor: "primary.boxBg",
           overflowY: { xs: "auto", md: "clip" },
         }}
       >

@@ -19,7 +19,11 @@ export const darkTheme = () => (
                 highlight:'rgb(217, 133, 37)',
                 calendar: 'rgb(39, 37, 37)',
                 badge:'rgb(53, 71, 100)',
-                
+                box: "rgb(36, 47, 52)",
+                boxBg:'rgb(24, 23, 23)',
+                dropdown:'rgb(24, 23, 23)',
+                unselectedCheckbox :'rgb(151, 144, 144)',
+                inverse: 'rgb(182, 173, 173)'
             },
            
             text: {

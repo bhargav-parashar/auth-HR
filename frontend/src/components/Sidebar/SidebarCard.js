@@ -10,6 +10,7 @@ const SidebarCard = ({
   setSelectedTab,
   toggleDrawer,
   isShimmer,
+  isBold
 }) => {
   const handleClick = (val) => {
     setSelectedTab(val);
@@ -48,7 +49,7 @@ const SidebarCard = ({
               variant="caption"
               sx={{
                 cursor: "pointer",
-                fontWeight: selectedTab === menuItem ? "bold" : "",
+                fontWeight: isBold ? "bold" : selectedTab === menuItem ? "bold" : "",
                 color: selectedTab === menuItem ? "text.heading" : "",
               }}
               onClick={() => handleClick(menuItem)}

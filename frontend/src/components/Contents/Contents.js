@@ -46,7 +46,7 @@ const Contents = ({
         <Paper
           elevation={2}
           sx={{
-            bgcolor: "primary.inactive2",
+            bgcolor: "primary.inactive3",
             position: "relative",
             padding: 2,
             height: "100%",

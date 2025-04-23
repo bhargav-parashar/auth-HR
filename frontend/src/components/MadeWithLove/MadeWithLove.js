@@ -1,7 +1,7 @@
 import { Typography, Box, Stack } from "@mui/material";
 import ShimmerText from "../ShimmerText/ShimmerText";
 
-const MadeWithLove = ({ size }) => {
+const MadeWithLove = ({ size, isLogin }) => {
   handleClick = () =>{
     window.open("https://www.google.com", "_blank", "noopener,noreferrer");
   }
@@ -16,7 +16,7 @@ const MadeWithLove = ({ size }) => {
       <Typography
         fontSize={size ? size : ""}
         variant="caption"
-        color="lightgray"
+        color= {isLogin ?'lightgray' : "primary.inverse"}
       >
         Made with ❤️ and countless console.log()s
       </Typography>

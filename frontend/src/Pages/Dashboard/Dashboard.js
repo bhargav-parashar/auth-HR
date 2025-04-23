@@ -17,7 +17,7 @@ const Employees = lazy(() => import("./HR/EmployeesTab/Employees"));
 const ApplyLeave = lazy(() => import("./Employee/LeaveTab/ApplyLeave"));
 const Relocation = lazy(() => import("./Employee/RelocationTab/Relocation"));
 const Resignation = lazy(() => import("./Employee/ResignationTab/Resignation"));
-const AboutDeveloper = lazy(() => import("./Developer/AboutDeveloper"));
+const AboutDeveloper = lazy(() => import("./Developer/About/AboutDeveloper"));
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState("Dashboard");
@@ -46,6 +46,7 @@ const Dashboard = () => {
         py={{ xs: 0, xl: 5 }}
         px={{ xs: 0, xl: 10 }}
         sx={{
+          overflowY:{xs:'auto', md:'clip'},
           height: "100vh",
           background:
             "linear-gradient(0deg, rgba(246,228,204,1) 0%, rgba(108,140,181,1) 100%)",

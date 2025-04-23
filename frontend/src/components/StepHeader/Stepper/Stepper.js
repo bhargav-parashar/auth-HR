@@ -41,7 +41,7 @@ const StepperComponent = ({ activeStep, steps }) => {
                         color: "white", 
                       },
                       "&:not(.Mui-active):not(.Mui-completed)": {
-                        color: "primary.inactive", 
+                        color: "primary.unselectedCheckbox", 
                       },
                     },
                   },

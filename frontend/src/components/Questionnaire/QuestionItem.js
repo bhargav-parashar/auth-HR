@@ -18,7 +18,7 @@ const QuestionItem = ({ handleInputChange, questionitem, idx, isReview }) => {
             variant="outlined"
             value={questionitem.response}
             size="small"
-            sx={{ width: "100%", mb: 3, }}
+            sx={{ width: "100%", mb: 3, bgcolor:'primary.dropdown' }}
             inputProps={{ maxLength: 100, style: {fontSize: "0.8rem"}}} 
             onChange={(e) =>
               handleInputChange(questionitem.questionId, e.target.value)

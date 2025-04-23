@@ -21,6 +21,7 @@ const RelocationStep1 = ({location, handleLocationChange}) => {
                 onChange={handleLocationChange}
                 sx={{
                   width: "50%",
+                  bgcolor:'primary.dropdown'
                 }}
               >
                 <MenuItem disabled value="">

@@ -107,6 +107,7 @@ const Panel = ({ selectedTab, setSelectedTab,toggleDrawer }) => {
         setSelectedTab={setSelectedTab}
         toggleDrawer={toggleDrawer}
         isShimmer
+        isBold
       />
     </Box>
   );

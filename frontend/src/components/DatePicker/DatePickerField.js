@@ -56,7 +56,7 @@ export default function BasicDatePicker({
           disabled={disabled}
           value={date}
           onChange={handleDateChange}
-          sx={{ width: isMobile ? "100%" : "50%" }}
+          sx={{ width: isMobile ? "100%" : "50%", bgcolor:'primary.dropdown' }}
           slotProps={{
             textField: { 
               size: isMobile ? "large" : "small" 

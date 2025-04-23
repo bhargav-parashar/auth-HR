@@ -1,16 +1,16 @@
 import React from "react";
 import { Box, Typography, Stack, Button } from "@mui/material";
-import SkillPill from "./SkillPill";
+import SkillPill from "../Skills/SkillPill";
 import Launch from "@mui/icons-material/Launch";
-import AuthHRPic from "../../../assets/authHRPic.png";
-import QKartPic from "../../../assets/qKartPic.png";
-import MedifyPic from "../../../assets/medifyPic.png";
-import ExpensePic from "../../../assets/expenseTrackerPic.png";
-import SwiftPic from "../../../assets/swiftPic.png";
-import QtifyPic from "../../../assets/qtifyPic.png";
-import TaskManagerPic from "../../../assets/taskManagerPic.png";
-import WeatherPic from "../../../assets/weatherPic.png";
-import BotAiPic from "../../../assets/botAiPic.png";
+import AuthHRPic from "../../../../assets/authHRPic.png";
+import QKartPic from "../../../../assets/qKartPic.png";
+import MedifyPic from "../../../../assets/medifyPic.png";
+import ExpensePic from "../../../../assets/expenseTrackerPic.png";
+import SwiftPic from "../../../../assets/swiftPic.png";
+import QtifyPic from "../../../../assets/qtifyPic.png";
+import TaskManagerPic from "../../../../assets/taskManagerPic.png";
+import WeatherPic from "../../../../assets/weatherPic.png";
+import BotAiPic from "../../../../assets/botAiPic.png";
 
 const Project = ({ item }) => {
   getImage = (label) => {
@@ -33,7 +33,7 @@ const Project = ({ item }) => {
       mt={2}
       onClick={handleClick}
       sx={{
-        bgcolor: "rgb(36, 47, 52)",
+        bgcolor: "primary.box",
         width: "100%",
         borderRadius: "0.6rem",
         cursor: "pointer",
@@ -49,10 +49,10 @@ const Project = ({ item }) => {
             sx={{
               width: "20%",
               maxHeight: "150px",
-              objectFit: "contain",
+              objectFit: "fill",
               borderRadius: "0.6rem",
             }}
-            alt="profile"
+            alt={item.label}
             src={getImage(item.label)}
           />
           <Stack
@@ -69,7 +69,11 @@ const Project = ({ item }) => {
               sx={{ width: "100%" }}
             >
               <Stack direction="row" gap={1} alignItems="center">
-                <Typography textAlign="justify" variant="body1">
+                <Typography
+                  color="honeyDew"
+                  textAlign="justify"
+                  variant="body1"
+                >
                   {item.label}
                 </Typography>
                 <Box
@@ -81,7 +85,9 @@ const Project = ({ item }) => {
                     borderColor: "primary.badge",
                   }}
                 >
-                  <Typography variant="caption">{item.tag}</Typography>
+                  <Typography color="honeyDew" variant="caption">
+                    {item.tag}
+                  </Typography>
                 </Box>
               </Stack>
               <Stack direction="row" gap={1} alignItems="center">
@@ -134,11 +140,11 @@ const Project = ({ item }) => {
       </Box>
 
       <Box sx={{ display: { xs: "block", md: "none" } }}>
-        <Stack gap={3} direction="row" alignItems="center">
+        <Stack gap={1} direction="row" alignItems="center">
           <Box
             component="img"
             sx={{
-              width: "40%",
+              width: "38%",
               maxHeight: "150px",
               objectFit: "contain",
               borderRadius: "0.6rem",
@@ -146,10 +152,79 @@ const Project = ({ item }) => {
             alt="profile"
             src={getImage(item.label)}
           />
-         
+          <Box sx={{ height: "100%", width: "60%" }}>
+            <Stack direction="row" gap={1} alignItems="center">
+              <Typography color="honeyDew" textAlign="justify" variant="body2">
+                {item.label}
+              </Typography>
+              <Box
+                sx={{
+                  display: "inline-block",
+                  px: 1,
+                  borderRadius: "0.6rem",
+                  border: "2px solid",
+                  borderColor: "primary.badge",
+                }}
+              >
+                <Typography color="honeyDew" variant="caption">
+                  {item.tag}
+                </Typography>
+              </Box>
+            </Stack>
+            <Stack mt={1} direction="row" gap={1} alignItems="center">
+              <Button
+                endIcon={<Launch />}
+                size="small"
+                variant="outlined"
+                sx={{ bgcolor: "transparent", fontSize: "0.6rem" }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(item.code, "_blank", "noopener,noreferrer");
+                }}
+              >
+                Code
+              </Button>
+              <Button
+                endIcon={<Launch />}
+                size="small"
+                variant="outlined"
+                sx={{ bgcolor: "transparent", fontSize: "0.6rem" }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(item.website, "_blank", "noopener,noreferrer");
+                }}
+              >
+                Site
+              </Button>
+            </Stack>
+            {/* <Stack mt={1} direction="row" gap={1} alignItems="center">
+              <Typography
+                color="text.subHeader"
+                textAlign="left"
+                variant="caption"
+              >
+                {item.about}
+              </Typography>
+            </Stack> */}
+          </Box>
+        </Stack>
+        <Stack mt={1} direction="row" gap={1} alignItems="center">
+          <Typography color="text.subHeader" textAlign="left" variant="caption">
+            {item.about}
+          </Typography>
+        </Stack>
+        <Stack
+          mt={1}
+          direction="row"
+          alignItems="center"
+          gap={0.5}
+          flexWrap="wrap"
+        >
+          {item.skills.map((skill) => (
+            <SkillPill key={skill.id} label={skill.label} />
+          ))}
         </Stack>
       </Box>
-    
     </Box>
   );
 };

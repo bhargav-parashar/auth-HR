@@ -1,0 +1,2 @@
+# AuthHR
+Inspired by real-world workplace challenges, this full-stack Human Resource Management (HRM) application is built to close the communication gap between HR teams and employees. Prioritizing usability, security, and workflow efficiency, the platform streamlines processes such as leave applications, relocation requests, and resignation submissions and approvals.

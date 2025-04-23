@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, Stack, Typography } from "@mui/material";
-import profilePic from "../../../assets/profilePicture.jpg";
+import profilePic from "../../../../assets/profilePicture.jpg";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
-import github from "../../../assets/github.svg";
-import linkedIn from "../../../assets/linkedin.svg";
-import leetcode from "../../../assets/leetcode.svg";
+import github from "../../../../assets/github.svg";
+import linkedIn from "../../../../assets/linkedin.svg";
+import leetcode from "../../../../assets/leetcode.svg";
 import WorkHistoryOutlinedIcon from "@mui/icons-material/WorkHistoryOutlined";
 import Code from "@mui/icons-material/Code";
 
