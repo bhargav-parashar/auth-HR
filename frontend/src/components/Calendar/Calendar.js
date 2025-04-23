@@ -64,7 +64,7 @@ function Day(props) {
   );
 }
 
-// Main component accepting props
+
 export default function WeekPicker({ startDate, endDate }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
