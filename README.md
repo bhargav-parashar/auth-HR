@@ -43,7 +43,7 @@ HR dashboard to review, approve, or reject resignation requests efficiently.
 
 ## DESIGN PATTERN 
 
-<img src="./frontend/src/assets/flowdiagram.svg" alt="Dashboard" width="300"/>
+<img src="./frontend/src/assets/flowDiagram.svg" alt="Dashboard" width="300"/>
 
 ### LAYERED ARCHITECTURE
 The backend is structured using a clean and modular layered architecture, promoting a clear separation of concerns. Each layer has a distinct responsibility—controllers handle incoming requests and responses, routers manage endpoint definitions, middlewares provide cross-cutting functionality such as authentication, services encapsulate business logic, and database modules manage data access and persistence. This approach enhances code readability, testability, scalability, and maintainability.
