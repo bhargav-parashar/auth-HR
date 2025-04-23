@@ -5,7 +5,9 @@ Inspired by real-world workplace challenges, this full-stack Human Resource Mana
 - [Tech Stack](#tech-stack)
 - [Feature Overview](#feature-overview)
 - [Design Pattern](#design-pattern)
+- [Security](#security)
 - [Deployment](#deployment)
+
 
 ## Tech Stack
 
