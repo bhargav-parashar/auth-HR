@@ -59,8 +59,8 @@ const login = async (req, res) => {
           .cookie("remember-token", jwtToken, {
             maxAge: 30 * 60 * 1000,
             httpOnly: true,
-            // secure: true,
-            // sameSite: "None",
+            secure: true,
+            sameSite: "None"
           })
           .send({ 
                   role: role 
@@ -84,8 +84,8 @@ const logout = (req,res)=>{
           "remember-token",
            {
               httpOnly: true,
-              // secure:true,
-              // sameSite:'None'
+              secure:true,
+              sameSite:'None'
            }
       )
       .json({message:"Logged Out"})
