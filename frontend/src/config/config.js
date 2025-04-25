@@ -1,5 +1,5 @@
 const config = {
-    endpoint: `http://localhost:8082/api`
+    endpoint: `https://auth-hr-6sid.onrender.com/api`
 };
 
 export default config;
