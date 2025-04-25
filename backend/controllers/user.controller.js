@@ -1,8 +1,7 @@
 const UserService = require("../services/user.service");
 const UserServiceInstance = new UserService();
 
-//USER DETAILS
-
+// 1. GET USER'S DETAILS
 const userDetails = async (req, res) =>{
   try{
     const user = await UserServiceInstance.findByUserId(req.user._id);
@@ -12,6 +11,7 @@ const userDetails = async (req, res) =>{
   }
 };
 
+// 2. GET USER'S REQUEST HISTORY
 const getRequestHistoryByUserId = async (req, res) =>{
   try{
     const leaveHistory = await UserServiceInstance.getleavesByUserId(req.user._id);
@@ -28,6 +28,7 @@ const getRequestHistoryByUserId = async (req, res) =>{
   }
 }
 
+// 3. GET USER'S LEAVE BALANCE
 const getLeaveBalByUserId = async (req, res) =>{
   try{
     const user = await UserServiceInstance.findByUserId(req.user._id);
@@ -38,7 +39,7 @@ const getLeaveBalByUserId = async (req, res) =>{
   }
 };
 
-//LEAVE
+// 4. CREATE LEAVE REQUEST
 const leave = async (req, res) => {
   try {
     const newLeave = await UserServiceInstance.leave(
@@ -60,6 +61,7 @@ const leave = async (req, res) => {
   }
 };
 
+// 5. UPDATE LEAVE BALANCE COUNT
 const updateLeaveBal = async (req, res ) =>{
   try{
     const newUser = await UserServiceInstance.updateLeaveBal( req.user._id, req.body.newBal );
@@ -69,8 +71,7 @@ const updateLeaveBal = async (req, res ) =>{
   }
 }
 
-
-
+// 6. GET LEAVE REQUEST HISTORY BY USER ID
 const getLeavesByUserId = async (req, res) => {
     try {
       const leave = await UserServiceInstance.getleavesByUserId(
@@ -82,6 +83,7 @@ const getLeavesByUserId = async (req, res) => {
     }
 };
 
+// 7. GET PENDING LEAVES BY USER ID
 const getPendingLeavesByUserId = async (req, res) => {
   try {
     const leave = await UserServiceInstance.getPendingleavesByUserId(
@@ -95,7 +97,7 @@ const getPendingLeavesByUserId = async (req, res) => {
 
 
 
-//RELOCATON
+// 8. CREATE RELOCATION REQUEST
 const relocate = async (req, res) => {
   try {
     const newRelocation = await UserServiceInstance.relocate(
@@ -115,6 +117,7 @@ const relocate = async (req, res) => {
   }
 };
 
+// 9. CREATE RELOCATION RESPONSE FOR QUESTIONNAIRE
 const submitRelocationResponse = async (req, res) => {
   try {
     const body = {
@@ -132,6 +135,7 @@ const submitRelocationResponse = async (req, res) => {
   }
 };
 
+// 10. GET RELOCATION QUESTIONNAIRE
 const relocationQuestionnaire = async (req, res) => {
   try {
     const allQuestions = await UserServiceInstance.getRelocationQuestions();
@@ -141,6 +145,7 @@ const relocationQuestionnaire = async (req, res) => {
   }
 };
 
+// 11. GET RELOCATION REQUESTS HISTORY BY USER ID
 const getRelocationByUserId = async (req, res) => {
   try {
     const relocation = await UserServiceInstance.getRelocationByUserId(
@@ -152,6 +157,7 @@ const getRelocationByUserId = async (req, res) => {
   }
 };
 
+// 12. GET PENDING RELOCATION REQUESTS BY USER ID
 const getPendingRelocationByUserId = async (req, res) => {
   try {
     const relocation = await UserServiceInstance.getPendingRelocationByUserId(
@@ -163,7 +169,7 @@ const getPendingRelocationByUserId = async (req, res) => {
   }
 };
 
-//RESIGNATION
+// 13. CREATE RESIGNATION REQUEST
 const resign = async (req, res) => {
   try {
     const newResignation = await UserServiceInstance.resign(
@@ -183,6 +189,7 @@ const resign = async (req, res) => {
   }
 };
 
+// 14. CREATE RESIGNATION RESPONSE FOR QUESTIONNAIRE
 const submitResponse = async (req, res) => {
   try {
     const body = {
@@ -199,6 +206,7 @@ const submitResponse = async (req, res) => {
   }
 };
 
+// 15. GET RESIGNATION QUESTIONNAIRE
 const questionnaire = async (req, res) => {
   try {
     const allQuestions = await UserServiceInstance.getQuestions();
@@ -208,6 +216,7 @@ const questionnaire = async (req, res) => {
   }
 };
 
+// 16. GET RESIGNATION REQUESTS HISTORY BY USER ID
 const getResignationByUserId = async (req, res) => {
   try {
     const resignation = await UserServiceInstance.getResignationByUserId(
@@ -219,6 +228,7 @@ const getResignationByUserId = async (req, res) => {
   }
 };
 
+// 17. GET PENDING RESIGNATION REQUESTS BY USER ID
 const getPendingResignationByUserId = async (req, res) => {
   try {
     const resignation = await UserServiceInstance.getPendingResignationByUserId(

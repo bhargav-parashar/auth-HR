@@ -3,7 +3,7 @@ const AuthServiceInstance = new AuthService();
 const UserService = require("../services/user.service");
 const UserServiceInstance = new UserService();
 
-const authorize = async (req,res,next) =>{
+const authorizeJwt = async (req,res,next) =>{
    
    try{
       const token = req.cookies["remember-token"];
@@ -16,4 +16,4 @@ const authorize = async (req,res,next) =>{
    }
 }
 
-module.exports = authorize;
+module.exports = authorizeJwt;

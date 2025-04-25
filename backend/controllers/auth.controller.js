@@ -3,7 +3,7 @@ const AuthServiceInstance = new AuthService();
 const UserService = require("../services/user.service");
 const UserServiceInstance = new UserService();
 
-//CREATE USER
+// 1. REGISTER USER
 const register = async (req, res) => {
   try {
     //Hash Password
@@ -23,6 +23,7 @@ const register = async (req, res) => {
   }
 };
 
+// 2. LOGIN USER
 const login = async (req, res) => {
   try {
     //search users table by username
@@ -75,6 +76,7 @@ const login = async (req, res) => {
   }
 };
 
+// 3. LOGOUT USER BY CLEARING HTTP ONLY COOKIE  
 const logout = (req,res)=>{
   try{
       res.status(200)
@@ -94,6 +96,7 @@ const logout = (req,res)=>{
   
 };
 
+//4. RETURN USER DETAILS, WILL GO TO JWT AUTH FIRST, IF LOGIN TOKEN TIMED OUT WILL NOT REACH HERE
 const loginstatus = async (req,res) =>{
     try{
          const {roleId} = await UserServiceInstance.getUserRoleMapping(req.user._id);

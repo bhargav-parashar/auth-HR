@@ -6,8 +6,14 @@ const RelocationResp = require("../models/relocationResponse.model");
 const Resignations = require("../models/resignation.model");
 const ResignationResp = require("../models/userResponse.model");
 const Announcement = require("../models/announcement.model");
+const RolePermission = require("../models/rolePermission.model");
+const Permission = require("../models/permission.model");
 
 class HRService {
+
+  //ANALYTICS SERVICES
+
+  // 1. GET ALL USERS
   getAllUsers = async () => {
     try {
       const users = await User.aggregate([
@@ -56,6 +62,7 @@ class HRService {
     }
   };
 
+  // 2. GET PENDING LEAVES
   getPendingLeaves = async () => {
     try {
       const pendingLeaves = await Leaves.aggregate([
@@ -89,6 +96,7 @@ class HRService {
     }
   };
 
+  // 3. GET PENDING RELOCATIONS
   getPendingRelocations = async () => {
     try {
       const pendingRelocations = await Relocations.aggregate([
@@ -129,6 +137,7 @@ class HRService {
     }
   };
 
+  // 4. GET PENDING RESIGNATIONS
   getPendingResignations = async () => {
     try {
       const pendingResignations = await Resignations.aggregate([
@@ -169,6 +178,7 @@ class HRService {
     }
   };
 
+  // 5. GET CURRENT MONTH RESIGNATIONS
   getCurrMonthResignations = async () => {
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
@@ -183,6 +193,11 @@ class HRService {
     }
   };
 
+
+
+  //ANNOUONCEMENT SERVICES
+
+  // 6. CREATE ANNOUNCEMENT
   createAnnouncement = async (announcement) => {
     try {
       const body = {
@@ -195,6 +210,7 @@ class HRService {
     }
   };
 
+  // 7. GET ANNOUNCEMENTS
   getAnnouncements = async () => {
     try {
       const ann = await Announcement.find().sort({ createdAt: -1 });
@@ -204,6 +220,7 @@ class HRService {
     }
   };
 
+  // 8. UPDATE ANNOUNCEMENT
   updateAnnouncement = async (id, announcement) => {
     try {
       const body = {
@@ -218,6 +235,7 @@ class HRService {
     }
   };
 
+  // 9. DELETE ANNOUNCEMENT
   deleteAnnouncement = async (id) => {
     try {
       const deletedAnn = await Announcement.findByIdAndDelete(id, { new: true });
@@ -227,6 +245,11 @@ class HRService {
     }
   };
 
+
+
+  //USER LEAVE SERVICES
+
+  // 10. UPDATE LEAVE BALANCE
   updateLeaveBal = async (id, newLeaveBal) => {
     try {
       const updated = await User.findByIdAndUpdate(
@@ -240,6 +263,7 @@ class HRService {
     }
   };
 
+  // 11. UPDATE LEAVE STATUS
   updateLeaveStatus = async (id, newStatus) => {
     try {
       const updated = await Leaves.findByIdAndUpdate(
@@ -253,6 +277,11 @@ class HRService {
     }
   };
 
+
+
+  //USER RELOCATION SERVICES
+
+  // 12. UPDATE RELOCATION STATUS
   updateRelocationStatus = async (id, newStatus) => {
     try {
       const updated = await Relocations.findByIdAndUpdate(
@@ -266,6 +295,7 @@ class HRService {
     }
   };
 
+  // 13. UPDATE USER LOCATION
   updateUserLocation = async (id, newLocation) => {
     try {
       const updated = await User.findByIdAndUpdate(
@@ -279,6 +309,10 @@ class HRService {
     }
   };
 
+
+  //USER RESIGNATION SERVICES
+
+  // 14. UPDATE RESIGNATION STATUS
   updateResignationStatus = async (id, newStatus, newLwd) => {
     try {
       const updated = await Resignations.findByIdAndUpdate(
@@ -294,7 +328,9 @@ class HRService {
 
 
 
-  //UPDATE USER BY USER ID
+  //USER DATA SERVICES
+
+  // 15. UPDATE USER BY USER ID
   updateUser = async (id, newBody) => {
     try {
       const updatedUser = await User.findByIdAndUpdate(
@@ -310,9 +346,7 @@ class HRService {
     }
   };
 
-
-
-  // DELETE USER BY ID
+  // 16. DELETE USER BY ID
   deleteUserById = async ( userId, session = null ) => {
     try {
       // CREATE THE BASE QUERY
@@ -333,9 +367,7 @@ class HRService {
     }
   };
 
-
-
-  // DELETE USER ROLES BY USER ID
+  // 17. DELETE USER ROLES BY USER ID
   deleteUserRolesByUserId = async (userId, session = null ) =>{
     try{
       // CREATE THE BASE QUERY
@@ -356,9 +388,7 @@ class HRService {
     }
   };
 
-
-
-  // DELETE USER LEAVES BY USER ID
+  // 18. DELETE USER LEAVES BY USER ID
   deleteLeavesByUserId = async (userId, session = null ) =>{
     try{
       // CREATE THE BASE QUERY
@@ -379,9 +409,7 @@ class HRService {
     }
   };
 
-
-
-  // DELETE USER RELOCATIONS BY USER ID
+  // 19. DELETE USER RELOCATIONS BY USER ID
   deleteRelocationsByUserId = async (userId, session = null ) =>{
     try{
       // CREATE THE BASE QUERY
@@ -402,9 +430,7 @@ class HRService {
     }
   };
 
-
-
-  // DELETE USER RELOCATION RESPONSES BY USER ID
+  // 20. DELETE USER RELOCATION RESPONSES BY USER ID
   deleteRelocationRespByUserId = async (userId, session = null ) =>{
     try{
       // CREATE THE BASE QUERY
@@ -425,9 +451,7 @@ class HRService {
     }
   };
 
-
-
-  // DELETE USER RESIGNATIONS BY USER ID
+  // 21. DELETE USER RESIGNATIONS BY USER ID
   deleteResignationsByUserId = async (userId, session = null ) =>{
     try{
       // CREATE THE BASE QUERY
@@ -448,9 +472,7 @@ class HRService {
     }
   };
 
-
-
-  // DELETE USER RESIGNATION RESPONSES BY USER ID
+  // 22. DELETE USER RESIGNATION RESPONSES BY USER ID
   deleteResignationRespByUserId = async (userId, session = null ) =>{
     try{
       // CREATE THE BASE QUERY
@@ -471,6 +493,25 @@ class HRService {
     }
   };
 
+  // 23. GET ROLE PERMISSIONS
+  getRolePermissions = async (roleId) =>{
+    try{
+      const rolePermissions = await RolePermission.find({roleId : roleId});
+      return rolePermissions;
+    }catch(err){
+      throw err;
+    }
+  };
+
+  // 24. GET PERMISSIONS BY IDS
+  getPermissions = async (permissionIds) =>{
+    try{
+      const permissions = await Permission.find({ _id :{ $in: permissionIds  } });
+      return permissions;
+    }catch(err){
+      throw err;
+    }
+  };
 
 }
 

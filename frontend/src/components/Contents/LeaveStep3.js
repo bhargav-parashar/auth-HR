@@ -3,7 +3,7 @@ import DatePicker from "../DatePicker/DatePickerField";
 import {Box,Typography, Stack} from "@mui/material";
 import { formatDistance, addDays } from "date-fns";
 
-const LeaveStep3 = ({leaveType,startDate, endDate,setStartDate, setEndDate}) => {
+const LeaveStep3 = ({leaveType,startDate, endDate}) => {
   return (
     <Box>
               <Stack direction="row" gap={1}>

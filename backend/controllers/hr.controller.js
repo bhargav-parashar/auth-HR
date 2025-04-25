@@ -4,6 +4,7 @@ const AuthService = require("../services/auth.service");
 const AuthServiceInstance = new AuthService();
 const mongoose = require("mongoose");
 
+// 1. GET ALL AVAILABLE USERS
 const getAllUsers = async (req,res) =>{
     try{
         const userDetails = await HRServiceInstance.getAllUsers();
@@ -13,6 +14,7 @@ const getAllUsers = async (req,res) =>{
     }
 };
 
+// 2. GET ALL PENDING LEAVES
 const getPendingLeaves = async (req,res) =>{
     try{
         const pendingLeaves = await HRServiceInstance.getPendingLeaves();
@@ -22,6 +24,7 @@ const getPendingLeaves = async (req,res) =>{
     }
 };
 
+// 3. GET ALL PENDING RELOCATIONS
 const getPendingRelocations = async (req,res) =>{
     try{
         const pendingRelocations = await HRServiceInstance.getPendingRelocations();
@@ -31,6 +34,7 @@ const getPendingRelocations = async (req,res) =>{
     }
 };
 
+// 4. GET ALL PENDING RESIGNATIONS
 const getPendingResignations = async (req,res) =>{
     try{
         const pendingResignations = await HRServiceInstance.getPendingResignations();
@@ -40,7 +44,7 @@ const getPendingResignations = async (req,res) =>{
     }
 };
 
-
+// 5. GET CURRENT MONTH RESIGNATIONS
 const getCurrMonthResignations = async (req,res) =>{
     try{
         const currMonthResignations = await HRServiceInstance.getCurrMonthResignations();
@@ -50,7 +54,7 @@ const getCurrMonthResignations = async (req,res) =>{
     }
 };
 
-// CREATE ANNOUNCEMENT
+// 6. CREATE ANNOUNCEMENT
 const createAnnouncement = async (req,res) => {
     try {
       const newAnn = await HRServiceInstance.createAnnouncement(req.body.body);
@@ -60,7 +64,7 @@ const createAnnouncement = async (req,res) => {
     }
   };
 
-  // GET ANNOUNCEMENTS
+  // 7. GET ANNOUNCEMENTS
   const getAnnouncements = async (req,res) =>{
     try{
       const ann = await HRServiceInstance.getAnnouncements();
@@ -70,7 +74,7 @@ const createAnnouncement = async (req,res) => {
     }
   };
 
-  // UPDATE ANNOUNCEMENTS
+  // 8. UPDATE ANNOUNCEMENTS
   const updateAnnouncement = async (req,res) => {
     try {
        const updatedAnn = await HRServiceInstance.updateAnnouncement(req.body.id, req.body.body);
@@ -80,7 +84,7 @@ const createAnnouncement = async (req,res) => {
     }
   };
 
-  // DELETE ANNOUNCEMENT
+  // 9. DELETE ANNOUNCEMENT
   const deleteAnnouncement = async (req,res) =>{
     try{
       const deletedAnn = await HRServiceInstance.deleteAnnouncement(req.body.id);
@@ -90,7 +94,7 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
-  //UPDATE LEAVE BALANCE
+  // 10. UPDATE LEAVE BALANCE
   const updateLeaveBal = async (req,res) =>{
     try{
       const updated = await HRServiceInstance.updateLeaveBal(req.user._id, req.body.newLeaveBal);
@@ -100,7 +104,7 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
-  //UPDATE LEAVE STATUS
+  // 11. UPDATE LEAVE STATUS
   const updateLeaveStatus = async (req,res) =>{
     try{
       const updated = await HRServiceInstance.updateLeaveStatus(req.body.id, req.body.newStatus);
@@ -110,7 +114,7 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
-  //UPDATE RELOCATION STATUS
+  // 12. UPDATE RELOCATION STATUS
   const updateRelocationStatus = async (req,res) =>{
     try{
       const updated = await HRServiceInstance.updateRelocationStatus(req.body.id, req.body.newStatus);
@@ -120,7 +124,7 @@ const createAnnouncement = async (req,res) => {
     }
   }
   
-  // UPDATE USER LOCATION 
+  // 13. UPDATE USER LOCATION 
   const updateUserLocation = async (req,res) =>{
     try{
       const updated = await HRServiceInstance.updateUserLocation(req.body.id, req.body.newLocation);
@@ -130,7 +134,7 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
-  // UPDATE RESIGNATION STATUS
+  // 14. UPDATE RESIGNATION STATUS
   const updateResignationStatus = async (req,res) =>{
     try{
       const updated = await HRServiceInstance.updateResignationStatus(req.body.id, req.body.newStatus, req.body.newLwd);
@@ -140,7 +144,7 @@ const createAnnouncement = async (req,res) => {
     }
   }
 
-  // UPDATE USER
+  // 15. UPDATE USER
   const updateUser = async (req, res ) =>{
     const newPassword = req.body.body.password;
     let hashedPassword = '';
@@ -180,7 +184,7 @@ const createAnnouncement = async (req,res) => {
 
   
 
-  // DELETE USER AND ALL USER'S ROLES, REQUESTS, RESPONSES
+  // 16. DELETE USER AND ALL USER'S ROLES, REQUESTS, RESPONSES
   const deleteAllUserData = async (req,res) =>{
     const userId = req.params.userId;
 

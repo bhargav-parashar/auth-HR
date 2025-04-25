@@ -1,4 +1,6 @@
 const router = require("express").Router();
+
+//IMPORT CONTROLLER FUNCTIONS
 const {
   getAllUsers,
   getPendingLeaves,
@@ -17,56 +19,61 @@ const {
   updateUser,
   deleteAllUserData
 } = require("../controllers/hr.controller");
+
+//IMPORT MIDDLEWARES 
 const jwtAuthorize = require("../middlewares/authorizeJwt.middleware");
 const { validateSchema } = require("../middlewares/validate.middleware");
+const validateRolePermission = require("../middlewares/validateRolePermission.middleware");
+
+//IMPORT SCHEMA VALIDATIONS
 const {annValidateSchema} = require("../validations/hr.validations");
 
-//GET ALL USER DETAILS
-router.get("/all-user-details", jwtAuthorize, getAllUsers);
+// 1. GET ALL USER DETAILS
+router.get("/all-user-details", jwtAuthorize, validateRolePermission("see-all", "users"), getAllUsers);
 
-//GET PENDING LEAVES
-router.get("/pending-leaves", jwtAuthorize, getPendingLeaves);
+// 2. GET PENDING LEAVES
+router.get("/pending-leaves", jwtAuthorize, validateRolePermission("see-all", "pending-leaves"), getPendingLeaves);
 
-//GET PENDING RELOCATIONS
-router.get("/pending-relocations", jwtAuthorize, getPendingRelocations);
+// 3. GET PENDING RELOCATIONS
+router.get("/pending-relocations", jwtAuthorize, validateRolePermission("see-all", "pending-relocations"), getPendingRelocations);
 
-//GET PENDING RESIGNATIONS
-router.get("/pending-resignations", jwtAuthorize, getPendingResignations);
+// 4. GET PENDING RESIGNATIONS
+router.get("/pending-resignations", jwtAuthorize, validateRolePermission("see-all", "pending-resignations"), getPendingResignations);
 
-//GET CURRENT MONTH RESIGNATIONS
-router.get("/current-month-resignations", jwtAuthorize, getCurrMonthResignations);
+// 5. GET CURRENT MONTH RESIGNATIONS
+router.get("/current-month-resignations", jwtAuthorize, validateRolePermission("see-all", "current-month-resignations"), getCurrMonthResignations);
 
-//POST ANNOUNCEMENT 
-router.post("/create-announcement", jwtAuthorize, validateSchema(annValidateSchema), createAnnouncement);
+// 6. POST ANNOUNCEMENT 
+router.post("/create-announcement", jwtAuthorize, validateRolePermission("create", "announcement"), validateSchema(annValidateSchema), createAnnouncement);
 
-//GET ALL ANNOUNCEMENTS 
-router.get("/announcements",jwtAuthorize,  getAnnouncements);
+// 7. GET ALL ANNOUNCEMENTS 
+router.get("/announcements",jwtAuthorize, validateRolePermission("see-all", "announcement"),  getAnnouncements);
 
-//UPDATE ANNOUNCEMENT 
-router.put("/update-announcement",jwtAuthorize,  updateAnnouncement);
+// 8. UPDATE ANNOUNCEMENT 
+router.put("/update-announcement",jwtAuthorize, validateRolePermission("update", "announcement"),  updateAnnouncement);
 
-//DELETE ANNOUNCEMENT
-router.delete("/delete-announcement",jwtAuthorize, deleteAnnouncement);
+// 9. DELETE ANNOUNCEMENT
+router.delete("/delete-announcement",jwtAuthorize, validateRolePermission("delete", "announcement"), deleteAnnouncement);
 
-//UPDATE LEAVE BALANCE
-router.put("/update-leave-bal",jwtAuthorize, updateLeaveBal);
+// 10. UPDATE LEAVE BALANCE
+router.put("/update-leave-bal",jwtAuthorize, validateRolePermission("update", "leave-balance"), updateLeaveBal);
 
-//UPDATE LEAVE STATUS
-router.put("/update-leave-status",jwtAuthorize, updateLeaveStatus );
+// 11. UPDATE LEAVE STATUS
+router.put("/update-leave-status",jwtAuthorize, validateRolePermission("review", "leave"), updateLeaveStatus );
 
-//UPDATE RELOCATION STATUS
-router.put("/update-relocation-status",jwtAuthorize, updateRelocationStatus );
+// 12. UPDATE RELOCATION STATUS
+router.put("/update-relocation-status",jwtAuthorize, validateRolePermission("review", "relocation"), updateRelocationStatus );
 
-//UPDATE RESIGNATION STATUS
-router.put("/update-resignation-status",jwtAuthorize, updateResignationStatus );
+// 13. UPDATE RESIGNATION STATUS
+router.put("/update-resignation-status",jwtAuthorize, validateRolePermission("review", "resignation"), updateResignationStatus );
 
-//UPDATE USER LOCATION
-router.put("/update-user-location",jwtAuthorize, updateUserLocation );
+// 14. UPDATE USER LOCATION
+router.put("/update-user-location",jwtAuthorize, validateRolePermission("update", "user-location"), updateUserLocation );
 
-//UPDATE USER DETAILS
-router.put("/update-user-details",jwtAuthorize, updateUser );
+// 15. UPDATE USER DETAILS
+router.put("/update-user-details",jwtAuthorize, validateRolePermission("update", "user-details"), updateUser );
 
-//DELETE ALL USER DATA
-router.delete("/delete-all-user-data/:userId", jwtAuthorize, deleteAllUserData)
+// 16. DELETE ALL USER DATA
+router.delete("/delete-all-user-data/:userId", jwtAuthorize, validateRolePermission("delete", "user-details"),  deleteAllUserData);
 
 module.exports = router;

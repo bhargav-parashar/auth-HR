@@ -10,7 +10,9 @@ const RelocationResponse = require("../models/relocationResponse.model");
 const Leave = require("../models/leave.model");
 
 class UserService {
-  //LOGIN & REGISTER
+  // LOGIN & REGISTRATION SERVICES
+
+  // 1. CREATE USER
   create = async (payload) => {
     try {
       const newUser = await User.create(payload);
@@ -20,6 +22,7 @@ class UserService {
     }
   };
 
+  // 2. CREATE USER ROLE MAPPING
   createUserRole = async (payload) => {
     try {
       const newUserRole = await UserRole.create(payload);
@@ -28,6 +31,7 @@ class UserService {
     }
   };
 
+  // 3. GET USER ROLE MAPPING
   getUserRoleMapping = async (id) => {
     try {
       const userRoleMapping = await UserRole.findOne({ userId: id });
@@ -37,6 +41,7 @@ class UserService {
     }
   };
 
+  // 4. FIND USER BY USERNAME
   findByUsername = async (username) => {
     try {
       const reqUser = await User.findOne({ username });
@@ -46,6 +51,8 @@ class UserService {
     }
   };
 
+
+  // 5. FIND USER BY ID
   findByUserId = async (userId) => {
     try {
       const user = await User.findById(userId);
@@ -55,6 +62,8 @@ class UserService {
     }
   };
 
+
+  // 6. GET ROLE BY ID
   getRole = async (roleId) => {
     try {
       const role = await Role.findById(roleId);
@@ -65,7 +74,10 @@ class UserService {
   };
 
 
-  //RESIGNATION
+
+  // RESIGNATION SERVICES
+
+  // 7. CREATE RESIGNATION
   resign = async (id, lastWorkDay) => {
     try {
       const body = {
@@ -79,6 +91,7 @@ class UserService {
     }
   };
 
+  // 8. SUBMIT RESIGNATION QUESTIONNAIRE RESPONSE
   submitResponse = async (payload) => {
     try {
       const response = await Response.create(payload);
@@ -88,6 +101,7 @@ class UserService {
     }
   };
 
+  // 9. GET RESIGNATION QUESTIONNAIRE
   getQuestions = async () => {
     try {
       const questions = await Questionnaire.find({});
@@ -97,6 +111,7 @@ class UserService {
     }
   };
 
+  // 10. GET RESIGNATIONS BY USER ID
   getResignationByUserId = async (userId) =>
    await Resignation.aggregate([
       {
@@ -130,9 +145,10 @@ class UserService {
           userResponses: { $arrayElemAt: ["$userResponses.responses", 0] },
         },
       },
-    ]);
+  ]);
 
-    getPendingResignationByUserId = async (userId) =>
+  // 11. GET PENDING RESIGNATION BY USER ID
+  getPendingResignationByUserId = async (userId) =>
     await  Resignation.aggregate([
         {
           $match: { employeeId: userId, status:"Pending" },
@@ -165,9 +181,13 @@ class UserService {
             userResponses: { $arrayElemAt: ["$userResponses.responses", 0] },
           },
         },
-      ]);
+  ]);
 
-  //RELOCATION
+
+
+  //RELOCATION SERVICES
+
+  // 12. CREATE RELOCATION REQUEST
   relocate = async (id, location) => {
     try {
       const body = {
@@ -181,6 +201,7 @@ class UserService {
     }
   };
 
+  // 13. CREATE RELOCATION QUESTIONNAIRE RESPONSE
   submitRelocationResponse = async (payload) => {
     try {
       const response = await RelocationResponse.create(payload);
@@ -190,6 +211,7 @@ class UserService {
     }
   };
 
+  // 14. GET RELOCATION QUESTIONNAIRE
   getRelocationQuestions = async () => {
     try {
       const questions = await RelocationQuestionnaire.find({});
@@ -199,6 +221,7 @@ class UserService {
     }
   };
 
+  // 15. GET RELOCATIONS BY USER ID
   getRelocationByUserId = async (userId) =>
     await Relocation.aggregate([
       {
@@ -234,8 +257,9 @@ class UserService {
           },
         },
       },
-    ]);
+  ]);
 
+  // 16. GET PENDING RELOCATIONS BY USER ID 
   getPendingRelocationByUserId = async (userId) =>
    await Relocation.aggregate([
       {
@@ -271,9 +295,13 @@ class UserService {
           },
         },
       },
-    ]);
+  ]);
 
-  //LEAVE
+
+
+  // LEAVE SERVICES 
+
+  // 17. CREATE LEAVE REQUEST
   leave = async (id, startDate, endDate, leaveType) => {
     try {
       const body = {
@@ -289,6 +317,7 @@ class UserService {
     }
   };
 
+  // 18. UPDATE LEAVE BALANCE
   updateLeaveBal = async (userId, newBal) =>{
     try{
       const newLeaveBal = await User.findOneAndUpdate(
@@ -302,6 +331,7 @@ class UserService {
     }
   };
 
+  // 19. GET LEAVE BALANCE
   getleavesByUserId =  async (userId) =>
    await Leave.aggregate([
       {
@@ -328,8 +358,9 @@ class UserService {
           userDetails: { $arrayElemAt: ["$userDetails.username", 0] }
         },
       },
-    ]);
+  ]);
   
+  // 20. GET PENDING LEAVES BY USER ID  
   getPendingleavesByUserId = async (userId) =>
    await Leave.aggregate([
       {
@@ -356,7 +387,7 @@ class UserService {
           userDetails: { $arrayElemAt: ["$userDetails.username", 0] }
         },
       },
-    ]);
+  ]);
 
     
 }
