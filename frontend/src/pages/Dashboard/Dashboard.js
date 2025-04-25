@@ -5,7 +5,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import AdminHome from "./HR/HomeTab/AdminHome";
 import EmployeeHome from "./Employee/HomeTab/EmployeeHome";
 import { useState, useContext } from "react";
-import TabContext from "../../context/tabContext";
+import TabContext from "../../context/TabContext";
 import UserContext from "../../context/UserContext";
 import useGetAnalytics from "../../Hooks/useGetAnalytics";
 import Shimmer from "../../components/ShimmerUI/Shimmer";
