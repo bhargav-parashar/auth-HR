@@ -1,16 +1,10 @@
-import {  useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import * as styles from "./Modal.module.css";
-import {
-  Box,
-  Typography,
-  Stack,
-  Button,
-  TextField,
-} from "@mui/material";
+import { Box, Typography, Stack, Button, TextField } from "@mui/material";
 import CampaignIcon from "@mui/icons-material/Campaign";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
-const CreateOrUpdateAnnouncement = ({
+const AnnouncementModal = ({
   handleOutsideClick,
   handleModalClose,
   handleSubmit,
@@ -19,25 +13,23 @@ const CreateOrUpdateAnnouncement = ({
   announcement = "",
   id = "",
   isEdit = false,
-  isDelete = false
+  isDelete = false,
+  isAnnLoading,
 }) => {
   const [editedAnnouncement, setEditedAnnouncement] = useState(announcement);
-  const inputRef = useRef(null); 
- 
-  useEffect(()=>{
+  const inputRef = useRef(null);
+
+  useEffect(() => {
     inputRef.current?.focus();
-  },[]);
+  }, []);
 
   const handleSubmitClick = () => {
     if (isEdit) {
-      handleEdit(id, editedAnnouncement);
-      handleModalClose();
-    } else if(isDelete) {
-      handleDelete(id);
-      handleModalClose();
-    }else {
-      handleSubmit(editedAnnouncement);
-      handleModalClose();
+      handleEdit(id, editedAnnouncement, handleModalClose);
+    } else if (isDelete) {
+      handleDelete(id, handleModalClose);
+    } else {
+      handleSubmit(editedAnnouncement, handleModalClose);
     }
   };
 
@@ -48,32 +40,48 @@ const CreateOrUpdateAnnouncement = ({
   return (
     <Box id="Outer-Modal" className={styles.modal} onClick={handleOutsideClick}>
       <Box className={styles["modal-content"]}>
-         <Stack direction='row' alignItems='center' justifyContent='space-between' sx={{width:'100%'}}>
         <Stack
-          mb={1}
           direction="row"
           alignItems="center"
-          gap={1}
+          justifyContent="space-between"
           sx={{ width: "100%" }}
         >
-          <Typography
-            sx={{ fontWeight: "bold" }}
-            variant="h6"
-            color="text.headingContrast"
+          <Stack
+            mb={1}
+            direction="row"
+            alignItems="center"
+            gap={1}
+            sx={{ width: "100%" }}
           >
-            {isEdit
-              ? "Update Announcement"
-              : isDelete
-              ? "Delete Announcement"
-              : "Create Announcement"}
-          </Typography>
+            <Typography
+              sx={{ fontWeight: "bold" }}
+              variant="h6"
+              color="text.headingContrast"
+            >
+              {isEdit
+                ? "Update Announcement"
+                : isDelete
+                ? "Delete Announcement"
+                : "Create Announcement"}
+            </Typography>
 
-          <CampaignIcon sx={{ color: "primary.contrast" }} />
-        </Stack>
-        <CloseIcon  onClick={handleModalClose} sx={{marginX:'10px', cursor:'pointer', color:'primary.contrast' }} />
+            <CampaignIcon sx={{ color: "primary.contrast" }} />
+          </Stack>
+          <CloseIcon
+            onClick={handleModalClose}
+            sx={{
+              marginX: "10px",
+              cursor: "pointer",
+              color: "primary.contrast",
+            }}
+          />
         </Stack>
         {isDelete && (
-          <Typography sx={{color:'primary.inactive'}} textAlign="left" pr={1}>
+          <Typography
+            sx={{ color: "primary.inactive" }}
+            textAlign="left"
+            pr={1}
+          >
             Are you sure you want to delete this announcement ?
           </Typography>
         )}
@@ -133,4 +141,4 @@ const CreateOrUpdateAnnouncement = ({
   );
 };
 
-export default CreateOrUpdateAnnouncement;
+export default AnnouncementModal;

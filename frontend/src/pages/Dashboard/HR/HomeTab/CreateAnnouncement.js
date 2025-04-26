@@ -21,6 +21,7 @@ const CreateAnnouncement = ({
     handleCreateAnnouncment,
     handleUpdateAnnouncment,
     handleDeleteAnnouncment,
+    isAnnLoading
   } = useAnnouncements();
   const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } =
     useModal();
@@ -100,13 +101,7 @@ const CreateAnnouncement = ({
                 }}
                 aria-label="dense table"
               >
-                <TableHead>
-                  {/* <TableRow>
-                    <TableCell align="left">Announcement</TableCell>
-                    <TableCell align="left">Edit</TableCell>
-                    <TableCell align="left">Delete</TableCell>
-                  </TableRow> */}
-                </TableHead>
+                <TableHead></TableHead>
                 <TableBody key={1}>
                   {announcements.length > 0 &&
                     announcements.map((item, idx) => (
@@ -181,6 +176,7 @@ const CreateAnnouncement = ({
           setIsEdit={setIsEdit}
           isDelete={isDelete}
           setIsDelete={setIsDelete}
+          isAnnLoading = {isAnnLoading}
         />
       )}
     </Box>

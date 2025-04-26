@@ -40,27 +40,38 @@ const Modal = ({ handleOutsideClick, handleModalClose, handleSubmit }) => {
         <Typography textAlign="left" pr={1}>
           Are you sure you want to submit this request ?
         </Typography>
-        <Stack
-          pt={6}
-          px={2}
-          direction="row"
-          justifyContent="flex-end"
-          gap={0.5}
-        >
-          <Button
-            sx={{ bgcolor: "primary.inactive" }}
-            onClick={handleModalClose}
+        {isLoading ? (
+          <Stack
+            pt={6}
+            px={2}
+            direction="row"
+            justifyContent="flex-end"
+            gap={0.5}
           >
-            No
-          </Button>
-          {isLoading ? (
-            <Loader isColored/>
-          ) : (
-            <Button sx={{ bgcolor: "primary.contrast" }} onClick={handleSubmitClick}>
+            <Loader isColored />
+          </Stack>
+        ) : (
+          <Stack
+            pt={6}
+            px={2}
+            direction="row"
+            justifyContent="flex-end"
+            gap={0.5}
+          >
+            <Button
+              sx={{ bgcolor: "primary.inactive" }}
+              onClick={handleModalClose}
+            >
+              No
+            </Button>
+            <Button
+              sx={{ bgcolor: "primary.contrast" }}
+              onClick={handleSubmitClick}
+            >
               Yes
             </Button>
-          )}
-        </Stack>
+          </Stack>
+        )}
       </Box>
     </Box>
   );

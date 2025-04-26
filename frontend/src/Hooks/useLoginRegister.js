@@ -117,6 +117,7 @@ const useLoginRegister = (
     }
   };
 
+  //REGISTER USER
   const handleRegister = async () => {
     if (!registerValidateInput(formData)) return;
     const URL = `${config.endpoint}/auth/register`;
@@ -157,6 +158,7 @@ const useLoginRegister = (
     }
   };
 
+  // LOGIN USER
   const handleLogin = async (
     isGuestAdmin = false,
     isGuestEmp = false,
@@ -209,6 +211,7 @@ const useLoginRegister = (
     }
   };
 
+  // UPDATE USER
   const handleUserUpdate = async (data) => {
     if (!updateValidateInput(data)) return;
     const URL = `${config.endpoint}/hr/update-user-details`;
@@ -220,6 +223,7 @@ const useLoginRegister = (
       department: data.department,
     };
     try {
+      setIsLoading(true);
       const res =  await axios.put(URL, { id, body }, { withCredentials: true });
       if(res.status === 200){
         enqueueSnackbar("User update successful", { variant: "success" });
@@ -230,16 +234,20 @@ const useLoginRegister = (
     } catch (err) {
       enqueueSnackbar(`Error while updating user : ${err} `, { variant: "warn" });
       console.log(err);
+    }finally{
+      setIsLoading(false);
     }
 
     
   };
 
+  //DELETE USER
   const handleUserDelete = async (userId) => {
 
     const URL = `${config.endpoint}/hr/delete-all-user-data/${userId}`;
     console.log(URL);
     try {
+      setIsLoading(true);
       const res =  await axios.delete( URL, { withCredentials: true } );
       if(res.status === 200){
         enqueueSnackbar("User and related data deleted!", { variant: "success" });
@@ -250,6 +258,8 @@ const useLoginRegister = (
     } catch (err) {
       enqueueSnackbar(`Error while deleting user : ${err} `, { variant: "warn" });
       console.log(err);
+    }finally{
+      setIsLoading(false);
     }  
   };
   

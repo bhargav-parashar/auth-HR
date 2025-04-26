@@ -16,6 +16,7 @@ import {
   departments,
   locations,
 } from "../../../../constants/constants";
+import Loader from "../../../../components/Loader/Loader";
 
 const CustomTextBox = styled(TextField)(() => ({
   marginBottom: 10,
@@ -47,17 +48,14 @@ const CustomTextBox = styled(TextField)(() => ({
   },
 }));
 
-
-
 const AddEditEmp = ({
   formData,
   handleChange,
   handleRegister,
   isLoading,
   isEdit,
-  handleUserUpdate
+  handleUserUpdate,
 }) => {
-
   const [updatedData, setUpdatedData] = useState({
     username: formData.username,
     password: "",
@@ -66,7 +64,9 @@ const AddEditEmp = ({
     location: formData.location,
   });
 
-  const disabled = formData._id === '67a3950a04fbad8753fc0f18' || formData._id === '67d85cbaccf002f5a1bf809c';
+  const disabled =
+    formData._id === "67a3950a04fbad8753fc0f18" ||
+    formData._id === "67d85cbaccf002f5a1bf809c";
 
   useEffect(() => {
     setUpdatedData(formData);
@@ -77,9 +77,9 @@ const AddEditEmp = ({
     setUpdatedData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleUpdateClick = (updatedData) =>{
-    handleUserUpdate(updatedData );
-  }
+  const handleUpdateClick = (updatedData) => {
+    handleUserUpdate(updatedData);
+  };
 
   return (
     <Stack direction="column" gap={2}>
@@ -90,35 +90,49 @@ const AddEditEmp = ({
           placeholder="User Name"
           label={updatedData.username ? "User Name" : ""}
           variant="outlined"
-          value={disabled ? ` ${updatedData.username} (This user's username cannot be updated)` : updatedData.username}
+          value={
+            disabled
+              ? ` ${updatedData.username} (This user's username cannot be updated)`
+              : updatedData.username
+          }
           onChange={isEdit ? handleUpdate : handleChange}
-          InputProps={{readOnly:disabled}}
-          
+          InputProps={{ readOnly: disabled }}
         />
 
         <CustomTextBox
           id="password"
           name="password"
-          placeholder={ disabled?"This user's password cannot be updated" :  isEdit ? "Update Password (leave blank to keep old password)" : "Password"}
+          placeholder={
+            disabled
+              ? "This user's password cannot be updated"
+              : isEdit
+              ? "Update Password (leave blank to keep old password)"
+              : "Password"
+          }
           label={updatedData.password ? "Password" : ""}
           type="password"
           variant="outlined"
           value={updatedData.password}
           onChange={isEdit ? handleUpdate : handleChange}
-          InputProps={{readOnly:disabled}}
-          helperText={ !disabled &&  "Password must be atleast 5 characters long"}
+          InputProps={{ readOnly: disabled }}
+          helperText={!disabled && "Password must be atleast 5 characters long"}
         />
         <CustomTextBox
           id="confirmpassword"
           name="confirmpassword"
-          placeholder={disabled?"This user's password cannot be updated" : isEdit ? "Confirm Password (leave blank to keep old password)" : "Confirm Password"}
+          placeholder={
+            disabled
+              ? "This user's password cannot be updated"
+              : isEdit
+              ? "Confirm Password (leave blank to keep old password)"
+              : "Confirm Password"
+          }
           label={updatedData.confirmpassword ? "Confirm Password" : ""}
           type="password"
           variant="outlined"
           value={updatedData.confirmpassword}
           onChange={isEdit ? handleUpdate : handleChange}
-          InputProps={{readOnly:disabled}}
-          
+          InputProps={{ readOnly: disabled }}
         />
         <Stack direction="row" gap={1}>
           <Dropdown
@@ -141,7 +155,7 @@ const AddEditEmp = ({
           />
         </Stack>
       </Stack>
-      {isLoading ? (
+      {isLoading && !isEdit ? (
         <Box mt={5}>
           <Stack direction="row">
             <Loader />
@@ -156,7 +170,7 @@ const AddEditEmp = ({
             />
           </Stack>
         </Box>
-      ): isEdit? (
+      ) : !isLoading  && isEdit  ? (
         <Button
           sx={{
             marginTop: "15px",
@@ -170,11 +184,13 @@ const AddEditEmp = ({
             color: "black",
           }}
           variant="contained"
-          onClick={()=>handleUpdateClick(updatedData)}
+          onClick={() => handleUpdateClick(updatedData)}
         >
           Update
         </Button>
-      ):(
+      ) : isLoading && isEdit ? (
+        <Loader isColored />
+      ) : (
         <Button
           sx={{
             marginTop: "15px",
@@ -192,8 +208,7 @@ const AddEditEmp = ({
         >
           Register
         </Button>
-      )
-    }
+      )}
     </Stack>
   );
 };

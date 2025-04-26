@@ -6,6 +6,7 @@ import AddEditEmp from "../../pages/Dashboard/HR/EmployeesTab/AddEditEmp";
 import useLoginRegister from "../../Hooks/useLoginRegister";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 
+
 const AddEditEmpModal = ({
   handleOutsideClick,
   handleModalClose,
