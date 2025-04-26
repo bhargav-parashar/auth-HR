@@ -1,11 +1,9 @@
-import styles from "./RequestModal.module.css";
+import * as styles from "./RequestModal.module.css";
 import {
   Box,
   Typography,
   Stack,
-  Button,
-  Paper,
-  TextField,
+  Button
 } from "@mui/material";
 import Details from "../../pages/Dashboard/Employee/HomeTab/Details";
 import LeaveBal from "../../pages/Dashboard/Employee/HomeTab/LeaveBal";

@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./Modal.module.css";
-import { Box, Typography, Stack, Button, Paper } from "@mui/material";
+import * as styles from "./Modal.module.css";
+import { Box, Typography, Stack, Button } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 
 

@@ -1,4 +1,4 @@
-import styles from "./RequestModal.module.css";
+import * as styles from "./RequestModal.module.css";
 import { Box, Typography, Stack, Button } from "@mui/material";
 import avatar from "../../assets/avatar.svg";
 import CloseIcon from "@mui/icons-material/Close";

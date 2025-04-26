@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./RequestModal.module.css";
+import  * as styles from "./RequestModal.module.css";
 import {
   Box,
   Typography,
