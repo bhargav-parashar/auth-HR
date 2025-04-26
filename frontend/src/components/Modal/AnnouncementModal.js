@@ -3,6 +3,7 @@ import * as styles from "./Modal.module.css";
 import { Box, Typography, Stack, Button, TextField } from "@mui/material";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import CloseIcon from "@mui/icons-material/Close";
+import Loader from "../Loader/Loader";
 
 const AnnouncementModal = ({
   handleOutsideClick,
@@ -116,26 +117,30 @@ const AnnouncementModal = ({
             inputProps={{ maxLength: 70, style: { fontSize: "0.8rem" } }}
           />
         )}
-        <Stack
-          pt={6}
-          px={2}
-          direction="row"
-          justifyContent="flex-end"
-          gap={0.5}
-        >
-          <Button
-            sx={{ bgcolor: "primary.inactive" }}
-            onClick={handleModalClose}
+        {isAnnLoading ? (
+          <Loader isColored />
+        ) : (
+          <Stack
+            pt={6}
+            px={2}
+            direction="row"
+            justifyContent="flex-end"
+            gap={0.5}
           >
-            Cancel
-          </Button>
-          <Button
-            sx={{ bgcolor: "primary.contrast" }}
-            onClick={handleSubmitClick}
-          >
-            {isEdit ? "Update" : isDelete ? "Delete" : "Create"}
-          </Button>
-        </Stack>
+            <Button
+              sx={{ bgcolor: "primary.inactive" }}
+              onClick={handleModalClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              sx={{ bgcolor: "primary.contrast" }}
+              onClick={handleSubmitClick}
+            >
+              {isEdit ? "Update" : isDelete ? "Delete" : "Create"}
+            </Button>
+          </Stack>
+        )}
       </Box>
     </Box>
   );

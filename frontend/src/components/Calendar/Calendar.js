@@ -12,7 +12,6 @@ dayjs.extend(isBetweenPlugin);
 const CustomPickersDay = styled(PickersDay, {
   shouldForwardProp: (prop) => prop !== "isInRange",
 })(({ theme, isInRange }) => ({
-  
   borderRadius: "0",
   ...(isInRange && {
     backgroundColor: theme.palette.primary.light,
@@ -63,13 +62,12 @@ function Day(props) {
   );
 }
 
-
 export default function WeekPicker({ startDate, endDate }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DateCalendar
         views={["day"]}
-        value={null}
+        value={startDate}
         readOnly
         showDaysOutsideCurrentMonth
         slots={{ day: Day }}
@@ -80,13 +78,15 @@ export default function WeekPicker({ startDate, endDate }) {
             day: ownerState.day,
           }),
         }}
-        defaultCalendarMonth={startDate}
         sx={{
-          marginY:'auto',
-          marginX:'auto',
-          '.MuiPickersDay-today': {
-      borderRadius: '50%'
-    },
+          marginY: "auto",
+          marginX: "auto",
+          ".MuiPickersDay-today": {
+            borderRadius: "50%",
+          },
+          ".Mui-selected": {
+            backgroundColor: "transparent", 
+          }
         }}
       />
     </LocalizationProvider>

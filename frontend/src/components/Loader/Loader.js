@@ -10,12 +10,12 @@ export default function Loader({ small = false, isColored }) {
       {isColored ? (
         <CircularProgress
           size={small ? "1rem" : "2rem"}
-          style={{ color: "rgb(81, 81, 228)" }}
+          sx={{ color: "rgb(81, 81, 228)", animationDuration: '500ms' }}
         />
       ) : (
         <CircularProgress
           size={small ? "1rem" : "2rem"}
-          style={{ color: "white" }}
+          sx={{ color: "white", animationDuration: '500ms' }}
         />
       )}
     </Box>
