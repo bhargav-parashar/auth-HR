@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography, Stack, Button } from "@mui/material";
 import SkillPill from "../Skills/SkillPill";
 import Launch from "@mui/icons-material/Launch";
-import AuthHRPic from "../../../../assets/authHRPic.png";
+import AuthHRPic from "../../../../assets/authHrPic.png";
 import QKartPic from "../../../../assets/qKartPic.png";
 import MedifyPic from "../../../../assets/medifyPic.png";
 import ExpensePic from "../../../../assets/expenseTrackerPic.png";
