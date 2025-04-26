@@ -33,7 +33,11 @@ export default function RelocationMobile({
   const {user} = useGetLoggedInUser();
   const currLocation = user?.location;
   const updatedLocations = locations.filter((item)=>item !== currLocation);
-
+  
+  const handleLocationChange = (e) => {
+    const { value } = e.target;
+    setLocation(value);
+  };
   return (
     <Box sx={{ height: "90%", maxWidth: 400, flexGrow: 1 }}>
       <Stack
