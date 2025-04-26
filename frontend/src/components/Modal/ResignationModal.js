@@ -1,11 +1,6 @@
 import { useState } from "react";
-import  * as styles from "./RequestModal.module.css";
-import {
-  Box,
-  Typography,
-  Stack,
-  Button
-} from "@mui/material";
+import * as styles from "./RequestModal.module.css";
+import { Box, Typography, Stack, Button } from "@mui/material";
 import Details from "../../pages/Dashboard/Employee/HomeTab/Details";
 import review from "../../assets/reviewHR.svg";
 import axios from "axios";
@@ -13,8 +8,9 @@ import { useSnackbar } from "notistack";
 import config from "../../config/config";
 import DatePicker from "../DatePicker/DatePickerField";
 import EditIcon from "@mui/icons-material/Edit";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 import format from "date-fns/format";
+import Loader from "../Loader/Loader";
 
 const ResignationModal = ({
   handleOutsideClick,
@@ -23,11 +19,13 @@ const ResignationModal = ({
   selectedReq,
   getPenRequests,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [lwd, setLwd] = useState(selectedReq?.lwd);
   const { enqueueSnackbar } = useSnackbar();
 
   const reject = async () => {
     try {
+      setIsLoading(true);
       const URL = `${config.endpoint}/hr/update-resignation-status`;
       const id = selectedReq?._id;
       const res = await axios.put(
@@ -43,16 +41,19 @@ const ResignationModal = ({
     } catch (err) {
       console.log(err);
       enqueueSnackbar(err, { variant: "warning" });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const approve = async () => {
     try {
+      setIsLoading(true);
       const URL = `${config.endpoint}/hr/update-resignation-status`;
       const id = selectedReq?._id;
       const res = await axios.put(
         URL,
-        { id: id, newStatus: "Approved", newLwd : lwd },
+        { id: id, newStatus: "Approved", newLwd: lwd },
         { withCredentials: true }
       );
       if (res.status === 200) {
@@ -63,40 +64,55 @@ const ResignationModal = ({
     } catch (err) {
       console.log(err);
       enqueueSnackbar(err, { variant: "warning" });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-
-    
     <Box id="Outer-Modal" className={styles.modal} onClick={handleOutsideClick}>
       <Box className={styles["modal-content"]}>
-      <Stack direction='row' justifyContent='space-between'  sx={{width:'100%'}} >
         <Stack
-          mb={1}
-          direction="column"
-          alignItems="flex-start"
+          direction="row"
+          justifyContent="space-between"
           sx={{ width: "100%" }}
         >
-          <Typography
-            sx={{ fontWeight: "bold" }}
-            variant="h6"
-            color="text.headingContrast"
+          <Stack
+            mb={1}
+            direction="column"
+            alignItems="flex-start"
+            sx={{ width: "100%" }}
           >
-            Resignation Request
-          </Typography>
-          <Typography
-            sx={{ fontWeight: "bold" }}
-            variant="body2"
-            color="primary.inactive"
-          >
-            {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
-          </Typography>
+            <Typography
+              sx={{ fontWeight: "bold" }}
+              variant="h6"
+              color="text.headingContrast"
+            >
+              Resignation Request
+            </Typography>
+            <Typography
+              sx={{ fontWeight: "bold" }}
+              variant="body2"
+              color="primary.inactive"
+            >
+              {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
+            </Typography>
+          </Stack>
+          <CloseIcon
+            onClick={handleModalClose}
+            sx={{
+              marginRight: 2,
+              cursor: "pointer",
+              color: "primary.contrast",
+            }}
+          />
         </Stack>
-        <CloseIcon onClick={handleModalClose} sx={{ marginRight: 2, cursor:'pointer', color:'primary.contrast' }} />
-      </Stack>
-        <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction={{xs:"column", md:"row"}}>
-          <Box sx={{ width: {xs:"100%", md:"50%"}, height: "100%" }}>
+        <Stack
+          gap={1}
+          sx={{ width: "100%", height: "100%" }}
+          direction={{ xs: "column", md: "row" }}
+        >
+          <Box sx={{ width: { xs: "100%", md: "50%" }, height: "100%" }}>
             <Details isReview isGrid user={selectedReq?.userDetails[0]} />
             <Box
               p={2}
@@ -159,7 +175,7 @@ const ResignationModal = ({
               </Box>
             </Box>
           </Box>
-          <Box sx={{ width: {xs:"100%", md:"50%"}, height: "100%" }}>
+          <Box sx={{ width: { xs: "100%", md: "50%" }, height: "100%" }}>
             <Box
               p={1}
               sx={{
@@ -169,7 +185,7 @@ const ResignationModal = ({
                 borderRadius: "0.6rem",
               }}
             >
-              <Stack gap={1} sx={{width:'100%'}}>
+              <Stack gap={1} sx={{ width: "100%" }}>
                 <Stack
                   px={1}
                   pb={1}
@@ -189,10 +205,19 @@ const ResignationModal = ({
                       variant="caption"
                       mx={1}
                     >{`Requested Last Working Day`}</Typography>
-                    <EditIcon fontSize="small"  />
+                    <EditIcon fontSize="small" />
                   </Stack>
-                  <Box pb={1} px={1} sx={{ borderRadius:'0.6rem', bgcolor:'primary.light'}} >
-                  <DatePicker isMobile label="" dateField={lwd} setDateField={setLwd} />
+                  <Box
+                    pb={1}
+                    px={1}
+                    sx={{ borderRadius: "0.6rem", bgcolor: "primary.light" }}
+                  >
+                    <DatePicker
+                      isMobile
+                      label=""
+                      dateField={lwd}
+                      setDateField={setLwd}
+                    />
                   </Box>
                 </Stack>
               </Stack>
@@ -223,21 +248,32 @@ const ResignationModal = ({
             </Box>
           </Box>
         </Stack>
-
-        <Stack
-          pt={6}
-          px={2}
-          direction="row"
-          justifyContent="flex-end"
-          gap={0.5}
-        >
-          <Button sx={{ bgcolor: "primary.inactive" }} onClick={reject}>
-            Reject
-          </Button>
-          <Button sx={{ bgcolor: "primary.contrast" }} onClick={approve}>
-            Approve
-          </Button>
-        </Stack>
+        {isLoading ? (
+          <Stack
+            pt={6}
+            px={2}
+            direction="row"
+            justifyContent="flex-end"
+            gap={0.5}
+          >
+            <Loader isColored />
+          </Stack>
+        ) : (
+          <Stack
+            pt={6}
+            px={2}
+            direction="row"
+            justifyContent="flex-end"
+            gap={0.5}
+          >
+            <Button sx={{ bgcolor: "primary.inactive" }} onClick={reject}>
+              Reject
+            </Button>
+            <Button sx={{ bgcolor: "primary.contrast" }} onClick={approve}>
+              Approve
+            </Button>
+          </Stack>
+        )}
       </Box>
     </Box>
   );

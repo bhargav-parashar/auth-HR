@@ -1,10 +1,6 @@
+import { useState } from "react";
 import * as styles from "./RequestModal.module.css";
-import {
-  Box,
-  Typography,
-  Stack,
-  Button
-} from "@mui/material";
+import { Box, Typography, Stack, Button } from "@mui/material";
 import Details from "../../pages/Dashboard/Employee/HomeTab/Details";
 import LeaveBal from "../../pages/Dashboard/Employee/HomeTab/LeaveBal";
 import addDays from "date-fns/addDays";
@@ -15,20 +11,22 @@ import review from "../../assets/reviewHR.svg";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import config from "../../config/config";
-import CloseIcon from '@mui/icons-material/Close';
-
+import CloseIcon from "@mui/icons-material/Close";
+import Loader from "../Loader/Loader";
 
 const LeaveModal = ({
   handleOutsideClick,
   handleModalClose,
   handleSubmit,
   selectedReq,
-  getPenRequests
+  getPenRequests,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
   const reject = async (balanceObject) => {
     try {
+      setIsLoading(true);
       const URL = `${config.endpoint}/hr/update-leave-status`;
       const id = selectedReq?._id;
       const res = await axios.put(
@@ -53,29 +51,32 @@ const LeaveModal = ({
     } catch (err) {
       console.log(err);
       enqueueSnackbar(err, { variant: "warning" });
+    } finally {
+      setIsLoading(false);
     }
-    
   };
 
   const approve = async () => {
     try {
-        const URL = `${config.endpoint}/hr/update-leave-status`;
-        const id = selectedReq?._id;
-        const res = await axios.put(
-          URL,
-          { id: id, newStatus: "Approved" },
-          { withCredentials: true }
-        );
-        if (res.status === 200) {
-            getPenRequests();
-            handleModalClose();
-            enqueueSnackbar("Request Approved", { variant: "success" });
-        }
+      setIsLoading(true);
+      const URL = `${config.endpoint}/hr/update-leave-status`;
+      const id = selectedReq?._id;
+      const res = await axios.put(
+        URL,
+        { id: id, newStatus: "Approved" },
+        { withCredentials: true }
+      );
+      if (res.status === 200) {
+        getPenRequests();
+        handleModalClose();
+        enqueueSnackbar("Request Approved", { variant: "success" });
+      }
     } catch (err) {
       console.log(err);
       enqueueSnackbar(err, { variant: "warning" });
+    } finally {
+      setIsLoading(false);
     }
-    
   };
 
   const handleClose = () => {
@@ -100,14 +101,18 @@ const LeaveModal = ({
     reject(balanceObject);
   };
 
-  const handleApprove = () =>{
+  const handleApprove = () => {
     approve();
-  }
+  };
 
   return (
     <Box id="Outer-Modal" className={styles.modal} onClick={handleOutsideClick}>
       <Box className={styles["modal-content"]}>
-        <Stack direction='row' justifyContent='space-between'  sx={{width:'100%'}} >
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          sx={{ width: "100%" }}
+        >
           <Stack
             mb={1}
             direction="column"
@@ -129,15 +134,30 @@ const LeaveModal = ({
               {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
             </Typography>
           </Stack>
-          <CloseIcon onClick={handleModalClose} sx={{ marginRight: 2, cursor:'pointer', color:'primary.contrast' }} />
+          <CloseIcon
+            onClick={handleModalClose}
+            sx={{
+              marginRight: 2,
+              cursor: "pointer",
+              color: "primary.contrast",
+            }}
+          />
         </Stack>
-        
-        <Stack gap={1} sx={{ width: "100%", height: "100%" }} direction={{xs:'columnn', md:'row'}}>
-          <Box sx={{ width:{xs:"100%", md:"50%"} , height: "100%" }}>
+
+        <Stack
+          gap={1}
+          sx={{ width: "100%", height: "100%" }}
+          direction={{ xs: "columnn", md: "row" }}
+        >
+          <Box sx={{ width: { xs: "100%", md: "50%" }, height: "100%" }}>
             <Details isReview isGrid user={selectedReq?.userDetails[0]} />
-            <LeaveBal lable="Employee's new leave balance after approval"  isReview user={selectedReq?.userDetails[0]} />
+            <LeaveBal
+              lable="Employee's new leave balance after approval"
+              isReview
+              user={selectedReq?.userDetails[0]}
+            />
           </Box>
-          <Box sx={{ width: {xs:"100%", md:"50%"}, height: "100%" }}>
+          <Box sx={{ width: { xs: "100%", md: "50%" }, height: "100%" }}>
             <Box
               p={1}
               sx={{
@@ -230,24 +250,35 @@ const LeaveModal = ({
             </Box>
           </Box>
         </Stack>
-
-        <Stack
-          pt={6}
-          px={2}
-          direction="row"
-          justifyContent="flex-end"
-          gap={0.5}
-        >
-          <Button sx={{ bgcolor: "primary.inactive" }} onClick={handleClose}>
-            Reject
-          </Button>
-          <Button
-            sx={{ bgcolor: "primary.contrast" }}
-            onClick={handleApprove}
+        {isLoading ? (
+          <Stack
+            pt={6}
+            px={2}
+            direction="row"
+            justifyContent="flex-end"
+            gap={0.5}
           >
-            Approve
-          </Button>
-        </Stack>
+            <Loader isColored />
+          </Stack>
+        ) : (
+          <Stack
+            pt={6}
+            px={2}
+            direction="row"
+            justifyContent="flex-end"
+            gap={0.5}
+          >
+            <Button sx={{ bgcolor: "primary.inactive" }} onClick={handleClose}>
+              Reject
+            </Button>
+            <Button
+              sx={{ bgcolor: "primary.contrast" }}
+              onClick={handleApprove}
+            >
+              Approve
+            </Button>
+          </Stack>
+        )}
       </Box>
     </Box>
   );
