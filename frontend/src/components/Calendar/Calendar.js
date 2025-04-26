@@ -80,6 +80,7 @@ export default function WeekPicker({ startDate, endDate }) {
             day: ownerState.day,
           }),
         }}
+        defaultCalendarMonth={startDate}
         sx={{
           marginY:'auto',
           marginX:'auto',
