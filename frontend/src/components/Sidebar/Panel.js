@@ -8,8 +8,10 @@ import { useSnackbar } from "notistack";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import SidebarCard from "./SidebarCard";
+import Loader from "../Loader/Loader";
 
-const Panel = ({ selectedTab, setSelectedTab,toggleDrawer }) => {
+
+const Panel = ({ selectedTab, setSelectedTab, toggleDrawer }) => {
   const [loggedInUser, setLoggedInUser] = useState(
     JSON.parse(localStorage.getItem("loggedInUser"))
   );
@@ -71,13 +73,17 @@ const Panel = ({ selectedTab, setSelectedTab,toggleDrawer }) => {
           gap={1}
         >
           <LogoutIcon sx={{ cursor: "pointer" }} onClick={handleLogout} />
-          <Typography
-            variant="caption"
-            sx={{ cursor: "pointer" }}
-            onClick={handleLogout}
-          >
-            Logout
-          </Typography>
+          {isLoading ? (
+            <Loader/>
+          ) : (
+            <Typography
+              variant="caption"
+              sx={{ cursor: "pointer" }}
+              onClick={handleLogout}
+            >
+              Logout
+            </Typography>
+          )}
         </Stack>
       </Stack>
 
@@ -100,8 +106,8 @@ const Panel = ({ selectedTab, setSelectedTab,toggleDrawer }) => {
         </Stack>
       </Stack>
       <SidebarCard
-        key='100'
-        menuItem='About the Developer'
+        key="100"
+        menuItem="About the Developer"
         menuIcon="Code"
         selectedTab={selectedTab}
         setSelectedTab={setSelectedTab}
