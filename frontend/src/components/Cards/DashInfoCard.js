@@ -3,7 +3,7 @@ import { Stack, Box, Typography } from "@mui/material";
 import Shimmer from "../ShimmerUI/Shimmer";
 
 const DashInfoCard = ({ label, value, isLoading}) => {
-  getBg=(label)=>{
+ const getBg=(label)=>{
     if(isLoading) return "";
     else if(label === "Current Month Hires"){
       return "rgb(59, 165, 100)";
@@ -15,7 +15,7 @@ const DashInfoCard = ({ label, value, isLoading}) => {
       return "rgb(212, 154, 19)";
     }
   }
-  getBgHighlight=(label)=>{
+  const getBgHighlight=(label)=>{
     if(isLoading) return "";
     else if(label === "Current Month Hires"){
       return "rgb(4, 143, 57)";

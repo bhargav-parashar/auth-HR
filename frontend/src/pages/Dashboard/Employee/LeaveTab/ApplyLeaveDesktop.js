@@ -40,7 +40,7 @@ const ApplyLeaveDesktop = ({ setSelectedTab, setRefresh }) => {
   handleModalClose();
 };
 
-getBalance = (leaveType, allLeaveBal) => {
+const getBalance = (leaveType, allLeaveBal) => {
   if (leaveType === "Earned Leave") {
     return allLeaveBal?.earned;
   } else if (leaveType === "Casual Leave") {

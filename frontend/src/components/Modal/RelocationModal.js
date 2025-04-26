@@ -22,7 +22,7 @@ const RelocationModal = ({
 }) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  reject = async () => {
+  const reject = async () => {
     try {
       const URL = `${config.endpoint}/hr/update-relocation-status`;
       const id = selectedReq?._id;
@@ -42,7 +42,7 @@ const RelocationModal = ({
     }
   };
 
-  approve = async () => {
+  const approve = async () => {
     try {
       const URL = `${config.endpoint}/hr/update-relocation-status`;
       const id = selectedReq?._id;

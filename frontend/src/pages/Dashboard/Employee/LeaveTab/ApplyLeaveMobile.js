@@ -39,11 +39,11 @@ export default function ApplyLeaveMobile({
   const { activeStep, handleNext, handleBack } = useActiveStep();
   const maxSteps = leaveSteps.length;
 
-  handleLeaveTypeChange = (e) => {
+  const handleLeaveTypeChange = (e) => {
     setLeaveType(e.target.value);
   };
 
-  dateDifference = (date1, date2) => {
+  const dateDifference = (date1, date2) => {
     if (date1 && date2) return differenceInDays(date1, date2) + 1;
     return 0;
   };

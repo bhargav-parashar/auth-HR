@@ -30,21 +30,21 @@ const AdminHome = ({
     setSelectedReqTab("");
   };
 
-  handleLeaveReview = (id) => {
+  const handleLeaveReview = (id) => {
     const leaves = penRequests?.leaves;
     const selectedRequest = leaves.find((item) => item._id === id);
     setSelectedReq(selectedRequest);
     handleModalOpen();
   };
 
-  handleRelocationReview = (id) => {
+  const handleRelocationReview = (id) => {
     const relocations = penRequests?.relocations;
     const selectedRequest = relocations.find((item) => item._id === id);
     setSelectedReq(selectedRequest);
     handleModalOpen();
   };
 
-  handleResignationReview = (id) => {
+ const handleResignationReview = (id) => {
     const resignations = penRequests?.resignations;
     const selectedRequest = resignations.find((item) => item._id === id);
     setSelectedReq(selectedRequest);

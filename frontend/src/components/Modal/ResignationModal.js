@@ -26,7 +26,7 @@ const ResignationModal = ({
   const [lwd, setLwd] = useState(selectedReq?.lwd);
   const { enqueueSnackbar } = useSnackbar();
 
-  reject = async () => {
+  const reject = async () => {
     try {
       const URL = `${config.endpoint}/hr/update-resignation-status`;
       const id = selectedReq?._id;
@@ -46,7 +46,7 @@ const ResignationModal = ({
     }
   };
 
-  approve = async () => {
+  const approve = async () => {
     try {
       const URL = `${config.endpoint}/hr/update-resignation-status`;
       const id = selectedReq?._id;

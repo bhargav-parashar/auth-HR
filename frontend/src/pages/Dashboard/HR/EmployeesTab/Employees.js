@@ -40,7 +40,7 @@ const Employees = ({getEmployeeData}) => {
   
   const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } = useModal();
   
-  handleAddEmployee = () => { 
+  const handleAddEmployee = () => { 
     setIsEdit(false);
     setSelectedUser('');
     handleModalOpen();

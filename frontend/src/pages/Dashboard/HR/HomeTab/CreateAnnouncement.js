@@ -29,14 +29,14 @@ const CreateAnnouncement = ({
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
 
-  hancelCreateClick = () => {
+  const hancelCreateClick = () => {
     setIsEdit(false);
     setIsDelete(false);
     setAnnouncement("");
     handleModalOpen();
   };
 
-  handleEditClick = (id, ann) => {
+  const handleEditClick = (id, ann) => {
     setIsEdit(true);
     setIsDelete(false);
     setAnnouncement(ann);
@@ -44,7 +44,7 @@ const CreateAnnouncement = ({
     handleModalOpen();
   };
 
-  handleDeleteClick = (id) => {
+  const handleDeleteClick = (id) => {
     setIsDelete(true);
     setIsEdit(false);
     setId(id);

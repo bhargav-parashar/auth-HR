@@ -13,7 +13,7 @@ import WeatherPic from "../../../../assets/weatherPic.png";
 import BotAiPic from "../../../../assets/botAiPic.png";
 
 const Project = ({ item }) => {
-  getImage = (label) => {
+  const getImage = (label) => {
     if (label === "AuthHR") return AuthHRPic;
     else if (label === "QKart") return QKartPic;
     else if (label === "Medify") return MedifyPic;

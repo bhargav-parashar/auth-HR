@@ -5,7 +5,7 @@ import Shimmer from "../ShimmerUI/Shimmer";
 import CircleIcon from '@mui/icons-material/Circle';
 
 const DashCard = ({ isMobile, label, count, isLoading, setSelectedReqTab,selectedReqTab }) => {
-  handleclick = () => {
+  const handleclick = () => {
     setSelectedReqTab(label);
   };
   

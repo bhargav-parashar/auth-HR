@@ -28,7 +28,7 @@ const CreateOrUpdateAnnouncement = ({
     inputRef.current?.focus();
   },[]);
 
-  handleSubmitClick = () => {
+  const handleSubmitClick = () => {
     if (isEdit) {
       handleEdit(id, editedAnnouncement);
       handleModalClose();
@@ -41,7 +41,7 @@ const CreateOrUpdateAnnouncement = ({
     }
   };
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     setEditedAnnouncement(e.target.value);
   };
 

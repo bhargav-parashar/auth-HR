@@ -14,7 +14,7 @@ const Details = ({
   setIsEdit
 }) => {
 
-  handleClick = () =>{
+  const handleClick = () =>{
     setIsEdit(true);
     setSelectedUser(user);
     handleModalOpen();

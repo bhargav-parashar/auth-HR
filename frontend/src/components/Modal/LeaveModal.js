@@ -27,7 +27,7 @@ const LeaveModal = ({
 }) => {
   const { enqueueSnackbar } = useSnackbar();
 
-  reject = async (balanceObject) => {
+  const reject = async (balanceObject) => {
     try {
       const URL = `${config.endpoint}/hr/update-leave-status`;
       const id = selectedReq?._id;
@@ -57,7 +57,7 @@ const LeaveModal = ({
     
   };
 
-  approve = async () => {
+  const approve = async () => {
     try {
         const URL = `${config.endpoint}/hr/update-leave-status`;
         const id = selectedReq?._id;
@@ -78,7 +78,7 @@ const LeaveModal = ({
     
   };
 
-  handleClose = () => {
+  const handleClose = () => {
     //Add duration number of days back to the type of leave for the specific user
     const balanceObject = selectedReq?.userDetails[0]?.leaveBal;
     const lt = selectedReq.leaveType;
@@ -100,7 +100,7 @@ const LeaveModal = ({
     reject(balanceObject);
   };
 
-  handleApprove = () =>{
+  const handleApprove = () =>{
     approve();
   }
 

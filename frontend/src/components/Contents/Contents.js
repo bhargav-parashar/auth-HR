@@ -32,11 +32,11 @@ const Contents = ({
   setLeaveType,
   leaveBal
 }) => {
-  handleLocationChange = (e) => {
+  const handleLocationChange = (e) => {
     const { value } = e.target;
     setLocation(value);
   };
-  handleLeaveTypeChange = (e) => {
+  const handleLeaveTypeChange = (e) => {
     setLeaveType(e.target.value);
   };
 

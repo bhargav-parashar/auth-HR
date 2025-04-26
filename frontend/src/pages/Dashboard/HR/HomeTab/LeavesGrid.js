@@ -88,9 +88,6 @@ const LeavesGrid = ({
                       {formatDistance(item.startDate, addDays(item.endDate, 1))}
                     </TableCell>
                   )}
-                  {/* <TableCell align="left">
-                    {formatDistance(item.startDate, addDays(item.endDate, 1))}
-                  </TableCell> */}
                   <TableCell align="left">
                     {item?.userDetails[0]?.username}
                   </TableCell>

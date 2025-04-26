@@ -72,12 +72,12 @@ const AddEditEmp = ({
     setUpdatedData(formData);
   }, [formData]);
 
-  handleUpdate = (e) => {
+  const handleUpdate = (e) => {
     const { name, value } = e.target;
     setUpdatedData((prev) => ({ ...prev, [name]: value }));
   };
 
-  handleUpdateClick = (updatedData) =>{
+  const handleUpdateClick = (updatedData) =>{
     handleUserUpdate(updatedData );
   }
 

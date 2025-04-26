@@ -1,11 +1,7 @@
 import React from 'react';
 import {
-    Box,
     Typography,
-    Stack,
-    TextField,
-    FormControl,
-    Select,
+    Stack
   } from "@mui/material";
 
 const TotalEmployee = ({totalEmployees}) => {
