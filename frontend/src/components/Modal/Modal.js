@@ -54,7 +54,7 @@ const Modal = ({ handleOutsideClick, handleModalClose, handleSubmit }) => {
             No
           </Button>
           {isLoading ? (
-            <Loader/>
+            <Loader isColored/>
           ) : (
             <Button sx={{ bgcolor: "primary.contrast" }} onClick={handleSubmitClick}>
               Yes

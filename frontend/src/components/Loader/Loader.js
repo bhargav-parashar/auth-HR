@@ -2,10 +2,15 @@ import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
-export default function Loader({small=false}) {
+export default function Loader({ small = false, isColored }) {
   return (
-    <Box sx={{ display: "flex", justifyContent:"center", alignItems:"center" }}>
-      <CircularProgress size={small?"1rem":'2rem'} style={{color:'white'}}  />
+    <Box
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    >
+      <CircularProgress
+        size={small ? "1rem" : "2rem"}
+        style={{ color: isColored ? "primary.contrast" : "white" }}
+      />
     </Box>
   );
 }
