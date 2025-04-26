@@ -10,7 +10,7 @@ const useGetPendingRequests = () => {
     resignations: [],
   });
 
-  getPenRequests = async () => {
+  const getPenRequests = async () => {
     try {
       const URL1 = `${config.endpoint}/hr/pending-leaves`;
       const URL2 = `${config.endpoint}/hr/pending-relocations`;

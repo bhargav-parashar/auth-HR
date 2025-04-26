@@ -22,7 +22,7 @@ const useAnnouncements = () => {
   }, []);
 
   //CREATE ANNOUNCEMENT
-  handleCreateAnnouncment = async (ann) => {
+ const handleCreateAnnouncment = async (ann) => {
     const URL = `${config.endpoint}/hr/create-announcement`;
     const body = {
       body: ann,
@@ -40,7 +40,7 @@ const useAnnouncements = () => {
   };
 
   //UPDATE ANNOUNCEMENT
-  handleUpdateAnnouncment = async (id, ann) => {
+  const handleUpdateAnnouncment = async (id, ann) => {
     const URL = `${config.endpoint}/hr/update-announcement`;
     try {
       const updatedAnn = await axios.put(
@@ -58,7 +58,7 @@ const useAnnouncements = () => {
   };
 
   //DELETE ANNOUNCEMENT
-  handleDeleteAnnouncment = async (id) => {
+  const handleDeleteAnnouncment = async (id) => {
     const URL = `${config.endpoint}/hr/delete-announcement`;
     try {
       const deletedAnn = await axios.delete(

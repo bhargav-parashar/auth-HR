@@ -35,7 +35,7 @@ const useDebouncedSearchFilter = () => {
   }, [searchInput, department, location]);
 
   //DEBOUNCED SEARCH ON LIST OF USERS BY CALLING FILTER FUNCTION
-  debouncedSearch = () => {
+  const debouncedSearch = () => {
     if (timeoutId) {
       clearInterval(timeoutId);
     }
@@ -47,7 +47,7 @@ const useDebouncedSearchFilter = () => {
   };
 
   //FILTER FUNCTION
-  filterUsers = () => {
+  const filterUsers = () => {
     let searchFilteredData =
       !searchInput || searchInput.length === 0
         ? users
@@ -75,13 +75,13 @@ const useDebouncedSearchFilter = () => {
   };
 
   //HANDLE SEARCH INPUT, DEPARTMENT AND LOCATION CHANGE
-  handleSearchInputChange = (e) => {
+  const  handleSearchInputChange = (e) => {
     setSearchInput(e.target.value);
   };
-  handleDeptChange = (e) => {
+  const handleDeptChange = (e) => {
     setDepartment(e.target.value);
   };
-  handleLocationChange = (e) => {
+  const handleLocationChange = (e) => {
     setLocation(e.target.value);
   };
 
