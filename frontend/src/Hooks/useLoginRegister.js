@@ -204,7 +204,7 @@ const useLoginRegister = (
       navigate("/dashboard");
     } catch (err) {
       console.log(err);
-      enqueueSnackbar(err.response.data.message, { variant: "warning" });
+      enqueueSnackbar( err?.response?.data?.message || "Network error", { variant: "warning" });
     } finally {
       setIsLoading(false);
     }
