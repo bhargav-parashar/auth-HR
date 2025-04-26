@@ -22,7 +22,7 @@ const AddEditEmpModal = ({
     handleUserUpdate,
     handleUserDelete,
   } = useLoginRegister(
-    (isHR = true),
+    true,
     getEmployeeData,
     handleModalClose,
     queryEmployees
