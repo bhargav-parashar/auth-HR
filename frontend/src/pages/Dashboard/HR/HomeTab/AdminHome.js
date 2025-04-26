@@ -26,7 +26,7 @@ const AdminHome = ({
   const { isReqLoading, penRequests, getPenRequests } = useGetPendingRequests();
   const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } = useModal();
   
-  handleBack = () => {
+ const handleBack = () => {
     setSelectedReqTab("");
   };
 
