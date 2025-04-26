@@ -8,7 +8,7 @@ const useAnnouncements = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   //GET ANNOUNCEMENTS
-  getAnnouncements = async () => {
+  const getAnnouncements = async () => {
     const URL = `${config.endpoint}/hr/announcements`;
     try {
       const { data } = await axios.get(URL, { withCredentials: true });
