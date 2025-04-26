@@ -10,7 +10,8 @@ const submitLeave = async ({
   enqueueSnackbar,
   setSelectedTab,
   allLeaveBal,
-  setRefresh
+  setRefresh,
+  handleModalClose
 }) => {
   const type =
     leaveType === "Sick Leave"
@@ -45,6 +46,7 @@ const submitLeave = async ({
         enqueueSnackbar("Leave request submitted", { variant: "success" });
         setSelectedTab("Apply Leave");
         setRefresh(prev=>prev+1);
+        handleModalClose();
       }
     }
   } catch (err) {

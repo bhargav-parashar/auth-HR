@@ -36,9 +36,10 @@ const ApplyLeaveDesktop = ({ setSelectedTab, setRefresh }) => {
     enqueueSnackbar,
     setSelectedTab,
     allLeaveBal,
-    setRefresh
+    setRefresh,
+    handleModalClose
   });
-  handleModalClose();
+  
 };
 
 const getBalance = (leaveType, allLeaveBal) => {
