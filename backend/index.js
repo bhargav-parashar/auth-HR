@@ -14,7 +14,7 @@ const PORT = process.env.PORT;
 connectDB();
 
 const corsOptions = {
-    origin: ["http://localhost:1234"], //["http://localhost:8081","http://localhost:3000"]
+    origin: ["https://auth-hr.vercel.app/", "http://localhost:1234"], 
     optionsSuccessStatus : 200,
     credentials: true //Access-Control-Allow-Credentials : true 
 };
