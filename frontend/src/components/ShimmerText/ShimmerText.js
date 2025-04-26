@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ShimmerText.module.css";
+import * as styles from "./ShimmerText.module.css";
 import Typography from "@mui/material/Typography";
 
 const ShimmerText = ({ children }) => {
