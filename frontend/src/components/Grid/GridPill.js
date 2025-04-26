@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack, Paper, Typography, Button } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 
 const GridPill = ({ id, label, type, handleTabChange }) => {
   return (
