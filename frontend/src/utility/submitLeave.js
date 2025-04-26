@@ -2,7 +2,7 @@ import config from "../config/config";
 import axios from "axios";
 import { differenceInDays } from "date-fns";
 
-export default submitLeave = async ({
+const submitLeave = async ({
   startDate,
   endDate,
   leaveType,
@@ -53,3 +53,5 @@ export default submitLeave = async ({
     setIsLoading(false);
   }
 };
+
+export default submitLeave;

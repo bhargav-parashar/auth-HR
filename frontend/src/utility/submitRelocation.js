@@ -1,7 +1,7 @@
 import config from "../config/config";
 import axios from "axios";
 
-export default submitRelocation = async ({
+const submitRelocation = async ({
   location,
   setIsLoading,
   questionResponseMapping,
@@ -33,3 +33,5 @@ export default submitRelocation = async ({
     setIsLoading(false);
   }
 };
+
+export default submitRelocation;

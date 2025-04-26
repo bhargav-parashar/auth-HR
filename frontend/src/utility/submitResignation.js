@@ -1,7 +1,7 @@
 import config from "../config/config";
 import axios from "axios";
 
-export default submitResignation = async ({
+const submitResignation = async ({
   lwd,
   setIsLoading,
   questionResponseMapping,
@@ -39,3 +39,5 @@ export default submitResignation = async ({
     setIsLoading(false);
   }
 };
+
+export default submitResignation;
