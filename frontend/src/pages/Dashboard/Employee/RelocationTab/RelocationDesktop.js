@@ -68,9 +68,10 @@ const RelocationDesktop = ({ setSelectedTab, setRefresh }) => {
       questionResponseMapping,
       enqueueSnackbar,
       setSelectedTab,
-      setRefresh
+      setRefresh,
+      handleModalClose
     });
-    handleModalClose();
+    
   };
 
   return (

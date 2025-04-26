@@ -7,7 +7,8 @@ const submitResignation = async ({
   questionResponseMapping,
   enqueueSnackbar,
   setSelectedTab,
-  setRefresh
+  setRefresh,
+  handleModalClose
 }) => {
   const URL = `${config.endpoint}/user/resign`;
   const body = {
@@ -26,6 +27,7 @@ const submitResignation = async ({
       enqueueSnackbar("Resignation submitted", { variant: "success" });
       setSelectedTab("Resignation");
       setRefresh(prev=>prev+1);
+      handleModalClose();
     }
   } catch (err) {
     if (err.status === 400) {
