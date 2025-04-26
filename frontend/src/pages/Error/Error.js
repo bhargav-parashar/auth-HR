@@ -68,7 +68,7 @@ const Error = () => {
               height: "15%",
             }}
           >
-            <Typography fontWeight="bold">{`${err?.status}.`|| "Unknown error occured."}</Typography>
+            <Typography fontWeight="bold">{`${err?.status || "Unknown error occured."}` }</Typography>
             <Typography color="rgb(152, 146, 146)">That's an error.</Typography>
           </Stack>
 
@@ -82,7 +82,7 @@ const Error = () => {
             }}
           >
             <Box sx={{ height: "100%", width: "100%" }}>
-              <Typography>{`${err?.error?.message || ""}.`}</Typography>
+              <Typography>{`${err?.error?.message || ""}`}</Typography>
               <Typography color="rgb(152, 146, 146)">{`That's all we know.`}</Typography>
             </Box>
           </Stack>
