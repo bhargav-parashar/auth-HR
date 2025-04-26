@@ -1,5 +1,4 @@
 import { Typography, Box, Stack } from "@mui/material";
-import ShimmerText from "../ShimmerText/ShimmerText";
 
 const MadeWithLove = ({ size, isLogin }) => {
  
