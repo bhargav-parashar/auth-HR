@@ -9,7 +9,10 @@ import {
 } from "@mui/material";
 import Details from "../../pages/Dashboard/Employee/HomeTab/Details";
 import LeaveBal from "../../pages/Dashboard/Employee/HomeTab/LeaveBal";
-import { addDays, format, formatDistance, differenceInDays } from "date-fns";
+import addDays from "date-fns/addDays";
+import format from "date-fns/format";
+import formatDistance from "date-fns/formatDistance";
+import differenceInDays from "date-fns/differenceInDays";
 import review from "../../assets/reviewHR.svg";
 import axios from "axios";
 import { useSnackbar } from "notistack";

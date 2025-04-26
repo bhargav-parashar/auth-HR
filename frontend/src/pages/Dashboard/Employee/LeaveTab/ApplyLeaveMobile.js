@@ -17,8 +17,10 @@ import useModal from "../../../../Hooks/useModal";
 import useActiveStep from "../../../../Hooks/useActiveStep";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import { formatDistance, differenceInDays, addDays } from "date-fns";
 import InsufficientBalCard from "../../../../components/Cards/InsufficientBal";
+import addDays from "date-fns/addDays";
+import formatDistance from "date-fns/formatDistance";
+import differenceInDays from "date-fns/differenceInDays";
 
 export default function ApplyLeaveMobile({
   startDate,

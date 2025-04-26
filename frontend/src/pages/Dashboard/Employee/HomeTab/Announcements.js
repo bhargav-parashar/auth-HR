@@ -1,11 +1,6 @@
-import { useState, useEffect } from "react";
 import { Box, Stack, Paper, Typography } from "@mui/material";
-import avatar from "../../../../assets/avatar.svg";
-import { format } from "date-fns";
 import { keyframes } from "@emotion/react";
 import CampaignIcon from "@mui/icons-material/Campaign";
-import config from "../../../../config/config";
-import axios from "axios";
 
 const scrollUp = keyframes`
   0% { transform: translateY(100%); }

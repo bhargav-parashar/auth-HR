@@ -4,8 +4,11 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Stack, Box, Typography, Button, Paper } from "@mui/material";
-import { format, formatDistance, addDays } from "date-fns";
+import addDays from "date-fns/addDays";
+import format from "date-fns/format";
+import formatDistance from "date-fns/formatDistance";
+import { Stack, Typography, Button, Paper } from "@mui/material";
+
 
 const LeavesGrid = ({
   handleBack,

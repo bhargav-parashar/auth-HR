@@ -4,13 +4,9 @@ import {
   Box,
   Typography,
   Stack,
-  Button,
-  Paper,
-  TextField,
+  Button
 } from "@mui/material";
 import Details from "../../pages/Dashboard/Employee/HomeTab/Details";
-import LeaveBal from "../../pages/Dashboard/Employee/HomeTab/LeaveBal";
-import { addDays, format, formatDistance, differenceInDays } from "date-fns";
 import review from "../../assets/reviewHR.svg";
 import axios from "axios";
 import { useSnackbar } from "notistack";
@@ -18,7 +14,7 @@ import config from "../../config/config";
 import DatePicker from "../DatePicker/DatePickerField";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from '@mui/icons-material/Close';
-
+import format from "date-fns/format";
 
 const ResignationModal = ({
   handleOutsideClick,

@@ -1,7 +1,7 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
 import avatar from "../../../../assets/avatar.svg";
-import { format } from "date-fns";
 import EditIcon from "@mui/icons-material/Edit";
+import format from "date-fns/format";
 
 const Details = ({
   isHR,

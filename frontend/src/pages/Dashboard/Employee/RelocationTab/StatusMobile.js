@@ -1,6 +1,6 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
 import resign_submit from "../../../../assets/resign_submit.svg";
-import { format } from "date-fns";
+
 
 const StatusMobile = ({ relocation }) => {
   return (

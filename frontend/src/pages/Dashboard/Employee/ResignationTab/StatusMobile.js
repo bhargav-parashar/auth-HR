@@ -1,10 +1,6 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
-import StepHeader from "../../../../components/StepHeader/StepHeader";
-import { relocationSteps } from "../../../../constants/constants";
-import date_picker from "../../../../assets/date_picker.svg";
-import resign_feedback from "../../../../assets/resign_feedback.svg";
+import format from "date-fns/format";
 import resign_submit from "../../../../assets/resign_submit.svg";
-import { format } from "date-fns";
 
 const StatusMobile = ({ resignation }) => {
   return (

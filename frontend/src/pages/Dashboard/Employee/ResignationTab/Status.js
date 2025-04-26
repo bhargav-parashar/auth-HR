@@ -2,8 +2,9 @@ import { Box, Stack, Paper, Typography } from "@mui/material";
 import StepHeader from "../../../../components/StepHeader/StepHeader";
 import { resignSteps } from "../../../../constants/constants";
 import resign_submit from "../../../../assets/resign_submit.svg";
-import { format } from "date-fns";
 import StatusMobile from "./StatusMobile";
+import format from "date-fns/format";
+
 
 const Status = ({ resignation }) => {
   return (
