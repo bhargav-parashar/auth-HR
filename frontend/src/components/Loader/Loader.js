@@ -7,10 +7,17 @@ export default function Loader({ small = false, isColored }) {
     <Box
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <CircularProgress
-        size={small ? "1rem" : "2rem"}
-        style={{ color: isColored ? "primary.contrast" : "white" }}
-      />
+      {isColored ? (
+        <CircularProgress
+          size={small ? "1rem" : "2rem"}
+          style={{ color: "rgb(81, 81, 228)" }}
+        />
+      ) : (
+        <CircularProgress
+          size={small ? "1rem" : "2rem"}
+          style={{ color: "white" }}
+        />
+      )}
     </Box>
   );
 }
