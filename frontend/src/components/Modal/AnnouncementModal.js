@@ -1,11 +1,10 @@
 import {  useState, useEffect, useRef } from "react";
-import styles from "./Modal.module.css";
+import * as styles from "./Modal.module.css";
 import {
   Box,
   Typography,
   Stack,
   Button,
-  Paper,
   TextField,
 } from "@mui/material";
 import CampaignIcon from "@mui/icons-material/Campaign";
