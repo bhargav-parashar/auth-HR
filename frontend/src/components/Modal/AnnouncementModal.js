@@ -14,9 +14,9 @@ const AnnouncementModal = ({
   announcement = "",
   id = "",
   isEdit = false,
-  isDelete = false,
-  isAnnLoading,
+  isDelete = false
 }) => {
+  const [isAnnLoading, setIsAnnLoading] = useState(false);
   const [editedAnnouncement, setEditedAnnouncement] = useState(announcement);
   const inputRef = useRef(null);
 
@@ -25,12 +25,13 @@ const AnnouncementModal = ({
   }, []);
 
   const handleSubmitClick = () => {
+    setIsAnnLoading(true);
     if (isEdit) {
-      handleEdit(id, editedAnnouncement, handleModalClose);
+      handleEdit(id, editedAnnouncement, handleModalClose, setIsAnnLoading);
     } else if (isDelete) {
-      handleDelete(id, handleModalClose);
+      handleDelete(id, handleModalClose, setIsAnnLoading);
     } else {
-      handleSubmit(editedAnnouncement, handleModalClose);
+      handleSubmit(editedAnnouncement, handleModalClose, setIsAnnLoading);
     }
   };
 

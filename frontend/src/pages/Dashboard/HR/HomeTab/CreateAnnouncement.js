@@ -20,8 +20,7 @@ const CreateAnnouncement = ({
     announcements,
     handleCreateAnnouncment,
     handleUpdateAnnouncment,
-    handleDeleteAnnouncment,
-    isAnnLoading
+    handleDeleteAnnouncment
   } = useAnnouncements();
   const { handleModalOpen, handleModalClose, handleOutsideClick, isModalOpen } =
     useModal();
@@ -103,7 +102,7 @@ const CreateAnnouncement = ({
               >
                 <TableHead></TableHead>
                 <TableBody key={1}>
-                  {announcements.length > 0 &&
+                   { announcements && announcements.length > 0 &&
                     announcements.map((item, idx) => (
                       <TableRow
                         key={item.id || `leave-${idx}`}
@@ -176,7 +175,6 @@ const CreateAnnouncement = ({
           setIsEdit={setIsEdit}
           isDelete={isDelete}
           setIsDelete={setIsDelete}
-          isAnnLoading = {isAnnLoading}
         />
       )}
     </Box>
