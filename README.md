@@ -6,7 +6,7 @@ Inspired by real-world workplace challenges, this full-stack Human Resource Mana
 - [Feature Overview](#feature-overview)
 - [Design Pattern](#design-pattern)
 - [Security](#security)
-- [API endpoints / Routes](#api-endpoints-/-routes)
+- [API endpoints / Routes](#api-endpoints--routes)
 - [Middlewares](#middlewares)
 - [Controllers](#controllers)
 - [Services](#services)
@@ -68,10 +68,10 @@ The application leverages custom React hooks to encapsulate and reuse logic rela
 
 ## SECURITY 
 
-### 1.Password Hashing
+### 1. Password Hashing
 User passwords are securely hashed using bcrypt, a strong hashing algorithm, ensuring that passwords are never stored in plain text. This enhances security by making it computationally infeasible for attackers to recover the original passwords, even in the event of a data breach.
 
-### 2.JWT Authentication
+### 2. JWT Authentication
 The application employs JSON Web Tokens (JWT) for secure, stateless authentication, ensuring that user credentials are safely transmitted and validated. This mechanism guarantees that sensitive data remains protected during the authentication process.
 
 <img src="./frontend/src/assets/jwtFlow.png" alt="Dashboard" width="350"/>
@@ -79,166 +79,166 @@ The application employs JSON Web Tokens (JWT) for secure, stateless authenticati
 ## API endpoints / Routes
 37 API Endpoints built to seamlessly connect client to the backend. These endpoints are divided into three routes - auth, hr and user. 
 
-#### 1. auth.routes.js 
-/register [register new user]
-/login [login registered user]
-/logout [logout or clear http cookie of logged in user]
-/loginstatus [returns user’s status]
+### 1. auth.routes.js 
+/register [register new user] <br>
+/login [login registered user] <br>
+/logout [logout or clear http cookie of logged in user] <br>
+/loginstatus [returns user’s status] <br>
 
-#### 2. hr.routes.js
-/all-user-details [returns all available users ]
-/pending-leaves [return all pending leave requests]
-/pending-relocations [return all pending relocation requests]
-/pending-resignations [return all pending resignation requests]
-/current-month-resignations [returns current month resignation for analytics purpose]
-/create-announcement [create new announcement]
-/announcements [get all announcement]
-/update-announcement [edit/update existing announcement]
-/delete-announcement [delete existing announcement]
-/update-leave-bal [updates available leave balance count]
-/update-leave-status [review leave request]
-/update-relocation-status [review relocation request]
-/update-resignation-status [review resignation request]
-/update-user-location [update user’s location]
-/update-user-details [update user’s details]
-/delete-all-user-data/:userId [delete user and user’s details]
+### 2. hr.routes.js
+/all-user-details [returns all available users ]<br>
+/pending-leaves [return all pending leave requests]<br>
+/pending-relocations [return all pending relocation requests]<br>
+/pending-resignations [return all pending resignation requests]<br>
+/current-month-resignations [returns current month resignation for analytics purpose]<br>
+/create-announcement [create new announcement]<br>
+/announcements [get all announcement]<br>
+/update-announcement [edit/update existing announcement]<br>
+/delete-announcement [delete existing announcement]<br>
+/update-leave-bal [updates available leave balance count]<br>
+/update-leave-status [review leave request]<br>
+/update-relocation-status [review relocation request]<br>
+/update-resignation-status [review resignation request]<br>
+/update-user-location [update user’s location]<br>
+/update-user-details [update user’s details]<br>
+/delete-all-user-data/:userId [delete user and user’s details]<br>
 
-#### 3. user.route.js
-/details [returns logged in user details]
-/request-history [return logged in user’s request history] 
-/leaveBal [returns logged in user’s leave balance]
-/updateLeaveBal [updates logged in user’s leave balance]
- /leave [submit leave request]
-/leave-applications [returns logged in user’s leave application history]
-/pending-leave-applications [returns logged in user’s pending leave applications]
-/relocate [submit relocation request]
-/relocationquestionnaire [get relocation questionnaire]
-/relocationresponses [submit relocation responses for relocation questionnaire]
-/relocation [returns logged in user’s relocation requests history]
-/pending-relocation [returns logged in user’s pending requests]
-/resign [ submit resignation]
-/questionnaire [get resignation questionnaire]
-/responses [submit resignation responses for relocation questionnaire]
-/resignation [returns logged in user’s resignation requests history]
-/pending-resignation [returns logged in user’s pending resignation request]
+### 3. user.route.js
+/details [returns logged in user details]<br>
+/request-history [return logged in user’s request history]<br> 
+/leaveBal [returns logged in user’s leave balance]<br>
+/updateLeaveBal [updates logged in user’s leave balance]<br>
+ /leave [submit leave request]<br>
+/leave-applications [returns logged in user’s leave application history]<br>
+/pending-leave-applications [returns logged in user’s pending leave applications]<br>
+/relocate [submit relocation request]<br>
+/relocationquestionnaire [get relocation questionnaire]<br>
+/relocationresponses [submit relocation responses for relocation questionnaire]<br>
+/relocation [returns logged in user’s relocation requests history]<br>
+/pending-relocation [returns logged in user’s pending requests]<br>
+/resign [ submit resignation]<br>
+/questionnaire [get resignation questionnaire]<br>
+/responses [submit resignation responses for relocation questionnaire]<br>
+/resignation [returns logged in user’s resignation requests history]<br>
+/pending-resignation [returns logged in user’s pending resignation request]<br>
 
 ## Middlewares
 4 essential middleware functions have been developed and reused across critical parts of the application
 
-#### 1. authorizeJwt(req, res, next)
+### 1. authorizeJwt(req, res, next)
 Verifies the user's JWT by extracting the token from cookies and attaches the authenticated user object to the request.
 
-#### 2. dateValidation(req, res, next)
+### 2. dateValidation(req, res, next)
 Ensures that the requested date is not a national holiday or a weekend.
 
-#### 3. validateSchema(req, res, next) 
+### 3. validateSchema(req, res, next) 
 Validates incoming request data against predefined Joi schemas.
 
-##### 4. validateRolePermission(req, res, next)
+#### 4. validateRolePermission(req, res, next)
 Enforces role-based access control by verifying if the user has permission to perform the requested action.
 
 ## Controllers
 37 Controller Functions are built for handling incoming requests and sending responses back to the client. These functions are divided into 3 Controller JS files -
 
-#### 1. auth.controller.js 
-register() [register new user] 
-login() [login registered user]
-logout() [clear cookie, logout user]
-loginstatus() [return user details if jwt token still valid]
+### 1. auth.controller.js 
+register() [register new user] <br>
+login() [login registered user]<br>
+logout() [clear cookie, logout user]<br>
+loginstatus() [return user details if jwt token still valid]<br>
 
-#### 2. hr.controller.js
-getAllUsers() [gets all available users]
-getPendingLeaves() [gets all pending leave requests]
-getPendingRelocations() [gets all pending relocation requests]
-getPendingResignations() [gets all pending relocation resignations]
-getCurrMonthResignations() [gets current month resignations for analytics ]
-createAnnouncement() [creates announcement]
-getAnnouncements() [gets all announcements]
-updateAnnouncement() [updates announcement]
-deleteAnnouncement() [deletes announcement]
-updateLeaveBal() [updates leave balance count]
-updateLeaveStatus() [updates leave status – approved/rejected]
-updateRelocationStatus() [updates relocation status – approved/rejected]
-updateUserLocation() [updates user location]
-updateResignationStatus() [updates resignation status – approved/rejected]
-updateUser() [updates user details]
-deleteAllUserData() [removes user and associated data in a single mongoose transaction]
+### 2. hr.controller.js
+getAllUsers() [gets all available users]<br>
+getPendingLeaves() [gets all pending leave requests]<br>
+getPendingRelocations() [gets all pending relocation requests]<br>
+getPendingResignations() [gets all pending relocation resignations]<br>
+getCurrMonthResignations() [gets current month resignations for analytics ]<br>
+createAnnouncement() [creates announcement]<br>
+getAnnouncements() [gets all announcements]<br>
+updateAnnouncement() [updates announcement]<br>
+deleteAnnouncement() [deletes announcement]<br>
+updateLeaveBal() [updates leave balance count]<br>
+updateLeaveStatus() [updates leave status – approved/rejected]<br>
+updateRelocationStatus() [updates relocation status – approved/rejected]<br>
+updateUserLocation() [updates user location]<br>
+updateResignationStatus() [updates resignation status – approved/rejected]<br>
+updateUser() [updates user details]<br>
+deleteAllUserData() [removes user and associated data in a single mongoose transaction]<br>
 
-#### 3.user.controller.js
-userDetails() [gets user details by user id]
-getRequestHistoryByUserId() [gets user’s request history by user id]
-getLeaveBalByUserId() [gets leave balance by user id]
-leave() [submits leave request]
-updateLeaveBal() [updates user’s leave balance]
-getLeavesByUserId() [gets leave request history by user id]
-getPendingLeavesByUserId() [gets pending leaves by user id]
-relocate() [submits relocation request]
-relocationQuestionnaire() [gets relocation questionnaire]
-submitRelocationResponse() [submit response to relocation questionnaire]
-getRelocationByUserId() [get relocation request history by user id]
-getPendingRelocationByUserId() [get pending relocation requests by user id]
-resign() [submit resignation request]
-questionnaire() [gets resignation questionnaire]
-submitResponse() [submit response to resignation questionnaire]
-getResignationByUserId() [get relocation request history by user id]
-getPendingResignationByUserId() [get pending resignation requests by user id]
+### 3.user.controller.js
+userDetails() [gets user details by user id]<br>
+getRequestHistoryByUserId() [gets user’s request history by user id]<br>
+getLeaveBalByUserId() [gets leave balance by user id]<br>
+leave() [submits leave request]<br>
+updateLeaveBal() [updates user’s leave balance]<br>
+getLeavesByUserId() [gets leave request history by user id]<br>
+getPendingLeavesByUserId() [gets pending leaves by user id]<br>
+relocate() [submits relocation request]<br>
+relocationQuestionnaire() [gets relocation questionnaire]<br>
+submitRelocationResponse() [submit response to relocation questionnaire]<br>
+getRelocationByUserId() [get relocation request history by user id]<br>
+getPendingRelocationByUserId() [get pending relocation requests by user id]<br>
+resign() [submit resignation request]<br>
+questionnaire() [gets resignation questionnaire]<br>
+submitResponse() [submit response to resignation questionnaire]<br>
+getResignationByUserId() [get relocation request history by user id]<br>
+getPendingResignationByUserId() [get pending resignation requests by user id]<br>
 
 ## SERVICES
 48 Services built to seamlessly carry out business logic, connect to MongoDB and return requested data back to the controller and sub-sequently to the client. These services are divided into 3 Services JS files - 
 
-#### 1. auth.service.js 
-generatePasswordHash() [generates hashed password from plain text input using bcrypt]
-comparePasswordHash() [compares input password and hashed password]
-generateJwt() [creates Jwt using Jwt.sign()]
-verifyJwt() [verifies jwt using Jwt.verify()] 
+### 1. auth.service.js 
+generatePasswordHash() [generates hashed password from plain text input using bcrypt]<br>
+comparePasswordHash() [compares input password and hashed password]<br>
+generateJwt() [creates Jwt using Jwt.sign()]<br>
+verifyJwt() [verifies jwt using Jwt.verify()] <br>
 
-#### 2. hr.service.js
-getAllUsers() [gets all documents from users collection]
-getPendingLeaves() [gets all pending leave documents from leaves collection]
-getPendingRelocations() [gets all pending relocation documents from relocations collection]
-getPendingResignations() [gets all pending resignation documents from resignations collection]
-getCurrMonthResignations() [gets current month’s resignations from resignations collection]
-createAnnouncement() [creates a new announcement document in the announcements collection]
-getAnnouncements() [gets all announcement documents from announcements collection]
-updateAnnouncement() [updates a document in the announcements collection]
-deleteAnnouncement() [deletes a document from the announcements collection]
-updateLeaveBal() [updates leave balance in a document in the users collection]
-updateLeaveStatus() [updates leave status in a document in the leaves collection]
-updateRelocationStatus() [updates relocation status in a document in the relocations collection]
-updateUserLocation() [updates location in a document in the users collection]
-updateResignationStatus() [updates resignation status in a document in the resignations collection]
-updateUser() [updates  multiple fields in a document in the users collection]
-deleteUserById() [deletes a document in the users collection]
-deleteUserRolesByUserId() [deletes a document in the userroles collection]
-deleteLeavesByUserId() [deletes a document in the leaves collection]
-deleteRelocationsByUserId() [deletes a document in the relocations collection]
-deleteRelocationRespByUserId() [deletes a document in the relocationresponses collection]
-deleteResignationsByUserId() [deletes a document in the resignations collection]
-deleteResignationRespByUserId() [deletes a document in the userresponses collection]
-getRolePermissions() [gets documents from rolepermissions collection by role Id]
-getPermissions() [gets documents from persmissions collection by permission ids]
+### 2. hr.service.js
+getAllUsers() [gets all documents from users collection]<br>
+getPendingLeaves() [gets all pending leave documents from leaves collection]<br>
+getPendingRelocations() [gets all pending relocation documents from relocations collection]<br>
+getPendingResignations() [gets all pending resignation documents from resignations collection]<br>
+getCurrMonthResignations() [gets current month’s resignations from resignations collection]<br>
+createAnnouncement() [creates a new announcement document in the announcements collection]<br>
+getAnnouncements() [gets all announcement documents from announcements collection]<br>
+updateAnnouncement() [updates a document in the announcements collection]<br>
+deleteAnnouncement() [deletes a document from the announcements collection]<br>
+updateLeaveBal() [updates leave balance in a document in the users collection]<br>
+updateLeaveStatus() [updates leave status in a document in the leaves collection]<br>
+updateRelocationStatus() [updates relocation status in a document in the relocations collection]<br>
+updateUserLocation() [updates location in a document in the users collection]<br>
+updateResignationStatus() [updates resignation status in a document in the resignations collection]<br>
+updateUser() [updates  multiple fields in a document in the users collection]<br>
+deleteUserById() [deletes a document in the users collection]<br>
+deleteUserRolesByUserId() [deletes a document in the userroles collection]<br>
+deleteLeavesByUserId() [deletes a document in the leaves collection]<br>
+deleteRelocationsByUserId() [deletes a document in the relocations collection]<br>
+deleteRelocationRespByUserId() [deletes a document in the relocationresponses collection]<br>
+deleteResignationsByUserId() [deletes a document in the resignations collection]<br>
+deleteResignationRespByUserId() [deletes a document in the userresponses collection]<br>
+getRolePermissions() [gets documents from rolepermissions collection by role Id]<br>
+getPermissions() [gets documents from persmissions collection by permission ids]<br>
 
-#### 3. user.service.js
-create() [creates a document in the users collection]
-createUserRole() [creates a document in the userroles collection]
-getUserRoleMapping() [get documents from userroles collection by user id]
-findByUsername() [get documents from users collection by user name]
-findByUserId() [get documents from users collection by user id]
-getRole() [get documents from roles table by role id]
-resign() [creates a document in the resignations collection]
-submitResponse() [creates a document in the userresponses collection]
-getQuestions() [gets documents from questionnaire collection]
-getResignationByUserId() [aggregates and returns data from resignations, users and userresponses collections]
-getPendingResignationByUserId() () [aggregates and returns data from resignations, users and userresponses collections]
-relocate() [creates a document in the relocations collection]
-submitRelocationResponse() [creates a document in the relocationresponses collection]
-getRelocationQuestions() [gets documents from relocationquestionnaire collection]
-getRelocationByUserId() [aggregates and returns data from relocations, users and relocationresponses collections]
-getPendingRelocationByUserId() [aggregates and returns data from relocations, users and relocationresponses collections]
-leave() [creates a document in the leaves collection]
-updateLeaveBal() [updates leave balance in a document in the users collection]
-getleavesByUserId() [aggregates and returns data from leaves and users collections]
-getPendingleavesByUserId() [aggregates and returns data from leaves and users collections]
+### 3. user.service.js
+create() [creates a document in the users collection]<br>
+createUserRole() [creates a document in the userroles collection]<br>
+getUserRoleMapping() [get documents from userroles collection by user id]<br>
+findByUsername() [get documents from users collection by user name]<br>
+findByUserId() [get documents from users collection by user id]<br>
+getRole() [get documents from roles table by role id]<br>
+resign() [creates a document in the resignations collection]<br>
+submitResponse() [creates a document in the userresponses collection]<br>
+getQuestions() [gets documents from questionnaire collection]<br>
+getResignationByUserId() [aggregates and returns data from resignations, users and userresponses collections]<br>
+getPendingResignationByUserId() () [aggregates and returns data from resignations, users and userresponses collections]<br>
+relocate() [creates a document in the relocations collection]<br>
+submitRelocationResponse() [creates a document in the relocationresponses collection]<br>
+getRelocationQuestions() [gets documents from relocationquestionnaire collection]<br>
+getRelocationByUserId() [aggregates and returns data from relocations, users and relocationresponses collections]<br>
+getPendingRelocationByUserId() [aggregates and returns data from relocations, users and relocationresponses collections]<br>
+leave() [creates a document in the leaves collection]<br>
+updateLeaveBal() [updates leave balance in a document in the users collection]<br>
+getleavesByUserId() [aggregates and returns data from leaves and users collections]<br>
+getPendingleavesByUserId() [aggregates and returns data from leaves and users collections]<br>
 
 
 ## DEPLOYMENT
