@@ -45,9 +45,14 @@ const StatusMobile = ({ relocation }) => {
                 width: "100%",
               }}
             >
-              <Stack direction="row" sx={{ width: "100%" }}>
+              <Stack direction="row" sx={{ width: "50%" }}>
                 <Typography variant="body2" pl={1}>Status :</Typography>
                 <Typography variant="body2" fontWeight='bold' color="text.heading" px={1}>{relocation[0].status}</Typography>
+              </Stack>
+
+              <Stack direction="row" sx={{ width: "50%" }}>
+                <Typography variant="body2" pl={1}>New Location :</Typography>
+                <Typography variant="body2" fontWeight='bold' color="text.heading" px={1}>{relocation[0].location}</Typography>
               </Stack>
               
             </Stack>
@@ -108,10 +113,10 @@ const StatusMobile = ({ relocation }) => {
               component="img"
               m={1}
               sx={{
-                height: "80%",
-                width: "80%",
+                height: "70%",
+                width: "60%",
                 bottom: 0,
-                right: 0,
+                //right: 0,
                 position: "absolute",
               }}
               alt="resign"

@@ -14,7 +14,7 @@ const AnnouncementModal = ({
   announcement = "",
   id = "",
   isEdit = false,
-  isDelete = false
+  isDelete = false,
 }) => {
   const [isAnnLoading, setIsAnnLoading] = useState(false);
   const [editedAnnouncement, setEditedAnnouncement] = useState(announcement);
@@ -119,7 +119,15 @@ const AnnouncementModal = ({
           />
         )}
         {isAnnLoading ? (
-          <Loader isColored />
+          <Stack
+            pt={6}
+            px={2}
+            direction="row"
+            justifyContent="flex-end"
+            gap={0.5}
+          >
+            <Loader isColored />
+          </Stack>
         ) : (
           <Stack
             pt={6}

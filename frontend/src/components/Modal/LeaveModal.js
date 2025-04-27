@@ -105,6 +105,8 @@ const LeaveModal = ({
     approve();
   };
 
+ 
+
   return (
     <Box id="Outer-Modal" className={styles.modal} onClick={handleOutsideClick}>
       <Box className={styles["modal-content"]}>

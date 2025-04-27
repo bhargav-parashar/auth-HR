@@ -64,7 +64,7 @@ export default function ResignationMobile({
 
                 <Box>
                   {activeStep === 0 && (
-                    <DatePicker isMobile lwd={lwd} setLwd={setLwd} />
+                    <DatePicker isMobile dateField={lwd} setDateField={setLwd} />
                   )}
                   {activeStep === 1 && (
                     <Questionnaire

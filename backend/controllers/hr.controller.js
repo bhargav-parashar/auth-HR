@@ -97,6 +97,10 @@ const createAnnouncement = async (req,res) => {
   // 10. UPDATE LEAVE BALANCE
   const updateLeaveBal = async (req,res) =>{
     try{
+      console.log("REACHED CONTROLLER");
+      console.log(`User Id : ${req.user._id}`);
+      console.log(`User Id : ${req.body.newLeaveBal}`);
+      console.log("------------");
       const updated = await HRServiceInstance.updateLeaveBal(req.user._id, req.body.newLeaveBal);
       res.status(200).json(updated);
     }catch(err){

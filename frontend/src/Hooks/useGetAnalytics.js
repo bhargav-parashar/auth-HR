@@ -27,14 +27,27 @@ const useGetAnalytics = () => {
     }
   };
 
+  // const queryData = async () => {
+  //   try {
+  //       getEmployees();
+  //       getCurrMonthResig();
+  //   } catch (err) {
+  //       console.log(err);
+  //   } finally {
+  //       setIsLoading(false);
+  //   }
+  // };
   const queryData = async () => {
     try {
-        getEmployees();
-        getCurrMonthResig();
+      const results = await Promise.allSettled([getEmployees(), getCurrMonthResig()]);
+  
+      if (results.some(result => result.status === 'rejected')) {
+        console.warn('Some data could not be loaded.');
+      }
     } catch (err) {
-        console.log(err);
+      console.log('Unexpected error:', err);
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
