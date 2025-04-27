@@ -53,7 +53,7 @@ HR dashboard to review, approve, or reject requests made by employees efficientl
 
 ## DESIGN PATTERN 
 
-<img src="./frontend/src/assets/flowDiagram.png" alt="Dashboard" width="350"/>
+<img src="./frontend/src/assets/flowDiagram.png" alt="Dashboard" width="100%"/>
 
 ### 1.Layered Architecture
 The backend is structured using a clean and modular layered architecture, promoting a clear separation of concerns. Each layer has a distinct responsibility—controllers handle incoming requests and responses, routers manage endpoint definitions, middlewares provide cross-cutting functionality such as authentication, services encapsulate business logic, and database modules manage data access and persistence. This approach enhances code readability, testability, scalability, and maintainability.
@@ -76,7 +76,7 @@ User passwords are securely hashed using bcrypt, a strong hashing algorithm, ens
 ### 2. JWT Authentication
 The application employs JSON Web Tokens (JWT) for secure, stateless authentication, ensuring that user credentials are safely transmitted and validated. This mechanism guarantees that sensitive data remains protected during the authentication process.
 
-<img src="./frontend/src/assets/jwtFlow.png" alt="Dashboard" width="350"/>
+<img src="./frontend/src/assets/jwtFlow.png" alt="Dashboard" width="100%"/>
 
 ## API endpoints / Routes
 37 API Endpoints built to seamlessly connect client to the backend. These endpoints are divided into three routes - auth, hr and user. 
