@@ -1,6 +1,8 @@
 # AuthHR
 Inspired by real-world workplace challenges, this full-stack Human Resource Management (HRM) application is built to close the communication gap between HR teams and employees. Prioritizing usability, security, and workflow efficiency, the platform streamlines processes such as leave applications, relocation requests, and resignation submissions and approvals.
 
+<img src="./frontend/src/assets/authHRFlow.png" alt="Dashboard" width="100%"/>
+
 ## Table of Contents
 - [Tech Stack](#tech-stack)
 - [Feature Overview](#feature-overview)
@@ -134,7 +136,7 @@ Ensures that the requested date is not a national holiday or a weekend.
 ### 3. validateSchema(req, res, next) 
 Validates incoming request data against predefined Joi schemas.
 
-#### 4. validateRolePermission(req, res, next)
+### 4. validateRolePermission(req, res, next)
 Enforces role-based access control by verifying if the user has permission to perform the requested action.
 
 ## Controllers
