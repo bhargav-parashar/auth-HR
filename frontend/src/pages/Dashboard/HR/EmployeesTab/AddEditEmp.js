@@ -157,8 +157,8 @@ const AddEditEmp = ({
       </Stack>
       {isLoading && !isEdit ? (
         <Box mt={5}>
-          <Stack direction="row">
-            <Loader />
+          <Stack direction="row" justifyContent='center'>
+            <Loader isColored/>
           </Stack>
         </Box>
       ) : !isLoading  && isEdit  ? (

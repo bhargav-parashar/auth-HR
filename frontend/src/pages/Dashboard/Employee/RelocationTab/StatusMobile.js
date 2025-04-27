@@ -113,10 +113,10 @@ const StatusMobile = ({ relocation }) => {
               component="img"
               m={1}
               sx={{
-                height: "70%",
-                width: "60%",
+                height: "120px",
+                width: "120px",
                 bottom: 0,
-                //right: 0,
+                right: 0,
                 position: "absolute",
               }}
               alt="resign"

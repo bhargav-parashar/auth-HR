@@ -126,8 +126,8 @@ const StatusMobile = ({ resignation }) => {
               component="img"
               m={1}
               sx={{
-                height: "80%",
-                width: "80%",
+                height: "120px",
+                width: "120px",
                 bottom: 0,
                 right: 0,
                 position: "absolute",
