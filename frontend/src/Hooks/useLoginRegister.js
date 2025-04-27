@@ -141,12 +141,13 @@ const useLoginRegister = (
       });
       console.log(`Res status : ${res} `)
        if(res.status === 201){
-        enqueueSnackbar("Registered successfully", { variant: "success" });
         if (!isHR) {
           navigate("/");
+          enqueueSnackbar("Registered successfully", { variant: "success" });
         } else {
           await Promise.all([queryEmployees(),getEmployeeData()]);
           handleModalClose();
+          enqueueSnackbar("Registered successfully", { variant: "success" });
         }
      }
 
@@ -225,9 +226,9 @@ const useLoginRegister = (
       setIsLoading(true);
       const res =  await axios.put(URL, { id, body }, { withCredentials: true });
       if(res.status === 200){
-        enqueueSnackbar("User update successful", { variant: "success" });
         await Promise.all([queryEmployees(),getEmployeeData()]);
-        handleModalClose();  
+        handleModalClose();
+        enqueueSnackbar("User update successful", { variant: "success" });  
       }
     } catch (err) {
       enqueueSnackbar(`Error while updating user : ${err} `, { variant: "warn" });
@@ -248,9 +249,9 @@ const useLoginRegister = (
       setIsLoading(true);
       const res =  await axios.delete( URL, { withCredentials: true } );
       if(res.status === 200){
-        enqueueSnackbar("User and related data deleted!", { variant: "success" });
         await Promise.all([queryEmployees(),getEmployeeData()]);
         handleModalClose();  
+        enqueueSnackbar("User and related data deleted!", { variant: "success" });
       }
     } catch (err) {
       enqueueSnackbar(`Error while deleting user : ${err} `, { variant: "warn" });
