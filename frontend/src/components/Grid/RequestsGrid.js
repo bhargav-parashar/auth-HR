@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Stack, Paper, Typography } from "@mui/material";
+import { Stack, Paper, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,7 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import GridPill from "./GridPill";
 import { reqHistoryPills } from "../../constants/constants";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
-import format from "date-fns/format";
+import dateConverter from "../../utility/dateConverter";
 
 const RequestsGrid = ({ requests }) => {
   const [type, setType] = useState(1);
@@ -17,7 +17,7 @@ const RequestsGrid = ({ requests }) => {
   const leaves = requests?.leaves;
   const relocations = requests?.relocations;
   const resignations = requests?.resignations;
-  
+
   const handleTabChange = (val) => {
     setType(val);
   };
@@ -81,7 +81,7 @@ const RequestsGrid = ({ requests }) => {
                     </TableCell>
                     <TableCell align="left">{item.leaveType}</TableCell>
                     <TableCell align="left">
-                      {format(item.createdAt, "dd MMM, yyyy")}
+                      {dateConverter(item?.createdAt)}
                     </TableCell>
                     <TableCell
                       sx={{ color: getColor(item.status) }}
@@ -147,7 +147,7 @@ const RequestsGrid = ({ requests }) => {
                     </TableCell>
                     <TableCell align="left">Relocation</TableCell>
                     <TableCell align="left">
-                      {format(item.createdAt, "dd MMM, yyyy")}
+                      {dateConverter(item?.createdAt)}
                     </TableCell>
                     <TableCell
                       sx={{ color: getColor(item.status) }}
@@ -213,9 +213,11 @@ const RequestsGrid = ({ requests }) => {
                       {idx + 1}
                     </TableCell>
                     <TableCell align="left">Resignation</TableCell>
-                    <TableCell align="left">{format(item.lwd, "PPP")}</TableCell>
                     <TableCell align="left">
-                      {format(item.createdAt, "PPP")}
+                      {dateConverter(item?.lwd)}
+                    </TableCell>
+                    <TableCell align="left">
+                      {dateConverter(item?.createdAt)}
                     </TableCell>
                     <TableCell
                       sx={{ color: getColor(item.status) }}

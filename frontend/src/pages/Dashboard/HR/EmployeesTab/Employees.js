@@ -22,7 +22,7 @@ import useModal from "../../../../Hooks/useModal";
 import AddEditEmpModal from "../../../../components/Modal/AddEditEmpModal";
 
 const Employees = ({getEmployeeData}) => {
-   
+  
   const [selectedUser, setSelectedUser] = useState('');
   const [ isEdit, setIsEdit] = useState(false);
 
@@ -45,7 +45,9 @@ const Employees = ({getEmployeeData}) => {
     setSelectedUser('');
     handleModalOpen();
   }
+
   return (
+   
     <Box
       sx={{
         height: "100%",

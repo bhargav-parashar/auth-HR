@@ -1,7 +1,8 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
 import avatar from "../../../../assets/avatar.svg";
 import EditIcon from "@mui/icons-material/Edit";
-import format from "date-fns/format";
+import dateConverter from "../../../../utility/dateConverter";
+
 
 const Details = ({
   isHR,
@@ -11,19 +12,20 @@ const Details = ({
   isReview,
   handleModalOpen,
   setSelectedUser,
-  setIsEdit
+  setIsEdit,
 }) => {
-
-  const handleClick = () =>{
+  const handleClick = () => {
     setIsEdit(true);
     setSelectedUser(user);
     handleModalOpen();
-  }
+  };
+
+  
   return (
     <Box
       p={1}
       flex={1}
-      onClick={isHR ? handleClick : {} }
+      onClick={isHR ? handleClick : {}}
       sx={{
         cursor: isHR ? "pointer" : "",
         height: "50%",
@@ -35,8 +37,8 @@ const Details = ({
           ? "transform 0.3s ease, background-color 0.3s ease"
           : "",
         "&:hover": {
-          transform:  isHR ? "scale(1.015)" : "",
-          border: isHR ?  "1px solid" : "none",
+          transform: isHR ? "scale(1.015)" : "",
+          border: isHR ? "1px solid" : "none",
           borderColor: isHR ? "primary.light" : "",
         },
       }}
@@ -55,7 +57,7 @@ const Details = ({
               right: -5,
               top: -16,
               width: "5%",
-              color:"primary.light"
+              color: "primary.light",
             }}
           />
         )}
@@ -136,7 +138,7 @@ const Details = ({
           <Typography variant="caption">{user?.department}</Typography>
           <Typography variant="caption">{user?.location}</Typography>
           <Typography variant="caption">
-            {user?.createdAt ? format(user?.createdAt, "dd MMM, yyyy") : ""}
+            {dateConverter(user?.createdAt)}
           </Typography>
         </Stack>
       </Stack>

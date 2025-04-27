@@ -9,8 +9,9 @@ import config from "../../config/config";
 import DatePicker from "../DatePicker/DatePickerField";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
-import format from "date-fns/format";
 import Loader from "../Loader/Loader";
+import dateConverter from "../../utility/dateConverter";
+
 
 const ResignationModal = ({
   handleOutsideClick,
@@ -34,7 +35,7 @@ const ResignationModal = ({
         { withCredentials: true }
       );
       if (res.status === 200) {
-        getPenRequests();
+        await getPenRequests();
         handleModalClose();
         enqueueSnackbar("Request Approved", { variant: "success" });
       }
@@ -57,7 +58,7 @@ const ResignationModal = ({
         { withCredentials: true }
       );
       if (res.status === 200) {
-        getPenRequests();
+        await getPenRequests();
         handleModalClose();
         enqueueSnackbar("Request Approved", { variant: "success" });
       }
@@ -95,7 +96,7 @@ const ResignationModal = ({
               variant="body2"
               color="primary.inactive"
             >
-              {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
+              {`Submitted On: ${ dateConverter(selectedReq?.createdAt)} `}
             </Typography>
           </Stack>
           <CloseIcon
@@ -213,6 +214,7 @@ const ResignationModal = ({
                     sx={{ borderRadius: "0.6rem", bgcolor: "primary.light" }}
                   >
                     <DatePicker
+                      isHR
                       isMobile
                       label=""
                       dateField={lwd}

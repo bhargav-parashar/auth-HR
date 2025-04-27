@@ -31,7 +31,7 @@ const useAnnouncements = () => {
     try {
       const newAnn = await axios.post(URL, body, { withCredentials: true });
       if (newAnn.status === 200) {
-        getAnnouncements();
+        await getAnnouncements();
         enqueueSnackbar(`Announcement added!`, { variant: "success" });
       }
     } catch (err) {
@@ -52,7 +52,7 @@ const useAnnouncements = () => {
         { withCredentials: true }
       );
       if (updatedAnn.status === 200) {
-        getAnnouncements();
+        await getAnnouncements();
         enqueueSnackbar(`Announcement updated!`, { variant: "success" });
       }
     } catch (err) {
@@ -75,7 +75,7 @@ const useAnnouncements = () => {
         }
       );
       if (deletedAnn.status === 200) {
-        getAnnouncements();
+        await getAnnouncements();
         enqueueSnackbar(`Announcement deleted!`, { variant: "success" });
       }
     } catch (err) {

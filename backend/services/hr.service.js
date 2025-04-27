@@ -252,6 +252,9 @@ class HRService {
   // 10. UPDATE LEAVE BALANCE
   updateLeaveBal = async (id, newLeaveBal) => {
     try {
+      if (typeof newLeaveBal === 'string') {
+        newLeaveBal = JSON.parse(newLeaveBal);
+      }
       const updated = await User.findByIdAndUpdate(
         id,
         { $set: { leaveBal: newLeaveBal } },

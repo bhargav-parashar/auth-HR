@@ -145,9 +145,8 @@ const useLoginRegister = (
         if (!isHR) {
           navigate("/");
         } else {
-           queryEmployees();
-           getEmployeeData();
-           handleModalClose();
+          await Promise.all([queryEmployees(),getEmployeeData()]);
+          handleModalClose();
         }
      }
 
@@ -227,8 +226,7 @@ const useLoginRegister = (
       const res =  await axios.put(URL, { id, body }, { withCredentials: true });
       if(res.status === 200){
         enqueueSnackbar("User update successful", { variant: "success" });
-        queryEmployees();
-        getEmployeeData();
+        await Promise.all([queryEmployees(),getEmployeeData()]);
         handleModalClose();  
       }
     } catch (err) {
@@ -251,8 +249,7 @@ const useLoginRegister = (
       const res =  await axios.delete( URL, { withCredentials: true } );
       if(res.status === 200){
         enqueueSnackbar("User and related data deleted!", { variant: "success" });
-        queryEmployees();
-        getEmployeeData();
+        await Promise.all([queryEmployees(),getEmployeeData()]);
         handleModalClose();  
       }
     } catch (err) {

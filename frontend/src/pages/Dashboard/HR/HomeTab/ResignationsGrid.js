@@ -4,8 +4,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import format from "date-fns/format";
 import { Stack, Typography, Button, Paper } from "@mui/material";
+import dateConverter from "../../../../utility/dateConverter";
 
 const ResignationsGrid = ({
   handleBack,
@@ -79,13 +79,13 @@ const ResignationsGrid = ({
                 >
                   <TableCell align="left">{idx + 1}</TableCell>
                   <TableCell align="left">
-                    {format(item?.lwd, "PPP")}
+                    {dateConverter(item?.lwd)}
                   </TableCell>
                   <TableCell align="left">
                     {item?.userDetails[0]?.username}
                   </TableCell>
                   <TableCell align="left">
-                    {format(item.createdAt, "PPP")}
+                    {dateConverter(item?.createdAt)}
                   </TableCell>
                   <TableCell align="left">
                     <Button

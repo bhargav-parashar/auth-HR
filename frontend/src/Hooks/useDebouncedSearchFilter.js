@@ -3,7 +3,7 @@ import axios from "axios";
 import config from "../config/config";
 
 const useDebouncedSearchFilter = () => {
-  const [users, setUsers] = useState(null);
+  const [users, setUsers] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [timeoutId, setTimeoutId] = useState(undefined);
   const [department, setDepartment] = useState("");
@@ -21,10 +21,10 @@ const useDebouncedSearchFilter = () => {
       const URL = `${config.endpoint}/hr/all-user-details`;
       const { data } = await axios.get(URL, { withCredentials: true });
       setUsers(data);
+
       setFilteredData(data);
     } catch (err) {
-      console.log(err);
-    }finally{
+    } finally {
       setIsLoading(false);
     }
   };
@@ -32,12 +32,12 @@ const useDebouncedSearchFilter = () => {
   //ON CHANGE OF SEARCH INPUTS/FILTERS, CALL DEBOUNCED SEARCH
   useEffect(() => {
     debouncedSearch();
-  }, [searchInput, department, location]);
+  }, [searchInput, department, location, users]);
 
   //DEBOUNCED SEARCH ON LIST OF USERS BY CALLING FILTER FUNCTION
   const debouncedSearch = () => {
     if (timeoutId) {
-      clearInterval(timeoutId);
+      clearTimeout(timeoutId);
     }
 
     const id = setTimeout(() => {
@@ -49,7 +49,7 @@ const useDebouncedSearchFilter = () => {
   //FILTER FUNCTION
   const filterUsers = () => {
     let searchFilteredData =
-      !searchInput || searchInput.length === 0
+      (!searchInput || searchInput.length === 0) && users.length > 0
         ? users
         : users.filter((user) =>
             user["username"]
@@ -75,7 +75,7 @@ const useDebouncedSearchFilter = () => {
   };
 
   //HANDLE SEARCH INPUT, DEPARTMENT AND LOCATION CHANGE
-  const  handleSearchInputChange = (e) => {
+  const handleSearchInputChange = (e) => {
     setSearchInput(e.target.value);
   };
   const handleDeptChange = (e) => {
@@ -94,7 +94,7 @@ const useDebouncedSearchFilter = () => {
     searchInput,
     handleSearchInputChange,
     isLoading,
-    queryEmployees
+    queryEmployees,
   };
 };
 

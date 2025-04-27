@@ -5,10 +5,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import addDays from "date-fns/addDays";
-import format from "date-fns/format";
 import formatDistance from "date-fns/formatDistance";
 import { Stack, Typography, Button, Paper } from "@mui/material";
-
+import dateConverter from "../../../../utility/dateConverter";
 
 const LeavesGrid = ({
   handleBack,
@@ -92,7 +91,9 @@ const LeavesGrid = ({
                     {item?.userDetails[0]?.username}
                   </TableCell>
                   <TableCell align="left">
-                    {format(item.createdAt, "PPP")}
+                    
+                    {dateConverter(item?.createdAt)}
+                  
                   </TableCell>
                   <TableCell align="left">
                     <Button

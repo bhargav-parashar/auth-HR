@@ -4,9 +4,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import format from "date-fns/format";
 import { Stack,  Typography, Button, Paper } from "@mui/material";
-
+import dateConverter from "../../../../utility/dateConverter";
 
 const RelocationsGrid = ({
   handleBack,
@@ -93,7 +92,8 @@ const RelocationsGrid = ({
                     {item?.userDetails[0]?.username}
                   </TableCell>
                   <TableCell align="left">
-                    {format(item.createdAt, "PPP")}
+                   
+                    {dateConverter(item?.createdAt)}
                   </TableCell>
                   <TableCell align="left">
                     <Button

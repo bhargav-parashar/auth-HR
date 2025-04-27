@@ -3,8 +3,7 @@ import StepHeader from "../../../../components/StepHeader/StepHeader";
 import { resignSteps } from "../../../../constants/constants";
 import resign_submit from "../../../../assets/resign_submit.svg";
 import StatusMobile from "./StatusMobile";
-import format from "date-fns/format";
-
+import dateConverter from "../../../../utility/dateConverter";
 
 const Status = ({ resignation }) => {
   return (
@@ -25,7 +24,7 @@ const Status = ({ resignation }) => {
             activeStep={resignSteps.length + 1}
             steps={resignSteps}
           />
-          
+
           <Box
             p={2}
             sx={{
@@ -108,12 +107,10 @@ const Status = ({ resignation }) => {
                     borderRadius: "0.6rem",
                   }}
                 >
-                  <Stack  direction="row" sx={{ width: "100%" }}>
-                    <Typography variant="body2" >
-                      Status :
-                    </Typography>
+                  <Stack direction="row" sx={{ width: "100%" }}>
+                    <Typography variant="body2">Status :</Typography>
                     <Typography
-                      variant='body2'
+                      variant="body2"
                       fontWeight="bold"
                       color="text.heading"
                       px={1}
@@ -130,7 +127,11 @@ const Status = ({ resignation }) => {
                     bgcolor: "primary.inactive2",
                   }}
                 >
-                  <Typography variant="body2" mt={2} mx={2}>{`Last Working Day`}</Typography>
+                  <Typography
+                    variant="body2"
+                    mt={2}
+                    mx={2}
+                  >{`Last Working Day`}</Typography>
                   <Typography
                     mb={2}
                     mx={2}
@@ -139,7 +140,7 @@ const Status = ({ resignation }) => {
                     color="text.heading"
                   >
                     {resignation[0]?.lwd
-                      ? format(resignation[0].lwd, "dd MMM, yyyy")
+                      ? dateConverter(resignation[0]?.lwd)
                       : ""}
                   </Typography>
                 </Box>

@@ -4,7 +4,6 @@ import { Box, Typography, Stack, Button } from "@mui/material";
 import Details from "../../pages/Dashboard/Employee/HomeTab/Details";
 import LeaveBal from "../../pages/Dashboard/Employee/HomeTab/LeaveBal";
 import addDays from "date-fns/addDays";
-import format from "date-fns/format";
 import formatDistance from "date-fns/formatDistance";
 import differenceInDays from "date-fns/differenceInDays";
 import review from "../../assets/reviewHR.svg";
@@ -13,6 +12,7 @@ import { useSnackbar } from "notistack";
 import config from "../../config/config";
 import CloseIcon from "@mui/icons-material/Close";
 import Loader from "../Loader/Loader";
+import dateConverter from "../../utility/dateConverter";
 
 const LeaveModal = ({
   handleOutsideClick,
@@ -39,11 +39,11 @@ const LeaveModal = ({
         const id = selectedReq?.userDetails[0]?._id;
         const updated = await axios.put(
           URL1,
-          { id: id, newLeaveBal: balanceObject },
+          { id: id, newLeaveBal: JSON.stringify(balanceObject) },
           { withCredentials: true }
         );
         if (updated.status === 200) {
-          getPenRequests();
+         await getPenRequests();
           handleModalClose();
           enqueueSnackbar("Request Rejected", { variant: "success" });
         }
@@ -67,7 +67,7 @@ const LeaveModal = ({
         { withCredentials: true }
       );
       if (res.status === 200) {
-        getPenRequests();
+        await getPenRequests();
         handleModalClose();
         enqueueSnackbar("Request Approved", { variant: "success" });
       }
@@ -105,8 +105,6 @@ const LeaveModal = ({
     approve();
   };
 
- 
-
   return (
     <Box id="Outer-Modal" className={styles.modal} onClick={handleOutsideClick}>
       <Box className={styles["modal-content"]}>
@@ -133,7 +131,7 @@ const LeaveModal = ({
               variant="body2"
               color="primary.inactive"
             >
-              {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
+              {`Submitted On: ${dateConverter(selectedReq?.createdAt)} `}
             </Typography>
           </Stack>
           <CloseIcon
@@ -212,10 +210,10 @@ const LeaveModal = ({
                 </Stack>
                 <Stack justifyContent="center" sx={{ width: "100%" }}>
                   <Typography variant="caption">
-                    {format(selectedReq?.startDate, "PPP")}
+                    {dateConverter(selectedReq?.startDate)}
                   </Typography>
                   <Typography variant="caption">
-                    {format(selectedReq?.endDate, "PPP")}
+                    {dateConverter(selectedReq?.endDate)}
                   </Typography>
                   <Typography variant="caption">
                     {formatDistance(

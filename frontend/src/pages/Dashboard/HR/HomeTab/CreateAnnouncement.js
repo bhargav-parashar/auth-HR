@@ -29,7 +29,7 @@ const CreateAnnouncement = ({
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
 
-  const hancelCreateClick = () => {
+  const handelCreateClick = () => {
     setIsEdit(false);
     setIsDelete(false);
     setAnnouncement("");
@@ -140,7 +140,7 @@ const CreateAnnouncement = ({
             </TableContainer>
 
             <Button
-              onClick={hancelCreateClick}
+              onClick={handelCreateClick}
               sx={{
                 width: 40,
                 height: 40,

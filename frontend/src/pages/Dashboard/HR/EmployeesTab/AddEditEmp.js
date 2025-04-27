@@ -54,7 +54,7 @@ const AddEditEmp = ({
   handleRegister,
   isLoading,
   isEdit,
-  handleUserUpdate,
+  handleUserUpdate
 }) => {
   const [updatedData, setUpdatedData] = useState({
     username: formData.username,
@@ -159,15 +159,6 @@ const AddEditEmp = ({
         <Box mt={5}>
           <Stack direction="row">
             <Loader />
-            <LoginCarousel
-              slidesPerView={1}
-              delay={3000}
-              data={loadingCarousel.map((slide) => (
-                <Typography key={slide.id} sx={{ color: "white" }}>
-                  {slide.txt}
-                </Typography>
-              ))}
-            />
           </Stack>
         </Box>
       ) : !isLoading  && isEdit  ? (

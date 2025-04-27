@@ -1,10 +1,10 @@
 import { Box, Stack, Paper, Typography } from "@mui/material";
-import format from "date-fns/format";
 import resign_submit from "../../../../assets/resign_submit.svg";
+import dateConverter from "../../../../utility/dateConverter";
 
 const StatusMobile = ({ resignation }) => {
   return (
-    <Box  sx={{ height: "90%", width: "100%",  flexGrow: 1 }}>
+    <Box sx={{ height: "90%", width: "100%", flexGrow: 1 }}>
       <Stack
         sx={{ height: "90vh", width: "100%" }}
         justifyContent="space-around"
@@ -46,17 +46,30 @@ const StatusMobile = ({ resignation }) => {
               }}
             >
               <Stack direction="row" sx={{ width: "100%" }}>
-                <Typography variant="body2" pl={1}>Status :</Typography>
-                <Typography variant="body2" fontWeight='bold' color="text.heading" px={1}>{resignation[0].status}</Typography>
+                <Typography variant="body2" pl={1}>
+                  Status :
+                </Typography>
+                <Typography
+                  variant="body2"
+                  fontWeight="bold"
+                  color="text.heading"
+                  px={1}
+                >
+                  {resignation[0].status}
+                </Typography>
               </Stack>
-              <Stack  sx={{ width: "100%" }}>
-                <Typography variant="body2" pl={1}>Last working day</Typography>
-                <Typography variant="body2" pl={1}  color="text.heading">
-                    {resignation[0]?.lwd ? format(resignation[0].lwd, "dd MMM, yyyy") : ""}
-                  </Typography>
+              <Stack sx={{ width: "100%" }}>
+                <Typography variant="body2" pl={1}>
+                  Last working day
+                </Typography>
+                <Typography variant="body2" pl={1} color="text.heading">
+                  {resignation[0]?.lwd
+                    ? dateConverter(resignation[0]?.lwd)
+                    : ""}
+                </Typography>
               </Stack>
             </Stack>
-            
+
             <Stack sx={{ height: "75%" }} gap={1}>
               <Box
                 flex={1}

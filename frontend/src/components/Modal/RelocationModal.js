@@ -7,8 +7,9 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 import config from "../../config/config";
 import CloseIcon from "@mui/icons-material/Close";
-import format from "date-fns/format";
 import Loader from "../Loader/Loader";
+import dateConverter from "../../utility/dateConverter";
+
 
 const RelocationModal = ({
   handleOutsideClick,
@@ -31,7 +32,7 @@ const RelocationModal = ({
         { withCredentials: true }
       );
       if (res.status === 200) {
-        getPenRequests();
+        await getPenRequests();
         handleModalClose();
         enqueueSnackbar("Request Approved", { variant: "success" });
       }
@@ -64,8 +65,7 @@ const RelocationModal = ({
           { withCredentials: true }
         );
         if (res1.status === 200) {
-          getPenRequests();
-          getEmployeeData();
+          await Promise.all([getPenRequests(), getEmployeeData()]);
           handleModalClose();
           enqueueSnackbar("Request Approved", { variant: "success" });
         }
@@ -104,7 +104,7 @@ const RelocationModal = ({
               variant="body2"
               color="primary.inactive"
             >
-              {`Submitted On: ${format(selectedReq.createdAt, "PPP")} `}
+              {`Submitted On: ${dateConverter(selectedReq?.createdAt)}`}
             </Typography>
           </Stack>
           <CloseIcon
