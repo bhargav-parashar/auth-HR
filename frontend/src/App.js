@@ -11,7 +11,7 @@ const App = () => {
   const { loggedInUser, setLoggedInUser } = useAuth();
   const [darkMode, setDarkMode ] = useState(true);
   const theme = useMemo(
-    () => (darkMode ? createTheme(darkTheme()) : createTheme(lightTheme()) )
+    () => (darkMode ? createTheme(darkTheme()) : createTheme(lightTheme()) ), [darkMode]
   );
   
 
