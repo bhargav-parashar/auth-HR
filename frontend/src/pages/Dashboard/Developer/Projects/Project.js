@@ -12,6 +12,7 @@ import TaskManagerPic from "../../../../assets/taskManagerPic.png";
 import WeatherPic from "../../../../assets/weatherPic.png";
 import BotAiPic from "../../../../assets/botAiPic.png";
 import ShimmerButton from "../../../../components/ButtonLayout/ShimmerButton2";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 
 const Project = ({ item }) => {
   const getImage = (label) => {
