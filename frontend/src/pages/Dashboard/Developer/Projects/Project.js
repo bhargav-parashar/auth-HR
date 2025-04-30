@@ -11,6 +11,7 @@ import QtifyPic from "../../../../assets/qtifyPic.png";
 import TaskManagerPic from "../../../../assets/taskManagerPic.png";
 import WeatherPic from "../../../../assets/weatherPic.png";
 import BotAiPic from "../../../../assets/botAiPic.png";
+import ShimmerButton from "../../../../components/ButtonLayout/ShimmerButton2";
 
 const Project = ({ item }) => {
   const getImage = (label) => {
@@ -210,16 +211,21 @@ const Project = ({ item }) => {
               >
                 Site
               </Button>
+              {item.label == "AuthHR" && (
+                <ShimmerButton
+                  handleClick={(e) => {
+                    e.stopPropagation();
+                    window.open(
+                      item.walkthrough,
+                      "_blank",
+                      "noopener,noreferrer"
+                    );
+                  }}
+                  endIcon={<YouTubeIcon />}
+                  label="Demo"
+                />
+              )}
             </Stack>
-            {/* <Stack mt={1} direction="row" gap={1} alignItems="center">
-              <Typography
-                color="text.subHeader"
-                textAlign="left"
-                variant="caption"
-              >
-                {item.about}
-              </Typography>
-            </Stack> */}
           </Box>
         </Stack>
         <Stack mt={1} direction="row" gap={1} alignItems="center">
