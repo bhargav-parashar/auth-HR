@@ -101,7 +101,7 @@ const Project = ({ item }) => {
                     window.open(item.code, "_blank", "noopener,noreferrer");
                   }}
                 >
-                  View Code
+                  Code
                 </Button>
                 <Button
                   endIcon={<Launch />}
@@ -113,8 +113,22 @@ const Project = ({ item }) => {
                     window.open(item.website, "_blank", "noopener,noreferrer");
                   }}
                 >
-                  Website
+                  Site
                 </Button>
+                {item.label == "AuthHR" && (
+                  <ShimmerButton
+                    handleClick={(e) => {
+                      e.stopPropagation();
+                      window.open(
+                        item.walkthrough,
+                        "_blank",
+                        "noopener,noreferrer"
+                      );
+                    }}
+                    endIcon={<YouTubeIcon />}
+                    label="Demo"
+                  />
+                )}
               </Stack>
             </Stack>
 
