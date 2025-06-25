@@ -182,10 +182,12 @@ const skills = {
   frontEnd: [
     { id: 1, label: "Javascript" },
     { id: 2, label: "React" },
-    { id: 3, label: "MUI" },
-    { id: 4, label: "Bootstrap" },
-    { id: 5, label: "HTML5" },
-    { id: 6, label: "CSS3" },
+    { id: 3, label: "Tailwind" },
+    { id: 4, label: "MUI" },
+    { id: 5, label: "Typescript" },
+    { id: 6, label: "Bootstrap" },
+    { id: 7, label: "HTML5" },
+    { id: 8, label: "CSS3" },
   ],
   backEnd: [
     { id: 1, label: "Node.js" },
